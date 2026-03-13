@@ -15,13 +15,17 @@ const indicators = [
   { key: 'govt_health_expenditure' },
   { key: 'high_cholesterol_prevalence' },
   { key: 'chronic_disease_screening' },
-  { key: 'physical_activity' }
+  { key: 'physical_activity' },
+  { key: 'aged_65_plus' },
+  { key: 'old_age_support_ratio' },
+  { key: 'total_fertility_rate' }
 ]
 
 // Keys where an increase is a positive/good trend
 const positiveUpKeys = new Set([
   'life_expectancy', 'govt_health_expenditure',
-  'chronic_disease_screening', 'physical_activity'
+  'chronic_disease_screening', 'physical_activity',
+  'old_age_support_ratio', 'total_fertility_rate'
 ])
 
 function getTrendTooltip(key, prev, indicator) {
@@ -64,7 +68,8 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
   return (
     <motion.div
       ref={ref}
-      className="card p-5 cursor-pointer hover:card-hover"
+      className="card p-5 cursor-pointer hover:card-hover focus:outline-none"
+      style={{ WebkitTapHighlightColor: 'transparent' }}
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5 }}
@@ -134,12 +139,12 @@ export default function Snapshot({ onSelectIndicator }) {
             Singapore at a Glance
           </h2>
           <p className="mt-2 text-xs text-secondary/60 font-mono">
-            {dataStatus === 'live' ? 'Live data from data.gov.sg' : 'Data from MOH / SingStat'}
-            <InfoTooltip content="Health indicator data comes from the National Population Health Survey (NPHS) conducted by MOH. Health expenditure uses MOH published figures. All data sourced from data.gov.sg and MOH reports." />
+            {dataStatus === 'live' ? 'Live data from SingStat & data.gov.sg' : 'Data from MOH / SingStat'}
+            <InfoTooltip content="Health indicator data is fetched live from the SingStat Table Builder API (tablebuilder.singstat.gov.sg). Sources include MOH National Population Health Survey, Department of Statistics, and NEA. Data is cached for 24 hours on the server." />
           </p>
         </motion.div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
           {indicators.map(({ key }) => (
             <SnapshotCard
               key={key}

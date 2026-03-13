@@ -3,36 +3,67 @@
     "label": "Life Expectancy at Birth",
     "unit": "years",
     "description": "Average number of years a newborn is expected to live, based on current mortality rates across all age groups in Singapore.",
-    "source": "Department of Statistics Singapore (SingStat)",
-    "tooltip": "Based on period life tables published by SingStat. Reflects the average lifespan if current-year mortality rates persist. Not a prediction for any individual.",
+    "source": "Department of Statistics Singapore (SingStat), Table M810501",
+    "tooltip": "Based on period life tables published by SingStat. Reflects the average lifespan if current-year mortality rates persist. Not a prediction for any individual. The dip in 2021–2022 reflects excess COVID-19 mortality.",
+    "singstatTableId": "M810501",
     "data": [
       {"year": 1960, "value": 64.5},
-      {"year": 1970, "value": 67.8},
-      {"year": 1980, "value": 71.5},
+      {"year": 1970, "value": 69.5},
+      {"year": 1980, "value": 72.1},
       {"year": 1990, "value": 75.3},
       {"year": 2000, "value": 78.0},
-      {"year": 2005, "value": 79.4},
-      {"year": 2010, "value": 81.0},
-      {"year": 2015, "value": 82.7},
-      {"year": 2018, "value": 83.2},
-      {"year": 2019, "value": 83.6},
-      {"year": 2020, "value": 83.0},
-      {"year": 2021, "value": 83.5},
-      {"year": 2022, "value": 83.9},
-      {"year": 2023, "value": 83.9}
-    ]
+      {"year": 2005, "value": 79.6},
+      {"year": 2010, "value": 81.7},
+      {"year": 2015, "value": 82.9},
+      {"year": 2016, "value": 83.0},
+      {"year": 2017, "value": 83.2},
+      {"year": 2018, "value": 83.4},
+      {"year": 2019, "value": 83.7},
+      {"year": 2020, "value": 83.7},
+      {"year": 2021, "value": 83.2},
+      {"year": 2022, "value": 83.0},
+      {"year": 2023, "value": 83.2},
+      {"year": 2024, "value": 83.5}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2015, "value": 80.5},
+        {"year": 2016, "value": 80.7},
+        {"year": 2017, "value": 80.9},
+        {"year": 2018, "value": 81.2},
+        {"year": 2019, "value": 81.4},
+        {"year": 2020, "value": 81.3},
+        {"year": 2021, "value": 80.8},
+        {"year": 2022, "value": 80.7},
+        {"year": 2023, "value": 81.0},
+        {"year": 2024, "value": 81.2}
+      ],
+      "female": [
+        {"year": 2015, "value": 85.1},
+        {"year": 2016, "value": 85.1},
+        {"year": 2017, "value": 85.4},
+        {"year": 2018, "value": 85.5},
+        {"year": 2019, "value": 85.9},
+        {"year": 2020, "value": 85.9},
+        {"year": 2021, "value": 85.5},
+        {"year": 2022, "value": 85.2},
+        {"year": 2023, "value": 85.3},
+        {"year": 2024, "value": 85.6}
+      ]
+    }
   },
   "diabetes_prevalence": {
     "label": "Diabetes Prevalence",
     "unit": "%",
-    "description": "Percentage of Singapore residents aged 18–69 diagnosed with or found to have diabetes mellitus.",
-    "source": "MOH National Population Health Survey (NPHS) via data.gov.sg",
-    "tooltip": "Measured via fasting blood glucose or HbA1c during health surveys. Includes both previously diagnosed cases and newly detected cases during the survey. Survey methodologies changed over time — earlier surveys (NHS) covered ages 18–69; NPHS from 2019 onward may differ in sampling. Comparisons across years should note these methodology changes.",
-    "trendBaseline": "1992 NHS baseline (7.3%)",
+    "description": "Percentage of Singapore residents aged 18–74 diagnosed with or found to have diabetes mellitus.",
+    "source": "MOH National Population Health Survey (NPHS) via SingStat Table M870401",
+    "tooltip": "Measured via fasting blood glucose or HbA1c during health surveys. Includes both previously diagnosed and newly detected cases. Survey age range changed from 18–69 to 18–74 in 2017. Comparisons across years should note methodology changes.",
+    "trendBaseline": "2010 NPHS baseline (8.6%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 1992, "value": 7.3},
-      {"year": 1998, "value": 7.4},
-      {"year": 2004, "value": 7.0},
+      {"year": 1998, "value": 9.0},
+      {"year": 2004, "value": 8.2},
       {"year": 2010, "value": 8.6},
       {"year": 2017, "value": 8.8},
       {"year": 2020, "value": 9.5},
@@ -51,35 +82,19 @@
         {"year": 2020, "value": 8.4},
         {"year": 2022, "value": 7.3}
       ]
-    },
-    "by_ethnicity": {
-      "chinese": [
-        {"year": 1998, "value": 7.1},
-        {"year": 2004, "value": 7.1},
-        {"year": 2010, "value": 9.7}
-      ],
-      "malay": [
-        {"year": 1998, "value": 12.8},
-        {"year": 2004, "value": 11.0},
-        {"year": 2010, "value": 16.6}
-      ],
-      "indian": [
-        {"year": 1998, "value": 15.3},
-        {"year": 2004, "value": 15.3},
-        {"year": 2010, "value": 17.2}
-      ]
     }
   },
   "hypertension_prevalence": {
     "label": "Hypertension Prevalence",
     "unit": "%",
-    "description": "Percentage of Singapore residents with high blood pressure (systolic ≥ 140 mmHg or diastolic ≥ 90 mmHg, or on medication).",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "From 2020 onward, NPHS adopted a new methodology using the average of multiple blood pressure readings and expanded age range, resulting in significantly higher reported prevalence (35.5% in 2020 vs 24.2% in 2017). The jump from 2017 to 2020 is largely due to this methodology change, not an actual surge in hypertension. Earlier NHS data (1992–2004) used different thresholds.",
-    "trendBaseline": "1992 NHS baseline (16.1%)",
+    "description": "Percentage of Singapore residents aged 18–74 with high blood pressure (systolic ≥ 140 mmHg or diastolic ≥ 90 mmHg, or on medication).",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "From 2020, NPHS adopted a new methodology using the average of multiple blood pressure readings and expanded the age range to 18–74. This caused reported prevalence to jump from 24.2% (2017) to 35.5% (2020). The increase is largely methodological, not a real surge in hypertension.",
+    "trendBaseline": "2010 NPHS baseline (19.8%)",
+    "singstatTableId": "M870401",
     "data": [
-      {"year": 1992, "value": 16.1},
-      {"year": 1998, "value": 21.5},
+      {"year": 1992, "value": 22.6},
+      {"year": 1998, "value": 26.7},
       {"year": 2004, "value": 20.1},
       {"year": 2010, "value": 19.8},
       {"year": 2017, "value": 24.2},
@@ -104,17 +119,18 @@
   "obesity_prevalence": {
     "label": "Obesity Prevalence",
     "unit": "%",
-    "description": "Percentage of Singapore residents with BMI ≥ 30 kg/m².",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Based on measured BMI (weight/height²) during health surveys. Uses WHO obesity threshold of BMI ≥ 30. Note that Asian populations may have higher metabolic risk at lower BMI thresholds — Singapore also tracks 'overweight' at BMI ≥ 25. The 2013 figure is from a different survey wave.",
-    "trendBaseline": "1992 NHS baseline (5.1%)",
+    "description": "Percentage of Singapore residents aged 18–74 with BMI ≥ 30 kg/m².",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Based on measured BMI (weight/height²) during health surveys. Uses WHO obesity threshold of BMI ≥ 30. Asian populations may have higher metabolic risk at lower BMI — Singapore also tracks 'overweight' at BMI ≥ 25.",
+    "trendBaseline": "2010 NPHS baseline (10.5%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 1992, "value": 5.1},
       {"year": 1998, "value": 6.0},
       {"year": 2004, "value": 6.9},
-      {"year": 2010, "value": 10.8},
+      {"year": 2010, "value": 10.5},
       {"year": 2013, "value": 8.6},
-      {"year": 2017, "value": 8.7},
+      {"year": 2017, "value": 8.6},
       {"year": 2020, "value": 10.5},
       {"year": 2022, "value": 11.6}
     ],
@@ -138,13 +154,14 @@
   "high_cholesterol_prevalence": {
     "label": "Hyperlipidaemia",
     "unit": "%",
-    "description": "Percentage of Singapore residents with high total cholesterol (≥ 6.2 mmol/L) or on lipid-lowering medication.",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Measured via fasting blood lipid panel during health surveys. Includes those on lipid-lowering medication. The large increase from 2010 to 2017 may partly reflect expanded screening and changed survey methodology. 2020 and 2022 data from NPHS uses updated methodology.",
-    "trendBaseline": "2010 NPHS baseline (25.2%)",
+    "description": "Percentage of Singapore residents aged 18–74 with high total cholesterol (≥ 6.2 mmol/L) or on lipid-lowering medication.",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Measured via fasting blood lipid panel during health surveys. Includes those on lipid-lowering medication. The drop in 2022 may reflect increased medication use and better management rather than less hyperlipidaemia.",
+    "trendBaseline": "2010 NPHS baseline (26.2%)",
+    "singstatTableId": "M870401",
     "data": [
-      {"year": 2010, "value": 25.2},
-      {"year": 2017, "value": 33.6},
+      {"year": 2010, "value": 26.2},
+      {"year": 2017, "value": 35.5},
       {"year": 2020, "value": 39.1},
       {"year": 2022, "value": 31.9}
     ],
@@ -166,13 +183,14 @@
   "daily_smoking_rate": {
     "label": "Daily Smoking Rate",
     "unit": "%",
-    "description": "Percentage of Singapore residents aged 18–69 who smoke daily.",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Self-reported daily smoking status during health surveys. Includes cigarettes and other tobacco products. Singapore has progressively raised the minimum legal smoking age and implemented plain packaging. The consistent decline reflects decades of tobacco control policy.",
-    "trendBaseline": "1992 NHS baseline (18.3%)",
+    "description": "Percentage of Singapore residents aged 18–74 who smoke daily.",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Self-reported daily smoking status during health surveys. The consistent decline reflects decades of tobacco control policy including plain packaging, high excise taxes, and progressively raised minimum legal age.",
+    "trendBaseline": "2007 NPHS baseline (13.3%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 1992, "value": 18.3},
-      {"year": 1998, "value": 15.2},
+      {"year": 1998, "value": 15.0},
       {"year": 2004, "value": 12.6},
       {"year": 2007, "value": 13.3},
       {"year": 2010, "value": 13.9},
@@ -212,32 +230,30 @@
   "govt_health_expenditure": {
     "label": "Government Health Expenditure",
     "unit": "$B",
-    "description": "Total Singapore government expenditure on health, in billions of Singapore dollars.",
-    "source": "MOH Annual Reports",
-    "tooltip": "Includes Ministry of Health operating and development expenditure. The sharp increase from 2019 to 2021 was driven by COVID-19 pandemic response costs. These are nominal figures (not adjusted for inflation).",
-    "trendBaseline": "2011 baseline ($3.9B)",
+    "description": "Total Singapore government expenditure on health (operating + development), in billions of Singapore dollars.",
+    "source": "MOH via SingStat Table M870391",
+    "tooltip": "Includes operating expenditure (hospitals, polyclinics, subsidies) and development expenditure (new facilities, infrastructure). The sharp increase from 2019 to 2021 was driven by COVID-19 pandemic response. These are nominal figures (not inflation-adjusted). Per capita spend was $2,976 in 2022.",
+    "trendBaseline": "2015 baseline ($8.6B)",
+    "singstatTableId": "M870391",
     "data": [
-      {"year": 2011, "value": 3.9},
-      {"year": 2012, "value": 4.5},
-      {"year": 2013, "value": 5.3},
-      {"year": 2014, "value": 6.5},
-      {"year": 2015, "value": 7.7},
-      {"year": 2016, "value": 8.7},
+      {"year": 2015, "value": 8.6},
+      {"year": 2016, "value": 9.3},
       {"year": 2017, "value": 9.8},
-      {"year": 2018, "value": 10.2},
-      {"year": 2019, "value": 11.3},
-      {"year": 2020, "value": 13.9},
-      {"year": 2021, "value": 15.4},
-      {"year": 2022, "value": 16.2}
+      {"year": 2018, "value": 10.1},
+      {"year": 2019, "value": 11.1},
+      {"year": 2020, "value": 15.2},
+      {"year": 2021, "value": 16.9},
+      {"year": 2022, "value": 16.8}
     ]
   },
   "chronic_disease_screening": {
     "label": "Chronic Disease Screening Rate",
     "unit": "%",
     "description": "Percentage of Singapore residents who were screened for chronic diseases at the recommended frequency.",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Covers screening for diabetes, hypertension, and hyperlipidaemia per MOH recommended intervals. The Screen for Life programme subsidises these screenings. Higher rates indicate better preventive health behaviour.",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Covers screening for diabetes, hypertension, and hyperlipidaemia per MOH recommended intervals. The Screen for Life programme subsidises these screenings at CHAS GP clinics and polyclinics.",
     "trendBaseline": "2007 baseline (58.1%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 2007, "value": 58.1},
       {"year": 2010, "value": 45.2},
@@ -277,10 +293,11 @@
   "binge_drinking": {
     "label": "Binge Drinking",
     "unit": "%",
-    "description": "Percentage of Singapore residents who engaged in binge drinking (5+ drinks on a single occasion) in the past month.",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Self-reported binge drinking (≥5 standard drinks on one occasion for men, ≥4 for women). The steady increase over time reflects changing social drinking patterns in Singapore.",
+    "description": "Percentage of Singapore residents who engaged in binge drinking (5+ drinks on a single occasion for men, 4+ for women) in the past month.",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Self-reported binge drinking. The steady increase over time reflects changing social drinking patterns. Binge drinking is a risk factor for liver disease, injuries, and cardiovascular events.",
     "trendBaseline": "2007 baseline (4.3%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 2007, "value": 4.3},
       {"year": 2013, "value": 7.4},
@@ -318,9 +335,10 @@
     "label": "Sufficient Physical Activity",
     "unit": "%",
     "description": "Percentage of Singapore residents meeting WHO-recommended levels of physical activity (≥150 min moderate or ≥75 min vigorous per week).",
-    "source": "MOH NPHS via data.gov.sg",
-    "tooltip": "Self-reported physical activity levels based on WHO Global Physical Activity Questionnaire. 'Sufficient' means meeting the minimum 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity activity per week. The decline from 2019 may partly reflect COVID-19 restrictions on exercise facilities.",
+    "source": "MOH NPHS via SingStat Table M870401",
+    "tooltip": "Self-reported via the Global Physical Activity Questionnaire (GPAQ). 'Sufficient' means meeting WHO minimum of 150 minutes moderate or 75 minutes vigorous activity per week. The post-2019 decline may partly reflect COVID-19 restrictions.",
     "trendBaseline": "2007 baseline (85.4%)",
+    "singstatTableId": "M870401",
     "data": [
       {"year": 2007, "value": 85.4},
       {"year": 2013, "value": 79.5},
@@ -353,5 +371,241 @@
         {"year": 2023, "value": 76.9}
       ]
     }
+  },
+  "childhood_obesity": {
+    "label": "Childhood Obesity (Pri 1)",
+    "unit": "%",
+    "description": "Prevalence of overweight and severely overweight (obesity) among Primary 1 children in Singapore.",
+    "source": "HPB via SingStat Table M870381",
+    "tooltip": "Measured during the annual School Health Service screening of Primary 1 students (age ~7). Combines overweight and severely overweight categories. The spike in 2021 (13.4%) likely reflects reduced physical activity during COVID-19 school closures.",
+    "singstatTableId": "M870381",
+    "data": [
+      {"year": 2013, "value": 12.0},
+      {"year": 2014, "value": 12.0},
+      {"year": 2015, "value": 12.0},
+      {"year": 2016, "value": 13.0},
+      {"year": 2017, "value": 13.0},
+      {"year": 2018, "value": 13.0},
+      {"year": 2019, "value": 12.0},
+      {"year": 2020, "value": 10.1},
+      {"year": 2021, "value": 13.4},
+      {"year": 2022, "value": 12.1},
+      {"year": 2023, "value": 9.5},
+      {"year": 2024, "value": 8.9}
+    ]
+  },
+  "health_personnel": {
+    "label": "Doctors per 10,000",
+    "unit": "per 10k",
+    "description": "Number of registered doctors per 10,000 total population in Singapore.",
+    "source": "MOH via SingStat Table M870001",
+    "tooltip": "Includes all registered medical practitioners (GPs, specialists, house officers). The gradual increase reflects Singapore's efforts to expand healthcare workforce capacity to meet growing demand from an aging population.",
+    "singstatTableId": "M870001",
+    "data": [
+      {"year": 2000, "value": 14},
+      {"year": 2005, "value": 16},
+      {"year": 2010, "value": 19},
+      {"year": 2015, "value": 23},
+      {"year": 2018, "value": 24},
+      {"year": 2019, "value": 25},
+      {"year": 2020, "value": 26},
+      {"year": 2021, "value": 27},
+      {"year": 2022, "value": 28},
+      {"year": 2023, "value": 28},
+      {"year": 2024, "value": 29}
+    ]
+  },
+  "hospital_beds": {
+    "label": "Hospital Beds (Acute)",
+    "unit": "beds",
+    "description": "Total number of beds in acute hospitals (public and private) in Singapore.",
+    "source": "MOH via SingStat Table M870301",
+    "tooltip": "Includes public, not-for-profit, and private acute hospital beds. Does not include community hospital or psychiatric hospital beds. The gradual increase reflects infrastructure expansion to serve a growing and aging population.",
+    "singstatTableId": "M870301",
+    "data": [
+      {"year": 2010, "value": 9993},
+      {"year": 2015, "value": 10745},
+      {"year": 2018, "value": 11208},
+      {"year": 2019, "value": 11412},
+      {"year": 2020, "value": 11572},
+      {"year": 2021, "value": 11704},
+      {"year": 2022, "value": 11830},
+      {"year": 2023, "value": 12025}
+    ]
+  },
+  "deaths_by_cause": {
+    "label": "Deaths by Cause",
+    "unit": "deaths",
+    "description": "Annual deaths in Singapore broken down by broad cause categories.",
+    "source": "SingStat Table M810131",
+    "tooltip": "Based on certified cause of death. Cancer (neoplasms), heart disease, and pneumonia are consistently the top causes. Pneumonia deaths surged during COVID-19. These are absolute numbers — rates per 100,000 would differ due to population growth.",
+    "singstatTableId": "M810131",
+    "categories": {
+      "cancer": {
+        "label": "Cancer",
+        "data": [
+          {"year": 2015, "value": 6262},
+          {"year": 2018, "value": 6397},
+          {"year": 2019, "value": 6436},
+          {"year": 2020, "value": 6415},
+          {"year": 2021, "value": 6605},
+          {"year": 2022, "value": 6702},
+          {"year": 2023, "value": 6781},
+          {"year": 2024, "value": 7173},
+          {"year": 2025, "value": 7189}
+        ]
+      },
+      "heart_disease": {
+        "label": "Heart Disease",
+        "data": [
+          {"year": 2015, "value": 5826},
+          {"year": 2018, "value": 5925},
+          {"year": 2019, "value": 5975},
+          {"year": 2020, "value": 6210},
+          {"year": 2021, "value": 6238},
+          {"year": 2022, "value": 6884},
+          {"year": 2023, "value": 6798},
+          {"year": 2024, "value": 6587},
+          {"year": 2025, "value": 6721}
+        ]
+      },
+      "pneumonia": {
+        "label": "Pneumonia",
+        "data": [
+          {"year": 2015, "value": 3533},
+          {"year": 2018, "value": 4048},
+          {"year": 2019, "value": 4243},
+          {"year": 2020, "value": 2970},
+          {"year": 2021, "value": 4460},
+          {"year": 2022, "value": 5391},
+          {"year": 2023, "value": 6320},
+          {"year": 2024, "value": 6077},
+          {"year": 2025, "value": 6057}
+        ]
+      },
+      "stroke": {
+        "label": "Stroke",
+        "data": [
+          {"year": 2015, "value": 1682},
+          {"year": 2018, "value": 1595},
+          {"year": 2019, "value": 1566},
+          {"year": 2020, "value": 1530},
+          {"year": 2021, "value": 1492},
+          {"year": 2022, "value": 1554},
+          {"year": 2023, "value": 1496},
+          {"year": 2024, "value": 1473},
+          {"year": 2025, "value": 1478}
+        ]
+      }
+    }
+  },
+  "psychiatric_admissions": {
+    "label": "Psychiatric Admissions",
+    "unit": "admissions",
+    "description": "Annual admissions to psychiatric hospitals in Singapore.",
+    "source": "MOH via SingStat Table M870311",
+    "tooltip": "Tracks public psychiatric hospital admissions (primarily Institute of Mental Health). The steady increase from 2021 onward may reflect growing mental health needs and reduced stigma around seeking help. Does not capture outpatient psychiatric visits.",
+    "singstatTableId": "M870311",
+    "data": [
+      {"year": 2015, "value": 6842},
+      {"year": 2018, "value": 7576},
+      {"year": 2019, "value": 7709},
+      {"year": 2020, "value": 6781},
+      {"year": 2021, "value": 8226},
+      {"year": 2022, "value": 9340},
+      {"year": 2023, "value": 9693},
+      {"year": 2024, "value": 9846},
+      {"year": 2025, "value": 11154}
+    ]
+  },
+  "tb_incidence": {
+    "label": "Tuberculosis Incidence",
+    "unit": "per 100k",
+    "description": "Incidence rate of tuberculosis per 100,000 population in Singapore.",
+    "source": "MOH via SingStat Table M870361",
+    "tooltip": "Singapore still has an intermediate TB burden compared to other developed countries. The decline from 2022 onward may reflect improved screening and treatment. TB remains a notifiable disease in Singapore.",
+    "singstatTableId": "M870361",
+    "data": [
+      {"year": 2000, "value": 48.0},
+      {"year": 2005, "value": 35.6},
+      {"year": 2010, "value": 39.2},
+      {"year": 2015, "value": 47.7},
+      {"year": 2018, "value": 42.0},
+      {"year": 2019, "value": 40.7},
+      {"year": 2020, "value": 39.1},
+      {"year": 2021, "value": 42.4},
+      {"year": 2022, "value": 44.5},
+      {"year": 2023, "value": 34.1},
+      {"year": 2024, "value": 35.1}
+    ]
+  },
+  "aged_65_plus": {
+    "label": "Population Aged 65+",
+    "unit": "%",
+    "description": "Percentage of Singapore resident population aged 65 years and over.",
+    "source": "Department of Statistics Singapore (SingStat), Table M810011",
+    "tooltip": "Singapore is one of the fastest-aging societies in Asia. The proportion aged 65+ has more than doubled since 2000, driven by longer life expectancy and low fertility rates. By 2030, roughly 1 in 4 residents will be 65+.",
+    "trendBaseline": "2000 baseline (7.2%)",
+    "singstatTableId": "M810011",
+    "data": [
+      {"year": 2000, "value": 7.2},
+      {"year": 2005, "value": 8.4},
+      {"year": 2010, "value": 9.0},
+      {"year": 2015, "value": 12.0},
+      {"year": 2018, "value": 13.7},
+      {"year": 2019, "value": 14.4},
+      {"year": 2020, "value": 15.2},
+      {"year": 2021, "value": 16.0},
+      {"year": 2022, "value": 17.6},
+      {"year": 2023, "value": 18.4},
+      {"year": 2024, "value": 19.1}
+    ]
+  },
+  "old_age_support_ratio": {
+    "label": "Old-Age Support Ratio",
+    "unit": "ratio",
+    "description": "Number of residents aged 20-64 per resident aged 65 and over. A lower ratio means fewer working-age adults supporting each elderly person.",
+    "source": "Department of Statistics Singapore (SingStat), Table M810001",
+    "tooltip": "The old-age support ratio measures how many working-age adults (20-64) support each elderly person (65+). A declining ratio signals increasing fiscal pressure on healthcare, pensions, and social services. Singapore's ratio has fallen sharply from 8.4 in 2005 to around 3.6 in 2024.",
+    "trendBaseline": "2005 baseline (8.4)",
+    "singstatTableId": "M810001",
+    "data": [
+      {"year": 2000, "value": 9.9},
+      {"year": 2005, "value": 8.4},
+      {"year": 2010, "value": 7.6},
+      {"year": 2015, "value": 5.6},
+      {"year": 2018, "value": 4.7},
+      {"year": 2019, "value": 4.5},
+      {"year": 2020, "value": 4.2},
+      {"year": 2021, "value": 4.0},
+      {"year": 2022, "value": 3.7},
+      {"year": 2023, "value": 3.6},
+      {"year": 2024, "value": 3.5}
+    ]
+  },
+  "total_fertility_rate": {
+    "label": "Total Fertility Rate",
+    "unit": "births",
+    "description": "Average number of live births per woman over her lifetime, assuming current age-specific fertility rates persist.",
+    "source": "Department of Statistics Singapore (SingStat), Table M810091",
+    "tooltip": "A TFR of 2.1 is needed for population replacement without immigration. Singapore's TFR has been well below replacement level since the 1980s and hit a historic low of 0.97 in 2023 — one of the lowest in the world. This drives the aging population trend.",
+    "trendBaseline": "Replacement level: 2.1",
+    "singstatTableId": "M810091",
+    "data": [
+      {"year": 1980, "value": 1.82},
+      {"year": 1990, "value": 1.83},
+      {"year": 2000, "value": 1.60},
+      {"year": 2005, "value": 1.26},
+      {"year": 2010, "value": 1.15},
+      {"year": 2015, "value": 1.24},
+      {"year": 2018, "value": 1.14},
+      {"year": 2019, "value": 1.14},
+      {"year": 2020, "value": 1.10},
+      {"year": 2021, "value": 1.12},
+      {"year": 2022, "value": 1.04},
+      {"year": 2023, "value": 0.97},
+      {"year": 2024, "value": 0.97},
+      {"year": 2025, "value": 0.87}
+    ]
   }
 }

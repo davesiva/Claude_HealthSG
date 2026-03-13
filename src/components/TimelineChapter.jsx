@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
-  Tooltip, ResponsiveContainer, ReferenceLine, ReferenceArea, Legend, Label
+  Tooltip, ResponsiveContainer, ReferenceArea, ReferenceLine, Legend, Label
 } from 'recharts'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import healthData from '../data/health-indicators.json'
@@ -13,14 +13,46 @@ const chartColors = {
   smoking: '#6B7280'
 }
 
-function CustomTooltip({ active, payload, label }) {
+// Axis tick style — darker for better contrast
+const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
+const axisStroke = '#D1D5DB'
+
+function SimpleTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
   return (
-    <div className="card px-3 py-2 text-xs border border-border">
-      <p className="font-mono font-semibold">{label}</p>
+    <div className="bg-white px-3 py-2 text-xs border border-border rounded-lg shadow-md">
+      <p className="font-mono font-semibold text-primary">{label}</p>
       {payload.map((p, i) => (
         <p key={i} style={{ color: p.color }} className="font-mono">
-          {p.name}: {p.value}
+          {p.name}: {p.value}%
+        </p>
+      ))}
+    </div>
+  )
+}
+
+function SimpleBarTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) return null
+  return (
+    <div className="bg-white px-3 py-2 text-xs border border-border rounded-lg shadow-md">
+      <p className="font-mono font-semibold text-primary">{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} style={{ color: p.color }} className="font-mono">
+          {p.name}: ${p.value}B
+        </p>
+      ))}
+    </div>
+  )
+}
+
+function LifeExpTooltip({ active, payload, label }) {
+  if (!active || !payload?.length) return null
+  return (
+    <div className="bg-white px-3 py-2 text-xs border border-border rounded-lg shadow-md">
+      <p className="font-mono font-semibold text-primary">{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} style={{ color: p.color }} className="font-mono">
+          {p.name}: {p.value} yrs
         </p>
       ))}
     </div>
@@ -30,99 +62,112 @@ function CustomTooltip({ active, payload, label }) {
 function Chapter1() {
   const data = healthData.life_expectancy.data
   return (
-    <ResponsiveContainer width="100%" height={250}>
-      <LineChart data={data}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-        <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-        <YAxis domain={[60, 85]} tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-        <Tooltip content={<CustomTooltip />} />
-        <ReferenceArea x1={1960} x2={1990} fill="#0D9488" fillOpacity={0.05} />
-        <ReferenceLine x={1984} stroke="#0D9488" strokeDasharray="3 3">
-          <Label value="Medisave" position="top" fill="#0D9488" fontSize={10} />
-        </ReferenceLine>
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke="#0D9488"
-          strokeWidth={2}
-          dot={{ r: 3, fill: '#0D9488' }}
-          name="Life Expectancy"
-          isAnimationActive={true}
-          animationDuration={1500}
-        />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+      <ResponsiveContainer width="100%" height={250}>
+        <LineChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
+          <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+          <YAxis domain={[60, 85]} tick={axisTick} stroke={axisStroke} />
+          <Tooltip content={<LifeExpTooltip />} />
+          <ReferenceArea x1={1960} x2={1990} fill="#0D9488" fillOpacity={0.05} />
+          <ReferenceLine x={1984} stroke="#0D9488" strokeDasharray="3 3">
+            <Label value="Medisave" position="top" fill="#0D9488" fontSize={10} />
+          </ReferenceLine>
+          <Line
+            type="monotone"
+            dataKey="value"
+            stroke="#0D9488"
+            strokeWidth={2}
+            dot={{ r: 3, fill: '#0D9488' }}
+            activeDot={{ r: 5, fill: '#0D9488', stroke: '#fff', strokeWidth: 2 }}
+            name="Life Expectancy"
+            isAnimationActive={true}
+            animationDuration={1500}
+          />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   )
 }
 
 function Chapter2() {
-  const years = [1992, 1998, 2004, 2010]
-  const combined = years.map(year => ({
+  // Use actual available years from the dataset
+  const allYears = new Set()
+  const keys = ['diabetes_prevalence', 'hypertension_prevalence', 'obesity_prevalence', 'daily_smoking_rate']
+  keys.forEach(k => {
+    healthData[k]?.data?.forEach(d => allYears.add(d.year))
+  })
+  const sortedYears = [...allYears].sort((a, b) => a - b).filter(y => y <= 2010)
+
+  const combined = sortedYears.map(year => ({
     year,
     diabetes: healthData.diabetes_prevalence.data.find(d => d.year === year)?.value,
     hypertension: healthData.hypertension_prevalence.data.find(d => d.year === year)?.value,
     obesity: healthData.obesity_prevalence.data.find(d => d.year === year)?.value,
     smoking: healthData.daily_smoking_rate.data.find(d => d.year === year)?.value
-  }))
+  })).filter(d => d.diabetes != null || d.hypertension != null || d.obesity != null || d.smoking != null)
 
   return (
-    <ResponsiveContainer width="100%" height={280}>
-      <LineChart data={combined}>
-        <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-        <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-        <YAxis tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-        <Tooltip content={<CustomTooltip />} />
-        <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
-        <ReferenceLine x={2006} stroke="#0D9488" strokeDasharray="3 3">
-          <Label value="CDMP" position="top" fill="#0D9488" fontSize={10} />
-        </ReferenceLine>
-        <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} name="Diabetes" />
-        <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} name="Hypertension" />
-        <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} name="Obesity" />
-        <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} name="Smoking" />
-      </LineChart>
-    </ResponsiveContainer>
+    <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
+      <ResponsiveContainer width="100%" height={280}>
+        <LineChart data={combined}>
+          <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
+          <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} />
+          <Tooltip content={<SimpleTooltip />} />
+          <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
+          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
+          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Hypertension" />
+          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Obesity" />
+          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Smoking" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
   )
 }
 
 function Chapter3() {
-  const years = [2010, 2017, 2020, 2022]
-  const combined = years.map(year => ({
+  // Use actual available years >= 2010 from the dataset
+  const allYears = new Set()
+  const keys = ['diabetes_prevalence', 'hypertension_prevalence', 'obesity_prevalence', 'daily_smoking_rate']
+  keys.forEach(k => {
+    healthData[k]?.data?.forEach(d => { if (d.year >= 2010) allYears.add(d.year) })
+  })
+  const sortedYears = [...allYears].sort((a, b) => a - b)
+
+  const combined = sortedYears.map(year => ({
     year,
     diabetes: healthData.diabetes_prevalence.data.find(d => d.year === year)?.value,
     hypertension: healthData.hypertension_prevalence.data.find(d => d.year === year)?.value,
     obesity: healthData.obesity_prevalence.data.find(d => d.year === year)?.value,
     smoking: healthData.daily_smoking_rate.data.find(d => d.year === year)?.value
-  }))
+  })).filter(d => d.diabetes != null || d.hypertension != null || d.obesity != null || d.smoking != null)
 
   const expenditure = healthData.govt_health_expenditure.data
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart data={combined}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-          <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-          <YAxis tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-          <Tooltip content={<CustomTooltip />} />
+          <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} />
+          <Tooltip content={<SimpleTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
-          <ReferenceLine x={2020} stroke="#EF4444" strokeDasharray="3 3">
-            <Label value="COVID-19" position="top" fill="#EF4444" fontSize={10} />
-          </ReferenceLine>
-          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} name="Diabetes" />
-          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} name="Hypertension" />
-          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} name="Obesity" />
-          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} name="Smoking" />
+          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
+          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Hypertension" />
+          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Obesity" />
+          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Smoking" />
         </LineChart>
       </ResponsiveContainer>
 
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={expenditure}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-          <XAxis dataKey="year" tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-          <YAxis tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
-          <Tooltip content={<CustomTooltip />} />
-          <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name="Expenditure ($B)" />
+          <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} />
+          <Tooltip content={<SimpleBarTooltip />} />
+          <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name="Health Spend" />
         </BarChart>
       </ResponsiveContainer>
     </div>
@@ -131,27 +176,27 @@ function Chapter3() {
 
 const chapters = [
   {
-    era: '1965–1990',
+    era: '1965-1990',
     title: 'Building the Foundation',
-    narrative: "Singapore's early public health story was one of conquering infectious diseases, building hospital infrastructure, and establishing Medisave — the world's first compulsory medical savings scheme. Life expectancy leapt from 65 to 75 years in just 25 years, a transformation that rivalled any nation on Earth.",
+    narrative: "Singapore's early public health story was one of conquering infectious diseases, building hospital infrastructure, and establishing Medisave \u2014 the world's first compulsory medical savings scheme. Life expectancy leapt from 65 to 75 years in just 25 years, a transformation that rivalled any nation on Earth.",
     chart: Chapter1
   },
   {
-    era: '1990–2010',
+    era: '1990-2010',
     title: 'The Chronic Disease Shift',
-    narrative: "As infectious diseases retreated, chronic conditions took centre stage. The first National Health Survey in 1992 established baseline numbers — diabetes at 7.3%, daily smoking at 18.3%. By 2010, diabetes had risen to 8.6% and obesity had doubled to 10.8% — a wake-up call that the nation's health challenges had fundamentally changed.",
+    narrative: "As infectious diseases retreated, chronic conditions took centre stage. The first National Health Survey in 1992 established baseline numbers. By 2010, diabetes had risen to 8.6% and obesity had doubled \u2014 a wake-up call that the nation's health challenges had fundamentally changed.",
     chart: Chapter2
   },
   {
-    era: '2010–Present',
-    title: 'War on Diabetes & COVID',
-    narrative: "The government declared a War on Diabetes in 2016. Then COVID-19 hit — disrupting everything. Health expenditure surged past $15B. But smoking hit historic lows and Healthier SG signalled a fundamental shift to prevention.",
+    era: '2010-Present',
+    title: 'War on Diabetes & Beyond',
+    narrative: "The government declared a War on Diabetes in 2016. Health expenditure surged past $15B. But smoking hit historic lows and Healthier SG signalled a fundamental shift to prevention.",
     chart: Chapter3
   },
   {
     era: '2030',
     title: 'The Road Ahead',
-    narrative: "By 2030, 1 in 4 Singaporeans will be 65 or older. Multimorbidity is rising. Mental health is emerging as a priority. The question isn't whether the system will be tested — it's whether the shift to prevention came soon enough.",
+    narrative: "By 2030, 1 in 4 Singaporeans will be 65 or older. Multimorbidity is rising. Mental health is emerging as a priority. The question isn't whether the system will be tested \u2014 it's whether the shift to prevention came soon enough.",
     chart: null
   }
 ]
@@ -182,7 +227,7 @@ export default function TimelineChapter({ chapter, index }) {
         <p className="mt-3 text-secondary text-base leading-relaxed">{ch.narrative}</p>
 
         {ChartComponent && (
-          <div className="mt-6">
+          <div className="mt-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
             <ChartComponent />
           </div>
         )}

@@ -20,10 +20,10 @@ export default function Hero() {
     const sm = getLatest(healthData.daily_smoking_rate)
 
     return [
-      { label: 'Life expectancy', value: le ? `${le.value} years` : '83.9 years' },
+      { label: 'Life expectancy', value: le ? `${le.value} years` : '83.5 years' },
       { label: 'Diabetes prevalence', value: dm ? `${dm.value}% of adults` : '8.5% of adults' },
-      { label: 'Govt health spend', value: ghe ? `$${ghe.value}B in ${ghe.year}` : '$16.2B in 2022' },
-      { label: 'Smoking rate at historic low', value: sm ? `${sm.value}%` : '9.7%' }
+      { label: 'Govt health spend', value: ghe ? `$${ghe.value}B in ${ghe.year}` : '$16.8B in 2022' },
+      { label: 'Smoking rate at historic low', value: sm ? `${sm.value}%` : '8.8%' }
     ]
   }, [healthData])
 

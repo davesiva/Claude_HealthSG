@@ -11,7 +11,7 @@ export function HealthDataProvider({ children }) {
   useEffect(() => {
     fetchAllHealthData().then(data => {
       setHealthData(data)
-      const isLive = data._sources?.prevalence === 'live' || data._sources?.demographics === 'live'
+      const isLive = data._sources?.singstat === 'live'
       setDataStatus(isLive ? 'live' : 'fallback')
     })
   }, [])

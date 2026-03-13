@@ -54,4 +54,14 @@
   * {
     box-sizing: border-box;
   }
+
+  /* Remove focus outline on chart SVG elements */
+  .recharts-wrapper,
+  .recharts-surface,
+  .recharts-wrapper svg,
+  .recharts-wrapper svg:focus,
+  .recharts-wrapper *:focus {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
 }

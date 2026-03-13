@@ -4,12 +4,16 @@ export default function Footer() {
       <div className="max-w-[960px] mx-auto text-center space-y-3">
         <p className="text-sm text-secondary">
           Built with open data from{' '}
+          <a href="https://tablebuilder.singstat.gov.sg" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+            SingStat Table Builder
+          </a>
+          {' & '}
           <a href="https://data.gov.sg" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
             data.gov.sg
           </a>
         </p>
         <p className="text-xs text-secondary/70">
-          Sources: Ministry of Health, Department of Statistics Singapore, NEA
+          Sources: Ministry of Health, Department of Statistics Singapore (SingStat), NEA, Health Promotion Board
         </p>
         <p className="text-xs text-secondary/70">
           AI insights powered by Claude (Anthropic)
