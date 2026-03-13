@@ -2,7 +2,9 @@
   "life_expectancy": {
     "label": "Life Expectancy at Birth",
     "unit": "years",
-    "source": "SingStat",
+    "description": "Average number of years a newborn is expected to live, based on current mortality rates across all age groups in Singapore.",
+    "source": "Department of Statistics Singapore (SingStat)",
+    "tooltip": "Based on period life tables published by SingStat. Reflects the average lifespan if current-year mortality rates persist. Not a prediction for any individual.",
     "data": [
       {"year": 1960, "value": 64.5},
       {"year": 1970, "value": 67.8},
@@ -23,30 +25,31 @@
   "diabetes_prevalence": {
     "label": "Diabetes Prevalence",
     "unit": "%",
-    "description": "Among Singapore residents aged 18-69",
-    "source": "MOH National Health Survey / NPHS",
+    "description": "Percentage of Singapore residents aged 18–69 diagnosed with or found to have diabetes mellitus.",
+    "source": "MOH National Population Health Survey (NPHS) via data.gov.sg",
+    "tooltip": "Measured via fasting blood glucose or HbA1c during health surveys. Includes both previously diagnosed cases and newly detected cases during the survey. Survey methodologies changed over time — earlier surveys (NHS) covered ages 18–69; NPHS from 2019 onward may differ in sampling. Comparisons across years should note these methodology changes.",
+    "trendBaseline": "1992 NHS baseline (7.3%)",
     "data": [
-      {"year": 1992, "value": 8.6},
-      {"year": 1998, "value": 9.0},
-      {"year": 2004, "value": 8.2},
-      {"year": 2010, "value": 11.3},
+      {"year": 1992, "value": 7.3},
+      {"year": 1998, "value": 7.4},
+      {"year": 2004, "value": 7.0},
+      {"year": 2010, "value": 8.6},
       {"year": 2017, "value": 8.8},
-      {"year": 2019, "value": 9.5},
-      {"year": 2020, "value": 8.5},
-      {"year": 2021, "value": 9.1},
-      {"year": 2022, "value": 8.5},
-      {"year": 2023, "value": 8.5}
+      {"year": 2020, "value": 9.5},
+      {"year": 2022, "value": 8.5}
     ],
     "by_gender": {
       "male": [
-        {"year": 2010, "value": 12.5},
-        {"year": 2017, "value": 9.5},
-        {"year": 2022, "value": 9.8}
+        {"year": 2010, "value": 9.2},
+        {"year": 2017, "value": 10.3},
+        {"year": 2020, "value": 10.6},
+        {"year": 2022, "value": 9.7}
       ],
       "female": [
-        {"year": 2010, "value": 10.1},
-        {"year": 2017, "value": 8.1},
-        {"year": 2022, "value": 7.2}
+        {"year": 2010, "value": 8.0},
+        {"year": 2017, "value": 7.4},
+        {"year": 2020, "value": 8.4},
+        {"year": 2022, "value": 7.3}
       ]
     },
     "by_ethnicity": {
@@ -70,62 +73,149 @@
   "hypertension_prevalence": {
     "label": "Hypertension Prevalence",
     "unit": "%",
-    "source": "MOH NHS / NPHS",
+    "description": "Percentage of Singapore residents with high blood pressure (systolic ≥ 140 mmHg or diastolic ≥ 90 mmHg, or on medication).",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "From 2020 onward, NPHS adopted a new methodology using the average of multiple blood pressure readings and expanded age range, resulting in significantly higher reported prevalence (35.5% in 2020 vs 24.2% in 2017). The jump from 2017 to 2020 is largely due to this methodology change, not an actual surge in hypertension. Earlier NHS data (1992–2004) used different thresholds.",
+    "trendBaseline": "1992 NHS baseline (16.1%)",
     "data": [
-      {"year": 1992, "value": 22.5},
+      {"year": 1992, "value": 16.1},
       {"year": 1998, "value": 21.5},
       {"year": 2004, "value": 20.1},
-      {"year": 2010, "value": 23.5},
-      {"year": 2017, "value": 21.4},
-      {"year": 2020, "value": 21.2},
-      {"year": 2022, "value": 21.5}
-    ]
+      {"year": 2010, "value": 19.8},
+      {"year": 2017, "value": 24.2},
+      {"year": 2020, "value": 35.5},
+      {"year": 2022, "value": 37.0}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2010, "value": 22.0},
+        {"year": 2017, "value": 27.0},
+        {"year": 2020, "value": 41.0},
+        {"year": 2022, "value": 44.0}
+      ],
+      "female": [
+        {"year": 2010, "value": 17.6},
+        {"year": 2017, "value": 21.7},
+        {"year": 2020, "value": 30.2},
+        {"year": 2022, "value": 30.2}
+      ]
+    }
   },
   "obesity_prevalence": {
     "label": "Obesity Prevalence",
     "unit": "%",
-    "description": "BMI >= 30 kg/m²",
-    "source": "MOH NHS / NPHS",
+    "description": "Percentage of Singapore residents with BMI ≥ 30 kg/m².",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Based on measured BMI (weight/height²) during health surveys. Uses WHO obesity threshold of BMI ≥ 30. Note that Asian populations may have higher metabolic risk at lower BMI thresholds — Singapore also tracks 'overweight' at BMI ≥ 25. The 2013 figure is from a different survey wave.",
+    "trendBaseline": "1992 NHS baseline (5.1%)",
     "data": [
       {"year": 1992, "value": 5.1},
       {"year": 1998, "value": 6.0},
       {"year": 2004, "value": 6.9},
       {"year": 2010, "value": 10.8},
-      {"year": 2017, "value": 8.6},
+      {"year": 2013, "value": 8.6},
+      {"year": 2017, "value": 8.7},
       {"year": 2020, "value": 10.5},
-      {"year": 2022, "value": 10.7}
-    ]
+      {"year": 2022, "value": 11.6}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2010, "value": 11.7},
+        {"year": 2013, "value": 9.4},
+        {"year": 2017, "value": 7.0},
+        {"year": 2020, "value": 11.9},
+        {"year": 2022, "value": 13.1}
+      ],
+      "female": [
+        {"year": 2010, "value": 9.4},
+        {"year": 2013, "value": 7.8},
+        {"year": 2017, "value": 10.0},
+        {"year": 2020, "value": 9.3},
+        {"year": 2022, "value": 10.2}
+      ]
+    }
   },
   "high_cholesterol_prevalence": {
-    "label": "High Total Cholesterol",
+    "label": "Hyperlipidaemia",
     "unit": "%",
-    "source": "MOH NHS / NPHS",
+    "description": "Percentage of Singapore residents with high total cholesterol (≥ 6.2 mmol/L) or on lipid-lowering medication.",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Measured via fasting blood lipid panel during health surveys. Includes those on lipid-lowering medication. The large increase from 2010 to 2017 may partly reflect expanded screening and changed survey methodology. 2020 and 2022 data from NPHS uses updated methodology.",
+    "trendBaseline": "2010 NPHS baseline (25.2%)",
     "data": [
-      {"year": 1992, "value": 19.4},
-      {"year": 1998, "value": 25.4},
-      {"year": 2004, "value": 18.7},
-      {"year": 2010, "value": 17.4},
-      {"year": 2017, "value": 33.6}
-    ]
+      {"year": 2010, "value": 25.2},
+      {"year": 2017, "value": 33.6},
+      {"year": 2020, "value": 39.1},
+      {"year": 2022, "value": 31.9}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2010, "value": 28.8},
+        {"year": 2017, "value": 42.8},
+        {"year": 2020, "value": 42.8},
+        {"year": 2022, "value": 36.2}
+      ],
+      "female": [
+        {"year": 2010, "value": 23.6},
+        {"year": 2017, "value": 28.5},
+        {"year": 2020, "value": 35.8},
+        {"year": 2022, "value": 27.9}
+      ]
+    }
   },
   "daily_smoking_rate": {
     "label": "Daily Smoking Rate",
     "unit": "%",
-    "source": "MOH NHS / NPHS",
+    "description": "Percentage of Singapore residents aged 18–69 who smoke daily.",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Self-reported daily smoking status during health surveys. Includes cigarettes and other tobacco products. Singapore has progressively raised the minimum legal smoking age and implemented plain packaging. The consistent decline reflects decades of tobacco control policy.",
+    "trendBaseline": "1992 NHS baseline (18.3%)",
     "data": [
       {"year": 1992, "value": 18.3},
       {"year": 1998, "value": 15.2},
       {"year": 2004, "value": 12.6},
-      {"year": 2010, "value": 14.3},
-      {"year": 2017, "value": 12.0},
+      {"year": 2007, "value": 13.3},
+      {"year": 2010, "value": 13.9},
+      {"year": 2013, "value": 13.1},
+      {"year": 2017, "value": 11.8},
+      {"year": 2019, "value": 10.6},
       {"year": 2020, "value": 10.1},
-      {"year": 2022, "value": 9.7}
-    ]
+      {"year": 2021, "value": 10.4},
+      {"year": 2022, "value": 9.2},
+      {"year": 2023, "value": 8.8}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2007, "value": 23.1},
+        {"year": 2010, "value": 24.0},
+        {"year": 2013, "value": 23.0},
+        {"year": 2017, "value": 20.6},
+        {"year": 2019, "value": 18.4},
+        {"year": 2020, "value": 17.0},
+        {"year": 2021, "value": 17.8},
+        {"year": 2022, "value": 16.0},
+        {"year": 2023, "value": 15.7}
+      ],
+      "female": [
+        {"year": 2007, "value": 3.8},
+        {"year": 2010, "value": 4.1},
+        {"year": 2013, "value": 3.6},
+        {"year": 2017, "value": 3.3},
+        {"year": 2019, "value": 3.2},
+        {"year": 2020, "value": 3.4},
+        {"year": 2021, "value": 3.3},
+        {"year": 2022, "value": 2.7},
+        {"year": 2023, "value": 2.3}
+      ]
+    }
   },
   "govt_health_expenditure": {
     "label": "Government Health Expenditure",
     "unit": "$B",
-    "source": "MOH",
+    "description": "Total Singapore government expenditure on health, in billions of Singapore dollars.",
+    "source": "MOH Annual Reports",
+    "tooltip": "Includes Ministry of Health operating and development expenditure. The sharp increase from 2019 to 2021 was driven by COVID-19 pandemic response costs. These are nominal figures (not adjusted for inflation).",
+    "trendBaseline": "2011 baseline ($3.9B)",
     "data": [
       {"year": 2011, "value": 3.9},
       {"year": 2012, "value": 4.5},
@@ -140,5 +230,128 @@
       {"year": 2021, "value": 15.4},
       {"year": 2022, "value": 16.2}
     ]
+  },
+  "chronic_disease_screening": {
+    "label": "Chronic Disease Screening Rate",
+    "unit": "%",
+    "description": "Percentage of Singapore residents who were screened for chronic diseases at the recommended frequency.",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Covers screening for diabetes, hypertension, and hyperlipidaemia per MOH recommended intervals. The Screen for Life programme subsidises these screenings. Higher rates indicate better preventive health behaviour.",
+    "trendBaseline": "2007 baseline (58.1%)",
+    "data": [
+      {"year": 2007, "value": 58.1},
+      {"year": 2010, "value": 45.2},
+      {"year": 2013, "value": 56.0},
+      {"year": 2017, "value": 66.4},
+      {"year": 2019, "value": 66.3},
+      {"year": 2020, "value": 63.0},
+      {"year": 2021, "value": 59.2},
+      {"year": 2022, "value": 60.3},
+      {"year": 2023, "value": 62.6}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2007, "value": 59.9},
+        {"year": 2010, "value": 47.8},
+        {"year": 2013, "value": 55.0},
+        {"year": 2017, "value": 65.9},
+        {"year": 2019, "value": 67.5},
+        {"year": 2020, "value": 63.9},
+        {"year": 2021, "value": 61.3},
+        {"year": 2022, "value": 59.2},
+        {"year": 2023, "value": 61.9}
+      ],
+      "female": [
+        {"year": 2007, "value": 56.4},
+        {"year": 2010, "value": 42.8},
+        {"year": 2013, "value": 56.9},
+        {"year": 2017, "value": 66.8},
+        {"year": 2019, "value": 65.2},
+        {"year": 2020, "value": 62.2},
+        {"year": 2021, "value": 57.5},
+        {"year": 2022, "value": 61.1},
+        {"year": 2023, "value": 63.3}
+      ]
+    }
+  },
+  "binge_drinking": {
+    "label": "Binge Drinking",
+    "unit": "%",
+    "description": "Percentage of Singapore residents who engaged in binge drinking (5+ drinks on a single occasion) in the past month.",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Self-reported binge drinking (≥5 standard drinks on one occasion for men, ≥4 for women). The steady increase over time reflects changing social drinking patterns in Singapore.",
+    "trendBaseline": "2007 baseline (4.3%)",
+    "data": [
+      {"year": 2007, "value": 4.3},
+      {"year": 2013, "value": 7.4},
+      {"year": 2017, "value": 8.8},
+      {"year": 2019, "value": 10.2},
+      {"year": 2020, "value": 10.5},
+      {"year": 2021, "value": 9.6},
+      {"year": 2022, "value": 9.4},
+      {"year": 2023, "value": 10.3}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2007, "value": 6.4},
+        {"year": 2013, "value": 10.7},
+        {"year": 2017, "value": 13.1},
+        {"year": 2019, "value": 14.9},
+        {"year": 2020, "value": 14.6},
+        {"year": 2021, "value": 13.8},
+        {"year": 2022, "value": 13.1},
+        {"year": 2023, "value": 13.7}
+      ],
+      "female": [
+        {"year": 2007, "value": 2.2},
+        {"year": 2013, "value": 4.2},
+        {"year": 2017, "value": 4.7},
+        {"year": 2019, "value": 5.7},
+        {"year": 2020, "value": 6.5},
+        {"year": 2021, "value": 5.6},
+        {"year": 2022, "value": 5.7},
+        {"year": 2023, "value": 7.1}
+      ]
+    }
+  },
+  "physical_activity": {
+    "label": "Sufficient Physical Activity",
+    "unit": "%",
+    "description": "Percentage of Singapore residents meeting WHO-recommended levels of physical activity (≥150 min moderate or ≥75 min vigorous per week).",
+    "source": "MOH NPHS via data.gov.sg",
+    "tooltip": "Self-reported physical activity levels based on WHO Global Physical Activity Questionnaire. 'Sufficient' means meeting the minimum 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity activity per week. The decline from 2019 may partly reflect COVID-19 restrictions on exercise facilities.",
+    "trendBaseline": "2007 baseline (85.4%)",
+    "data": [
+      {"year": 2007, "value": 85.4},
+      {"year": 2013, "value": 79.5},
+      {"year": 2017, "value": 84.0},
+      {"year": 2019, "value": 84.6},
+      {"year": 2020, "value": 80.6},
+      {"year": 2021, "value": 76.0},
+      {"year": 2022, "value": 74.9},
+      {"year": 2023, "value": 78.5}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2007, "value": 85.2},
+        {"year": 2013, "value": 82.5},
+        {"year": 2017, "value": 84.6},
+        {"year": 2019, "value": 85.6},
+        {"year": 2020, "value": 80.4},
+        {"year": 2021, "value": 78.1},
+        {"year": 2022, "value": 76.7},
+        {"year": 2023, "value": 80.0}
+      ],
+      "female": [
+        {"year": 2007, "value": 85.7},
+        {"year": 2013, "value": 76.6},
+        {"year": 2017, "value": 83.5},
+        {"year": 2019, "value": 83.6},
+        {"year": 2020, "value": 80.7},
+        {"year": 2021, "value": 74.1},
+        {"year": 2022, "value": 73.2},
+        {"year": 2023, "value": 76.9}
+      ]
+    }
   }
 }

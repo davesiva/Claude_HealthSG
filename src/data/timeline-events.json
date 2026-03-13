@@ -3,14 +3,14 @@
   {"year": 1969, "event": "Singapore General Hospital opens its new campus."},
   {"year": 1984, "event": "Medisave launched — compulsory medical savings scheme."},
   {"year": 1990, "event": "MediShield launched — catastrophic illness insurance."},
-  {"year": 1992, "event": "First National Health Survey conducted — baseline chronic disease data established."},
+  {"year": 1992, "event": "First National Health Survey conducted — baseline chronic disease data established. Diabetes at 7.3%, daily smoking at 18.3%."},
   {"year": 1993, "event": "Medifund established for the needy."},
   {"year": 2000, "event": "WHO ranks Singapore 6th globally for health systems."},
   {"year": 2006, "event": "Chronic Disease Management Programme (CDMP) launched for diabetes, hypertension, hyperlipidaemia."},
-  {"year": 2010, "event": "National Health Survey reveals sharp rise in diabetes (11.3%) and obesity (10.8%)."},
+  {"year": 2010, "event": "National Health Survey reveals diabetes at 8.6% and obesity at 10.8% — both significant increases from earlier surveys."},
   {"year": 2016, "event": "PM Lee declares 'War on Diabetes' at National Day Rally."},
-  {"year": 2019, "event": "Singapore achieves world's highest life expectancy at 84.8 years."},
-  {"year": 2020, "event": "COVID-19 pandemic. Life expectancy dips. Health expenditure surges to $13.9B."},
-  {"year": 2022, "event": "Healthier SG White Paper published — shift towards preventive care and enrolment with family doctors."},
-  {"year": 2023, "event": "Healthier SG programme officially launches. Screen for Life enhanced."}
+  {"year": 2019, "event": "Singapore achieves among world's highest life expectancy at 83.6 years."},
+  {"year": 2020, "event": "COVID-19 pandemic. Life expectancy dips to 83.0. Health expenditure surges to $13.9B."},
+  {"year": 2022, "event": "Healthier SG White Paper published — shift towards preventive care and enrolment with family doctors. Hypertension at 37% under new methodology."},
+  {"year": 2023, "event": "Healthier SG programme officially launches. Screen for Life enhanced. Daily smoking drops to historic low of 8.8%."}
 ]

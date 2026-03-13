@@ -15,7 +15,10 @@ const indicatorKeys = [
   { key: 'high_cholesterol_prevalence', label: 'Cholesterol' },
   { key: 'daily_smoking_rate', label: 'Smoking' },
   { key: 'life_expectancy', label: 'Life Expectancy' },
-  { key: 'govt_health_expenditure', label: 'Health Spend' }
+  { key: 'govt_health_expenditure', label: 'Health Spend' },
+  { key: 'chronic_disease_screening', label: 'Screening' },
+  { key: 'physical_activity', label: 'Physical Activity' },
+  { key: 'binge_drinking', label: 'Binge Drinking' }
 ]
 
 const demographicColors = {
@@ -35,7 +38,7 @@ const descriptions = {
   hypertension_prevalence: {
     text: 'Percentage of residents with systolic blood pressure ≥ 140 mmHg or diastolic ≥ 90 mmHg, or currently on blood pressure medication.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
-    note: 'The 2017 survey used updated methodology, which may account for differences from earlier surveys.'
+    note: 'From 2020, NPHS adopted a new methodology using the average of multiple BP readings and expanded age range. This caused reported prevalence to jump from 24.2% (2017) to 35.5% (2020). The increase is largely methodological, not a real surge in hypertension.'
   },
   obesity_prevalence: {
     text: 'Percentage of residents with BMI ≥ 30 kg/m². Note: WHO recommends Asian-specific cut-offs where BMI ≥ 27.5 is "high risk" for chronic disease.',
@@ -60,7 +63,22 @@ const descriptions = {
   govt_health_expenditure: {
     text: 'Total Singapore government spending on healthcare, including operating expenditure (hospitals, polyclinics, subsidies) and development expenditure (new facilities).',
     survey: 'Ministry of Health annual budget reports.',
-    note: 'The sharp increase from 2020 onwards includes COVID-19 response costs. This dataset is no longer available via data.gov.sg API — values are from published MOH reports.'
+    note: 'The sharp increase from 2020 onwards includes COVID-19 response costs. These are nominal figures (not adjusted for inflation).'
+  },
+  chronic_disease_screening: {
+    text: 'Percentage of Singapore residents who were screened for chronic diseases (diabetes, hypertension, hyperlipidaemia) at the recommended frequency.',
+    survey: 'National Population Health Survey (NPHS) by MOH.',
+    note: 'The Screen for Life programme subsidises these screenings at CHAS GP clinics and polyclinics. Higher rates indicate better preventive health behaviour.'
+  },
+  physical_activity: {
+    text: 'Percentage of Singapore residents meeting WHO-recommended levels of physical activity — at least 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity activity per week.',
+    survey: 'National Population Health Survey (NPHS) by MOH.',
+    note: 'Self-reported via the Global Physical Activity Questionnaire (GPAQ). The decline from 2019 may partly reflect COVID-19 restrictions on exercise facilities and outdoor activities.'
+  },
+  binge_drinking: {
+    text: 'Percentage of Singapore residents who engaged in binge drinking (5 or more standard drinks on a single occasion for men, 4 or more for women) in the past month.',
+    survey: 'National Population Health Survey (NPHS) by MOH.',
+    note: 'Self-reported. The steady increase over time reflects changing social drinking patterns in Singapore. Binge drinking is a risk factor for liver disease, injuries, and cardiovascular events.'
   }
 }
 

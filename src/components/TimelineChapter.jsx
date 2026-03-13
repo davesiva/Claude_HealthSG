@@ -106,7 +106,9 @@ function Chapter3() {
           <YAxis tick={{ fontSize: 11, fontFamily: 'JetBrains Mono' }} stroke="#E5E7EB" />
           <Tooltip content={<CustomTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
-          <ReferenceArea x1={2020} x2={2021} fill="#EF4444" fillOpacity={0.08} label={{ value: "COVID-19", fontSize: 10, fill: '#EF4444' }} />
+          <ReferenceLine x={2020} stroke="#EF4444" strokeDasharray="3 3">
+            <Label value="COVID-19" position="top" fill="#EF4444" fontSize={10} />
+          </ReferenceLine>
           <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} name="Diabetes" />
           <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} name="Hypertension" />
           <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} name="Obesity" />
@@ -137,7 +139,7 @@ const chapters = [
   {
     era: '1990–2010',
     title: 'The Chronic Disease Shift',
-    narrative: "As infectious diseases retreated, chronic conditions took centre stage. The first National Health Survey in 1992 established baseline numbers. By 2010, diabetes had surged to 11.3% and obesity to 10.8% — a wake-up call that the nation's health challenges had fundamentally changed.",
+    narrative: "As infectious diseases retreated, chronic conditions took centre stage. The first National Health Survey in 1992 established baseline numbers — diabetes at 7.3%, daily smoking at 18.3%. By 2010, diabetes had risen to 8.6% and obesity had doubled to 10.8% — a wake-up call that the nation's health challenges had fundamentally changed.",
     chart: Chapter2
   },
   {

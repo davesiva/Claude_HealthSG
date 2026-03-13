@@ -7,33 +7,35 @@ import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
 
 const indicators = [
-  { key: 'life_expectancy', trendUp: true },
-  { key: 'diabetes_prevalence', trendUp: false },
-  { key: 'hypertension_prevalence', trendUp: false },
-  { key: 'obesity_prevalence', trendUp: false },
-  { key: 'daily_smoking_rate', trendUp: false },
-  { key: 'govt_health_expenditure', trendUp: true },
-  { key: 'high_cholesterol_prevalence', trendUp: false }
+  { key: 'life_expectancy' },
+  { key: 'diabetes_prevalence' },
+  { key: 'hypertension_prevalence' },
+  { key: 'obesity_prevalence' },
+  { key: 'daily_smoking_rate' },
+  { key: 'govt_health_expenditure' },
+  { key: 'high_cholesterol_prevalence' },
+  { key: 'chronic_disease_screening' },
+  { key: 'physical_activity' }
 ]
 
-const cardTooltips = {
-  life_expectancy: 'Average years a newborn is expected to live, based on current mortality rates. Source: Department of Statistics Singapore.',
-  diabetes_prevalence: 'Percentage of Singapore residents aged 18-69 with diabetes, from the National Population Health Survey (NPHS).',
-  hypertension_prevalence: 'Percentage of residents with systolic BP ≥ 140 mmHg or diastolic BP ≥ 90 mmHg, or on medication. Source: MOH NPHS.',
-  obesity_prevalence: 'Percentage of residents with BMI ≥ 30 kg/m². Note: Singapore uses Asian BMI cut-offs where ≥ 27.5 is "high risk". Source: MOH NPHS.',
-  daily_smoking_rate: 'Percentage of residents who smoke at least one cigarette per day. Source: MOH NPHS.',
-  govt_health_expenditure: 'Total government spending on healthcare in Singapore dollars (billions). Includes operating and development expenditure. Source: MOH.',
-  high_cholesterol_prevalence: 'Percentage of residents with total blood cholesterol ≥ 6.2 mmol/L or on lipid-lowering medication. Source: MOH NPHS.'
-}
+// Keys where an increase is a positive/good trend
+const positiveUpKeys = new Set([
+  'life_expectancy', 'govt_health_expenditure',
+  'chronic_disease_screening', 'physical_activity'
+])
 
-const trendTooltips = {
-  life_expectancy: (prev, latest) => `Compared to ${prev.year} (${prev.value} yrs). A higher value means longer life expectancy — positive trend.`,
-  diabetes_prevalence: (prev, latest) => `Compared to ${prev.year} (${prev.value}%). Lower is better — a decrease means fewer people have diabetes.`,
-  hypertension_prevalence: (prev, latest) => `Compared to ${prev.year} (${prev.value}%). Lower is better — measures the change in high blood pressure rates.`,
-  obesity_prevalence: (prev, latest) => `Compared to ${prev.year} (${prev.value}%). Lower is better — a decrease means fewer people are obese.`,
-  daily_smoking_rate: (prev, latest) => `Compared to ${prev.year} (${prev.value}%). Lower is better — a decrease means fewer daily smokers.`,
-  govt_health_expenditure: (prev, latest) => `Compared to ${prev.year} ($${prev.value}B). Higher spending reflects expanded healthcare coverage and an ageing population.`,
-  high_cholesterol_prevalence: (prev, latest) => `Compared to ${prev.year} (${prev.value}%). Lower is better — a decrease means fewer people with high cholesterol.`
+function getTrendTooltip(key, prev, indicator) {
+  const baseline = indicator?.trendBaseline
+  const baselineNote = baseline ? ` Historical baseline: ${baseline}.` : ''
+  const unit = indicator?.unit === '$B' ? `$${prev.value}B` : `${prev.value}${indicator?.unit || ''}`
+
+  if (key === 'hypertension_prevalence') {
+    return `Compared to ${prev.year} (${unit}). Note: methodology changed in 2020 — the jump may not reflect a real increase.${baselineNote}`
+  }
+
+  const isPositiveUp = positiveUpKeys.has(key)
+  const direction = isPositiveUp ? 'Higher is better' : 'Lower is better'
+  return `Compared to ${prev.year} (${unit}). ${direction}.${baselineNote}`
 }
 
 function SnapshotCard({ indicatorKey, onSelect, healthData }) {
@@ -52,9 +54,12 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
   const countValue = useCountUp(latest.value, 1500, isVisible)
   const displayValue = countValue.toFixed(1)
 
-  const trendColor = indicatorKey === 'life_expectancy' || indicatorKey === 'govt_health_expenditure'
+  const isPositiveUp = positiveUpKeys.has(indicatorKey)
+  const trendColor = isPositiveUp
     ? (isUp ? '#0D9488' : '#EF4444')
     : (isUp ? '#EF4444' : '#0D9488')
+
+  const tooltipContent = indicator.tooltip || indicator.description || ''
 
   return (
     <motion.div
@@ -67,7 +72,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
     >
       <div className="flex items-start gap-1">
         <p className="text-sm text-secondary font-body truncate flex-1">{indicator.label}</p>
-        <InfoTooltip content={cardTooltips[indicatorKey]} size={13} />
+        {tooltipContent && <InfoTooltip content={tooltipContent} size={13} />}
       </div>
 
       <div className="mt-2 flex items-baseline gap-2">
@@ -82,7 +87,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
           {isUp ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
           <span className="font-mono">{isUp ? '+' : ''}{change}%</span>
           <InfoTooltip
-            content={trendTooltips[indicatorKey]?.(previous, latest) || `Compared to previous data point in ${previous.year}.`}
+            content={getTrendTooltip(indicatorKey, previous, indicator)}
             size={11}
           />
         </div>
@@ -130,7 +135,7 @@ export default function Snapshot({ onSelectIndicator }) {
           </h2>
           <p className="mt-2 text-xs text-secondary/60 font-mono">
             {dataStatus === 'live' ? 'Live data from data.gov.sg' : 'Data from MOH / SingStat'}
-            <InfoTooltip content="Data is fetched live from data.gov.sg APIs when available. Health expenditure uses MOH published figures. All prevalence data comes from the National Population Health Survey (NPHS) conducted by MOH." />
+            <InfoTooltip content="Health indicator data comes from the National Population Health Survey (NPHS) conducted by MOH. Health expenditure uses MOH published figures. All data sourced from data.gov.sg and MOH reports." />
           </p>
         </motion.div>
 
