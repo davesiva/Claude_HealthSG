@@ -53,7 +53,7 @@ app.post('/api/chat', async (req, res) => {
 })
 
 // SPA fallback — serve index.html for all other routes
-app.get('*', (req, res) => {
+app.get('/{*path}', (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'))
 })
 
