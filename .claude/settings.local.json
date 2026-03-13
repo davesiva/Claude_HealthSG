@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create:*)",
+      "Bash(mv temp-init/* temp-init/.* .)",
+      "Bash(rm -rf temp-init)",
+      "Bash(npm install:*)",
+      "Bash(mkdir -p src/data src/components src/hooks src/utils)",
+      "Bash(rm -f src/App.css src/assets/react.svg)",
+      "Bash(npm run:*)",
+      "mcp__Claude_Preview__preview_start",
+      "WebFetch(domain:data.gov.sg)",
+      "Bash(curl -s \"https://data.gov.sg/api/action/datastore_search?resource_id=d_efea9966c502767122171c61d88062db&limit=500\")",
+      "Bash(python3 -m json.tool)",
+      "Bash(python3 -c \":*)",
+      "Bash(curl -s \"https://data.gov.sg/api/action/datastore_search?resource_id=d_711586488b23182801c94bd7b6807833&limit=500\")",
+      "Bash(curl -s \"https://data.gov.sg/api/action/datastore_search?resource_id=d_abdadf4fc69bd0c8140a2a593e6aa7c7&limit=500\")",
+      "Bash(curl -s -H \"User-Agent: Mozilla/5.0\" \"https://data.gov.sg/api/action/datastore_search?resource_id=d_abdadf4fc69bd0c8140a2a593e6aa7c7&limit=500\")",
+      "Bash(curl -s --connect-timeout 10 -H \"Accept: application/json\" \"https://data.gov.sg/api/action/datastore_search?resource_id=d_abdadf4fc69bd0c8140a2a593e6aa7c7&limit=500\")",
+      "Bash(curl -s \"https://beta.data.gov.sg/api/v2/public/api/datasets/d_abdadf4fc69bd0c8140a2a593e6aa7c7/poll-download\")",
+      "Bash(curl -s \"https://api-open.data.gov.sg/v1/public/api/datasets/d_abdadf4fc69bd0c8140a2a593e6aa7c7/metadata\")",
+      "WebSearch",
+      "Bash(gh auth:*)",
+      "Bash(brew install:*)",
+      "Bash(gh repo:*)"
+    ]
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "life_expectancy": {
+    "label": "Life Expectancy at Birth",
+    "unit": "years",
+    "source": "SingStat",
+    "data": [
+      {"year": 1960, "value": 64.5},
+      {"year": 1970, "value": 67.8},
+      {"year": 1980, "value": 71.5},
+      {"year": 1990, "value": 75.3},
+      {"year": 2000, "value": 78.0},
+      {"year": 2005, "value": 79.4},
+      {"year": 2010, "value": 81.0},
+      {"year": 2015, "value": 82.7},
+      {"year": 2018, "value": 83.2},
+      {"year": 2019, "value": 83.6},
+      {"year": 2020, "value": 83.0},
+      {"year": 2021, "value": 83.5},
+      {"year": 2022, "value": 83.9},
+      {"year": 2023, "value": 83.9}
+    ]
+  },
+  "diabetes_prevalence": {
+    "label": "Diabetes Prevalence",
+    "unit": "%",
+    "description": "Among Singapore residents aged 18-69",
+    "source": "MOH National Health Survey / NPHS",
+    "data": [
+      {"year": 1992, "value": 8.6},
+      {"year": 1998, "value": 9.0},
+      {"year": 2004, "value": 8.2},
+      {"year": 2010, "value": 11.3},
+      {"year": 2017, "value": 8.8},
+      {"year": 2019, "value": 9.5},
+      {"year": 2020, "value": 8.5},
+      {"year": 2021, "value": 9.1},
+      {"year": 2022, "value": 8.5},
+      {"year": 2023, "value": 8.5}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 2010, "value": 12.5},
+        {"year": 2017, "value": 9.5},
+        {"year": 2022, "value": 9.8}
+      ],
+      "female": [
+        {"year": 2010, "value": 10.1},
+        {"year": 2017, "value": 8.1},
+        {"year": 2022, "value": 7.2}
+      ]
+    },
+    "by_ethnicity": {
+      "chinese": [
+        {"year": 1998, "value": 7.1},
+        {"year": 2004, "value": 7.1},
+        {"year": 2010, "value": 9.7}
+      ],
+      "malay": [
+        {"year": 1998, "value": 12.8},
+        {"year": 2004, "value": 11.0},
+        {"year": 2010, "value": 16.6}
+      ],
+      "indian": [
+        {"year": 1998, "value": 15.3},
+        {"year": 2004, "value": 15.3},
+        {"year": 2010, "value": 17.2}
+      ]
+    }
+  },
+  "hypertension_prevalence": {
+    "label": "Hypertension Prevalence",
+    "unit": "%",
+    "source": "MOH NHS / NPHS",
+    "data": [
+      {"year": 1992, "value": 22.5},
+      {"year": 1998, "value": 21.5},
+      {"year": 2004, "value": 20.1},
+      {"year": 2010, "value": 23.5},
+      {"year": 2017, "value": 21.4},
+      {"year": 2020, "value": 21.2},
+      {"year": 2022, "value": 21.5}
+    ]
+  },
+  "obesity_prevalence": {
+    "label": "Obesity Prevalence",
+    "unit": "%",
+    "description": "BMI >= 30 kg/m²",
+    "source": "MOH NHS / NPHS",
+    "data": [
+      {"year": 1992, "value": 5.1},
+      {"year": 1998, "value": 6.0},
+      {"year": 2004, "value": 6.9},
+      {"year": 2010, "value": 10.8},
+      {"year": 2017, "value": 8.6},
+      {"year": 2020, "value": 10.5},
+      {"year": 2022, "value": 10.7}
+    ]
+  },
+  "high_cholesterol_prevalence": {
+    "label": "High Total Cholesterol",
+    "unit": "%",
+    "source": "MOH NHS / NPHS",
+    "data": [
+      {"year": 1992, "value": 19.4},
+      {"year": 1998, "value": 25.4},
+      {"year": 2004, "value": 18.7},
+      {"year": 2010, "value": 17.4},
+      {"year": 2017, "value": 33.6}
+    ]
+  },
+  "daily_smoking_rate": {
+    "label": "Daily Smoking Rate",
+    "unit": "%",
+    "source": "MOH NHS / NPHS",
+    "data": [
+      {"year": 1992, "value": 18.3},
+      {"year": 1998, "value": 15.2},
+      {"year": 2004, "value": 12.6},
+      {"year": 2010, "value": 14.3},
+      {"year": 2017, "value": 12.0},
+      {"year": 2020, "value": 10.1},
+      {"year": 2022, "value": 9.7}
+    ]
+  },
+  "govt_health_expenditure": {
+    "label": "Government Health Expenditure",
+    "unit": "$B",
+    "source": "MOH",
+    "data": [
+      {"year": 2011, "value": 3.9},
+      {"year": 2012, "value": 4.5},
+      {"year": 2013, "value": 5.3},
+      {"year": 2014, "value": 6.5},
+      {"year": 2015, "value": 7.7},
+      {"year": 2016, "value": 8.7},
+      {"year": 2017, "value": 9.8},
+      {"year": 2018, "value": 10.2},
+      {"year": 2019, "value": 11.3},
+      {"year": 2020, "value": 13.9},
+      {"year": 2021, "value": 15.4},
+      {"year": 2022, "value": 16.2}
+    ]
+  }
+}
