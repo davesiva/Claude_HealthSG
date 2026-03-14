@@ -1,58 +1,5 @@
 export const THEMES = [
   {
-    id: 'money-health',
-    title: 'Does Money Buy Health?',
-    subtitle: 'Income inequality, spending & chronic disease',
-    icon: 'DollarSign',
-    color: '#0D9488',
-    comparisons: [
-      {
-        id: 'gini-vs-chronic',
-        title: 'Inequality & Disease',
-        subtitle: 'As income inequality narrows, do chronic diseases decline?',
-        yearRange: [2000, 2025],
-        series: [
-          { dataPath: 'household_income.gini', label: 'Gini Coefficient', axis: 'left', type: 'line', color: '#0D9488', unit: '' },
-          { dataPath: 'diabetes_prevalence', label: 'Diabetes (%)', axis: 'right', type: 'line', color: '#F59E0B', unit: '%' },
-          { dataPath: 'hypertension_prevalence', label: 'Hypertension (%)', axis: 'right', type: 'line', color: '#EF4444', unit: '%' }
-        ],
-        leftAxisLabel: 'Gini Coefficient',
-        rightAxisLabel: 'Prevalence (%)',
-        tooltip: 'The Gini coefficient measures income inequality (0 = perfect equality, 1 = maximum inequality). This uses the measure after government transfers and taxes. A declining Gini means inequality is narrowing.',
-        narrativePrompt: 'Analyze the relationship between income inequality (Gini coefficient after transfers/taxes) and chronic disease prevalence (diabetes, hypertension) in Singapore from 2000-2024. The Gini has declined from ~0.43 to ~0.36 while diabetes stayed around 8-9% and hypertension methodology changed in 2020. What does this suggest about the relationship between inequality and health outcomes in Singapore?'
-      },
-      {
-        id: 'income-vs-health-spend',
-        title: 'Income Growth & Health Spending',
-        subtitle: 'Government spending vs household income trends',
-        yearRange: [2000, 2025],
-        series: [
-          { dataPath: 'household_income.median_income', label: 'Median Income ($)', axis: 'left', type: 'line', color: '#0D9488', unit: '$' },
-          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile ($)', axis: 'left', type: 'line', color: '#6366F1', unit: '$' },
-          { dataPath: 'govt_health_expenditure', label: 'Govt Health Spend ($B)', axis: 'right', type: 'bar', color: '#F59E0B', unit: '$B' }
-        ],
-        leftAxisLabel: 'Monthly Income ($)',
-        rightAxisLabel: 'Health Expenditure ($B)',
-        tooltip: 'Compares household income (median and 20th percentile, including employer CPF) with government health expenditure. The 20th percentile represents lower-income households.',
-        narrativePrompt: 'Analyze how Singapore government health expenditure growth compares to household income growth from 2000-2024. Median income roughly doubled while health spending grew much faster. The 20th percentile income also grew. What does this suggest about the sustainability of healthcare spending and its accessibility for lower-income households?'
-      },
-      {
-        id: 'household-health-spend',
-        title: 'What Families Spend on Health',
-        subtitle: 'Household health expenditure every 5 years',
-        yearRange: [1993, 2023],
-        series: [
-          { dataPath: 'household_expenditure.health', label: 'Health Spend ($)', axis: 'left', type: 'bar', color: '#0D9488', unit: '$' },
-          { dataPath: 'household_expenditure.total', label: 'Total Spend ($)', axis: 'right', type: 'line', color: '#9CA3AF', unit: '$' }
-        ],
-        leftAxisLabel: 'Monthly Health ($)',
-        rightAxisLabel: 'Total Monthly ($)',
-        tooltip: 'Average monthly household expenditure on health vs total expenditure. Data from the Household Expenditure Survey conducted every 5 years. Health includes medical care, medicines, and health services.',
-        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from $61 to $225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?'
-      }
-    ]
-  },
-  {
     id: 'silver-tsunami',
     title: 'Silver Tsunami',
     subtitle: 'Aging, loneliness & the demographic squeeze',
@@ -142,6 +89,59 @@ export const THEMES = [
         rightAxisLabel: 'Support Ratio',
         tooltip: 'Total fertility rate (births per woman) and old-age support ratio (workers per retiree) are both declining. When both fall simultaneously, the pressure on each working adult intensifies — they must support more elderly with fewer siblings to share the burden.',
         narrativePrompt: 'Analyze the simultaneous decline of Singapore\'s total fertility rate (from 1.82 in 1980 to 0.87 in 2025) and old-age support ratio (from ~10 to ~3.5). These two lines converging represent a demographic squeeze. What are the policy implications? Discuss immigration, pro-natalist policies, and automation as potential responses.'
+      }
+    ]
+  },
+  {
+    id: 'cost-of-care',
+    title: 'The Cost of Care',
+    subtitle: 'Income inequality, spending & chronic disease',
+    icon: 'DollarSign',
+    color: '#0D9488',
+    comparisons: [
+      {
+        id: 'gini-vs-chronic',
+        title: 'Inequality & Disease',
+        subtitle: 'As income inequality narrows, do chronic diseases decline?',
+        yearRange: [2000, 2025],
+        series: [
+          { dataPath: 'household_income.gini', label: 'Gini Coefficient', axis: 'left', type: 'line', color: '#0D9488', unit: '' },
+          { dataPath: 'diabetes_prevalence', label: 'Diabetes (%)', axis: 'right', type: 'line', color: '#F59E0B', unit: '%' },
+          { dataPath: 'hypertension_prevalence', label: 'Hypertension (%)', axis: 'right', type: 'line', color: '#EF4444', unit: '%' }
+        ],
+        leftAxisLabel: 'Gini Coefficient',
+        rightAxisLabel: 'Prevalence (%)',
+        tooltip: 'The Gini coefficient measures income inequality (0 = perfect equality, 1 = maximum inequality). This uses the measure after government transfers and taxes. A declining Gini means inequality is narrowing.',
+        narrativePrompt: 'Analyze the relationship between income inequality (Gini coefficient after transfers/taxes) and chronic disease prevalence (diabetes, hypertension) in Singapore from 2000-2024. The Gini has declined from ~0.43 to ~0.36 while diabetes stayed around 8-9% and hypertension methodology changed in 2020. What does this suggest about the relationship between inequality and health outcomes in Singapore?'
+      },
+      {
+        id: 'income-vs-health-spend',
+        title: 'Income Growth & Health Spending',
+        subtitle: 'Government spending vs household income trends',
+        yearRange: [2000, 2025],
+        series: [
+          { dataPath: 'household_income.median_income', label: 'Median Income ($)', axis: 'left', type: 'line', color: '#0D9488', unit: '$' },
+          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile ($)', axis: 'left', type: 'line', color: '#6366F1', unit: '$' },
+          { dataPath: 'govt_health_expenditure', label: 'Govt Health Spend ($B)', axis: 'right', type: 'bar', color: '#F59E0B', unit: '$B' }
+        ],
+        leftAxisLabel: 'Monthly Income ($)',
+        rightAxisLabel: 'Health Expenditure ($B)',
+        tooltip: 'Compares household income (median and 20th percentile, including employer CPF) with government health expenditure. The 20th percentile represents lower-income households.',
+        narrativePrompt: 'Analyze how Singapore government health expenditure growth compares to household income growth from 2000-2024. Median income roughly doubled while health spending grew much faster. The 20th percentile income also grew. What does this suggest about the sustainability of healthcare spending and its accessibility for lower-income households?'
+      },
+      {
+        id: 'household-health-spend',
+        title: 'What Families Spend on Health',
+        subtitle: 'Household health expenditure every 5 years',
+        yearRange: [1993, 2023],
+        series: [
+          { dataPath: 'household_expenditure.health', label: 'Health Spend ($)', axis: 'left', type: 'bar', color: '#0D9488', unit: '$' },
+          { dataPath: 'household_expenditure.total', label: 'Total Spend ($)', axis: 'right', type: 'line', color: '#9CA3AF', unit: '$' }
+        ],
+        leftAxisLabel: 'Monthly Health ($)',
+        rightAxisLabel: 'Total Monthly ($)',
+        tooltip: 'Average monthly household expenditure on health vs total expenditure. Data from the Household Expenditure Survey conducted every 5 years. Health includes medical care, medicines, and health services.',
+        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from $61 to $225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?'
       }
     ]
   },

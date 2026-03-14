@@ -67,10 +67,10 @@ export default function AskHealthSG() {
       }))
       const response = await askHealthSG(apiMessages, systemPrompt)
       setMessages(prev => [...prev, { role: 'assistant', content: response }])
-    } catch {
+    } catch (err) {
       setMessages(prev => [
         ...prev,
-        { role: 'assistant', content: 'Sorry, I encountered an error. Please check your API key and try again.' }
+        { role: 'assistant', content: `Sorry, I encountered an error: ${err.message}` }
       ])
     } finally {
       setIsLoading(false)

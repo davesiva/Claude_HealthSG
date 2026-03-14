@@ -12,7 +12,11 @@ export async function askHealthSG(messages, systemPrompt, maxTokens = 1024) {
   })
 
   if (!response.ok) {
-    throw new Error(`API error: ${response.status}`)
+    const errorData = await response.json().catch(() => ({}))
+    const message = typeof errorData.error === 'string'
+      ? errorData.error
+      : errorData.error?.message || `API error: ${response.status}`
+    throw new Error(message)
   }
 
   const data = await response.json()

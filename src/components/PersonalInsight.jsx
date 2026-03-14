@@ -78,8 +78,8 @@ export default function PersonalInsight() {
         getSystemPrompt(healthData)
       )
       setInsight(result)
-    } catch {
-      setError('Unable to generate insight. Please check your API key and try again.')
+    } catch (err) {
+      setError(`Unable to generate insight: ${err.message}`)
     } finally {
       setLoading(false)
     }

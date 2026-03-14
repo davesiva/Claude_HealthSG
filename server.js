@@ -9,7 +9,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 const app = express()
 const PORT = process.env.PORT || 3001
 
-app.use(express.json())
+app.use(express.json({ limit: '1mb' }))
 
 // Serve static files from Vite build
 app.use(express.static(join(__dirname, 'dist')))
@@ -40,14 +40,15 @@ app.post('/api/chat', async (req, res) => {
 
     if (!response.ok) {
       const error = await response.text()
+      console.error(`Anthropic API ${response.status}:`, error)
       return res.status(response.status).json({ error })
     }
 
     const data = await response.json()
     res.json(data)
   } catch (err) {
-    console.error('Anthropic API error:', err)
-    res.status(500).json({ error: 'Failed to reach Anthropic API' })
+    console.error('Anthropic API error:', err.message, err.stack)
+    res.status(500).json({ error: `Failed to reach Anthropic API: ${err.message}` })
   }
 })
 

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ComposedChart, Line, Bar, Area, XAxis, YAxis, CartesianGrid,
@@ -41,6 +41,15 @@ export default function InsightLab() {
   const [narratives, setNarratives] = useState({})
   const [narrativeLoading, setNarrativeLoading] = useState(false)
   const [ref, isVisible] = useScrollAnimation(0.1)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   const activeTheme = THEMES.find(t => t.id === activeThemeId)
   const activeComparison = activeTheme?.comparisons.find(c => c.id === activeComparisonId)
@@ -166,7 +175,7 @@ export default function InsightLab() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeComparison.id}
-              className="mt-8 card p-6"
+              className="mt-8 card p-4 md:p-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
@@ -186,16 +195,16 @@ export default function InsightLab() {
               </div>
 
               {hasData ? (
-                <ResponsiveContainer width="100%" height={350}>
-                  <ComposedChart data={chartData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                <ResponsiveContainer width="100%" height={isMobile ? 280 : 350}>
+                  <ComposedChart data={chartData} margin={{ top: 10, right: isMobile ? 5 : 10, left: 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-                    <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+                    <XAxis dataKey="year" tick={{ ...axisTick, fontSize: isMobile ? 10 : 11 }} stroke={axisStroke} />
                     <YAxis
                       yAxisId="left"
-                      tick={axisTick}
+                      tick={{ ...axisTick, fontSize: isMobile ? 10 : 11 }}
                       stroke={axisStroke}
-                      width={55}
-                      label={{
+                      width={isMobile ? 35 : 55}
+                      label={isMobile ? undefined : {
                         value: activeComparison.leftAxisLabel,
                         angle: -90,
                         position: 'insideLeft',
@@ -206,10 +215,10 @@ export default function InsightLab() {
                     <YAxis
                       yAxisId="right"
                       orientation="right"
-                      tick={axisTick}
+                      tick={{ ...axisTick, fontSize: isMobile ? 10 : 11 }}
                       stroke={axisStroke}
-                      width={55}
-                      label={{
+                      width={isMobile ? 35 : 55}
+                      label={isMobile ? undefined : {
                         value: activeComparison.rightAxisLabel,
                         angle: 90,
                         position: 'insideRight',
@@ -218,7 +227,7 @@ export default function InsightLab() {
                       }}
                     />
                     <Tooltip content={<DualAxisTooltip />} />
-                    <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
+                    <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'DM Sans' }} />
                     {activeComparison.series.map((s, i) => {
                       const dataKey = `s${i}`
 
@@ -278,7 +287,7 @@ export default function InsightLab() {
                   </ComposedChart>
                 </ResponsiveContainer>
               ) : (
-                <div className="h-[350px] flex items-center justify-center text-secondary text-sm">
+                <div className="h-[280px] md:h-[350px] flex items-center justify-center text-secondary text-sm">
                   Data not available for this comparison. Try another.
                 </div>
               )}
