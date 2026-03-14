@@ -15,7 +15,13 @@ const SINGSTAT_TABLES = {
   infectiousDisease: 'M870361',
   populationByAge: 'M810011',
   populationIndicators: 'M810001',
-  fertilityRates: 'M810091'
+  fertilityRates: 'M810091',
+  // Insight Lab tables
+  householdIncome: 'M810361',
+  elderlyIndicators: 'M810611',
+  householdExpenditure: 'M212981',
+  hospitalAdmissionRates: 'M870321',
+  universityIntake: 'M850761'
 }
 
 function parseNum(val) {
@@ -289,6 +295,147 @@ function updateTotalFertilityRate(merged, parsed) {
 }
 
 /**
+ * Update household income data from SingStat M810361
+ */
+function updateHouseholdIncome(merged, parsed) {
+  if (!merged.household_income) {
+    merged.household_income = { gini: { data: [] }, median_income: { data: [] }, income_20th_pct: { data: [] } }
+  }
+
+  const giniRow = parsed['Gini Coefficient Based On Household Employment Income Per Household Member (Including Employer CPF Contributions) After Accounting For Government Transfers And Taxes']
+  if (giniRow?.length) {
+    merged.household_income.gini.data = mergeTimeSeries(merged.household_income.gini.data, giniRow)
+    merged.household_income._live = true
+  }
+
+  const median = parsed['Median Monthly Household Employment Income Including Employer CPF Contributions']
+  if (median?.length) {
+    merged.household_income.median_income.data = mergeTimeSeries(merged.household_income.median_income.data, median)
+  }
+
+  const pct20 = parsed['Monthly Household Employment Income Per Household Member (Including Employer CPF Contributions) At 20th Percentile']
+  if (pct20?.length) {
+    merged.household_income.income_20th_pct.data = mergeTimeSeries(merged.household_income.income_20th_pct.data, pct20)
+  }
+}
+
+/**
+ * Update elderly indicators from SingStat M810611
+ */
+function updateElderlyIndicators(merged, parsed) {
+  if (!merged.elderly_indicators) {
+    merged.elderly_indicators = {
+      pct_65_plus: { data: [] },
+      life_expectancy_at_65: { data: [] },
+      elderly_living_alone_pct: { data: [] },
+      elderly_labour_force_pct: { data: [] },
+      elderly_death_rate: { data: [] },
+      elderly_death_heart: { data: [] },
+      elderly_death_cancer: { data: [] }
+    }
+  }
+
+  const pct65 = parsed['Proportion Of Elderly Residents (65 Years & Over) Among Resident Population']
+  if (pct65?.length) {
+    merged.elderly_indicators.pct_65_plus.data = mergeTimeSeries(merged.elderly_indicators.pct_65_plus.data, pct65)
+    merged.elderly_indicators._live = true
+  }
+
+  const le65 = parsed['Life Expectancy At Age 65 Years']
+  if (le65?.length) {
+    merged.elderly_indicators.life_expectancy_at_65.data = mergeTimeSeries(merged.elderly_indicators.life_expectancy_at_65.data, le65)
+  }
+
+  const livingAlone = parsed['Proportion Of Elderly Residents (65 Years & Over) In Resident Households Who Are Living Alone In Household']
+  if (livingAlone?.length) {
+    merged.elderly_indicators.elderly_living_alone_pct.data = mergeTimeSeries(merged.elderly_indicators.elderly_living_alone_pct.data, livingAlone)
+  }
+
+  const labourForce = parsed['Proportion Of Elderly Residents (65 Years & Over) In Labour Force']
+  if (labourForce?.length) {
+    merged.elderly_indicators.elderly_labour_force_pct.data = mergeTimeSeries(merged.elderly_indicators.elderly_labour_force_pct.data, labourForce)
+  }
+
+  const deathRate = parsed['Death Rate Of Elderly Residents']
+  if (deathRate?.length) {
+    merged.elderly_indicators.elderly_death_rate.data = mergeTimeSeries(merged.elderly_indicators.elderly_death_rate.data, deathRate)
+  }
+
+  const heartDeath = parsed['Heart & Hypertensive Diseases']
+  if (heartDeath?.length) {
+    merged.elderly_indicators.elderly_death_heart.data = mergeTimeSeries(merged.elderly_indicators.elderly_death_heart.data, heartDeath)
+  }
+
+  const cancerDeath = parsed['Cancer (Malignant Neoplasms)']
+  if (cancerDeath?.length) {
+    merged.elderly_indicators.elderly_death_cancer.data = mergeTimeSeries(merged.elderly_indicators.elderly_death_cancer.data, cancerDeath)
+  }
+}
+
+/**
+ * Update household expenditure from SingStat M212981 (quinquennial)
+ */
+function updateHouseholdExpenditure(merged, parsed) {
+  if (!merged.household_expenditure) {
+    merged.household_expenditure = { health: { data: [] }, total: { data: [] } }
+  }
+
+  const health = parsed['Health']
+  if (health?.length) {
+    merged.household_expenditure.health.data = mergeTimeSeries(merged.household_expenditure.health.data, health)
+    merged.household_expenditure._live = true
+  }
+
+  const total = parsed['Total']
+  if (total?.length) {
+    merged.household_expenditure.total.data = mergeTimeSeries(merged.household_expenditure.total.data, total)
+  }
+}
+
+/**
+ * Update hospital admission rates from SingStat M870321
+ */
+function updateHospitalAdmissionRates(merged, parsed) {
+  if (!merged.hospital_admission_rates) {
+    merged.hospital_admission_rates = { psychiatric_total: { data: [] } }
+  }
+
+  // Find psychiatric admission rate rows
+  for (const [key, data] of Object.entries(parsed)) {
+    if (key.includes('Psychiatric') && !key.includes('Male') && !key.includes('Female') && data?.length) {
+      // Get the first match that looks like a total
+      if (key.includes('Total') || (!key.includes('Years') && !key.includes('Above'))) {
+        merged.hospital_admission_rates.psychiatric_total.data = mergeTimeSeries(
+          merged.hospital_admission_rates.psychiatric_total.data, data
+        )
+        merged.hospital_admission_rates._live = true
+        break
+      }
+    }
+  }
+}
+
+/**
+ * Update university intake from SingStat M850761
+ */
+function updateUniversityIntake(merged, parsed) {
+  if (!merged.university_intake) {
+    merged.university_intake = { health_sciences: { data: [] }, total: { data: [] } }
+  }
+
+  const healthSci = parsed['Health Sciences']
+  if (healthSci?.length) {
+    merged.university_intake.health_sciences.data = mergeTimeSeries(merged.university_intake.health_sciences.data, healthSci)
+    merged.university_intake._live = true
+  }
+
+  const total = parsed['Total Intake']
+  if (total?.length) {
+    merged.university_intake.total.data = mergeTimeSeries(merged.university_intake.total.data, total)
+  }
+}
+
+/**
  * Merge two time series, preferring fresh data for overlapping years
  */
 function mergeTimeSeries(existing, fresh) {
@@ -320,7 +467,13 @@ export async function fetchAllHealthData() {
       fetchSingStat(SINGSTAT_TABLES.infectiousDisease),
       fetchSingStat(SINGSTAT_TABLES.populationByAge),
       fetchSingStat(SINGSTAT_TABLES.populationIndicators),
-      fetchSingStat(SINGSTAT_TABLES.fertilityRates)
+      fetchSingStat(SINGSTAT_TABLES.fertilityRates),
+      // Insight Lab tables
+      fetchSingStat(SINGSTAT_TABLES.householdIncome),
+      fetchSingStat(SINGSTAT_TABLES.elderlyIndicators),
+      fetchSingStat(SINGSTAT_TABLES.householdExpenditure),
+      fetchSingStat(SINGSTAT_TABLES.hospitalAdmissionRates),
+      fetchSingStat(SINGSTAT_TABLES.universityIntake)
     ])
 
     const results = fetches.map(f => f.status === 'fulfilled' ? parseRows(f.value) : null)
@@ -337,6 +490,12 @@ export async function fetchAllHealthData() {
     if (results[9]) { updateAged65Plus(merged, results[9]); liveCount++ }
     if (results[10]) { updateOldAgeSupportRatio(merged, results[10]); liveCount++ }
     if (results[11]) { updateTotalFertilityRate(merged, results[11]); liveCount++ }
+    // Insight Lab tables
+    if (results[12]) { updateHouseholdIncome(merged, results[12]); liveCount++ }
+    if (results[13]) { updateElderlyIndicators(merged, results[13]); liveCount++ }
+    if (results[14]) { updateHouseholdExpenditure(merged, results[14]); liveCount++ }
+    if (results[15]) { updateHospitalAdmissionRates(merged, results[15]); liveCount++ }
+    if (results[16]) { updateUniversityIntake(merged, results[16]); liveCount++ }
 
     merged._lastFetched = new Date().toISOString()
     merged._sources = {
