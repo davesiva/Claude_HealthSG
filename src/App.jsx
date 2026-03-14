@@ -5,6 +5,7 @@ import Hero from './components/Hero'
 import Snapshot from './components/Snapshot'
 import Timeline from './components/Timeline'
 import Explorer from './components/Explorer'
+import InsightLab from './components/InsightLab'
 import PersonalInsight from './components/PersonalInsight'
 import AskHealthSG from './components/AskHealthSG'
 import Footer from './components/Footer'
@@ -28,6 +29,7 @@ function App() {
         <div ref={explorerRef}>
           <Explorer selectedIndicator={selectedIndicator} />
         </div>
+        <InsightLab />
         <PersonalInsight />
         <Footer />
         <AskHealthSG />
