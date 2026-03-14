@@ -21,7 +21,7 @@ export default function Footer() {
         <p className="text-xs text-secondary/60 mt-4">
           Not medical advice. Always consult a qualified healthcare professional.
         </p>
-        <p className="text-xs text-secondary/50 mt-2">&copy; 2026 HealthSG</p>
+        <p className="text-xs text-secondary/50 mt-2">&copy; Day V 2026</p>
       </div>
     </footer>
   )

@@ -62,7 +62,7 @@ export const THEMES = [
       {
         id: 'aging-curve',
         title: 'The Aging Curve',
-        subtitle: 'How fast is Singapore\'s population aging?',
+        subtitle: 'TFR hit a historic low of 0.87 in 2025 — how fast is the population aging?',
         yearRange: [1970, 2025],
         series: [
           { dataPath: 'elderly_indicators.pct_65_plus', label: 'Aged 65+ (%)', axis: 'left', type: 'area', color: '#6366F1', unit: '%' },

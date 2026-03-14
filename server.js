@@ -31,7 +31,7 @@ app.post('/api/chat', async (req, res) => {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: maxTokens,
         system: systemPrompt,
         messages
@@ -108,5 +108,5 @@ app.use((req, res, next) => {
 })
 
 app.listen(PORT, () => {
-  console.log(`HealthSG server running on port ${PORT}`)
+  console.log(`Middle-Out server running on port ${PORT}`)
 })

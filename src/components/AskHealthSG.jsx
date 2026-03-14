@@ -3,10 +3,11 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles, X, Send } from 'lucide-react'
 import { askHealthSG } from '../utils/anthropic'
 import { useHealthData } from '../context/HealthDataContext'
+import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
 import timelineEvents from '../data/timeline-events.json'
 
 function getSystemPrompt(healthData) {
-  return `You are HealthSG's AI assistant, helping users understand Singapore's public health data. You have access to the following datasets from Singapore's Ministry of Health and data.gov.sg:
+  return `You are Middle-Out's AI assistant, helping users understand Singapore's public health data. You have access to the following datasets from Singapore's Ministry of Health and data.gov.sg:
 
 ${JSON.stringify(healthData, null, 2)}
 
@@ -120,7 +121,7 @@ export default function AskHealthSG() {
               {/* Header */}
               <div className="flex items-center justify-between px-5 py-4 border-b border-border">
                 <div>
-                  <h3 className="font-heading text-lg text-primary">Ask HealthSG</h3>
+                  <h3 className="font-heading text-lg text-primary">Ask Middle-Out</h3>
                   <p className="text-[10px] text-secondary/50">Powered by Claude AI · Not medical advice</p>
                 </div>
                 <button
@@ -160,9 +161,11 @@ export default function AskHealthSG() {
                           : 'bg-grid text-primary rounded-bl-sm'
                       }`}
                     >
-                      {msg.content.split('\n\n').map((para, j) => (
-                        <p key={j} className={j > 0 ? 'mt-2' : ''}>{para}</p>
-                      ))}
+                      {msg.role === 'assistant'
+                        ? renderMarkdownParagraphs(msg.content)
+                        : msg.content.split('\n\n').map((para, j) => (
+                            <p key={j} className={j > 0 ? 'mt-2' : ''}>{para}</p>
+                          ))}
                     </div>
                   </div>
                 ))}

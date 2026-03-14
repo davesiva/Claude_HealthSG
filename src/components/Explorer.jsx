@@ -130,7 +130,7 @@ const descriptions = {
   total_fertility_rate: {
     text: 'The average number of live births a woman would have over her lifetime if current age-specific fertility rates persist. A TFR of 2.1 is the "replacement level" needed to maintain population size without immigration.',
     survey: 'Department of Statistics Singapore (SingStat), Table M810091.',
-    note: 'Singapore\'s TFR has been well below replacement since the 1980s and reached a historic low of 0.97 in 2023 \u2014 one of the lowest globally. This is the root driver of population aging.'
+    note: 'Singapore\'s TFR has been well below replacement since the 1980s and reached a historic low of 0.87 in 2025 (preliminary) \u2014 one of the lowest globally. This is the root driver of population aging.'
   }
 }
 

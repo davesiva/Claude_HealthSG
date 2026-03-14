@@ -588,7 +588,7 @@
     "unit": "births",
     "description": "Average number of live births per woman over her lifetime, assuming current age-specific fertility rates persist.",
     "source": "Department of Statistics Singapore (SingStat), Table M810091",
-    "tooltip": "A TFR of 2.1 is needed for population replacement without immigration. Singapore's TFR has been well below replacement level since the 1980s and hit a historic low of 0.97 in 2023 — one of the lowest in the world. This drives the aging population trend.",
+    "tooltip": "A TFR of 2.1 is needed for population replacement without immigration. Singapore's TFR has been well below replacement level since the 1980s and hit a historic low of 0.87 in 2025 (preliminary) — one of the lowest in the world. This drives the aging population trend.",
     "trendBaseline": "Replacement level: 2.1",
     "singstatTableId": "M810091",
     "data": [

@@ -51,7 +51,7 @@ export default function Hero() {
           {...fadeIn}
           transition={{ duration: 0.6, delay: 0 }}
         >
-          HealthSG
+          Middle-Out
         </motion.h1>
 
         <motion.p
