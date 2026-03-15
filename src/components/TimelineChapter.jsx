@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
@@ -59,15 +60,15 @@ function LifeExpTooltip({ active, payload, label }) {
   )
 }
 
-function Chapter1() {
+function Chapter1({ isMobile }) {
   const data = healthData.life_expectancy.data
   return (
     <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
-      <ResponsiveContainer width="100%" height={250}>
+      <ResponsiveContainer width="100%" height={isMobile ? 220 : 250}>
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-          <YAxis domain={[60, 85]} tick={axisTick} stroke={axisStroke} />
+          <YAxis domain={[60, 85]} tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<LifeExpTooltip />} />
           <ReferenceArea x1={1960} x2={1990} fill="#0D9488" fillOpacity={0.05} />
           <ReferenceLine x={1984} stroke="#0D9488" strokeDasharray="3 3">
@@ -90,7 +91,7 @@ function Chapter1() {
   )
 }
 
-function Chapter2() {
+function Chapter2({ isMobile }) {
   // Use actual available years from the dataset
   const allYears = new Set()
   const keys = ['diabetes_prevalence', 'hypertension_prevalence', 'obesity_prevalence', 'daily_smoking_rate']
@@ -109,11 +110,11 @@ function Chapter2() {
 
   return (
     <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
-      <ResponsiveContainer width="100%" height={280}>
+      <ResponsiveContainer width="100%" height={isMobile ? 240 : 280}>
         <LineChart data={combined}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-          <YAxis tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
           <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
@@ -126,7 +127,7 @@ function Chapter2() {
   )
 }
 
-function Chapter3() {
+function Chapter3({ isMobile }) {
   // Use actual available years >= 2010 from the dataset
   const allYears = new Set()
   const keys = ['diabetes_prevalence', 'hypertension_prevalence', 'obesity_prevalence', 'daily_smoking_rate']
@@ -147,11 +148,11 @@ function Chapter3() {
 
   return (
     <div className="space-y-6 outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
-      <ResponsiveContainer width="100%" height={250}>
+      <ResponsiveContainer width="100%" height={isMobile ? 220 : 250}>
         <LineChart data={combined}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-          <YAxis tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
           <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
@@ -161,11 +162,11 @@ function Chapter3() {
         </LineChart>
       </ResponsiveContainer>
 
-      <ResponsiveContainer width="100%" height={200}>
+      <ResponsiveContainer width="100%" height={isMobile ? 180 : 200}>
         <BarChart data={expenditure}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-          <YAxis tick={axisTick} stroke={axisStroke} />
+          <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleBarTooltip />} />
           <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name="Health Spend" />
         </BarChart>
@@ -203,6 +204,16 @@ const chapters = [
 
 export default function TimelineChapter({ chapter, index }) {
   const [ref, isVisible] = useScrollAnimation(0.15)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   const ch = chapters[index]
   if (!ch) return null
 
@@ -219,7 +230,7 @@ export default function TimelineChapter({ chapter, index }) {
       {/* Timeline dot */}
       <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-accent border-2 border-card" />
 
-      <div className="card p-6 md:p-8">
+      <div className="card p-3 md:p-8">
         <span className="inline-block px-3 py-1 rounded-full bg-grid text-xs font-mono text-secondary">
           {ch.era}
         </span>
@@ -228,7 +239,7 @@ export default function TimelineChapter({ chapter, index }) {
 
         {ChartComponent && (
           <div className="mt-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
-            <ChartComponent />
+            <ChartComponent isMobile={isMobile} />
           </div>
         )}
 

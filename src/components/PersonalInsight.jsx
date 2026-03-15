@@ -86,7 +86,7 @@ export default function PersonalInsight() {
   }
 
   return (
-    <section className="py-20 md:py-30 px-6" id="insight">
+    <section className="py-20 md:py-30 px-4 md:px-6" id="insight">
       <div className="max-w-[720px] mx-auto">
         <motion.div
           ref={ref}

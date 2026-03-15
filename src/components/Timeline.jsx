@@ -6,7 +6,7 @@ export default function Timeline() {
   const [ref, isVisible] = useScrollAnimation(0.1)
 
   return (
-    <section className="py-20 md:py-30 px-6" id="timeline">
+    <section className="py-20 md:py-30 px-4 md:px-6" id="timeline">
       <div className="max-w-[720px] mx-auto">
         <motion.div
           ref={ref}

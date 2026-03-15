@@ -68,7 +68,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
   return (
     <motion.div
       ref={ref}
-      className="card p-5 cursor-pointer hover:card-hover focus:outline-none"
+      className="card p-3 md:p-5 cursor-pointer hover:card-hover focus:outline-none"
       style={{ WebkitTapHighlightColor: 'transparent' }}
       initial={{ opacity: 0, y: 20 }}
       animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -126,7 +126,7 @@ export default function Snapshot({ onSelectIndicator }) {
   const { healthData, dataStatus } = useHealthData()
 
   return (
-    <section className="py-20 md:py-30 px-6" id="snapshot">
+    <section className="py-20 md:py-30 px-4 md:px-6" id="snapshot">
       <div className="max-w-[960px] mx-auto">
         <motion.div
           ref={ref}

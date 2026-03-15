@@ -153,6 +153,15 @@ export default function Explorer({ selectedIndicator }) {
   const [activeKey, setActiveKey] = useState(selectedIndicator || 'diabetes_prevalence')
   const [breakdown, setBreakdown] = useState('all')
   const [ref, isVisible] = useScrollAnimation(0.1)
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   useEffect(() => {
     if (selectedIndicator) {
@@ -207,7 +216,7 @@ export default function Explorer({ selectedIndicator }) {
   }
 
   return (
-    <section className="py-20 md:py-30 px-6" id="explorer">
+    <section className="py-20 md:py-30 px-4 md:px-6" id="explorer">
       <div className="max-w-[960px] mx-auto">
         <motion.h2
           ref={ref}
@@ -239,7 +248,7 @@ export default function Explorer({ selectedIndicator }) {
         </div>
 
         {/* Chart */}
-        <div className="mt-8 card p-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
+        <div className="mt-8 card p-3 md:p-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-body font-semibold text-primary">
               {indicator.label}
@@ -249,12 +258,12 @@ export default function Explorer({ selectedIndicator }) {
               {chartData[0]?.year}-{chartData[chartData.length - 1]?.year}
             </span>
           </div>
-          <ResponsiveContainer width="100%" height={300}>
+          <ResponsiveContainer width="100%" height={isMobile ? 260 : 300}>
             {isBarChart && breakdown === 'all' ? (
               <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-                <YAxis tick={axisTick} stroke={axisStroke} />
+                <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
                 <Tooltip content={<CustomTooltip unit={indicator.unit === '$B' ? 'B' : indicator.unit} />} />
                 <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name={indicator.label} />
               </BarChart>
@@ -262,7 +271,7 @@ export default function Explorer({ selectedIndicator }) {
               <LineChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
-                <YAxis tick={axisTick} stroke={axisStroke} />
+                <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
                 <Tooltip content={<CustomTooltip unit={indicator.unit === '%' ? '%' : ''} />} />
                 {lines.length > 1 && <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />}
                 {lines.map(line => (

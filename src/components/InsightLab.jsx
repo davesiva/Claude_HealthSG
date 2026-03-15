@@ -82,7 +82,7 @@ export default function InsightLab() {
 
   if (!healthData || dataStatus === 'loading') {
     return (
-      <section className="py-20 md:py-30 px-6">
+      <section className="py-20 md:py-30 px-4 md:px-6">
         <div className="max-w-[960px] mx-auto">
           <div className="h-8 w-48 bg-grid rounded animate-pulse mx-auto mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -100,7 +100,7 @@ export default function InsightLab() {
   const hasData = chartData.length > 0
 
   return (
-    <section className="py-20 md:py-30 px-6" id="insight-lab">
+    <section className="py-20 md:py-30 px-4 md:px-6" id="insight-lab">
       <div className="max-w-[960px] mx-auto">
         {/* Section heading */}
         <motion.h2
@@ -175,7 +175,7 @@ export default function InsightLab() {
           <AnimatePresence mode="wait">
             <motion.div
               key={activeComparison.id}
-              className="mt-8 card p-4 md:p-6"
+              className="mt-8 card p-3 md:p-6"
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
