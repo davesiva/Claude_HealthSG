@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown } from 'lucide-react'
 import { LineChart, Line, ResponsiveContainer } from 'recharts'
@@ -6,19 +7,28 @@ import { useCountUp } from '../hooks/useCountUp'
 import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
 
+const CATEGORIES = [
+  { id: 'all', label: 'All', color: '#6B7280' },
+  { id: 'longevity', label: 'Longevity', color: '#0D9488' },
+  { id: 'chronic', label: 'Chronic Disease', color: '#EF4444' },
+  { id: 'lifestyle', label: 'Lifestyle', color: '#F59E0B' },
+  { id: 'demographics', label: 'Demographics', color: '#6366F1' },
+  { id: 'healthcare', label: 'Healthcare', color: '#8B5CF6' },
+]
+
 const indicators = [
-  { key: 'life_expectancy' },
-  { key: 'diabetes_prevalence' },
-  { key: 'hypertension_prevalence' },
-  { key: 'obesity_prevalence' },
-  { key: 'daily_smoking_rate' },
-  { key: 'govt_health_expenditure' },
-  { key: 'high_cholesterol_prevalence' },
-  { key: 'chronic_disease_screening' },
-  { key: 'physical_activity' },
-  { key: 'aged_65_plus' },
-  { key: 'old_age_support_ratio' },
-  { key: 'total_fertility_rate' }
+  { key: 'life_expectancy', category: 'longevity' },
+  { key: 'diabetes_prevalence', category: 'chronic' },
+  { key: 'hypertension_prevalence', category: 'chronic' },
+  { key: 'obesity_prevalence', category: 'chronic' },
+  { key: 'daily_smoking_rate', category: 'lifestyle' },
+  { key: 'govt_health_expenditure', category: 'healthcare' },
+  { key: 'high_cholesterol_prevalence', category: 'chronic' },
+  { key: 'chronic_disease_screening', category: 'healthcare' },
+  { key: 'physical_activity', category: 'lifestyle' },
+  { key: 'aged_65_plus', category: 'demographics' },
+  { key: 'old_age_support_ratio', category: 'demographics' },
+  { key: 'total_fertility_rate', category: 'demographics' }
 ]
 
 // Keys where an increase is a positive/good trend
@@ -124,6 +134,11 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
 export default function Snapshot({ onSelectIndicator }) {
   const [ref, isVisible] = useScrollAnimation(0.1)
   const { healthData, dataStatus } = useHealthData()
+  const [activeCategory, setActiveCategory] = useState('all')
+
+  const filteredIndicators = activeCategory === 'all'
+    ? indicators
+    : indicators.filter(i => i.category === activeCategory)
 
   return (
     <section className="py-20 md:py-30 px-4 md:px-6" id="snapshot">
@@ -144,8 +159,32 @@ export default function Snapshot({ onSelectIndicator }) {
           </p>
         </motion.div>
 
-        <div className="mt-10 grid grid-cols-2 md:grid-cols-3 gap-4">
-          {indicators.map(({ key }) => (
+        {/* Category pills — matching DataLens ring colors */}
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          {CATEGORIES.map(cat => {
+            const isActive = activeCategory === cat.id
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`px-3 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
+                  isActive
+                    ? 'text-white shadow-sm'
+                    : 'bg-card text-secondary border border-border hover:border-accent'
+                }`}
+                style={{
+                  backgroundColor: isActive ? cat.color : undefined,
+                  WebkitTapHighlightColor: 'transparent'
+                }}
+              >
+                {cat.label}
+              </button>
+            )
+          })}
+        </div>
+
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+          {filteredIndicators.map(({ key }) => (
             <SnapshotCard
               key={key}
               indicatorKey={key}

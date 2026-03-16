@@ -65,3 +65,20 @@
     -webkit-tap-highlight-color: transparent;
   }
 }
+
+/* When the scroll animation is complete, override anime.js inline styles.
+   Stylesheet !important beats anime.js non-!important inline style writes. */
+.settled .snapshot-heading,
+.settled .pill-bar,
+.settled .pill-btn,
+.settled .card-grid {
+  opacity: 1 !important;
+  transform: none !important;
+}
+.settled .hero-text,
+.settled .chevron-hint {
+  opacity: 0 !important;
+}
+.settled > svg {
+  display: none !important;
+}
