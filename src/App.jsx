@@ -1,8 +1,7 @@
 import { useState, useRef } from 'react'
 import { HealthDataProvider } from './context/HealthDataContext'
 import LiveBanner from './components/LiveBanner'
-import Hero from './components/Hero'
-import Snapshot from './components/Snapshot'
+import HeroLensSection from './components/HeroLensSection'
 import Timeline from './components/Timeline'
 import Explorer from './components/Explorer'
 import InsightLab from './components/InsightLab'
@@ -24,8 +23,7 @@ function App() {
     <HealthDataProvider>
       <div className="relative z-10 min-h-screen">
         <LiveBanner />
-        <Hero />
-        <Snapshot onSelectIndicator={handleSelectIndicator} />
+        <HeroLensSection onSelectIndicator={handleSelectIndicator} />
         <Timeline />
         <div ref={explorerRef}>
           <Explorer selectedIndicator={selectedIndicator} />
