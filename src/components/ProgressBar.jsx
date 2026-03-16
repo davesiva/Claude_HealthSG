@@ -78,17 +78,20 @@ export default function ProgressBar({ sections, visible }) {
   if (isMobile) {
     return (
       <div
-        className="fixed bottom-0 left-0 right-0 z-30 flex items-center"
+        className="fixed z-30 flex items-center justify-center"
         style={{
-          height: '28px',
-          paddingLeft: '16px',
-          paddingRight: '72px', // avoid AskHealthSG button
-          background: 'rgba(250, 250, 248, 0.8)',
-          backdropFilter: 'blur(8px)',
-          WebkitBackdropFilter: 'blur(8px)',
+          bottom: '14px',
+          left: '16px',
+          right: '16px',
+          height: '32px',
+          borderRadius: '20px',
+          background: 'rgba(250, 250, 248, 0.85)',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04)',
         }}
       >
-        <div className="flex-1 flex items-center h-full relative">
+        <div className="flex-1 flex items-center h-full relative" style={{ paddingLeft: '14px', paddingRight: '14px' }}>
           {/* Track line */}
           <div
             className="absolute top-1/2 left-0 right-0 -translate-y-1/2"

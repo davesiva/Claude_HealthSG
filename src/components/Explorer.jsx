@@ -24,7 +24,7 @@ const EXPLORER_GROUPS = [
   {
     id: 'chronic',
     label: 'Chronic Disease',
-    color: '#EF4444',
+    color: '#E8829B',
     indicators: [
       { key: 'diabetes_prevalence', label: 'Diabetes' },
       { key: 'hypertension_prevalence', label: 'Hypertension' },

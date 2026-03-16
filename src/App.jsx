@@ -64,7 +64,7 @@ function App() {
           <PersonalInsight />
         </div>
         <Footer />
-        <AskHealthSG />
+        {/* <AskHealthSG /> — temporarily hidden */}
         <ProgressBar sections={sections} visible={heroSettled} />
       </div>
     </HealthDataProvider>
