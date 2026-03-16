@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend
@@ -8,25 +8,63 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
 
-const indicatorKeys = [
-  { key: 'diabetes_prevalence', label: 'Diabetes' },
-  { key: 'hypertension_prevalence', label: 'Hypertension' },
-  { key: 'obesity_prevalence', label: 'Obesity' },
-  { key: 'high_cholesterol_prevalence', label: 'Cholesterol' },
-  { key: 'daily_smoking_rate', label: 'Smoking' },
-  { key: 'life_expectancy', label: 'Life Expectancy' },
-  { key: 'govt_health_expenditure', label: 'Health Spend' },
-  { key: 'chronic_disease_screening', label: 'Screening' },
-  { key: 'physical_activity', label: 'Physical Activity' },
-  { key: 'binge_drinking', label: 'Binge Drinking' },
-  { key: 'childhood_obesity', label: 'Child Obesity' },
-  { key: 'health_personnel', label: 'Doctors' },
-  { key: 'hospital_beds', label: 'Hospital Beds' },
-  { key: 'psychiatric_admissions', label: 'Psych Admissions' },
-  { key: 'tb_incidence', label: 'TB Rate' },
-  { key: 'aged_65_plus', label: 'Aged 65+' },
-  { key: 'old_age_support_ratio', label: 'Support Ratio' },
-  { key: 'total_fertility_rate', label: 'Fertility Rate' }
+// ── Grouped indicator definitions for Explorer ──
+// Each group maps to a category with a color accent bar
+const EXPLORER_GROUPS = [
+  {
+    id: 'demographics',
+    label: 'Demographics',
+    color: '#6366F1',
+    indicators: [
+      { key: 'aged_65_plus', label: 'Aged 65+' },
+      { key: 'old_age_support_ratio', label: 'Support Ratio' },
+      { key: 'total_fertility_rate', label: 'Fertility Rate' },
+    ],
+  },
+  {
+    id: 'chronic',
+    label: 'Chronic Disease',
+    color: '#EF4444',
+    indicators: [
+      { key: 'diabetes_prevalence', label: 'Diabetes' },
+      { key: 'hypertension_prevalence', label: 'Hypertension' },
+      { key: 'obesity_prevalence', label: 'Obesity' },
+      { key: 'high_cholesterol_prevalence', label: 'Cholesterol' },
+      { key: 'childhood_obesity', label: 'Child Obesity' },
+      { key: 'cancer_incidence', label: 'Cancer Incidence' },
+      { key: 'cancer_mortality', label: 'Cancer Deaths' },
+    ],
+  },
+  {
+    id: 'lifestyle',
+    label: 'Lifestyle',
+    color: '#F59E0B',
+    indicators: [
+      { key: 'daily_smoking_rate', label: 'Smoking' },
+      { key: 'physical_activity', label: 'Physical Activity' },
+      { key: 'binge_drinking', label: 'Binge Drinking' },
+    ],
+  },
+  {
+    id: 'healthcare',
+    label: 'Public Health',
+    color: '#8B5CF6',
+    indicators: [
+      { key: 'govt_health_expenditure', label: 'Health Spend' },
+      { key: 'chronic_disease_screening', label: 'Screening' },
+      { key: 'health_personnel', label: 'Doctors' },
+      { key: 'hospital_beds', label: 'Hospital Beds' },
+      { key: 'psychiatric_admissions', label: 'Psych Admissions' },
+    ],
+  },
+  {
+    id: 'longevity',
+    label: 'Longevity',
+    color: '#0D9488',
+    indicators: [
+      { key: 'life_expectancy', label: 'Life Expectancy' },
+    ],
+  },
 ]
 
 const demographicColors = {
@@ -43,22 +81,22 @@ const axisStroke = '#D1D5DB'
 
 const descriptions = {
   diabetes_prevalence: {
-    text: 'Percentage of Singapore residents aged 18-69 diagnosed with diabetes mellitus. Measured via fasting blood glucose \u2265 7.0 mmol/L, HbA1c \u2265 6.5%, or on medication.',
+    text: 'Percentage of Singapore residents aged 18-69 diagnosed with diabetes mellitus. Measured via fasting blood glucose ≥ 7.0 mmol/L, HbA1c ≥ 6.5%, or on medication.',
     survey: 'National Population Health Survey (NPHS), conducted every 3-6 years by MOH.',
-    note: 'Survey methodology changed over the years \u2014 pre-2010 data used different age ranges and diagnostic criteria, so direct comparisons should be made with caution.'
+    note: 'Survey methodology changed over the years — pre-2010 data used different age ranges and diagnostic criteria, so direct comparisons should be made with caution.'
   },
   hypertension_prevalence: {
-    text: 'Percentage of residents with systolic blood pressure \u2265 140 mmHg or diastolic \u2265 90 mmHg, or currently on blood pressure medication.',
+    text: 'Percentage of residents with systolic blood pressure ≥ 140 mmHg or diastolic ≥ 90 mmHg, or currently on blood pressure medication.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
     note: 'From 2020, NPHS adopted a new methodology using the average of multiple BP readings and expanded age range. This caused reported prevalence to jump from 24.2% (2017) to 35.5% (2020). The increase is largely methodological, not a real surge in hypertension.'
   },
   obesity_prevalence: {
-    text: 'Percentage of residents with BMI \u2265 30 kg/m\u00B2. Note: WHO recommends Asian-specific cut-offs where BMI \u2265 27.5 is "high risk" for chronic disease.',
+    text: 'Percentage of residents with BMI ≥ 30 kg/m². Note: WHO recommends Asian-specific cut-offs where BMI ≥ 27.5 is "high risk" for chronic disease.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
     note: 'Based on measured (not self-reported) height and weight.'
   },
   high_cholesterol_prevalence: {
-    text: 'Percentage of residents with total blood cholesterol \u2265 6.2 mmol/L, or currently on lipid-lowering medication. Also called hyperlipidaemia.',
+    text: 'Percentage of residents with total blood cholesterol ≥ 6.2 mmol/L, or currently on lipid-lowering medication. Also called hyperlipidaemia.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
     note: 'The sharp rise in 2017 may partly reflect changes in diagnostic criteria and increased screening.'
   },
@@ -83,7 +121,7 @@ const descriptions = {
     note: 'The Screen for Life programme subsidises these screenings at CHAS GP clinics and polyclinics. Higher rates indicate better preventive health behaviour.'
   },
   physical_activity: {
-    text: 'Percentage of Singapore residents meeting WHO-recommended levels of physical activity \u2014 at least 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity activity per week.',
+    text: 'Percentage of Singapore residents meeting WHO-recommended levels of physical activity — at least 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity activity per week.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
     note: 'Self-reported via the Global Physical Activity Questionnaire (GPAQ). The decline from 2019 may partly reflect COVID-19 restrictions on exercise facilities and outdoor activities.'
   },
@@ -91,6 +129,16 @@ const descriptions = {
     text: 'Percentage of Singapore residents who engaged in binge drinking (5 or more standard drinks on a single occasion for men, 4 or more for women) in the past month.',
     survey: 'National Population Health Survey (NPHS) by MOH.',
     note: 'Self-reported. The steady increase over time reflects changing social drinking patterns in Singapore. Binge drinking is a risk factor for liver disease, injuries, and cardiovascular events.'
+  },
+  cancer_incidence: {
+    text: 'Age-standardised incidence rate of all cancers per 100,000 population. Based on 5-year period averages from the Singapore Cancer Registry. 1 in 4 Singaporeans will develop cancer in their lifetime.',
+    survey: 'Singapore Cancer Registry Annual Report 2023, National Registry of Diseases Office.',
+    note: 'Top cancers (2019-2023) — Males: Prostate (18%), Colorectal (16%), Lung (13%). Females: Breast (30%), Colorectal (13%), Lung (8%). Incidence has risen partly due to aging population and improved detection, but survival rates have also improved significantly.'
+  },
+  cancer_mortality: {
+    text: 'Age-standardised mortality rate from all cancers per 100,000 population. Despite rising incidence, mortality has declined steadily since the 1980s — a positive indicator of advances in treatment and early detection.',
+    survey: 'Singapore Cancer Registry Annual Report 2023, National Registry of Diseases Office.',
+    note: 'Top cancer deaths (2019-2023) — Males: Lung (25%), Colorectal (15%), Liver (12%). Females: Breast (18%), Colorectal (16%), Lung (16%). The widening gap between incidence and mortality reflects improving survival rates across most cancer types.'
   },
   childhood_obesity: {
     text: 'Prevalence of overweight and severely overweight (obesity) among Primary 1 children (~7 years old), measured during annual School Health Service screenings.',
@@ -112,11 +160,6 @@ const descriptions = {
     survey: 'Ministry of Health, via SingStat Table M870311.',
     note: 'The steady increase from 2021 may reflect growing mental health needs post-COVID and reduced stigma. Does not capture private psychiatric care or outpatient visits.'
   },
-  tb_incidence: {
-    text: 'Incidence rate of tuberculosis per 100,000 population. Singapore has an intermediate TB burden compared to other developed nations.',
-    survey: 'Ministry of Health, via SingStat Table M870361.',
-    note: 'TB remains a notifiable disease. The decline in 2023-2024 is encouraging and may reflect improved screening. Singapore aims to reduce TB to a pre-elimination threshold.'
-  },
   aged_65_plus: {
     text: 'Percentage of the Singapore resident population aged 65 years and over. Calculated from total resident population figures by age group.',
     survey: 'Department of Statistics Singapore (SingStat), Table M810011.',
@@ -130,7 +173,7 @@ const descriptions = {
   total_fertility_rate: {
     text: 'The average number of live births a woman would have over her lifetime if current age-specific fertility rates persist. A TFR of 2.1 is the "replacement level" needed to maintain population size without immigration.',
     survey: 'Department of Statistics Singapore (SingStat), Table M810091.',
-    note: 'Singapore\'s TFR has been well below replacement since the 1980s and reached a historic low of 0.87 in 2025 (preliminary) \u2014 one of the lowest globally. This is the root driver of population aging.'
+    note: 'Singapore\'s TFR has been well below replacement since the 1980s and reached a historic low of 0.87 in 2025 (preliminary) — one of the lowest globally. This is the root driver of population aging.'
   }
 }
 
@@ -148,12 +191,27 @@ function CustomTooltip({ active, payload, label, unit }) {
   )
 }
 
+// Helper: find which category a key belongs to
+function findCategoryForKey(key) {
+  for (const group of EXPLORER_GROUPS) {
+    if (group.indicators.some(ind => ind.key === key)) return group.id
+  }
+  return EXPLORER_GROUPS[0].id
+}
+
 export default function Explorer({ selectedIndicator }) {
   const { healthData } = useHealthData()
   const [activeKey, setActiveKey] = useState(selectedIndicator || 'diabetes_prevalence')
+  const [activeCategory, setActiveCategory] = useState(() => findCategoryForKey(selectedIndicator || 'diabetes_prevalence'))
   const [breakdown, setBreakdown] = useState('all')
   const [ref, isVisible] = useScrollAnimation(0.1)
   const [isMobile, setIsMobile] = useState(false)
+
+  // Derive the active group's indicators
+  const activeGroup = useMemo(
+    () => EXPLORER_GROUPS.find(g => g.id === activeCategory) || EXPLORER_GROUPS[0],
+    [activeCategory]
+  )
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -166,6 +224,7 @@ export default function Explorer({ selectedIndicator }) {
   useEffect(() => {
     if (selectedIndicator) {
       setActiveKey(selectedIndicator)
+      setActiveCategory(findCategoryForKey(selectedIndicator))
       setBreakdown('all')
     }
   }, [selectedIndicator])
@@ -229,23 +288,68 @@ export default function Explorer({ selectedIndicator }) {
           <InfoTooltip content="Select an indicator below to view its full historical time series. Toggle between overall, gender, and ethnicity breakdowns where data is available." />
         </motion.h2>
 
-        {/* Indicator pills */}
+        {/* ── Category tabs ── */}
         <div className="mt-8 flex flex-wrap justify-center gap-2">
-          {indicatorKeys.map(({ key, label }) => (
-            <button
-              key={key}
-              onClick={() => { setActiveKey(key); setBreakdown('all') }}
-              className={`px-4 py-2 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
-                activeKey === key
-                  ? 'bg-accent text-white'
-                  : 'bg-card text-secondary border border-border hover:border-accent'
-              }`}
-              style={{ WebkitTapHighlightColor: 'transparent' }}
-            >
-              {label}
-            </button>
-          ))}
+          {EXPLORER_GROUPS.map(group => {
+            const isActive = activeCategory === group.id
+            return (
+              <button
+                key={group.id}
+                onClick={() => {
+                  setActiveCategory(group.id)
+                  // Auto-select first indicator in category if current isn't in it
+                  const inGroup = group.indicators.some(ind => ind.key === activeKey)
+                  if (!inGroup) {
+                    setActiveKey(group.indicators[0].key)
+                    setBreakdown('all')
+                  }
+                }}
+                className={`px-4 py-2 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
+                  isActive
+                    ? 'text-white shadow-sm'
+                    : 'bg-card text-secondary border border-border'
+                }`}
+                style={{
+                  backgroundColor: isActive ? group.color : undefined,
+                  borderColor: isActive ? group.color : undefined,
+                  WebkitTapHighlightColor: 'transparent',
+                }}
+              >
+                {group.label}
+              </button>
+            )
+          })}
         </div>
+
+        {/* ── Metric pills for active category ── */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeCategory}
+            className="mt-3 flex flex-wrap justify-center gap-2"
+            initial={{ opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.15 }}
+          >
+            {activeGroup.indicators.map(({ key, label }) => (
+              <button
+                key={key}
+                onClick={() => { setActiveKey(key); setBreakdown('all') }}
+                className={`px-3 py-1.5 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
+                  activeKey === key
+                    ? 'text-white shadow-sm'
+                    : 'bg-card text-secondary border border-border hover:border-accent'
+                }`}
+                style={{
+                  backgroundColor: activeKey === key ? activeGroup.color : undefined,
+                  WebkitTapHighlightColor: 'transparent',
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
         {/* Chart */}
         <div className="mt-8 card p-3 md:p-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>

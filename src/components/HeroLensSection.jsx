@@ -104,7 +104,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData, forceVisible }) {
 // ══════════════════════════════════════════════════════════════
 // Main Component
 // ══════════════════════════════════════════════════════════════
-export default function HeroLensSection({ onSelectIndicator }) {
+export default function HeroLensSection({ onSelectIndicator, onSettled }) {
   // ── Refs ──
   const containerRef = useRef(null)
   const stickyRef = useRef(null)
@@ -146,7 +146,13 @@ export default function HeroLensSection({ onSelectIndicator }) {
     setPrefersReduced(window.matchMedia('(prefers-reduced-motion: reduce)').matches)
     const mq = window.matchMedia('(max-width: 768px)')
     setIsMobile(mq.matches)
-    const handler = (e) => setIsMobile(e.matches)
+    if (mq.matches) {
+      setTransitionComplete(true)
+    }
+    const handler = (e) => {
+      setIsMobile(e.matches)
+      if (e.matches) setTransitionComplete(true)
+    }
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
@@ -160,15 +166,15 @@ export default function HeroLensSection({ onSelectIndicator }) {
     return () => clearInterval(interval)
   }, [prefersReduced, stats.length])
 
-  // ── Derived dimensions ──
+  // ── Derived dimensions (desktop only) ──
   const R = 200
   const strokeW = 3
-  const scrollHeight = isMobile ? '200vh' : '280vh'
+  const scrollHeight = '280vh'
   const separateDistance = 25
 
-  // ── anime.js scroll timeline ──
+  // ── anime.js scroll timeline (desktop only) ──
   useEffect(() => {
-    if (prefersReduced) return
+    if (prefersReduced || isMobile) return
     if (!containerRef.current || !stickyRef.current) return
 
     // Small delay to let layout settle after mount
@@ -180,12 +186,13 @@ export default function HeroLensSection({ onSelectIndicator }) {
         const heroText = heroTextRef.current
         const chevron = sticky.querySelector('.chevron-hint')
         const snapshotHeading = sticky.querySelector('.snapshot-heading')
+        const pillBar = sticky.querySelector('.pill-bar')
         const cardGrid = sticky.querySelector('.card-grid')
 
         // ── Measure pill offsets from center ──
         const stickyRect = sticky.getBoundingClientRect()
         const centerX = stickyRect.width / 2
-        const centerY = stickyRect.height * 0.38 // slightly above vertical center (where circle is)
+        const centerY = stickyRect.height * 0.38
 
         const pillOffsets = []
         CATEGORIES.forEach((cat, i) => {
@@ -198,7 +205,6 @@ export default function HeroLensSection({ onSelectIndicator }) {
             x: centerX - pillCX,
             y: centerY - pillCY,
           })
-          // Set initial state: pill at center, invisible, scaled down
           utils.set(pill, {
             translateX: centerX - pillCX,
             translateY: centerY - pillCY,
@@ -208,7 +214,6 @@ export default function HeroLensSection({ onSelectIndicator }) {
         })
 
         // Set initial state for snapshot elements
-        const pillBar = sticky.querySelector('.pill-bar')
         utils.set(pillBar, { opacity: 0 })
         utils.set(snapshotHeading, { opacity: 0, translateY: 20 })
         utils.set(cardGrid, { opacity: 0 })
@@ -231,169 +236,108 @@ export default function HeroLensSection({ onSelectIndicator }) {
           }),
         })
 
-        if (isMobile) {
-          // ═══ MOBILE: No arcs — compact hero→pills→content transition ═══
-          // Immediate feedback: chevron fades and hero starts moving at time 0
-          if (chevron) {
-            tl.add(chevron, {
-              opacity: [1, 0],
-              translateY: [0, -15],
-              duration: 200,
-            }, 0)
-          }
+        // ═══ DESKTOP: Full arc animation ═══
 
-          // Hero text scales down and fades — starts immediately on scroll
-          if (heroText) {
-            tl.add(heroText, {
-              opacity: [1, 0],
-              scale: [1, 0.95],
-              translateY: [0, -30],
-              duration: 500,
-              ease: 'inOutQuad',
-            }, 0)
-          }
+        // Phase 1: Colorize (0–500ms) + immediate hero text response
+        if (heroText) {
+          tl.add(heroText, {
+            scale: [1, 0.97],
+            duration: 600,
+            ease: 'inOutQuad',
+          }, 0)
+        }
+        ARCS.forEach((arc, i) => {
+          const arcEl = arcRefs.current[i]
+          if (!arcEl) return
+          tl.add(arcEl, {
+            stroke: [MUTED_COLOR, arc.color],
+            strokeWidth: [strokeW, strokeW + 1],
+            duration: 500,
+            delay: i * 60,
+            ease: 'inOutQuad',
+          }, 0)
+        })
+        if (chevron) {
+          tl.add(chevron, {
+            opacity: [1, 0],
+            translateY: [0, -20],
+            duration: 300,
+          }, 0)
+        }
 
-          // Pill bar fades in
-          tl.add(pillBar, {
+        // Phase 2: Separate (400–1000ms)
+        ARCS.forEach((arc, i) => {
+          const arcEl = arcRefs.current[i]
+          if (!arcEl) return
+          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
+          tl.add(arcEl, {
+            translateX: Math.cos(midAngle) * separateDistance,
+            translateY: Math.sin(midAngle) * separateDistance,
+            duration: 500,
+            ease: 'outQuart',
+          }, 400 + i * 30)
+        })
+
+        // Phase 3: Transform (800–1600ms)
+        if (heroText) {
+          tl.add(heroText, {
+            opacity: [1, 0],
+            scale: [0.97, 0.90],
+            duration: 350,
+            ease: 'inQuart',
+          }, 800)
+        }
+
+        const flyDistance = 160
+        ARCS.forEach((arc, i) => {
+          const arcEl = arcRefs.current[i]
+          if (!arcEl) return
+          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
+          tl.add(arcEl, {
+            translateX: Math.cos(midAngle) * flyDistance,
+            translateY: Math.sin(midAngle) * flyDistance,
+            opacity: [1, 0],
+            duration: 450,
+            delay: i * 25,
+            ease: 'inQuart',
+          }, 900)
+        })
+
+        // Pill bar fades in
+        tl.add(pillBar, {
+          opacity: [0, 1],
+          duration: 250,
+          ease: 'outQuad',
+        }, 950)
+
+        // Pills fly in
+        CATEGORIES.forEach((cat, i) => {
+          const pill = pillRefs.current[i]
+          if (!pill) return
+          tl.add(pill, {
+            translateX: [pillOffsets[i]?.x ?? 0, 0],
+            translateY: [pillOffsets[i]?.y ?? 0, 0],
             opacity: [0, 1],
-            duration: 250,
-            ease: 'outQuad',
-          }, 350)
+            scale: [0.4, 1],
+            duration: 450,
+            ease: 'outQuart',
+          }, 1000 + i * 70)
+        })
 
-          // Pills fly in from center
-          CATEGORIES.forEach((cat, i) => {
-            const pill = pillRefs.current[i]
-            if (!pill) return
-            tl.add(pill, {
-              translateX: [pillOffsets[i]?.x ?? 0, 0],
-              translateY: [pillOffsets[i]?.y ?? 0, 0],
-              opacity: [0, 1],
-              scale: [0.4, 1],
-              duration: 400,
-              ease: 'outQuart',
-            }, 400 + i * 60)
-          })
-
-          // Heading + cards
-          if (snapshotHeading) {
-            tl.add(snapshotHeading, {
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 350,
-              ease: 'outQuart',
-            }, 800)
-          }
-          if (cardGrid) {
-            tl.add(cardGrid, {
-              opacity: [0, 1],
-              duration: 350,
-            }, 950)
-          }
-        } else {
-          // ═══ DESKTOP: Full arc animation ═══
-
-          // Phase 1: Colorize (0–500ms) + immediate hero text response
-          if (heroText) {
-            // Subtle scale gives instant visual feedback on first scroll
-            tl.add(heroText, {
-              scale: [1, 0.97],
-              duration: 600,
-              ease: 'inOutQuad',
-            }, 0)
-          }
-          ARCS.forEach((arc, i) => {
-            const arcEl = arcRefs.current[i]
-            if (!arcEl) return
-            tl.add(arcEl, {
-              stroke: [MUTED_COLOR, arc.color],
-              strokeWidth: [strokeW, strokeW + 1],
-              duration: 500,
-              delay: i * 60,
-              ease: 'inOutQuad',
-            }, 0)
-          })
-          if (chevron) {
-            tl.add(chevron, {
-              opacity: [1, 0],
-              translateY: [0, -20],
-              duration: 300,
-            }, 0)
-          }
-
-          // Phase 2: Separate (400–1000ms)
-          ARCS.forEach((arc, i) => {
-            const arcEl = arcRefs.current[i]
-            if (!arcEl) return
-            const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-            tl.add(arcEl, {
-              translateX: Math.cos(midAngle) * separateDistance,
-              translateY: Math.sin(midAngle) * separateDistance,
-              duration: 500,
-              ease: 'outQuart',
-            }, 400 + i * 30)
-          })
-
-          // Phase 3: Transform (800–1600ms)
-          if (heroText) {
-            tl.add(heroText, {
-              opacity: [1, 0],
-              scale: [0.97, 0.90],
-              duration: 350,
-              ease: 'inQuart',
-            }, 800)
-          }
-
-          const flyDistance = 160
-          ARCS.forEach((arc, i) => {
-            const arcEl = arcRefs.current[i]
-            if (!arcEl) return
-            const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-            tl.add(arcEl, {
-              translateX: Math.cos(midAngle) * flyDistance,
-              translateY: Math.sin(midAngle) * flyDistance,
-              opacity: [1, 0],
-              duration: 450,
-              delay: i * 25,
-              ease: 'inQuart',
-            }, 900)
-          })
-
-          // Pill bar fades in
-          tl.add(pillBar, {
+        // Phase 4: Settle (1500–2000ms)
+        if (snapshotHeading) {
+          tl.add(snapshotHeading, {
             opacity: [0, 1],
-            duration: 250,
-            ease: 'outQuad',
-          }, 950)
-
-          // Pills fly in
-          CATEGORIES.forEach((cat, i) => {
-            const pill = pillRefs.current[i]
-            if (!pill) return
-            tl.add(pill, {
-              translateX: [pillOffsets[i]?.x ?? 0, 0],
-              translateY: [pillOffsets[i]?.y ?? 0, 0],
-              opacity: [0, 1],
-              scale: [0.4, 1],
-              duration: 450,
-              ease: 'outQuart',
-            }, 1000 + i * 70)
-          })
-
-          // Phase 4: Settle (1500–2000ms)
-          if (snapshotHeading) {
-            tl.add(snapshotHeading, {
-              opacity: [0, 1],
-              translateY: [20, 0],
-              duration: 350,
-              ease: 'outQuart',
-            }, 1500)
-          }
-          if (cardGrid) {
-            tl.add(cardGrid, {
-              opacity: [0, 1],
-              duration: 350,
-            }, 1700)
-          }
+            translateY: [20, 0],
+            duration: 350,
+            ease: 'outQuart',
+          }, 1500)
+        }
+        if (cardGrid) {
+          tl.add(cardGrid, {
+            opacity: [0, 1],
+            duration: 350,
+          }, 1700)
         }
       })
     }, 300)
@@ -417,12 +361,26 @@ export default function HeroLensSection({ onSelectIndicator }) {
     }
   }, [transitionComplete])
 
+  // ── Notify parent when settled/unsettled ──
+  useEffect(() => {
+    onSettled?.(transitionComplete)
+  }, [transitionComplete, onSettled])
+
+  // ── Notify on mobile mount (no animation, settled immediately) ──
+  useEffect(() => {
+    if (isMobile || prefersReduced) {
+      onSettled?.(true)
+    }
+  }, [isMobile, prefersReduced, onSettled])
+
   // ── Framer Motion initial fade-in ──
   const fadeIn = prefersReduced
     ? { initial: {}, animate: {}, transition: {} }
     : { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0 } }
 
-  // ── Reduced motion fallback ──
+  // ══════════════════════════════════════════════════════════════
+  // Reduced motion fallback
+  // ══════════════════════════════════════════════════════════════
   if (prefersReduced) {
     return (
       <>
@@ -468,7 +426,108 @@ export default function HeroLensSection({ onSelectIndicator }) {
   }
 
   // ══════════════════════════════════════════════════════════════
-  // Animated Render
+  // Mobile: Static layout, no scroll animation
+  // ══════════════════════════════════════════════════════════════
+  if (isMobile) {
+    return (
+      <section className="px-4 pt-16 pb-8">
+        {/* ── Hero Text ── */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <motion.h1
+            className="font-heading text-5xl text-primary tracking-tight"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Middle-Out
+          </motion.h1>
+
+          <motion.p
+            className="mt-4 text-lg text-secondary font-body"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Singapore's health story, told through data.
+          </motion.p>
+
+          <motion.div
+            className="mt-10 h-16 flex items-center justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentStat}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.4 }}
+                className="text-center"
+              >
+                <span className="text-secondary text-sm font-body">
+                  {stats[currentStat].label}:
+                </span>
+                <span className="ml-2 text-2xl font-mono font-semibold text-accent">
+                  {stats[currentStat].value}
+                </span>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </div>
+
+        {/* ── Snapshot Section ── */}
+        <div className="max-w-[960px] mx-auto">
+          <div className="text-center">
+            <h2 className="font-heading text-3xl text-primary">
+              Singapore at a Glance
+            </h2>
+            <p className="mt-2 text-xs text-secondary/60 font-mono">
+              {dataStatus === 'live' ? 'Live data from SingStat & data.gov.sg' : 'Data from MOH / SingStat'}
+              <InfoTooltip content="Health indicator data is fetched live from the SingStat Table Builder API." />
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap justify-center gap-2">
+            {CATEGORIES.map(cat => (
+              <button
+                key={cat.id}
+                onClick={() => setActiveCategory(cat.id)}
+                className={`pill-btn px-3 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
+                  activeCategory === cat.id ? 'text-white shadow-sm' : 'bg-card text-secondary border border-border hover:border-accent'
+                }`}
+                style={{
+                  backgroundColor: activeCategory === cat.id ? cat.color : undefined,
+                  WebkitTapHighlightColor: 'transparent',
+                }}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+          <div className="mt-8" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
+            <div className="grid grid-cols-2 gap-4">
+              {filteredIndicators.map(({ key }) => (
+                <SnapshotCard
+                  key={key}
+                  indicatorKey={key}
+                  onSelect={onSelectIndicator}
+                  healthData={healthData}
+                  forceVisible={true}
+                />
+              ))}
+            </div>
+            <p className="mt-4 text-center text-[10px] text-secondary/40">
+              Tap any card to explore the full time series in detail
+            </p>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  // ══════════════════════════════════════════════════════════════
+  // Desktop: Animated Render
   // ══════════════════════════════════════════════════════════════
   return (
     <section ref={containerRef} style={{ height: scrollHeight }} className="relative">
@@ -521,32 +580,30 @@ export default function HeroLensSection({ onSelectIndicator }) {
         </div>
 
         {/* ── SVG Circle made of 5 arc paths (desktop only) ── */}
-        {!isMobile && (
-          <svg
-            className="absolute inset-0 w-full h-full pointer-events-none"
-            style={{ zIndex: 5 }}
-            viewBox={`0 0 ${CX * 2} ${CY * 2}`}
-            preserveAspectRatio="xMidYMid meet"
-          >
-            {ARCS.map((arc, i) => (
-              <path
-                key={arc.id}
-                ref={el => arcRefs.current[i] = el}
-                d={describeArc(CX, CY, R, arc.startAngle, arc.endAngle)}
-                stroke={MUTED_COLOR}
-                strokeWidth={strokeW}
-                fill="none"
-                strokeLinecap="round"
-                style={{ transformOrigin: `${CX}px ${CY}px` }}
-              />
-            ))}
-          </svg>
-        )}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          style={{ zIndex: 5 }}
+          viewBox={`0 0 ${CX * 2} ${CY * 2}`}
+          preserveAspectRatio="xMidYMid meet"
+        >
+          {ARCS.map((arc, i) => (
+            <path
+              key={arc.id}
+              ref={el => arcRefs.current[i] = el}
+              d={describeArc(CX, CY, R, arc.startAngle, arc.endAngle)}
+              stroke={MUTED_COLOR}
+              strokeWidth={strokeW}
+              fill="none"
+              strokeLinecap="round"
+              style={{ transformOrigin: `${CX}px ${CY}px` }}
+            />
+          ))}
+        </svg>
 
         {/* ── Bouncing chevron ── */}
         <div className="chevron-hint absolute bottom-8 z-10">
           <motion.div
-            initial={prefersReduced ? {} : { opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: [0, 8, 0] }}
             transition={{ opacity: { duration: 0.6, delay: 0.6 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 } }}
           >

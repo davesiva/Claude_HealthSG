@@ -433,6 +433,196 @@
       {"year": 2023, "value": 12025}
     ]
   },
+  "cancer_incidence": {
+    "label": "Cancer Incidence",
+    "unit": "per 100k",
+    "description": "Age-standardised incidence rate of all cancers per 100,000 population. Based on 5-year period averages from the Singapore Cancer Registry.",
+    "source": "Singapore Cancer Registry Annual Report 2023",
+    "tooltip": "Cancer incidence has risen steadily, driven partly by aging population and better detection. Despite rising diagnoses, survival rates have improved significantly. 1 in 4 Singaporeans will develop cancer in their lifetime.",
+    "data": [
+      {"year": 1970, "value": 189.5},
+      {"year": 1975, "value": 201.1},
+      {"year": 1980, "value": 210.4},
+      {"year": 1985, "value": 210.7},
+      {"year": 1990, "value": 211.8},
+      {"year": 1995, "value": 213.6},
+      {"year": 2000, "value": 217.0},
+      {"year": 2005, "value": 218.0},
+      {"year": 2010, "value": 222.2},
+      {"year": 2015, "value": 233.9},
+      {"year": 2020, "value": 242.9},
+      {"year": 2023, "value": 241.2}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 1970, "value": 229.0},
+        {"year": 1975, "value": 247.0},
+        {"year": 1980, "value": 251.0},
+        {"year": 1985, "value": 244.2},
+        {"year": 1990, "value": 237.6},
+        {"year": 1995, "value": 236.7},
+        {"year": 2000, "value": 235.3},
+        {"year": 2005, "value": 235.6},
+        {"year": 2010, "value": 235.7},
+        {"year": 2015, "value": 238.6},
+        {"year": 2020, "value": 243.7},
+        {"year": 2023, "value": 233.7}
+      ],
+      "female": [
+        {"year": 1970, "value": 155.6},
+        {"year": 1975, "value": 161.5},
+        {"year": 1980, "value": 176.0},
+        {"year": 1985, "value": 184.0},
+        {"year": 1990, "value": 191.9},
+        {"year": 1995, "value": 196.5},
+        {"year": 2000, "value": 204.7},
+        {"year": 2005, "value": 207.6},
+        {"year": 2010, "value": 214.8},
+        {"year": 2015, "value": 233.8},
+        {"year": 2020, "value": 245.3},
+        {"year": 2023, "value": 250.0}
+      ]
+    },
+    "by_ethnicity": {
+      "chinese": [
+        {"year": 1970, "value": 203.5},
+        {"year": 1975, "value": 216.0},
+        {"year": 1980, "value": 227.1},
+        {"year": 1985, "value": 228.3},
+        {"year": 1990, "value": 229.6},
+        {"year": 1995, "value": 230.5},
+        {"year": 2000, "value": 231.7},
+        {"year": 2005, "value": 229.6},
+        {"year": 2010, "value": 230.1},
+        {"year": 2015, "value": 238.9},
+        {"year": 2020, "value": 246.2},
+        {"year": 2023, "value": 246.6}
+      ],
+      "malay": [
+        {"year": 1970, "value": 96.4},
+        {"year": 1975, "value": 108.2},
+        {"year": 1980, "value": 118.1},
+        {"year": 1985, "value": 125.6},
+        {"year": 1990, "value": 141.6},
+        {"year": 1995, "value": 153.0},
+        {"year": 2000, "value": 169.1},
+        {"year": 2005, "value": 174.2},
+        {"year": 2010, "value": 192.9},
+        {"year": 2015, "value": 224.1},
+        {"year": 2020, "value": 237.5},
+        {"year": 2023, "value": 241.7}
+      ],
+      "indian": [
+        {"year": 1970, "value": 140.6},
+        {"year": 1975, "value": 158.8},
+        {"year": 1980, "value": 163.1},
+        {"year": 1985, "value": 145.1},
+        {"year": 1990, "value": 121.3},
+        {"year": 1995, "value": 130.6},
+        {"year": 2000, "value": 121.6},
+        {"year": 2005, "value": 140.8},
+        {"year": 2010, "value": 156.7},
+        {"year": 2015, "value": 171.0},
+        {"year": 2020, "value": 168.8},
+        {"year": 2023, "value": 181.8}
+      ]
+    }
+  },
+  "cancer_mortality": {
+    "label": "Cancer Mortality",
+    "unit": "per 100k",
+    "description": "Age-standardised mortality rate from all cancers per 100,000 population. Based on 5-year period averages from the Singapore Cancer Registry.",
+    "source": "Singapore Cancer Registry Annual Report 2023",
+    "tooltip": "Despite rising cancer incidence, mortality rates have declined steadily since the 1980s — reflecting advances in early detection, treatment, and screening programmes like Screen for Life.",
+    "data": [
+      {"year": 1970, "value": 93.2},
+      {"year": 1975, "value": 118.9},
+      {"year": 1980, "value": 128.5},
+      {"year": 1985, "value": 124.3},
+      {"year": 1990, "value": 125.7},
+      {"year": 1995, "value": 113.1},
+      {"year": 2000, "value": 114.4},
+      {"year": 2005, "value": 98.4},
+      {"year": 2010, "value": 90.8},
+      {"year": 2015, "value": 86.9},
+      {"year": 2020, "value": 75.0},
+      {"year": 2023, "value": 65.1}
+    ],
+    "by_gender": {
+      "male": [
+        {"year": 1970, "value": 121.8},
+        {"year": 1975, "value": 155.0},
+        {"year": 1980, "value": 165.1},
+        {"year": 1985, "value": 157.9},
+        {"year": 1990, "value": 159.6},
+        {"year": 1995, "value": 142.3},
+        {"year": 2000, "value": 145.0},
+        {"year": 2005, "value": 123.9},
+        {"year": 2010, "value": 111.4},
+        {"year": 2015, "value": 104.4},
+        {"year": 2020, "value": 88.4},
+        {"year": 2023, "value": 76.8}
+      ],
+      "female": [
+        {"year": 1970, "value": 67.5},
+        {"year": 1975, "value": 86.4},
+        {"year": 1980, "value": 96.3},
+        {"year": 1985, "value": 95.1},
+        {"year": 1990, "value": 96.5},
+        {"year": 1995, "value": 88.7},
+        {"year": 2000, "value": 89.1},
+        {"year": 2005, "value": 78.1},
+        {"year": 2010, "value": 74.7},
+        {"year": 2015, "value": 73.0},
+        {"year": 2020, "value": 64.4},
+        {"year": 2023, "value": 55.1}
+      ]
+    },
+    "by_ethnicity": {
+      "chinese": [
+        {"year": 1970, "value": 100.9},
+        {"year": 1975, "value": 129.0},
+        {"year": 1980, "value": 140.2},
+        {"year": 1985, "value": 136.1},
+        {"year": 1990, "value": 136.6},
+        {"year": 1995, "value": 122.3},
+        {"year": 2000, "value": 122.7},
+        {"year": 2005, "value": 103.3},
+        {"year": 2010, "value": 93.6},
+        {"year": 2015, "value": 87.7},
+        {"year": 2020, "value": 74.0},
+        {"year": 2023, "value": 64.0}
+      ],
+      "malay": [
+        {"year": 1970, "value": 45.4},
+        {"year": 1975, "value": 61.4},
+        {"year": 1980, "value": 65.5},
+        {"year": 1985, "value": 73.5},
+        {"year": 1990, "value": 86.3},
+        {"year": 1995, "value": 85.0},
+        {"year": 2000, "value": 87.0},
+        {"year": 2005, "value": 85.9},
+        {"year": 2010, "value": 88.0},
+        {"year": 2015, "value": 94.4},
+        {"year": 2020, "value": 92.6},
+        {"year": 2023, "value": 84.2}
+      ],
+      "indian": [
+        {"year": 1970, "value": 63.2},
+        {"year": 1975, "value": 78.6},
+        {"year": 1980, "value": 90.7},
+        {"year": 1985, "value": 73.8},
+        {"year": 1990, "value": 67.6},
+        {"year": 1995, "value": 55.7},
+        {"year": 2000, "value": 58.4},
+        {"year": 2005, "value": 61.3},
+        {"year": 2010, "value": 64.0},
+        {"year": 2015, "value": 63.3},
+        {"year": 2020, "value": 58.3},
+        {"year": 2023, "value": 48.1}
+      ]
+    }
+  },
   "deaths_by_cause": {
     "label": "Deaths by Cause",
     "unit": "deaths",
@@ -810,5 +1000,67 @@
         {"year": 2024, "value": 18180}
       ]
     }
+  },
+  "cancer_top_incident": {
+    "label": "Top Cancer Incidence by Gender",
+    "period": "2019-2023",
+    "source": "Singapore Cancer Registry Annual Report 2023",
+    "male": [
+      { "site": "Prostate", "pct": 18.0, "cases": 8114 },
+      { "site": "Colorectal", "pct": 15.8, "cases": 7101 },
+      { "site": "Lung", "pct": 13.2, "cases": 5938 },
+      { "site": "Lymphoid neoplasms", "pct": 7.4, "cases": 3336 },
+      { "site": "Liver", "pct": 7.0, "cases": 3148 }
+    ],
+    "female": [
+      { "site": "Breast", "pct": 29.9, "cases": 13935 },
+      { "site": "Colorectal", "pct": 12.6, "cases": 5849 },
+      { "site": "Lung", "pct": 8.1, "cases": 3794 },
+      { "site": "Uterus", "pct": 7.3, "cases": 3424 },
+      { "site": "Lymphoid neoplasms", "pct": 5.3, "cases": 2463 }
+    ]
+  },
+  "cancer_top_mortality": {
+    "label": "Top Cancer Mortality by Gender",
+    "period": "2019-2023",
+    "source": "Singapore Cancer Registry Annual Report 2023",
+    "male": [
+      { "site": "Lung", "pct": 24.6, "cases": 4033 },
+      { "site": "Colorectal", "pct": 14.8, "cases": 2429 },
+      { "site": "Liver", "pct": 12.4, "cases": 2039 },
+      { "site": "Pancreas", "pct": 7.7, "cases": 1264 },
+      { "site": "Prostate", "pct": 7.0, "cases": 1157 }
+    ],
+    "female": [
+      { "site": "Breast", "pct": 17.9, "cases": 2426 },
+      { "site": "Colorectal", "pct": 15.9, "cases": 2162 },
+      { "site": "Lung", "pct": 15.9, "cases": 2157 },
+      { "site": "Pancreas", "pct": 8.1, "cases": 1096 },
+      { "site": "Liver", "pct": 6.0, "cases": 815 }
+    ]
+  },
+  "cancer_age_distribution": {
+    "label": "Cancer Incidence by Age Group",
+    "period": "2019-2023",
+    "unit": "per 100k",
+    "source": "Singapore Cancer Registry Annual Report 2023",
+    "male": [
+      { "ageGroup": "0-29", "rate": 24.7, "cases": 825 },
+      { "ageGroup": "30-39", "rate": 65.7, "cases": 945 },
+      { "ageGroup": "40-49", "rate": 158.4, "cases": 2309 },
+      { "ageGroup": "50-59", "rate": 412.9, "cases": 6099 },
+      { "ageGroup": "60-69", "rate": 1076.8, "cases": 13953 },
+      { "ageGroup": "70-79", "rate": 2098.6, "cases": 13654 },
+      { "ageGroup": "80+", "rate": 2889.7, "cases": 7196 }
+    ],
+    "female": [
+      { "ageGroup": "0-29", "rate": 30.6, "cases": 990 },
+      { "ageGroup": "30-39", "rate": 141.9, "cases": 2235 },
+      { "ageGroup": "40-49", "rate": 379.8, "cases": 5983 },
+      { "ageGroup": "50-59", "rate": 590.3, "cases": 8932 },
+      { "ageGroup": "60-69", "rate": 880.4, "cases": 11666 },
+      { "ageGroup": "70-79", "rate": 1288.7, "cases": 9545 },
+      { "ageGroup": "80+", "rate": 1821.1, "cases": 7242 }
+    ]
   }
 }

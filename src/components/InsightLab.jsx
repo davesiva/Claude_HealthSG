@@ -4,7 +4,7 @@ import {
   ComposedChart, Line, Bar, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
-import { DollarSign, Users, GraduationCap, Sparkles, Loader2 } from 'lucide-react'
+import { DollarSign, Users, GraduationCap, Ribbon, Sparkles, Loader2 } from 'lucide-react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useHealthData } from '../context/HealthDataContext'
 import { buildChartData } from '../utils/insightLabDataResolver'
@@ -12,8 +12,10 @@ import { askHealthSG } from '../utils/anthropic'
 import { THEMES } from '../data/insight-lab-config'
 import InfoTooltip from './InfoTooltip'
 import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
+import CancerButterflyChart from './insight-charts/CancerButterflyChart'
+import CancerAgeChart from './insight-charts/CancerAgeChart'
 
-const iconMap = { DollarSign, Users, GraduationCap }
+const iconMap = { DollarSign, Users, GraduationCap, Ribbon }
 
 const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
@@ -85,8 +87,8 @@ export default function InsightLab() {
       <section className="py-20 md:py-30 px-4 md:px-6">
         <div className="max-w-[960px] mx-auto">
           <div className="h-8 w-48 bg-grid rounded animate-pulse mx-auto mb-8" />
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-            {[1, 2, 3].map(i => (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            {[1, 2, 3, 4].map(i => (
               <div key={i} className="h-28 bg-grid rounded-2xl animate-pulse" />
             ))}
           </div>
@@ -96,8 +98,10 @@ export default function InsightLab() {
     )
   }
 
-  const chartData = activeComparison ? buildChartData(healthData, activeComparison) : []
-  const hasData = chartData.length > 0
+  const isCustomChart = activeComparison?.chartType != null
+  const chartData = (activeComparison && !isCustomChart) ? buildChartData(healthData, activeComparison) : []
+  const customChartData = isCustomChart && activeComparison.dataPath ? healthData[activeComparison.dataPath] : null
+  const hasData = isCustomChart ? customChartData != null : chartData.length > 0
 
   return (
     <section className="py-20 md:py-30 px-4 md:px-6" id="insight-lab">
@@ -119,7 +123,7 @@ export default function InsightLab() {
         </p>
 
         {/* Theme selector */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
           {THEMES.map(theme => {
             const Icon = iconMap[theme.icon]
             const isActive = theme.id === activeThemeId
@@ -189,12 +193,24 @@ export default function InsightLab() {
                   </h3>
                   <p className="text-xs text-secondary mt-0.5">{activeComparison.subtitle}</p>
                 </div>
-                <span className="text-[10px] font-mono text-secondary/50 shrink-0 ml-2">
-                  {activeComparison.yearRange[0]}-{activeComparison.yearRange[1]}
-                </span>
+                {activeComparison.yearRange && (
+                  <span className="text-[10px] font-mono text-secondary/50 shrink-0 ml-2">
+                    {activeComparison.yearRange[0]}-{activeComparison.yearRange[1]}
+                  </span>
+                )}
               </div>
 
               {hasData ? (
+                isCustomChart ? (
+                  <div className="mt-2">
+                    {activeComparison.chartType === 'butterfly' && (
+                      <CancerButterflyChart data={customChartData} isMobile={isMobile} />
+                    )}
+                    {activeComparison.chartType === 'age-bars' && (
+                      <CancerAgeChart data={customChartData} isMobile={isMobile} />
+                    )}
+                  </div>
+                ) : (
                 <ResponsiveContainer width="100%" height={isMobile ? 280 : 350}>
                   <ComposedChart data={chartData} margin={{ top: 10, right: isMobile ? 5 : 10, left: isMobile ? -15 : 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
@@ -286,7 +302,9 @@ export default function InsightLab() {
                     })}
                   </ComposedChart>
                 </ResponsiveContainer>
-              ) : (
+                )
+              )
+              : (
                 <div className="h-[280px] md:h-[350px] flex items-center justify-center text-secondary text-sm">
                   Data not available for this comparison. Try another.
                 </div>

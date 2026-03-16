@@ -146,6 +146,77 @@ export const THEMES = [
     ]
   },
   {
+    id: 'cancer-landscape',
+    title: 'Cancer in Focus',
+    subtitle: 'Incidence, mortality & the demographic divide',
+    icon: 'Ribbon',
+    color: '#B388FF',
+    comparisons: [
+      {
+        id: 'incidence-vs-mortality',
+        title: 'Incidence vs Mortality',
+        subtitle: 'More cancers detected, but fewer deaths — is treatment winning?',
+        yearRange: [1970, 2023],
+        series: [
+          { dataPath: 'cancer_incidence', label: 'Incidence Rate', axis: 'left', type: 'area', color: '#E8A0BF', unit: '/100k' },
+          { dataPath: 'cancer_mortality', label: 'Mortality Rate', axis: 'right', type: 'line', color: '#7C5CBF', unit: '/100k' }
+        ],
+        leftAxisLabel: 'Incidence (per 100k)',
+        rightAxisLabel: 'Mortality (per 100k)',
+        tooltip: 'Age-standardised cancer incidence has risen ~27% since 1970 (more cancers being detected), while mortality has fallen ~30% (fewer deaths per case). This widening gap reflects advances in screening, early detection, and treatment.',
+        narrativePrompt: 'Analyze the divergence between cancer incidence (rising from ~190 to ~241 per 100k) and cancer mortality (falling from ~93 to ~65 per 100k) in Singapore from 1970 to 2023. What does this widening gap tell us about screening effectiveness and treatment advances? Consider the role of national screening programmes, advances in oncology, and the shift toward earlier-stage detection.'
+      },
+      {
+        id: 'cancer-gender-gap',
+        title: 'The Gender Gap',
+        subtitle: 'Males face higher incidence and much higher mortality',
+        yearRange: [1970, 2023],
+        series: [
+          { dataPath: 'cancer_incidence.by_gender.male', label: 'Male Incidence', axis: 'left', type: 'line', color: '#3B82F6', unit: '/100k' },
+          { dataPath: 'cancer_incidence.by_gender.female', label: 'Female Incidence', axis: 'left', type: 'line', color: '#EC4899', unit: '/100k' },
+          { dataPath: 'cancer_mortality.by_gender.male', label: 'Male Mortality', axis: 'right', type: 'line', color: '#1E40AF', unit: '/100k' },
+          { dataPath: 'cancer_mortality.by_gender.female', label: 'Female Mortality', axis: 'right', type: 'line', color: '#BE185D', unit: '/100k' }
+        ],
+        leftAxisLabel: 'Incidence (per 100k)',
+        rightAxisLabel: 'Mortality (per 100k)',
+        tooltip: 'Males consistently have higher cancer incidence and mortality rates than females. The gap is partly explained by cancer types (prostate, lung, liver in males vs breast in females), lifestyle factors (historically higher smoking rates in males), and screening uptake differences.',
+        narrativePrompt: 'Analyze the gender gap in cancer incidence and mortality in Singapore from 1970-2023. Male incidence (~280/100k) exceeds female (~210/100k), and male mortality is significantly higher. What factors contribute? Consider cancer types (prostate/lung/liver vs breast), historical smoking rates, occupational exposure, and screening behaviours. Has the gap narrowed or widened over time?'
+      },
+      {
+        id: 'cancer-ethnicity',
+        title: 'Cancer Across Ethnicities',
+        subtitle: 'How cancer burden varies by ethnic group',
+        yearRange: [1970, 2023],
+        series: [
+          { dataPath: 'cancer_incidence.by_ethnicity.chinese', label: 'Chinese Incidence', axis: 'left', type: 'line', color: '#EF4444', unit: '/100k' },
+          { dataPath: 'cancer_incidence.by_ethnicity.malay', label: 'Malay Incidence', axis: 'left', type: 'line', color: '#F59E0B', unit: '/100k' },
+          { dataPath: 'cancer_incidence.by_ethnicity.indian', label: 'Indian Incidence', axis: 'left', type: 'line', color: '#6366F1', unit: '/100k' }
+        ],
+        leftAxisLabel: 'Incidence (per 100k)',
+        tooltip: 'Cancer incidence varies across Singapore\'s three main ethnic groups. Differences may reflect genetic predisposition, dietary patterns, lifestyle factors, and screening uptake rates across communities.',
+        narrativePrompt: 'Analyze cancer incidence trends across Chinese, Malay, and Indian populations in Singapore from 1970-2023. Chinese have historically had the highest rates. Are the ethnic groups converging or diverging? What might explain the differences — genetics, diet, lifestyle, or screening access? Consider the impact of westernisation of diet across all groups.'
+      },
+      {
+        id: 'cancer-top-sites',
+        title: 'Top Cancers — Male vs Female',
+        subtitle: 'The 5 most common cancers differ sharply by gender (2019–2023)',
+        chartType: 'butterfly',
+        dataPath: 'cancer_top_incident',
+        tooltip: 'The top 5 cancers by incidence are strikingly different between males and females. Breast cancer alone accounts for nearly 30% of all female cancers, while prostate, colorectal, and lung cancers dominate in males.',
+        narrativePrompt: 'Compare the top 5 cancers by incidence in Singapore males vs females (2019-2023). Prostate (18%) leads in males while breast (29.9%) dominates in females. Colorectal cancer is the only top-3 cancer common to both. What do these patterns suggest about gender-specific screening priorities and risk factors?'
+      },
+      {
+        id: 'cancer-age-cliff',
+        title: 'Cancer and Age',
+        subtitle: 'The dramatic rise in cancer risk after 50',
+        chartType: 'age-bars',
+        dataPath: 'cancer_age_distribution',
+        tooltip: 'Cancer incidence rises exponentially with age. The crude rate jumps from ~160 per 100k in the 40-49 bracket to over 2,000 per 100k in the 70-79 bracket — a 13-fold increase. This age-incidence cliff underscores why screening becomes critical from age 50.',
+        narrativePrompt: 'Analyze the age distribution of cancer incidence in Singapore (2019-2023). The rate jumps dramatically after age 50 — from ~160/100k (40-49) to ~1,077/100k (60-69) to ~2,099/100k (70-79) in males. Females show a different pattern with higher rates in younger brackets (30-49) due to breast cancer. What does this mean for screening policy and age-based targeting?'
+      }
+    ]
+  },
+  {
     id: 'next-gen',
     title: 'The Next Generation',
     subtitle: 'Children\'s health & healthcare workforce pipeline',

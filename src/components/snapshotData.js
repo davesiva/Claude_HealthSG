@@ -6,7 +6,7 @@ export const CATEGORIES = [
   { id: 'demographics', label: 'Demographics', color: '#6366F1' },
   { id: 'chronic', label: 'Chronic Disease', color: '#EF4444' },
   { id: 'lifestyle', label: 'Lifestyle', color: '#F59E0B' },
-  { id: 'healthcare', label: 'Healthcare', color: '#8B5CF6' },
+  { id: 'healthcare', label: 'Public Health', color: '#8B5CF6' },
   { id: 'longevity', label: 'Longevity', color: '#0D9488' },
 ]
 
@@ -34,6 +34,14 @@ export const indicators = [
   { key: 'total_fertility_rate', category: 'demographics' }
 ]
 
+// Grouped indicators by category (for grouped section layout)
+export const GROUPED_INDICATORS = CATEGORIES
+  .filter(c => c.id !== 'all')
+  .map(cat => ({
+    ...cat,
+    indicators: indicators.filter(ind => ind.category === cat.id),
+  }))
+
 export const positiveUpKeys = new Set([
   'life_expectancy', 'govt_health_expenditure',
   'chronic_disease_screening', 'physical_activity',
@@ -47,7 +55,7 @@ export const ARCS = [
   { id: 'demographics', label: 'Demographics', startAngle: 216, endAngle: 286, color: '#6366F1' },
   { id: 'chronic', label: 'Chronic Disease', startAngle: 72, endAngle: 142, color: '#EF4444' },
   { id: 'lifestyle', label: 'Lifestyle', startAngle: 144, endAngle: 214, color: '#F59E0B' },
-  { id: 'healthcare', label: 'Healthcare', startAngle: 288, endAngle: 358, color: '#8B5CF6' },
+  { id: 'healthcare', label: 'Public Health', startAngle: 288, endAngle: 358, color: '#8B5CF6' },
   { id: 'longevity', label: 'Longevity', startAngle: 0, endAngle: 70, color: '#0D9488' },
 ]
 
