@@ -522,7 +522,7 @@ export default function HeroLensSection({ onSelectIndicator }) {
           </div>
 
           {/* ── Card grid ── */}
-          <div className="card-grid mt-8 w-full max-w-[960px] px-4 md:px-6" style={{ opacity: 0 }}>
+          <div className="card-grid mt-8 w-full max-w-[960px] px-4 md:px-6" style={{ opacity: 0, maxHeight: '60vh', overflowY: 'auto' }}>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {filteredIndicators.map(({ key }) => (
                 <SnapshotCard
