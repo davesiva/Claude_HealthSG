@@ -202,23 +202,6 @@ export default function ProgressBar({ sections, visible }) {
             })}
           </div>
 
-          {/* Progress head marker (red needle) */}
-          <div
-            className="absolute top-0 bottom-0 flex items-center pointer-events-none transition-[left] duration-150 ease-out"
-            style={{
-              left: `calc(14px + (100% - 28px) * ${scrollProgress})`,
-            }}
-          >
-            <div
-              style={{
-                width: '2.5px',
-                height: '18px',
-                borderRadius: '1.5px',
-                backgroundColor: '#EF4444',
-                boxShadow: '0 0 4px rgba(239,68,68,0.3)',
-              }}
-            />
-          </div>
         </div>
       </div>
     )
