@@ -79,7 +79,7 @@ function Chapter1({ isMobile }) {
             dataKey="value"
             stroke="#0D9488"
             strokeWidth={2}
-            dot={{ r: 3, fill: '#0D9488' }}
+            dot={isMobile ? false : { r: 3, fill: '#0D9488' }}
             activeDot={{ r: 5, fill: '#0D9488', stroke: '#fff', strokeWidth: 2 }}
             name="Life Expectancy"
             isAnimationActive={true}
@@ -117,10 +117,10 @@ function Chapter2({ isMobile }) {
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
-          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
-          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Hypertension" />
-          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Obesity" />
-          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Smoking" />
+          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Diabetes" />
+          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Hypertension" />
+          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Obesity" />
+          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Smoking" />
         </LineChart>
       </ResponsiveContainer>
     </div>
@@ -155,10 +155,10 @@ function Chapter3({ isMobile }) {
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
           <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
-          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Diabetes" />
-          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Hypertension" />
-          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Obesity" />
-          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={{ r: 3 }} connectNulls name="Smoking" />
+          <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Diabetes" />
+          <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Hypertension" />
+          <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Obesity" />
+          <Line type="monotone" dataKey="smoking" stroke={chartColors.smoking} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Smoking" />
         </LineChart>
       </ResponsiveContainer>
 

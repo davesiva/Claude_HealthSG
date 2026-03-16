@@ -430,99 +430,113 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
   // ══════════════════════════════════════════════════════════════
   if (isMobile) {
     return (
-      <section className="px-4 pt-16 pb-8">
-        {/* ── Hero Text ── */}
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <motion.h1
-            className="font-heading text-5xl text-primary tracking-tight"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            Middle-Out
-          </motion.h1>
+      <>
+        {/* ── Full-screen Hero Landing ── */}
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 relative">
+          <div className="text-center max-w-2xl mx-auto">
+            <motion.h1
+              className="font-heading text-5xl text-primary tracking-tight"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              Middle-Out
+            </motion.h1>
 
-          <motion.p
-            className="mt-4 text-lg text-secondary font-body"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Singapore's health story, told through data.
-          </motion.p>
+            <motion.p
+              className="mt-4 text-lg text-secondary font-body"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Singapore's health story, told through data.
+            </motion.p>
 
+            <motion.div
+              className="mt-10 h-16 flex items-center justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStat}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.4 }}
+                  className="text-center"
+                >
+                  <span className="text-secondary text-sm font-body">
+                    {stats[currentStat].label}:
+                  </span>
+                  <span className="ml-2 text-2xl font-mono font-semibold text-accent">
+                    {stats[currentStat].value}
+                  </span>
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </div>
+
+          {/* Scroll hint */}
           <motion.div
-            className="mt-10 h-16 flex items-center justify-center"
+            className="absolute bottom-8"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            animate={{ opacity: 1, y: [0, 8, 0] }}
+            transition={{ opacity: { duration: 0.6, delay: 0.6 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 } }}
           >
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentStat}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4 }}
-                className="text-center"
-              >
-                <span className="text-secondary text-sm font-body">
-                  {stats[currentStat].label}:
-                </span>
-                <span className="ml-2 text-2xl font-mono font-semibold text-accent">
-                  {stats[currentStat].value}
-                </span>
-              </motion.div>
-            </AnimatePresence>
+            <ChevronDown className="w-6 h-6 text-secondary/40" />
           </motion.div>
-        </div>
+        </section>
 
-        {/* ── Snapshot Section ── */}
-        <div className="max-w-[960px] mx-auto">
-          <div className="text-center">
-            <h2 className="font-heading text-3xl text-primary">
-              Singapore at a Glance
-            </h2>
-            <p className="mt-2 text-xs text-secondary/60 font-mono">
-              {dataStatus === 'live' ? 'Live data from SingStat & data.gov.sg' : 'Data from MOH / SingStat'}
-              <InfoTooltip content="Health indicator data is fetched live from the SingStat Table Builder API." />
-            </p>
-          </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-2">
-            {CATEGORIES.map(cat => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCategory(cat.id)}
-                className={`pill-btn px-3 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
-                  activeCategory === cat.id ? 'text-white shadow-sm' : 'bg-card text-secondary border border-border hover:border-accent'
-                }`}
-                style={{
-                  backgroundColor: activeCategory === cat.id ? cat.color : undefined,
-                  WebkitTapHighlightColor: 'transparent',
-                }}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
-          <div className="mt-8" style={{ maxHeight: '60vh', overflowY: 'auto' }}>
-            <div className="grid grid-cols-2 gap-4">
-              {filteredIndicators.map(({ key }) => (
-                <SnapshotCard
-                  key={key}
-                  indicatorKey={key}
-                  onSelect={onSelectIndicator}
-                  healthData={healthData}
-                  forceVisible={true}
-                />
+        {/* ── Singapore at a Glance (revealed on scroll) ── */}
+        <section className="px-4 py-16">
+          <div className="max-w-[960px] mx-auto">
+            <div className="text-center">
+              <h2 className="font-heading text-3xl text-primary">
+                Singapore at a Glance
+              </h2>
+              <p className="mt-2 text-xs text-secondary/60 font-mono">
+                {dataStatus === 'live' ? 'Live data from SingStat & data.gov.sg' : 'Data from MOH / SingStat'}
+                <InfoTooltip content="Health indicator data is fetched live from the SingStat Table Builder API." />
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap justify-center gap-2">
+              {CATEGORIES.map(cat => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCategory(cat.id)}
+                  className={`pill-btn px-3 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
+                    activeCategory === cat.id ? 'text-white shadow-sm' : 'bg-card text-secondary border border-border hover:border-accent'
+                  }`}
+                  style={{
+                    backgroundColor: activeCategory === cat.id ? cat.color : undefined,
+                    WebkitTapHighlightColor: 'transparent',
+                  }}
+                >
+                  {cat.label}
+                </button>
               ))}
             </div>
-            <p className="mt-4 text-center text-[10px] text-secondary/40">
-              Tap any card to explore the full time series in detail
-            </p>
+            <div className="mt-8">
+              <div className="grid grid-cols-2 gap-4">
+                {filteredIndicators.map(({ key }) => (
+                  <SnapshotCard
+                    key={key}
+                    indicatorKey={key}
+                    onSelect={onSelectIndicator}
+                    healthData={healthData}
+                    forceVisible={true}
+                  />
+                ))}
+              </div>
+              <p className="mt-4 text-center text-[10px] text-secondary/40">
+                Tap any card to explore the full time series in detail
+              </p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </>
     )
   }
 

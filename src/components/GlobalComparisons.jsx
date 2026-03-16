@@ -203,7 +203,7 @@ export default function GlobalComparisons() {
                         stroke={style.color}
                         strokeWidth={style.strokeWidth}
                         strokeDasharray={style.strokeDasharray}
-                        dot={key === 'singapore' ? { r: 3, fill: style.color } : false}
+                        dot={key === 'singapore' && !isMobile ? { r: 3, fill: style.color } : false}
                         activeDot={key === 'singapore'
                           ? { r: 5, fill: style.color, stroke: '#fff', strokeWidth: 2 }
                           : { r: 4, fill: style.color }

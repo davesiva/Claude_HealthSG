@@ -385,7 +385,7 @@ export default function Explorer({ selectedIndicator }) {
                     dataKey={line.key}
                     stroke={line.color}
                     strokeWidth={2}
-                    dot={{ r: 3, fill: line.color }}
+                    dot={isMobile ? false : { r: 3, fill: line.color }}
                     activeDot={{ r: 5, fill: line.color, stroke: '#fff', strokeWidth: 2 }}
                     name={line.name}
                     connectNulls

@@ -276,7 +276,7 @@ export default function InsightLab() {
                             fill={s.color}
                             fillOpacity={0.15}
                             strokeWidth={2}
-                            dot={{ r: 3, fill: s.color }}
+                            dot={isMobile ? false : { r: 3, fill: s.color }}
                             activeDot={{ r: 5, fill: s.color, stroke: '#fff', strokeWidth: 2 }}
                             isAnimationActive={true}
                             animationDuration={1000}
