@@ -260,7 +260,7 @@ export default function Explorer({ selectedIndicator }) {
           </div>
           <ResponsiveContainer width="100%" height={isMobile ? 260 : 300}>
             {isBarChart && breakdown === 'all' ? (
-              <BarChart data={chartData}>
+              <BarChart data={chartData} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
                 <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
@@ -268,7 +268,7 @@ export default function Explorer({ selectedIndicator }) {
                 <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name={indicator.label} />
               </BarChart>
             ) : (
-              <LineChart data={chartData}>
+              <LineChart data={chartData} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
                 <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />

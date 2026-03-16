@@ -6,6 +6,7 @@ import Snapshot from './components/Snapshot'
 import Timeline from './components/Timeline'
 import Explorer from './components/Explorer'
 import InsightLab from './components/InsightLab'
+import GlobalComparisons from './components/GlobalComparisons'
 import PersonalInsight from './components/PersonalInsight'
 import AskHealthSG from './components/AskHealthSG'
 import Footer from './components/Footer'
@@ -30,6 +31,7 @@ function App() {
           <Explorer selectedIndicator={selectedIndicator} />
         </div>
         <InsightLab />
+        <GlobalComparisons />
         <PersonalInsight />
         <Footer />
         <AskHealthSG />

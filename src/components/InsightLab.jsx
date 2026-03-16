@@ -196,7 +196,7 @@ export default function InsightLab() {
 
               {hasData ? (
                 <ResponsiveContainer width="100%" height={isMobile ? 280 : 350}>
-                  <ComposedChart data={chartData} margin={{ top: 10, right: isMobile ? 5 : 10, left: 0, bottom: 0 }}>
+                  <ComposedChart data={chartData} margin={{ top: 10, right: isMobile ? 5 : 10, left: isMobile ? -15 : 0, bottom: 0 }}>
                     <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                     <XAxis dataKey="year" tick={{ ...axisTick, fontSize: isMobile ? 10 : 11 }} stroke={axisStroke} />
                     <YAxis

@@ -65,7 +65,7 @@ function Chapter1({ isMobile }) {
   return (
     <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       <ResponsiveContainer width="100%" height={isMobile ? 220 : 250}>
-        <LineChart data={data}>
+        <LineChart data={data} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis domain={[60, 85]} tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
@@ -111,7 +111,7 @@ function Chapter2({ isMobile }) {
   return (
     <div className="outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       <ResponsiveContainer width="100%" height={isMobile ? 240 : 280}>
-        <LineChart data={combined}>
+        <LineChart data={combined} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
@@ -149,7 +149,7 @@ function Chapter3({ isMobile }) {
   return (
     <div className="space-y-6 outline-none" style={{ WebkitTapHighlightColor: 'transparent' }}>
       <ResponsiveContainer width="100%" height={isMobile ? 220 : 250}>
-        <LineChart data={combined}>
+        <LineChart data={combined} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
@@ -163,7 +163,7 @@ function Chapter3({ isMobile }) {
       </ResponsiveContainer>
 
       <ResponsiveContainer width="100%" height={isMobile ? 180 : 200}>
-        <BarChart data={expenditure}>
+        <BarChart data={expenditure} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
