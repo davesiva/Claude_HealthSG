@@ -161,10 +161,10 @@ export default function HeroLensSection({ onSelectIndicator }) {
   }, [prefersReduced, stats.length])
 
   // ── Derived dimensions ──
-  const R = isMobile ? 140 : 200
-  const strokeW = isMobile ? 2.5 : 3
-  const scrollHeight = isMobile ? '300vh' : '350vh'
-  const separateDistance = isMobile ? 15 : 25
+  const R = 200
+  const strokeW = 3
+  const scrollHeight = isMobile ? '200vh' : '280vh'
+  const separateDistance = 25
 
   // ── anime.js scroll timeline ──
   useEffect(() => {
@@ -231,102 +231,169 @@ export default function HeroLensSection({ onSelectIndicator }) {
           }),
         })
 
-        // ═══ Phase 1: Colorize (0–500ms) ═══
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          tl.add(arcEl, {
-            stroke: [MUTED_COLOR, arc.color],
-            strokeWidth: [strokeW, strokeW + 1],
-            duration: 500,
-            delay: i * 60,
-            ease: 'inOutQuad',
-          }, 0)
-        })
-        if (chevron) {
-          tl.add(chevron, {
-            opacity: [1, 0],
-            translateY: [0, -20],
-            duration: 300,
-          }, 0)
-        }
+        if (isMobile) {
+          // ═══ MOBILE: No arcs — compact hero→pills→content transition ═══
+          // Immediate feedback: chevron fades and hero starts moving at time 0
+          if (chevron) {
+            tl.add(chevron, {
+              opacity: [1, 0],
+              translateY: [0, -15],
+              duration: 200,
+            }, 0)
+          }
 
-        // ═══ Phase 2: Separate (400–1200ms) ═══
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-          tl.add(arcEl, {
-            translateX: Math.cos(midAngle) * separateDistance,
-            translateY: Math.sin(midAngle) * separateDistance,
-            duration: 600,
-            ease: 'outQuart',
-          }, 400 + i * 40)
-        })
+          // Hero text scales down and fades — starts immediately on scroll
+          if (heroText) {
+            tl.add(heroText, {
+              opacity: [1, 0],
+              scale: [1, 0.95],
+              translateY: [0, -30],
+              duration: 500,
+              ease: 'inOutQuad',
+            }, 0)
+          }
 
-        // ═══ Phase 3: Transform (1000–2000ms) ═══
-        // Hero text fades out
-        if (heroText) {
-          tl.add(heroText, {
-            opacity: [1, 0],
-            scale: [1, 0.92],
-            duration: 400,
-            ease: 'inQuart',
-          }, 1000)
-        }
-
-        // Arcs fly outward and dissolve
-        const flyDistance = isMobile ? 100 : 160
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-          tl.add(arcEl, {
-            translateX: Math.cos(midAngle) * flyDistance,
-            translateY: Math.sin(midAngle) * flyDistance,
-            opacity: [1, 0],
-            duration: 500,
-            delay: i * 30,
-            ease: 'inQuart',
-          }, 1100)
-        })
-
-        // Pill bar container fades in
-        tl.add(pillBar, {
-          opacity: [0, 1],
-          duration: 300,
-          ease: 'outQuad',
-        }, 1150)
-
-        // Pills emerge from center and fly to natural positions
-        CATEGORIES.forEach((cat, i) => {
-          const pill = pillRefs.current[i]
-          if (!pill) return
-          const startTime = 1200 + i * 80
-          tl.add(pill, {
-            translateX: [pillOffsets[i]?.x ?? 0, 0],
-            translateY: [pillOffsets[i]?.y ?? 0, 0],
+          // Pill bar fades in
+          tl.add(pillBar, {
             opacity: [0, 1],
-            scale: [0.4, 1],
-            duration: 500,
-            ease: 'outQuart',
-          }, startTime)
-        })
+            duration: 250,
+            ease: 'outQuad',
+          }, 350)
 
-        // ═══ Phase 4: Settle (1800–2400ms) ═══
-        if (snapshotHeading) {
-          tl.add(snapshotHeading, {
+          // Pills fly in from center
+          CATEGORIES.forEach((cat, i) => {
+            const pill = pillRefs.current[i]
+            if (!pill) return
+            tl.add(pill, {
+              translateX: [pillOffsets[i]?.x ?? 0, 0],
+              translateY: [pillOffsets[i]?.y ?? 0, 0],
+              opacity: [0, 1],
+              scale: [0.4, 1],
+              duration: 400,
+              ease: 'outQuart',
+            }, 400 + i * 60)
+          })
+
+          // Heading + cards
+          if (snapshotHeading) {
+            tl.add(snapshotHeading, {
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 350,
+              ease: 'outQuart',
+            }, 800)
+          }
+          if (cardGrid) {
+            tl.add(cardGrid, {
+              opacity: [0, 1],
+              duration: 350,
+            }, 950)
+          }
+        } else {
+          // ═══ DESKTOP: Full arc animation ═══
+
+          // Phase 1: Colorize (0–500ms) + immediate hero text response
+          if (heroText) {
+            // Subtle scale gives instant visual feedback on first scroll
+            tl.add(heroText, {
+              scale: [1, 0.97],
+              duration: 600,
+              ease: 'inOutQuad',
+            }, 0)
+          }
+          ARCS.forEach((arc, i) => {
+            const arcEl = arcRefs.current[i]
+            if (!arcEl) return
+            tl.add(arcEl, {
+              stroke: [MUTED_COLOR, arc.color],
+              strokeWidth: [strokeW, strokeW + 1],
+              duration: 500,
+              delay: i * 60,
+              ease: 'inOutQuad',
+            }, 0)
+          })
+          if (chevron) {
+            tl.add(chevron, {
+              opacity: [1, 0],
+              translateY: [0, -20],
+              duration: 300,
+            }, 0)
+          }
+
+          // Phase 2: Separate (400–1000ms)
+          ARCS.forEach((arc, i) => {
+            const arcEl = arcRefs.current[i]
+            if (!arcEl) return
+            const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
+            tl.add(arcEl, {
+              translateX: Math.cos(midAngle) * separateDistance,
+              translateY: Math.sin(midAngle) * separateDistance,
+              duration: 500,
+              ease: 'outQuart',
+            }, 400 + i * 30)
+          })
+
+          // Phase 3: Transform (800–1600ms)
+          if (heroText) {
+            tl.add(heroText, {
+              opacity: [1, 0],
+              scale: [0.97, 0.90],
+              duration: 350,
+              ease: 'inQuart',
+            }, 800)
+          }
+
+          const flyDistance = 160
+          ARCS.forEach((arc, i) => {
+            const arcEl = arcRefs.current[i]
+            if (!arcEl) return
+            const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
+            tl.add(arcEl, {
+              translateX: Math.cos(midAngle) * flyDistance,
+              translateY: Math.sin(midAngle) * flyDistance,
+              opacity: [1, 0],
+              duration: 450,
+              delay: i * 25,
+              ease: 'inQuart',
+            }, 900)
+          })
+
+          // Pill bar fades in
+          tl.add(pillBar, {
             opacity: [0, 1],
-            translateY: [20, 0],
-            duration: 400,
-            ease: 'outQuart',
-          }, 1800)
-        }
-        if (cardGrid) {
-          tl.add(cardGrid, {
-            opacity: [0, 1],
-            duration: 400,
-          }, 2000)
+            duration: 250,
+            ease: 'outQuad',
+          }, 950)
+
+          // Pills fly in
+          CATEGORIES.forEach((cat, i) => {
+            const pill = pillRefs.current[i]
+            if (!pill) return
+            tl.add(pill, {
+              translateX: [pillOffsets[i]?.x ?? 0, 0],
+              translateY: [pillOffsets[i]?.y ?? 0, 0],
+              opacity: [0, 1],
+              scale: [0.4, 1],
+              duration: 450,
+              ease: 'outQuart',
+            }, 1000 + i * 70)
+          })
+
+          // Phase 4: Settle (1500–2000ms)
+          if (snapshotHeading) {
+            tl.add(snapshotHeading, {
+              opacity: [0, 1],
+              translateY: [20, 0],
+              duration: 350,
+              ease: 'outQuart',
+            }, 1500)
+          }
+          if (cardGrid) {
+            tl.add(cardGrid, {
+              opacity: [0, 1],
+              duration: 350,
+            }, 1700)
+          }
         }
       })
     }, 300)
@@ -453,26 +520,28 @@ export default function HeroLensSection({ onSelectIndicator }) {
           </motion.div>
         </div>
 
-        {/* ── SVG Circle made of 5 arc paths ── */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ zIndex: 5 }}
-          viewBox={`0 0 ${CX * 2} ${CY * 2}`}
-          preserveAspectRatio="xMidYMid meet"
-        >
-          {ARCS.map((arc, i) => (
-            <path
-              key={arc.id}
-              ref={el => arcRefs.current[i] = el}
-              d={describeArc(CX, CY, R, arc.startAngle, arc.endAngle)}
-              stroke={MUTED_COLOR}
-              strokeWidth={strokeW}
-              fill="none"
-              strokeLinecap="round"
-              style={{ transformOrigin: `${CX}px ${CY}px` }}
-            />
-          ))}
-        </svg>
+        {/* ── SVG Circle made of 5 arc paths (desktop only) ── */}
+        {!isMobile && (
+          <svg
+            className="absolute inset-0 w-full h-full pointer-events-none"
+            style={{ zIndex: 5 }}
+            viewBox={`0 0 ${CX * 2} ${CY * 2}`}
+            preserveAspectRatio="xMidYMid meet"
+          >
+            {ARCS.map((arc, i) => (
+              <path
+                key={arc.id}
+                ref={el => arcRefs.current[i] = el}
+                d={describeArc(CX, CY, R, arc.startAngle, arc.endAngle)}
+                stroke={MUTED_COLOR}
+                strokeWidth={strokeW}
+                fill="none"
+                strokeLinecap="round"
+                style={{ transformOrigin: `${CX}px ${CY}px` }}
+              />
+            ))}
+          </svg>
+        )}
 
         {/* ── Bouncing chevron ── */}
         <div className="chevron-hint absolute bottom-8 z-10">
