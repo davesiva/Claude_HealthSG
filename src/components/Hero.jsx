@@ -22,7 +22,7 @@ export default function Hero() {
     return [
       { label: 'Life expectancy', value: le ? `${le.value} years` : '83.5 years' },
       { label: 'Diabetes prevalence', value: dm ? `${dm.value}% of adults` : '8.5% of adults' },
-      { label: 'Govt health spend', value: ghe ? `$${ghe.value}B in ${ghe.year}` : '$16.8B in 2022' },
+      { label: 'Govt health spend', value: ghe ? `S$${ghe.value}B in ${ghe.year}` : 'S$16.8B in 2022' },
       { label: 'Smoking rate at historic low', value: sm ? `${sm.value}%` : '8.8%' }
     ]
   }, [healthData])

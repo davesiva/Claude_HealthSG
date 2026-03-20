@@ -368,7 +368,7 @@ export default function Explorer({ selectedIndicator }) {
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
                 <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
-                <Tooltip content={<CustomTooltip unit={indicator.unit === '$B' ? 'B' : indicator.unit} />} />
+                <Tooltip content={<CustomTooltip unit={indicator.unit === 'S$B' ? 'B' : indicator.unit} />} />
                 <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name={indicator.label} />
               </BarChart>
             ) : (

@@ -27,7 +27,7 @@ function getLatest(indicator) {
 function getTrendTooltip(key, prev, indicator) {
   const baseline = indicator?.trendBaseline
   const baselineNote = baseline ? ` Historical baseline: ${baseline}.` : ''
-  const unit = indicator?.unit === '$B' ? `$${prev.value}B` : `${prev.value}${indicator?.unit || ''}`
+  const unit = indicator?.unit === 'S$B' ? `S$${prev.value}B` : `${prev.value}${indicator?.unit || ''}`
   if (key === 'hypertension_prevalence') {
     return `Compared to ${prev.year} (${unit}). Note: methodology changed in 2020 — the jump may not reflect a real increase.${baselineNote}`
   }
@@ -136,7 +136,7 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
     return [
       { label: 'Life expectancy', value: le ? `${le.value} years` : '83.5 years' },
       { label: 'Diabetes prevalence', value: dm ? `${dm.value}% of adults` : '8.5% of adults' },
-      { label: 'Govt health spend', value: ghe ? `$${ghe.value}B in ${ghe.year}` : '$16.8B in 2022' },
+      { label: 'Govt health spend', value: ghe ? `S$${ghe.value}B in ${ghe.year}` : 'S$16.8B in 2022' },
       { label: 'Smoking rate at historic low', value: sm ? `${sm.value}%` : '8.8%' },
     ]
   }, [healthData])

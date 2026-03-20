@@ -39,7 +39,7 @@ function SimpleBarTooltip({ active, payload, label }) {
       <p className="font-mono font-semibold text-primary">{label}</p>
       {payload.map((p, i) => (
         <p key={i} style={{ color: p.color }} className="font-mono">
-          {p.name}: ${p.value}B
+          {p.name}: S${p.value}B
         </p>
       ))}
     </div>

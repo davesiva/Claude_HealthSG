@@ -41,7 +41,7 @@ const positiveUpKeys = new Set([
 function getTrendTooltip(key, prev, indicator) {
   const baseline = indicator?.trendBaseline
   const baselineNote = baseline ? ` Historical baseline: ${baseline}.` : ''
-  const unit = indicator?.unit === '$B' ? `$${prev.value}B` : `${prev.value}${indicator?.unit || ''}`
+  const unit = indicator?.unit === 'S$B' ? `S$${prev.value}B` : `${prev.value}${indicator?.unit || ''}`
 
   if (key === 'hypertension_prevalence') {
     return `Compared to ${prev.year} (${unit}). Note: methodology changed in 2020 — the jump may not reflect a real increase.${baselineNote}`

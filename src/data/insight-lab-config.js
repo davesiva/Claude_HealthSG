@@ -41,12 +41,12 @@ export const THEMES = [
         yearRange: [2000, 2025],
         series: [
           { dataPath: 'old_age_support_ratio', label: 'Support Ratio', axis: 'left', type: 'line', color: '#0D9488', unit: '' },
-          { dataPath: 'govt_health_expenditure', label: 'Health Spend ($B)', axis: 'right', type: 'bar', color: '#EF4444', unit: '$B' }
+          { dataPath: 'govt_health_expenditure', label: 'Health Spend (S$B)', axis: 'right', type: 'bar', color: '#EF4444', unit: 'S$B' }
         ],
         leftAxisLabel: 'Workers per Retiree',
-        rightAxisLabel: 'Health Expenditure ($B)',
+        rightAxisLabel: 'Health Expenditure (S$B)',
         tooltip: 'The old-age support ratio (working-age adults 20-64 per elderly 65+) has fallen from ~10 in 2000 to ~3.5 in 2024. At the same time, government health spending has surged. This is the fiscal pressure of an aging society.',
-        narrativePrompt: 'Analyze the inverse correlation between Singapore\'s old-age support ratio (declining from 9.9 to 3.5) and government health expenditure (rising from under $5B to nearly $17B). What does this trend mean for fiscal sustainability? How might Singapore need to adapt its healthcare funding model?'
+        narrativePrompt: 'Analyze the inverse correlation between Singapore\'s old-age support ratio (declining from 9.9 to 3.5) and government health expenditure (rising from under S$5B to nearly S$17B). What does this trend mean for fiscal sustainability? How might Singapore need to adapt its healthcare funding model?'
       },
       {
         id: 'working-longer',
@@ -120,12 +120,12 @@ export const THEMES = [
         subtitle: 'Government spending vs household income trends',
         yearRange: [2000, 2025],
         series: [
-          { dataPath: 'household_income.median_income', label: 'Median Income ($)', axis: 'left', type: 'line', color: '#0D9488', unit: '$' },
-          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile ($)', axis: 'left', type: 'line', color: '#6366F1', unit: '$' },
-          { dataPath: 'govt_health_expenditure', label: 'Govt Health Spend ($B)', axis: 'right', type: 'bar', color: '#F59E0B', unit: '$B' }
+          { dataPath: 'household_income.median_income', label: 'Median Income (S$)', axis: 'left', type: 'line', color: '#0D9488', unit: 'S$' },
+          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile (S$)', axis: 'left', type: 'line', color: '#6366F1', unit: 'S$' },
+          { dataPath: 'govt_health_expenditure', label: 'Govt Health Spend (S$B)', axis: 'right', type: 'bar', color: '#F59E0B', unit: 'S$B' }
         ],
-        leftAxisLabel: 'Monthly Income ($)',
-        rightAxisLabel: 'Health Expenditure ($B)',
+        leftAxisLabel: 'Monthly Income (S$)',
+        rightAxisLabel: 'Health Expenditure (S$B)',
         tooltip: 'Compares household income (median and 20th percentile, including employer CPF) with government health expenditure. The 20th percentile represents lower-income households.',
         narrativePrompt: 'Analyze how Singapore government health expenditure growth compares to household income growth from 2000-2024. Median income roughly doubled while health spending grew much faster. The 20th percentile income also grew. What does this suggest about the sustainability of healthcare spending and its accessibility for lower-income households?'
       },
@@ -135,13 +135,13 @@ export const THEMES = [
         subtitle: 'Household health expenditure every 5 years',
         yearRange: [1993, 2023],
         series: [
-          { dataPath: 'household_expenditure.health', label: 'Health Spend ($)', axis: 'left', type: 'bar', color: '#0D9488', unit: '$' },
-          { dataPath: 'household_expenditure.total', label: 'Total Spend ($)', axis: 'right', type: 'line', color: '#9CA3AF', unit: '$' }
+          { dataPath: 'household_expenditure.health', label: 'Health Spend (S$)', axis: 'left', type: 'bar', color: '#0D9488', unit: 'S$' },
+          { dataPath: 'household_expenditure.total', label: 'Total Spend (S$)', axis: 'right', type: 'line', color: '#9CA3AF', unit: 'S$' }
         ],
-        leftAxisLabel: 'Monthly Health ($)',
-        rightAxisLabel: 'Total Monthly ($)',
+        leftAxisLabel: 'Monthly Health (S$)',
+        rightAxisLabel: 'Total Monthly (S$)',
         tooltip: 'Average monthly household expenditure on health vs total expenditure. Data from the Household Expenditure Survey conducted every 5 years. Health includes medical care, medicines, and health services.',
-        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from $61 to $225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?'
+        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from S$61 to S$225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?'
       }
     ]
   },

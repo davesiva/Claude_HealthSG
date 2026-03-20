@@ -229,11 +229,11 @@
   },
   "govt_health_expenditure": {
     "label": "Government Health Expenditure",
-    "unit": "$B",
+    "unit": "S$B",
     "description": "Total Singapore government expenditure on health (operating + development), in billions of Singapore dollars.",
     "source": "MOH via SingStat Table M870391",
-    "tooltip": "Includes operating expenditure (hospitals, polyclinics, subsidies) and development expenditure (new facilities, infrastructure). The sharp increase from 2019 to 2021 was driven by COVID-19 pandemic response. These are nominal figures (not inflation-adjusted). Per capita spend was $2,976 in 2022.",
-    "trendBaseline": "2015 baseline ($8.6B)",
+    "tooltip": "Includes operating expenditure (hospitals, polyclinics, subsidies) and development expenditure (new facilities, infrastructure). The sharp increase from 2019 to 2021 was driven by COVID-19 pandemic response. These are nominal figures (not inflation-adjusted). Per capita spend was S$2,976 in 2022.",
+    "trendBaseline": "2015 baseline (S$8.6B)",
     "singstatTableId": "M870391",
     "data": [
       {"year": 2015, "value": 8.6},
@@ -820,7 +820,7 @@
     },
     "median_income": {
       "label": "Median Household Income (incl. CPF)",
-      "unit": "$",
+      "unit": "S$",
       "source": "SingStat Table M810361",
       "data": [
         {"year": 2000, "value": 4398},
@@ -838,7 +838,7 @@
     },
     "income_20th_pct": {
       "label": "20th Percentile Income",
-      "unit": "$",
+      "unit": "S$",
       "source": "SingStat Table M810361",
       "data": [
         {"year": 2000, "value": 868},
@@ -938,7 +938,7 @@
   "household_expenditure": {
     "health": {
       "label": "Monthly Health Expenditure",
-      "unit": "$",
+      "unit": "S$",
       "source": "SingStat Table M212981",
       "data": [
         {"year": 1993, "value": 61},
@@ -952,7 +952,7 @@
     },
     "total": {
       "label": "Total Monthly Expenditure",
-      "unit": "$",
+      "unit": "S$",
       "source": "SingStat Table M212981",
       "data": [
         {"year": 1993, "value": 2692},
