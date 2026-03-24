@@ -48,24 +48,24 @@ export default function ShareButton({ title, subtitle, chartRef, className = '' 
 
       // Header: "Middle Out"
       ctx.fillStyle = '#1A1A1A'
-      ctx.font = '600 44px serif'
+      ctx.font = '44px "DM Sans", sans-serif'
       ctx.fillText('Middle Out', 96, 80)
 
       // Subheader
       ctx.fillStyle = '#9CA3AF'
-      ctx.font = '26px monospace'
-      ctx.fillText('Singapore Health Data', 340, 80)
+      ctx.font = '26px "JetBrains Mono", monospace'
+      ctx.fillText('Singapore Health Data', 350, 80)
 
       // Title
       ctx.fillStyle = '#1A1A1A'
-      ctx.font = '600 56px serif'
+      ctx.font = '600 52px "DM Sans", sans-serif'
       ctx.fillText(title || '', 96, 140)
 
       // Subtitle
       if (subtitle) {
         ctx.fillStyle = '#6B7280'
-        ctx.font = '30px sans-serif'
-        ctx.fillText(subtitle, 96, 180)
+        ctx.font = '28px "DM Sans", sans-serif'
+        ctx.fillText(subtitle, 96, 178)
       }
 
       // Chart image
@@ -95,11 +95,11 @@ export default function ShareButton({ title, subtitle, chartRef, className = '' 
 
       // Footer text
       ctx.fillStyle = '#9CA3AF'
-      ctx.font = '24px monospace'
+      ctx.font = '24px "JetBrains Mono", monospace'
       ctx.fillText('Middle Out', 96, 1220)
 
       ctx.fillStyle = '#D1D5DB'
-      ctx.font = '22px monospace'
+      ctx.font = '22px "JetBrains Mono", monospace'
       ctx.textAlign = 'right'
       ctx.fillText('Data: SingStat, MOH, OWID', 2304, 1220)
       ctx.textAlign = 'left'
