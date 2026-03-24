@@ -452,6 +452,9 @@ export default function PersonalInsight() {
             isOpen={tier2Open}
             onToggle={() => setTier2Open(v => !v)}
           >
+            <p className="text-xs text-secondary/70 font-body italic">
+              Fill in whatever you know — every bit helps, and you can skip the rest.
+            </p>
             <div className="grid grid-cols-2 gap-4">
               <NumericInput
                 label="Height"
@@ -511,6 +514,9 @@ export default function PersonalInsight() {
             isOpen={tier3Open}
             onToggle={() => setTier3Open(v => !v)}
           >
+            <p className="text-xs text-secondary/70 font-body italic">
+              No need to remember everything — just fill in what you know. The more you share, the more personalised your insight.
+            </p>
             <div>
               <p className="text-sm text-secondary mb-3 font-body">
                 Select any conditions you've been diagnosed with
