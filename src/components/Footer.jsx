@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer className="py-12 px-6 border-t border-border">
+    <footer className="py-12 pb-24 md:pb-12 px-6 border-t border-border">
       <div className="max-w-[960px] mx-auto text-center space-y-3">
         <p className="text-sm text-secondary">
           Built with open data from{' '}

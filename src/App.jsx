@@ -11,7 +11,7 @@ import PersonalInsight from './components/PersonalInsight'
 import HealthMap from './components/HealthMap'
 import AskHealthSG from './components/AskHealthSG'
 import Footer from './components/Footer'
-import ProgressBar from './components/ProgressBar'
+import SiteNav from './components/SiteNav'
 
 function App() {
   const [selectedIndicator, setSelectedIndicator] = useState(null)
@@ -51,33 +51,33 @@ function App() {
     <HealthDataProvider>
       <div className="relative z-10 min-h-screen">
         <LiveBanner />
-        <div ref={heroRef}>
+        <div ref={heroRef} style={{ scrollMarginTop: 56 }}>
           <HeroLensSection onSelectIndicator={handleSelectIndicator} onSettled={handleSettled} />
         </div>
-        <div ref={timelineRef}>
+        <div ref={timelineRef} style={{ scrollMarginTop: 56 }}>
           <Timeline />
         </div>
-        <div ref={explorerRef}>
+        <div ref={explorerRef} style={{ scrollMarginTop: 56 }}>
           <Explorer selectedIndicator={selectedIndicator} />
         </div>
-        <div ref={healthMapRef}>
+        <div ref={healthMapRef} style={{ scrollMarginTop: 56 }}>
           <HealthMap />
         </div>
-        <div ref={insightLabRef}>
+        <div ref={insightLabRef} style={{ scrollMarginTop: 56 }}>
           <InsightLab />
         </div>
-        <div ref={globalRef}>
+        <div ref={globalRef} style={{ scrollMarginTop: 56 }}>
           <GlobalComparisons />
         </div>
-        <div ref={quizRef}>
+        <div ref={quizRef} style={{ scrollMarginTop: 56 }}>
           <Quiz />
         </div>
-        <div ref={personalRef}>
+        <div ref={personalRef} style={{ scrollMarginTop: 56 }}>
           <PersonalInsight />
         </div>
         <Footer />
         {/* <AskHealthSG /> — temporarily hidden */}
-        <ProgressBar sections={sections} visible={heroSettled} />
+        <SiteNav sections={sections} visible={heroSettled} />
       </div>
     </HealthDataProvider>
   )
