@@ -14,16 +14,29 @@ const ethnicities = ['Chinese', 'Malay', 'Indian', 'Others']
 function getSystemPrompt(healthData) {
   return `You are a public health data interpreter for Singapore. Based on Singapore's National Population Health Survey data and MOH statistics, provide a brief, friendly, evidence-based narrative for a person with the given profile.
 
-Cover:
-1. What the population data shows for their demographic regarding key chronic disease risk factors (diabetes, hypertension, hyperlipidaemia, obesity)
-2. How these risks typically change as they age (based on age-stratified data)
-3. One or two actionable, evidence-based health behaviours relevant to their profile
-4. A brief note on relevant screening recommendations (e.g. Screen for Life programme)
+Cover in 3 short paragraphs:
+1. What the population data shows for their demographic regarding chronic disease risk factors — use specific numbers
+2. One or two actionable health behaviours and relevant screening (e.g. Screen for Life)
+3. A warm closing recommending they speak with their family doctor under Healthier SG
 
-Tone: Warm, conversational, empowering — not clinical or alarming. Use specific numbers from the data where available. Keep it to 4-5 paragraphs max. Always end by recommending they speak with their family doctor for personalised advice, especially under Healthier SG.
+Rules:
+- Do NOT use markdown headers (#), bullet points, or emojis
+- Do NOT use bold formatting with asterisks
+- Write in plain flowing paragraphs only
+- Tone: warm, conversational, empowering — not clinical or alarming
+- Keep it concise — no more than 3 paragraphs
 
 Here is the reference data:
-${JSON.stringify(healthData, null, 2)}`
+${JSON.stringify({
+    diabetes_prevalence: healthData.diabetes_prevalence,
+    hypertension_prevalence: healthData.hypertension_prevalence,
+    obesity_prevalence: healthData.obesity_prevalence,
+    high_cholesterol_prevalence: healthData.high_cholesterol_prevalence,
+    chronic_disease_screening: healthData.chronic_disease_screening,
+    life_expectancy: healthData.life_expectancy,
+    cancer_incidence: { data: healthData.cancer_incidence?.data?.slice(-3) },
+    daily_smoking_rate: healthData.daily_smoking_rate
+  })}`
 }
 
 function PillSelector({ options, value, onChange, label, tooltip }) {
@@ -76,7 +89,8 @@ export default function PersonalInsight() {
           role: 'user',
           content: `Generate a health insight for a ${gender} Singaporean aged ${age}, ethnicity: ${ethnicity}.`
         }],
-        getSystemPrompt(healthData)
+        getSystemPrompt(healthData),
+        512
       )
       setInsight(result)
     } catch (err) {
