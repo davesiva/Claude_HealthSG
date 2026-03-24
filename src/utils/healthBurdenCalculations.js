@@ -122,16 +122,16 @@ function lerpColor(a, b, t) {
 export function getColorScale(metricId, allValues) {
   const metric = METRICS.find(m => m.id === metricId)
   const colors = SCALES[metric?.colorScale || 'teal']
-  const valid = allValues.filter(v => v != null && !isNaN(v))
+  // Filter out nulls, NaNs, and zeros (unpopulated areas)
+  const valid = allValues.filter(v => v != null && !isNaN(v) && v > 0)
   const min = Math.min(...valid)
   const max = Math.max(...valid)
 
   const scale = (value) => {
-    if (value == null || isNaN(value)) return '#F3F4F6'
+    if (value == null || isNaN(value) || value === 0) return '#F3F4F6'
+    // Map the actual data range [min, max] to [0, 1]
     const t = max > min ? (value - min) / (max - min) : 0
-    // Power curve (t^0.6) to spread out the mid-range and boost contrast
-    const curved = Math.pow(t, 0.6)
-    return lerpColor(colors.low, colors.high, curved)
+    return lerpColor(colors.low, colors.high, t)
   }
 
   scale.noDataColor = '#F3F4F6'
