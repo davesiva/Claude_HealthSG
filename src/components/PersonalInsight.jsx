@@ -21,8 +21,8 @@ Cover in 3 short paragraphs:
 
 Rules:
 - Do NOT use markdown headers (#), bullet points, or emojis
-- Do NOT use bold formatting with asterisks
-- Write in plain flowing paragraphs only
+- Start each paragraph with a short bold label like **Where you stand:** or **What you can do:** using markdown bold
+- Write in flowing paragraphs after the bold label
 - Tone: warm, conversational, empowering — not clinical or alarming
 - Keep it concise — no more than 3 paragraphs
 
