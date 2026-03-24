@@ -193,7 +193,18 @@ export async function generateReport({ healthData, profile, insight, selectedInd
     if (profile.gender) parts.push(profile.gender)
     if (profile.age) parts.push(`Age ${profile.age}`)
     if (profile.ethnicity) parts.push(profile.ethnicity)
+    if (profile.bmi) parts.push(`BMI ${profile.bmi}`)
     if (parts.length) doc.text(sanitize(`Profile: ${parts.join(' | ')}`), MARGIN, 93)
+
+    const extraParts = []
+    if (profile.smoking) extraParts.push(`Smoking: ${profile.smoking}`)
+    if (profile.activity) extraParts.push(`Activity: ${profile.activity}`)
+    if (profile.conditions) {
+      extraParts.push(`Conditions: ${Object.keys(profile.conditions).join(', ')}`)
+    }
+    if (extraParts.length) {
+      doc.text(sanitize(extraParts.join(' | ')), MARGIN, 99)
+    }
   }
 
   addFooter(doc, pageNum)

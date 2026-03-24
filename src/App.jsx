@@ -34,8 +34,8 @@ function App() {
     { id: 'health-map', label: 'Health Map', ref: healthMapRef },
     { id: 'insight-lab', label: 'Insight Lab', ref: insightLabRef },
     { id: 'global', label: 'Singapore in the World', ref: globalRef },
-    { id: 'quiz', label: 'Test Yourself', ref: quizRef },
     { id: 'personal', label: 'Your Insights', ref: personalRef },
+    { id: 'quiz', label: 'Test Yourself', ref: quizRef },
   ]
 
   const handleSettled = useCallback((settled) => {
@@ -69,11 +69,11 @@ function App() {
         <div ref={globalRef} style={{ scrollMarginTop: 56 }}>
           <GlobalComparisons />
         </div>
-        <div ref={quizRef} style={{ scrollMarginTop: 56 }}>
-          <Quiz />
-        </div>
         <div ref={personalRef} style={{ scrollMarginTop: 56 }}>
           <PersonalInsight />
+        </div>
+        <div ref={quizRef} style={{ scrollMarginTop: 56 }}>
+          <Quiz />
         </div>
         <Footer />
         {/* <AskHealthSG /> — temporarily hidden */}

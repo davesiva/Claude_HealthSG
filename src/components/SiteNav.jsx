@@ -11,8 +11,8 @@ const DESKTOP_ITEMS = [
   { label: 'Health Map', icon: MapPin },
   { label: 'Insight Lab', icon: Sparkles },
   { label: 'Global', icon: Globe },
-  { label: 'Quiz', icon: Lightbulb },
   { label: 'You', icon: User },
+  { label: 'Quiz', icon: Lightbulb },
 ]
 
 // ── Mobile: 5 grouped tabs ──
