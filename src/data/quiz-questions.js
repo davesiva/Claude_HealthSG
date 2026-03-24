@@ -1,10 +1,13 @@
-// "Did You Know?" misconception quiz questions
-// Each question is designed to challenge common assumptions about Singapore health data
-// indicatorKey maps to health-indicators.json for the reveal mini-chart
+// Quiz questions about Singapore's health data and healthcare landscape
+// Categories: 'data' (health statistics), 'policy' (healthcare system/policy),
+//             'global' (comparative/international), 'practical' (useful knowledge)
+// indicatorKey maps to health-indicators.json for the reveal mini-chart (data questions only)
 
 const QUIZ_QUESTIONS = [
+  // ── DATA QUESTIONS (original 12) ─────────────────────────────────────
   {
     id: 'life_expectancy',
+    category: 'data',
     question: "What is Singapore's life expectancy at birth?",
     options: ['About 78 years', 'About 83.5 years', 'About 88 years'],
     correctIndex: 1,
@@ -14,6 +17,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'fertility_rate',
+    category: 'data',
     question: 'How many children does the average Singaporean woman have?',
     options: ['About 1.5', 'About 0.97', 'About 2.1'],
     correctIndex: 1,
@@ -23,6 +27,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'diabetes',
+    category: 'data',
     question: 'What percentage of Singaporeans aged 18–74 have diabetes?',
     options: ['About 3%', 'About 8.5%', 'About 18%'],
     correctIndex: 1,
@@ -32,6 +37,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'smoking',
+    category: 'data',
     question: "Singapore's daily smoking rate has fallen to what level?",
     options: ['About 15%', 'About 8.8%', 'About 3%'],
     correctIndex: 1,
@@ -41,6 +47,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'hypertension',
+    category: 'data',
     question: 'What percentage of Singaporeans have high blood pressure?',
     options: ['About 15%', 'About 25%', 'About 37%'],
     correctIndex: 2,
@@ -50,16 +57,18 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'health_spend_gdp',
+    category: 'data',
     question: 'What percentage of GDP does Singapore spend on healthcare?',
     options: ['About 5%', 'About 10%', 'About 15%'],
     correctIndex: 0,
-    indicatorKey: null, // uses global comparison data
+    indicatorKey: null,
     explanation: "Singapore spends only ~5% of GDP on healthcare — half of the US (~17%) — yet achieves some of the best health outcomes in the world.",
     chartType: 'none',
   },
   {
     id: 'aged_65_plus',
-    question: 'What share of Singapore\'s population is 65 or older?',
+    category: 'data',
+    question: "What share of Singapore's population is 65 or older?",
     options: ['About 10%', 'About 19%', 'About 28%'],
     correctIndex: 1,
     indicatorKey: 'aged_65_plus',
@@ -68,6 +77,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'support_ratio',
+    category: 'data',
     question: 'How many working-age adults support each elderly person in Singapore?',
     options: ['About 7', 'About 3.6', 'About 1.5'],
     correctIndex: 1,
@@ -77,6 +87,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'childhood_obesity',
+    category: 'data',
     question: 'What did childhood obesity peak at during COVID (2021)?',
     options: ['About 8%', 'About 13.4%', 'About 20%'],
     correctIndex: 1,
@@ -86,6 +97,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'govt_spending',
+    category: 'data',
     question: "How much does Singapore's government spend on health annually?",
     options: ['About S$5 billion', 'About S$10 billion', 'About S$17 billion'],
     correctIndex: 2,
@@ -95,6 +107,7 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'physical_activity',
+    category: 'data',
     question: 'What percentage of Singaporeans meet WHO exercise guidelines?',
     options: ['About 45%', 'About 65%', 'About 78.5%'],
     correctIndex: 2,
@@ -104,12 +117,245 @@ const QUIZ_QUESTIONS = [
   },
   {
     id: 'cancer_lifetime',
+    category: 'data',
     question: 'What fraction of Singaporeans will develop cancer in their lifetime?',
     options: ['1 in 10', '1 in 4', '1 in 2'],
     correctIndex: 1,
     indicatorKey: 'cancer_incidence',
     explanation: "1 in 4 Singaporeans will develop cancer in their lifetime. But the good news: mortality rates have been declining for decades thanks to better screening and treatment.",
     chartType: 'line',
+  },
+
+  // ── POLICY QUESTIONS ─────────────────────────────────────────────────
+  {
+    id: 'three_m_framework',
+    category: 'policy',
+    question: "What are the '3Ms' of Singapore's healthcare financing?",
+    options: [
+      'Medisave, MediShield Life, Medifund',
+      'Medicare, Medicaid, MediCare Plus',
+      'Medisave, MediClaim, MediBridge',
+    ],
+    correctIndex: 0,
+    indicatorKey: null,
+    explanation: "Singapore's 3M framework provides layered protection: Medisave (personal savings), MediShield Life (universal insurance), and Medifund (safety net for the needy). Together they ensure no one falls through the cracks.",
+    chartType: 'none',
+  },
+  {
+    id: 'medisave_year',
+    category: 'policy',
+    question: 'When was the Medisave scheme introduced?',
+    options: ['1974', '1984', '1994'],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Medisave was launched in 1984 as part of the CPF system. It requires workers to set aside part of their income for future medical expenses — a cornerstone of Singapore's personal-responsibility model.",
+    chartType: 'none',
+  },
+  {
+    id: 'medishield_life',
+    category: 'policy',
+    question: 'When did MediShield Life — universal health insurance for all citizens — take effect?',
+    options: ['2005', '2010', '2015'],
+    correctIndex: 2,
+    indicatorKey: null,
+    explanation: "MediShield Life launched on 1 November 2015, replacing the original MediShield. Unlike its predecessor, it covers all Singaporeans and Permanent Residents for life with no opt-out, including those with pre-existing conditions.",
+    chartType: 'none',
+  },
+  {
+    id: 'chas_meaning',
+    category: 'policy',
+    question: 'What does CHAS stand for?',
+    options: [
+      'Community Health Assist Scheme',
+      'Central Healthcare Allocation System',
+      'Comprehensive Health Access Service',
+    ],
+    correctIndex: 0,
+    indicatorKey: null,
+    explanation: "CHAS — the Community Health Assist Scheme — provides subsidies for medical and dental care at participating GP and dental clinics. It helps lower- and middle-income Singaporeans access affordable primary care.",
+    chartType: 'none',
+  },
+  {
+    id: 'healthier_sg',
+    category: 'policy',
+    question: "What is the focus of the Healthier SG initiative launched in 2023?",
+    options: [
+      'Building more hospitals',
+      'Preventive care through a regular family doctor',
+      'Free medication for seniors',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Healthier SG encourages every resident to enrol with a family doctor for regular check-ups and personalised health plans. The shift from treating illness to preventing it is a major pillar of Singapore's healthcare strategy.",
+    chartType: 'none',
+  },
+  {
+    id: 'war_on_diabetes',
+    category: 'policy',
+    question: "When did Singapore declare a 'War on Diabetes'?",
+    options: ['2010', '2016', '2020'],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Singapore declared a War on Diabetes in 2016, recognising it as a serious threat. Initiatives include the Nutri-Grade labelling system for beverages and restrictions on advertising high-sugar drinks.",
+    chartType: 'none',
+  },
+  {
+    id: 'organ_donation',
+    category: 'policy',
+    question: "How does Singapore's organ donation system (HOTA) work?",
+    options: [
+      'Opt-in: you must register to donate',
+      'Opt-out: citizens are donors by default unless they opt out',
+      'Family decides at time of death',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Under the Human Organ Transplant Act (HOTA), all Singapore citizens and PRs aged 21 and above are presumed organ donors unless they opt out. It covers kidneys, liver, heart, and corneas.",
+    chartType: 'none',
+  },
+  {
+    id: 'pioneer_generation',
+    category: 'policy',
+    question: 'The Pioneer Generation Package (2014) provides healthcare subsidies to Singaporeans who were adults before which year?',
+    options: ['Before 1965', 'Before 1975', 'Before 1985'],
+    correctIndex: 0,
+    indicatorKey: null,
+    explanation: "The Pioneer Generation Package honours Singaporeans who were aged 16 and above in 1965 (the year of independence) and obtained citizenship by 1986. They receive lifelong subsidies on MediShield Life premiums, outpatient care, and Medisave top-ups.",
+    chartType: 'none',
+  },
+
+  // ── GLOBAL / COMPARATIVE QUESTIONS ───────────────────────────────────
+  {
+    id: 'bloomberg_ranking',
+    category: 'global',
+    question: "In Bloomberg's Health Efficiency Index, how has Singapore typically ranked?",
+    options: ['Top 3', 'Top 20', 'Around 50th'],
+    correctIndex: 0,
+    indicatorKey: null,
+    explanation: "Singapore has consistently been in the top 3 of Bloomberg's Health Efficiency Index, which measures health outcomes relative to spending. It achieves world-class results at a fraction of the cost of most developed nations.",
+    chartType: 'none',
+  },
+  {
+    id: 'us_vs_sg_spending',
+    category: 'global',
+    question: 'The US spends about 17% of GDP on healthcare. How does Singapore compare?',
+    options: ['About 12%', 'About 8%', 'About 5%'],
+    correctIndex: 2,
+    indicatorKey: null,
+    explanation: "Singapore spends roughly 5% of GDP on healthcare — less than a third of US spending — yet achieves higher life expectancy and lower infant mortality. The difference highlights how system design matters more than raw spending.",
+    chartType: 'none',
+  },
+  {
+    id: 'hospital_beds_comparison',
+    category: 'global',
+    question: 'How many hospital beds does Singapore have per 1,000 people?',
+    options: ['About 2.5', 'About 5', 'About 8'],
+    correctIndex: 0,
+    indicatorKey: null,
+    explanation: "Singapore has about 2.5 hospital beds per 1,000 people — lower than the OECD average of around 4.3 and far below Japan (~13) or South Korea (~12.8). Singapore compensates with high efficiency and short average stays.",
+    chartType: 'none',
+  },
+  {
+    id: 'life_expectancy_vs_world',
+    category: 'global',
+    question: "How does Singapore's life expectancy compare to the global average?",
+    options: [
+      'About 3 years higher',
+      'About 10 years higher',
+      'About the same',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Singapore's life expectancy of 83.5 years is roughly 10 years above the global average of about 73 years. It consistently ranks in the top 5 worldwide alongside Japan, Switzerland, and Hong Kong.",
+    chartType: 'none',
+  },
+  {
+    id: 'out_of_pocket',
+    category: 'global',
+    question: "Compared to other high-income countries, Singapore's out-of-pocket healthcare spending is:",
+    options: ['Lower than average', 'About average', 'Higher than average'],
+    correctIndex: 2,
+    indicatorKey: null,
+    explanation: "Out-of-pocket spending makes up a relatively high share of total health expenditure in Singapore compared to other wealthy nations. This reflects the system's emphasis on personal responsibility and co-payments to discourage over-consumption.",
+    chartType: 'none',
+  },
+
+  // ── PRACTICAL KNOWLEDGE QUESTIONS ────────────────────────────────────
+  {
+    id: 'polyclinic_system',
+    category: 'practical',
+    question: 'What is a polyclinic in Singapore?',
+    options: [
+      'A private specialist hospital',
+      'A government-subsidised primary care clinic',
+      'A 24-hour emergency centre',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Polyclinics are government-run, heavily subsidised primary care clinics found across Singapore. They offer outpatient care, vaccinations, health screenings, and dental services at lower cost than private GPs.",
+    chartType: 'none',
+  },
+  {
+    id: 'public_hospital_clusters',
+    category: 'policy',
+    question: "Singapore's public hospitals are organised into how many healthcare clusters?",
+    options: ['2', '3', '5'],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Singapore has 3 public healthcare clusters: National Healthcare Group (NHG), SingHealth, and the National University Health System (NUHS). Each manages a network of hospitals, polyclinics, and specialty centres.",
+    chartType: 'none',
+  },
+  {
+    id: 'screen_for_life',
+    category: 'practical',
+    question: "What does Singapore's Screen for Life programme offer?",
+    options: [
+      'Free annual eye exams for all residents',
+      'Subsidised health screenings for chronic diseases',
+      'Cancer genetic testing for high-risk groups',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Screen for Life offers subsidised screenings for conditions like diabetes, hypertension, high cholesterol, and cervical and colorectal cancers. Singapore citizens and PRs aged 18+ can access these at polyclinics and CHAS clinics.",
+    chartType: 'none',
+  },
+  {
+    id: 'nutri_grade',
+    category: 'practical',
+    question: "What does Singapore's Nutri-Grade label on beverages indicate?",
+    options: [
+      'Calorie content only',
+      'Sugar and saturated fat levels (graded A to D)',
+      'Whether the drink is halal-certified',
+    ],
+    correctIndex: 1,
+    indicatorKey: null,
+    explanation: "Introduced in 2022, Nutri-Grade labels grade pre-packaged beverages from A (healthiest) to D based on sugar and saturated fat content. Grade D drinks are also banned from advertising — a world-first measure.",
+    chartType: 'none',
+  },
+  {
+    id: 'healthcare_model',
+    category: 'practical',
+    question: "Which best describes Singapore's healthcare system?",
+    options: [
+      'Fully public, government-funded (like the UK NHS)',
+      'Fully private, insurance-based (like the US)',
+      'Mixed public-private with mandatory savings and co-payments',
+    ],
+    correctIndex: 2,
+    indicatorKey: null,
+    explanation: "Singapore uses a unique mixed model combining government subsidies, mandatory personal savings (Medisave), universal insurance (MediShield Life), and co-payments. It avoids both fully public and fully private extremes.",
+    chartType: 'none',
+  },
+  {
+    id: 'smoking_age',
+    category: 'practical',
+    question: 'What is the minimum legal age to purchase tobacco in Singapore?',
+    options: ['18', '19', '21'],
+    correctIndex: 2,
+    indicatorKey: null,
+    explanation: "Singapore raised the minimum legal age for tobacco from 18 to 21 in January 2021. This is part of broader efforts that have driven the daily smoking rate down to 8.8%.",
+    chartType: 'none',
   },
 ]
 

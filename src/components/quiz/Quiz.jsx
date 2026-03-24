@@ -18,10 +18,28 @@ export default function Quiz() {
   const [userAnswer, setUserAnswer] = useState(null)
   const [answers, setAnswers] = useState([])
 
-  // Shuffle questions once per session
+  // Shuffle questions once per session, sampling across categories for variety
   const questions = useMemo(() => {
-    const shuffled = [...QUIZ_QUESTIONS].sort(() => Math.random() - 0.5)
-    return shuffled.slice(0, 12)
+    const byCategory = {}
+    QUIZ_QUESTIONS.forEach(q => {
+      ;(byCategory[q.category] ||= []).push(q)
+    })
+    // Shuffle each category independently
+    Object.values(byCategory).forEach(arr => arr.sort(() => Math.random() - 0.5))
+    // Round-robin pick from categories to ensure a mix
+    const categories = Object.keys(byCategory).sort(() => Math.random() - 0.5)
+    const picked = []
+    let ci = 0
+    while (picked.length < 10) {
+      const cat = categories[ci % categories.length]
+      if (byCategory[cat].length) {
+        picked.push(byCategory[cat].shift())
+      }
+      ci++
+      // Safety: if all categories drained, break
+      if (Object.values(byCategory).every(a => a.length === 0)) break
+    }
+    return picked.sort(() => Math.random() - 0.5) // final shuffle so categories aren't clustered
   }, [])
 
   const currentQuestion = questions[currentIndex]
@@ -117,10 +135,10 @@ export default function Quiz() {
                   className="text-center"
                 >
                   <p className="text-secondary mb-2 text-lg">
-                    {questions.length} questions about Singapore health data.
+                    {questions.length} questions on Singapore's health data &amp; healthcare landscape.
                   </p>
                   <p className="text-secondary mb-8 text-sm">
-                    No time limit. See how you stack up.
+                    No time limit. A fresh mix every time.
                   </p>
                   <motion.button
                     whileHover={{ scale: 1.05 }}
