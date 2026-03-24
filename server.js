@@ -98,6 +98,46 @@ app.get('/api/singstat/:tableId', async (req, res) => {
   }
 })
 
+// Proxy endpoint for OneMap Population Query API
+const onemapCache = new Map()
+const ONEMAP_CACHE_TTL = 7 * 24 * 60 * 60 * 1000 // 7 days (census data doesn't change)
+
+app.get('/api/onemap/population', async (req, res) => {
+  const { planningArea, year } = req.query
+  if (!planningArea || !year) {
+    return res.status(400).json({ error: 'planningArea and year are required' })
+  }
+
+  const token = process.env.ONEMAP_TOKEN
+  if (!token) {
+    return res.status(500).json({ error: 'OneMap token not configured' })
+  }
+
+  const cacheKey = `${planningArea}_${year}`
+  const cached = onemapCache.get(cacheKey)
+  if (cached && Date.now() - cached.timestamp < ONEMAP_CACHE_TTL) {
+    return res.json(cached.data)
+  }
+
+  try {
+    const url = `https://www.onemap.gov.sg/api/public/popapi/getPopulationAgeGroup?token=${encodeURIComponent(token)}&planningArea=${encodeURIComponent(planningArea)}&year=${encodeURIComponent(year)}`
+    const response = await fetch(url)
+
+    if (!response.ok) {
+      const text = await response.text()
+      console.error(`OneMap API ${response.status}:`, text)
+      return res.status(response.status).json({ error: `OneMap API returned ${response.status}` })
+    }
+
+    const data = await response.json()
+    onemapCache.set(cacheKey, { data, timestamp: Date.now() })
+    res.json(data)
+  } catch (err) {
+    console.error('OneMap API error:', err.message)
+    res.status(502).json({ error: 'Failed to reach OneMap API' })
+  }
+})
+
 // SPA fallback — serve index.html for all other routes
 // Use explicit callback instead of path pattern for Express 5 compatibility
 app.use((req, res, next) => {

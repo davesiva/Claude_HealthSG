@@ -8,6 +8,7 @@ import InsightLab from './components/InsightLab'
 import GlobalComparisons from './components/GlobalComparisons'
 import Quiz from './components/quiz/Quiz'
 import PersonalInsight from './components/PersonalInsight'
+import HealthMap from './components/HealthMap'
 import AskHealthSG from './components/AskHealthSG'
 import Footer from './components/Footer'
 import ProgressBar from './components/ProgressBar'
@@ -20,6 +21,7 @@ function App() {
   const heroRef = useRef(null)
   const timelineRef = useRef(null)
   const explorerRef = useRef(null)
+  const healthMapRef = useRef(null)
   const insightLabRef = useRef(null)
   const globalRef = useRef(null)
   const quizRef = useRef(null)
@@ -29,6 +31,7 @@ function App() {
     { id: 'glance', label: 'At a Glance', ref: heroRef },
     { id: 'timeline', label: 'How We Got Here', ref: timelineRef },
     { id: 'explorer', label: 'Explore the Data', ref: explorerRef },
+    { id: 'health-map', label: 'Health Map', ref: healthMapRef },
     { id: 'insight-lab', label: 'Insight Lab', ref: insightLabRef },
     { id: 'global', label: 'Singapore in the World', ref: globalRef },
     { id: 'quiz', label: 'Test Yourself', ref: quizRef },
@@ -56,6 +59,9 @@ function App() {
         </div>
         <div ref={explorerRef}>
           <Explorer selectedIndicator={selectedIndicator} />
+        </div>
+        <div ref={healthMapRef}>
+          <HealthMap />
         </div>
         <div ref={insightLabRef}>
           <InsightLab />
