@@ -70,5 +70,5 @@ export function useShareCard() {
     setImageDataUrl(null)
   }, [])
 
-  return { captureCard, downloadCard, copyToClipboard, nativeShare, imageDataUrl, isCapturing, reset }
+  return { captureCard, downloadCard, copyToClipboard, nativeShare, imageDataUrl, isCapturing, reset, setImageDataUrl, setIsCapturing }
 }

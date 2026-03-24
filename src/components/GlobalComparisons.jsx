@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
@@ -36,6 +36,7 @@ export default function GlobalComparisons() {
   const [visibleEntities, setVisibleEntities] = useState(['singapore', 'world', 'regional', 'malaysia'])
   const [ref, isVisible] = useScrollAnimation(0.1)
   const [isMobile, setIsMobile] = useState(false)
+  const chartContainerRef = useRef(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -155,6 +156,7 @@ export default function GlobalComparisons() {
         {/* Chart area */}
         <AnimatePresence mode="wait">
           <motion.div
+            ref={chartContainerRef}
             key={activeId}
             className="mt-6 card p-3 md:p-6"
             initial={{ opacity: 0, y: 10 }}
@@ -173,7 +175,7 @@ export default function GlobalComparisons() {
                 </p>
               </div>
               <div className="flex items-center gap-2 shrink-0 ml-2">
-                <ShareButton title={activeIndicator.title} subtitle={`Singapore vs. the World`} />
+                <ShareButton title={activeIndicator.title} subtitle={`Singapore vs. the World`} chartRef={chartContainerRef} />
                 <span className="text-[10px] font-mono text-secondary/50">
                   {activeIndicator.yearRange[0]}-{activeIndicator.yearRange[1]}
                 </span>

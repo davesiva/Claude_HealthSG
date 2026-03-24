@@ -1,17 +1,18 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   ComposedChart, Line, Bar, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
-import { DollarSign, Users, GraduationCap, Ribbon, Sparkles, Loader2 } from 'lucide-react'
+import { DollarSign, Users, GraduationCap, Ribbon, Sparkles, Loader2, FileText } from 'lucide-react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useHealthData } from '../context/HealthDataContext'
 import { buildChartData } from '../utils/insightLabDataResolver'
+import { resolveSeriesData } from '../utils/insightLabDataResolver'
+import { computeDataBriefStats, Sparkline } from '../utils/dataBriefStats'
 import { askHealthSG } from '../utils/anthropic'
 import { THEMES } from '../data/insight-lab-config'
 import InfoTooltip from './InfoTooltip'
-import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
 import ShareButton from './share/ShareButton'
 import CancerButterflyChart from './insight-charts/CancerButterflyChart'
 import CancerAgeChart from './insight-charts/CancerAgeChart'
@@ -45,6 +46,7 @@ export default function InsightLab() {
   const [narrativeLoading, setNarrativeLoading] = useState(false)
   const [ref, isVisible] = useScrollAnimation(0.1)
   const [isMobile, setIsMobile] = useState(false)
+  const chartContainerRef = useRef(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)')
@@ -65,23 +67,44 @@ export default function InsightLab() {
     }
   }, [])
 
+  // Compute stats for the Data Brief
+  const briefStats = useMemo(() => {
+    if (!activeComparison || !healthData) return null
+    return computeDataBriefStats(healthData, activeComparison)
+  }, [activeComparison, healthData])
+
+  // Count total data points for provenance display
+  const dataPointCount = useMemo(() => {
+    if (!activeComparison || !healthData || !activeComparison.dataBrief?.dataPointCount) return 0
+    if (!activeComparison.series) return 0
+    let count = 0
+    for (const s of activeComparison.series) {
+      const data = resolveSeriesData(healthData, s.dataPath, activeComparison.yearRange || [1900, 2100])
+      count += data.length
+    }
+    return count
+  }, [activeComparison, healthData])
+
   const generateNarrative = useCallback(async () => {
     if (!activeComparison || narratives[activeComparison.id]) return
     setNarrativeLoading(true)
     try {
-      const systemPrompt = `You are a health data analyst for Singapore. Analyze the data comparison presented and provide a clear, insightful narrative in 3-4 sentences. Be specific with numbers. End with one forward-looking implication. Do not use markdown formatting. Always note that correlation does not imply causation where relevant.`
+      const statsContext = briefStats
+        ? `\nPre-computed stats: ${briefStats.map(s => `${s.label}: ${s.value}`).join(', ')}.`
+        : ''
+      const systemPrompt = `You are a health data analyst writing a Data Brief for Singapore's health dashboard. Given the chart data and pre-computed statistics, write exactly ONE sentence that answers "why should a policymaker care?" Do not describe the trend (the reader can see the chart). Instead, connect the dots — what does this imply for policy, funding, or public health strategy? Reference a related health indicator from another part of the dashboard if relevant. No markdown. No preamble. Just the single insight sentence.`
       const result = await askHealthSG(
-        [{ role: 'user', content: activeComparison.narrativePrompt }],
+        [{ role: 'user', content: activeComparison.narrativePrompt + statsContext }],
         systemPrompt,
-        512
+        150
       )
       setNarratives(prev => ({ ...prev, [activeComparison.id]: result }))
     } catch {
-      setNarratives(prev => ({ ...prev, [activeComparison.id]: 'Unable to generate insight. Please try again later.' }))
+      setNarratives(prev => ({ ...prev, [activeComparison.id]: '__error__' }))
     } finally {
       setNarrativeLoading(false)
     }
-  }, [activeComparison, narratives])
+  }, [activeComparison, narratives, briefStats])
 
   if (!healthData || dataStatus === 'loading') {
     return (
@@ -179,6 +202,7 @@ export default function InsightLab() {
         {activeComparison && (
           <AnimatePresence mode="wait">
             <motion.div
+              ref={chartContainerRef}
               key={activeComparison.id}
               className="mt-8 card p-3 md:p-6"
               initial={{ opacity: 0, y: 10 }}
@@ -195,7 +219,7 @@ export default function InsightLab() {
                   <p className="text-xs text-secondary mt-0.5">{activeComparison.subtitle}</p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0 ml-2">
-                  <ShareButton title={activeComparison.title} subtitle={activeComparison.subtitle} />
+                  <ShareButton title={activeComparison.title} subtitle={activeComparison.subtitle} chartRef={chartContainerRef} />
                   {activeComparison.yearRange && (
                     <span className="text-[10px] font-mono text-secondary/50">
                       {activeComparison.yearRange[0]}-{activeComparison.yearRange[1]}
@@ -317,28 +341,68 @@ export default function InsightLab() {
           </AnimatePresence>
         )}
 
-        {/* AI Narrative */}
-        {activeComparison && hasData && (
+        {/* Data Brief */}
+        {activeComparison && hasData && briefStats && (
           <div className="mt-4">
             {narratives[activeComparison.id] ? (
               <motion.div
-                className="card p-5"
+                className="card p-4 md:p-5"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-xs text-secondary mb-3 flex items-center gap-1">
-                  <Sparkles size={12} className="text-accent" />
-                  AI-generated insight
-                  <InfoTooltip content="This narrative is generated by Claude AI based on the data shown in the chart. It provides context and analysis but should not be treated as expert medical or economic advice." />
-                </p>
-                <div className="text-sm text-primary leading-relaxed">
-                  {renderMarkdownParagraphs(narratives[activeComparison.id])}
+                {/* Header */}
+                <div className="flex items-center justify-between mb-3">
+                  <p className="text-xs font-mono text-secondary flex items-center gap-1.5">
+                    <FileText size={12} className="text-accent" />
+                    Data Brief · {activeComparison.title}
+                  </p>
+                  <p className="text-[10px] font-mono text-secondary/40">
+                    {dataPointCount > 0 && `${dataPointCount} data points`}
+                    {activeComparison.yearRange && ` · ${activeComparison.yearRange[0]}–${activeComparison.yearRange[1]}`}
+                  </p>
                 </div>
-                <p className="mt-4 text-[10px] text-secondary/40 italic border-t border-border pt-3">
-                  Correlation does not imply causation. This analysis is based on population-level data from SingStat and MOH.
-                  {activeComparison?.series?.some(s => s.dataPath === 'total_fertility_rate') &&
-                    ' Singapore\'s total fertility rate reached a historic low of 0.87 in 2025 (preliminary).'}
+
+                {/* Stat pills */}
+                <div className="grid grid-cols-3 gap-2 md:gap-3">
+                  {briefStats.map((stat, i) => (
+                    <div
+                      key={i}
+                      className="bg-surface rounded-xl px-3 py-2.5 text-center border border-border/50"
+                    >
+                      <p className={`text-lg md:text-xl font-mono font-semibold leading-tight ${
+                        stat.direction === 'up' ? 'text-rose-500' :
+                        stat.direction === 'down' ? 'text-emerald-600' :
+                        'text-primary'
+                      }`}>
+                        {stat.value}
+                        {stat.sparkData && (
+                          <Sparkline
+                            data={stat.sparkData}
+                            color={stat.direction === 'down' ? '#059669' : stat.direction === 'up' ? '#F43F5E' : '#6366F1'}
+                          />
+                        )}
+                      </p>
+                      <p className="text-[10px] md:text-xs text-secondary mt-0.5 leading-tight">{stat.label}</p>
+                      {stat.sublabel && (
+                        <p className="text-[9px] font-mono text-secondary/40 mt-0.5">{stat.sublabel}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {/* AI sentence */}
+                {narratives[activeComparison.id] !== '__error__' && (
+                  <div className="mt-3 pt-3 border-t border-border/50">
+                    <p className="text-sm text-primary/80 leading-relaxed italic">
+                      {narratives[activeComparison.id]}
+                    </p>
+                  </div>
+                )}
+
+                {/* Provenance footer */}
+                <p className="mt-2 text-[9px] text-secondary/30 font-mono">
+                  Generated {new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })} · Source: SingStat, MOH · Correlation ≠ causation
                 </p>
               </motion.div>
             ) : (
@@ -351,12 +415,12 @@ export default function InsightLab() {
                 {narrativeLoading ? (
                   <>
                     <Loader2 size={14} className="animate-spin" />
-                    Analyzing data...
+                    Generating brief...
                   </>
                 ) : (
                   <>
                     <Sparkles size={14} />
-                    Explain this data
+                    Generate Data Brief
                   </>
                 )}
               </button>

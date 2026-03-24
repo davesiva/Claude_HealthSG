@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
@@ -207,6 +207,7 @@ export default function Explorer({ selectedIndicator }) {
   const [breakdown, setBreakdown] = useState('all')
   const [ref, isVisible] = useScrollAnimation(0.1)
   const [isMobile, setIsMobile] = useState(false)
+  const chartContainerRef = useRef(null)
 
   // Derive the active group's indicators
   const activeGroup = useMemo(
@@ -353,14 +354,14 @@ export default function Explorer({ selectedIndicator }) {
         </AnimatePresence>
 
         {/* Chart */}
-        <div className="mt-8 card p-3 md:p-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
+        <div ref={chartContainerRef} className="mt-8 card p-3 md:p-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-body font-semibold text-primary">
               {indicator.label}
               <span className="ml-1 text-secondary font-normal">({indicator.unit})</span>
             </h3>
             <div className="flex items-center gap-2">
-              <ShareButton title={indicator.label} subtitle={`${chartData[0]?.year}–${chartData[chartData.length - 1]?.year} · Singapore`} />
+              <ShareButton title={indicator.label} subtitle={`${chartData[0]?.year}–${chartData[chartData.length - 1]?.year} · Singapore`} chartRef={chartContainerRef} />
               <span className="text-[10px] font-mono text-secondary/50">
                 {chartData[0]?.year}-{chartData[chartData.length - 1]?.year}
               </span>
