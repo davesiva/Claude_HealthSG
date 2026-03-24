@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown, Lock } from 'lucide-react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
-import { askHealthSG } from '../utils/anthropic'
+import { streamHealthSG } from '../utils/anthropic'
 import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
 import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
@@ -43,6 +43,11 @@ function bmiCategory(bmi) {
   return { label: 'Obese', color: 'text-red-500' }
 }
 
+// ── Cholesterol unit conversion (1 mmol/L = 38.67 mg/dL) ──
+const CHOL_FACTOR = 38.67
+function mgToMmol(mg) { return mg ? (parseFloat(mg) / CHOL_FACTOR).toFixed(2) : '' }
+function mmolToMg(mmol) { return mmol ? (parseFloat(mmol) * CHOL_FACTOR).toFixed(0) : '' }
+
 // ── System prompt builder ──
 function getSystemPrompt(healthData, profile) {
   const { bmi, smoking, activity, alcohol, conditions, labs, familyHistory } = profile
@@ -58,7 +63,7 @@ function getSystemPrompt(healthData, profile) {
     paragraphInstructions = `Cover in 4–5 short paragraphs:
 1. **Where you stand:** What population data shows for their demographic — use specific numbers from the reference data
 2. **Your body & lifestyle:** Compare their personal metrics (BMI, smoking, activity) against population averages for their demographic. Be specific.
-3. **What to watch for:** Condition-specific guidance based on their diagnosed conditions, control status, and lab values. Reference clinical guidelines where relevant (e.g. HbA1c target <7% for diabetics, BP target <130/80 for hypertensives).
+3. **What to watch for:** Condition-specific guidance based on their diagnosed conditions, control status, and lab values. Reference clinical guidelines where relevant (e.g. HbA1c target <7% for diabetics per Singapore MOH guidelines, BP target <140/90 per Singapore MOH CPG).
 4. **What you can do:** Actionable, tailored health behaviours and relevant screening (e.g. Screen for Life)
 5. **Next steps:** A warm closing recommending they speak with their family doctor under Healthier SG`
   } else if (hasLifestyle) {
@@ -292,6 +297,7 @@ export default function PersonalInsight() {
   const [tier3Open, setTier3Open] = useState(false)
   const [conditions, setConditions] = useState({})
   const [labs, setLabs] = useState({ hba1c: '', sysBP: '', diaBP: '', totalChol: '', ldl: '' })
+  const [cholUnit, setCholUnit] = useState('mmol/L') // 'mmol/L' or 'mg/dL'
   const [familyHistory, setFamilyHistory] = useState(new Set())
 
   // Generation state
@@ -375,10 +381,11 @@ export default function PersonalInsight() {
     const maxTokens = hasTier3Data ? 1024 : hasOptionalData ? 768 : 512
 
     try {
-      const result = await askHealthSG(
+      const result = await streamHealthSG(
         [{ role: 'user', content: parts.join(' ') }],
         getSystemPrompt(healthData, profile),
-        maxTokens
+        maxTokens,
+        (text) => setInsight(text)
       )
       setInsight(result)
     } catch (err) {
@@ -538,42 +545,60 @@ export default function PersonalInsight() {
                 <p className="text-sm text-secondary font-body">Latest lab results</p>
                 <InfoTooltip content="If you know your latest numbers, enter them here. Lab values help the AI give more specific guidance. Skip any you don't know." size={13} />
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                <NumericInput
-                  label="HbA1c"
-                  value={labs.hba1c}
-                  onChange={v => updateLab('hba1c', v)}
-                  unit="%"
-                  hint="Normal: < 5.7%"
-                />
-                <NumericInput
-                  label="Systolic BP"
-                  value={labs.sysBP}
-                  onChange={v => updateLab('sysBP', v)}
-                  unit="mmHg"
-                  hint="Normal: < 130"
-                />
-                <NumericInput
-                  label="Diastolic BP"
-                  value={labs.diaBP}
-                  onChange={v => updateLab('diaBP', v)}
-                  unit="mmHg"
-                  hint="Normal: < 80"
-                />
-                <NumericInput
-                  label="Total cholesterol"
-                  value={labs.totalChol}
-                  onChange={v => updateLab('totalChol', v)}
-                  unit="mmol/L"
-                  hint="Normal: < 5.2"
-                />
-                <NumericInput
-                  label="LDL cholesterol"
-                  value={labs.ldl}
-                  onChange={v => updateLab('ldl', v)}
-                  unit="mmol/L"
-                  hint="Normal: < 2.6"
-                />
+              <div className="space-y-4">
+                {/* Row 1: HbA1c */}
+                <div className="grid grid-cols-2 gap-4">
+                  <NumericInput
+                    label="HbA1c"
+                    value={labs.hba1c}
+                    onChange={v => updateLab('hba1c', v)}
+                    unit="%"
+                    hint="Normal: < 6.0%"
+                  />
+                </div>
+                {/* Row 2: Blood pressure */}
+                <div className="grid grid-cols-2 gap-4">
+                  <NumericInput
+                    label="Systolic BP"
+                    value={labs.sysBP}
+                    onChange={v => updateLab('sysBP', v)}
+                    unit="mmHg"
+                    hint="Normal: < 140 mmHg"
+                  />
+                  <NumericInput
+                    label="Diastolic BP"
+                    value={labs.diaBP}
+                    onChange={v => updateLab('diaBP', v)}
+                    unit="mmHg"
+                    hint="Normal: < 90 mmHg"
+                  />
+                </div>
+                {/* Row 3: Cholesterol with unit toggle */}
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="text-xs text-secondary font-body">Cholesterol unit:</span>
+                  <button
+                    onClick={() => setCholUnit(u => u === 'mmol/L' ? 'mg/dL' : 'mmol/L')}
+                    className="text-xs font-body font-semibold px-2.5 py-1 rounded-full border border-accent text-accent hover:bg-accent/10 transition-colors cursor-pointer"
+                  >
+                    {cholUnit}
+                  </button>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <NumericInput
+                    label="Total cholesterol"
+                    value={cholUnit === 'mg/dL' ? (labs.totalChol ? mmolToMg(labs.totalChol) : '') : labs.totalChol}
+                    onChange={v => updateLab('totalChol', cholUnit === 'mg/dL' ? mgToMmol(v) : v)}
+                    unit={cholUnit}
+                    hint={cholUnit === 'mg/dL' ? 'Optimal: < 200 mg/dL' : 'Optimal: < 5.2 mmol/L'}
+                  />
+                  <NumericInput
+                    label="LDL cholesterol"
+                    value={cholUnit === 'mg/dL' ? (labs.ldl ? mmolToMg(labs.ldl) : '') : labs.ldl}
+                    onChange={v => updateLab('ldl', cholUnit === 'mg/dL' ? mgToMmol(v) : v)}
+                    unit={cholUnit}
+                    hint={cholUnit === 'mg/dL' ? 'Optimal: < 100 mg/dL' : 'Optimal: < 2.6 mmol/L'}
+                  />
+                </div>
               </div>
             </div>
 
@@ -631,8 +656,8 @@ export default function PersonalInsight() {
           )}
         </div>
 
-        {/* ── Loading skeleton ── */}
-        {loading && (
+        {/* ── Loading skeleton (only before first text arrives) ── */}
+        {loading && !insight && (
           <div className="mt-6 card p-6 space-y-3 animate-pulse">
             <div className="h-3 bg-grid rounded w-1/3" />
             <div className="h-3 bg-grid rounded w-full" />
@@ -664,21 +689,22 @@ export default function PersonalInsight() {
             <div className="prose prose-sm max-w-none text-primary leading-relaxed space-y-4">
               {renderMarkdownParagraphs(insight)}
             </div>
-            <p className="mt-6 text-xs text-secondary/70 border-t border-border pt-4">
-              This is population-level information combined with the details you provided, not personal medical advice. Please consult your doctor.
-            </p>
-            <div className="mt-4 flex justify-center">
-              <ReportButton profile={reportProfile} insight={insight} />
-            </div>
+            {loading && (
+              <span className="inline-block w-1.5 h-4 bg-accent/60 rounded-sm animate-pulse ml-1" />
+            )}
+            {!loading && (
+              <>
+                <p className="mt-6 text-xs text-secondary/70 border-t border-border pt-4">
+                  This is population-level information combined with the details you provided, not personal medical advice. Please consult your doctor.
+                </p>
+                <div className="mt-4 flex justify-center">
+                  <ReportButton profile={reportProfile} insight={insight} />
+                </div>
+              </>
+            )}
           </motion.div>
         )}
 
-        {/* Report button also available without insight */}
-        {!insight && (
-          <div className="mt-8 flex justify-center">
-            <ReportButton profile={reportProfile} />
-          </div>
-        )}
       </div>
     </section>
   )

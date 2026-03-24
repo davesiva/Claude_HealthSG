@@ -52,6 +52,61 @@ app.post('/api/chat', async (req, res) => {
   }
 })
 
+// Streaming proxy endpoint for Anthropic API
+app.post('/api/chat/stream', async (req, res) => {
+  const { messages, systemPrompt, maxTokens = 1024 } = req.body
+
+  if (!process.env.ANTHROPIC_API_KEY) {
+    return res.status(500).json({ error: 'API key not configured' })
+  }
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: maxTokens,
+        system: systemPrompt,
+        messages,
+        stream: true
+      })
+    })
+
+    if (!response.ok) {
+      const error = await response.text()
+      console.error(`Anthropic API ${response.status}:`, error)
+      return res.status(response.status).json({ error })
+    }
+
+    res.setHeader('Content-Type', 'text/event-stream')
+    res.setHeader('Cache-Control', 'no-cache')
+    res.setHeader('Connection', 'keep-alive')
+
+    const reader = response.body.getReader()
+    const decoder = new TextDecoder()
+
+    while (true) {
+      const { done, value } = await reader.read()
+      if (done) break
+      res.write(decoder.decode(value, { stream: true }))
+    }
+
+    res.end()
+  } catch (err) {
+    console.error('Anthropic streaming error:', err.message)
+    if (!res.headersSent) {
+      res.status(500).json({ error: `Failed to reach Anthropic API: ${err.message}` })
+    } else {
+      res.end()
+    }
+  }
+})
+
 // Proxy endpoint for SingStat Table Builder API
 // Caches responses for 24 hours to avoid unnecessary requests
 const singstatCache = new Map()
