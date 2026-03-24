@@ -5,6 +5,7 @@ import { askHealthSG } from '../utils/anthropic'
 import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
 import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
+import ReportButton from './report/ReportButton'
 
 const ageGroups = ['18-29', '30-39', '40-49', '50-59', '60-69', '70+']
 const genders = ['Male', 'Female']
@@ -173,7 +174,17 @@ export default function PersonalInsight() {
             <p className="mt-6 text-xs text-secondary/70 border-t border-border pt-4">
               This is population-level information, not personal medical advice. Please consult your doctor.
             </p>
+            <div className="mt-4 flex justify-center">
+              <ReportButton profile={{ age, gender, ethnicity }} insight={insight} />
+            </div>
           </motion.div>
+        )}
+
+        {/* Report button also available without insight */}
+        {!insight && (
+          <div className="mt-8 flex justify-center">
+            <ReportButton profile={{ age, gender, ethnicity }} />
+          </div>
         )}
       </div>
     </section>

@@ -6,6 +6,7 @@ import Timeline from './components/Timeline'
 import Explorer from './components/Explorer'
 import InsightLab from './components/InsightLab'
 import GlobalComparisons from './components/GlobalComparisons'
+import Quiz from './components/quiz/Quiz'
 import PersonalInsight from './components/PersonalInsight'
 import AskHealthSG from './components/AskHealthSG'
 import Footer from './components/Footer'
@@ -21,6 +22,7 @@ function App() {
   const explorerRef = useRef(null)
   const insightLabRef = useRef(null)
   const globalRef = useRef(null)
+  const quizRef = useRef(null)
   const personalRef = useRef(null)
 
   const sections = [
@@ -29,6 +31,7 @@ function App() {
     { id: 'explorer', label: 'Explore the Data', ref: explorerRef },
     { id: 'insight-lab', label: 'Insight Lab', ref: insightLabRef },
     { id: 'global', label: 'Singapore in the World', ref: globalRef },
+    { id: 'quiz', label: 'Test Yourself', ref: quizRef },
     { id: 'personal', label: 'Your Insights', ref: personalRef },
   ]
 
@@ -59,6 +62,9 @@ function App() {
         </div>
         <div ref={globalRef}>
           <GlobalComparisons />
+        </div>
+        <div ref={quizRef}>
+          <Quiz />
         </div>
         <div ref={personalRef}>
           <PersonalInsight />

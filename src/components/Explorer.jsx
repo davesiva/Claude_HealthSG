@@ -7,6 +7,7 @@ import {
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useHealthData } from '../context/HealthDataContext'
 import InfoTooltip from './InfoTooltip'
+import ShareButton from './share/ShareButton'
 
 // ── Grouped indicator definitions for Explorer ──
 // Each group maps to a category with a color accent bar
@@ -358,9 +359,12 @@ export default function Explorer({ selectedIndicator }) {
               {indicator.label}
               <span className="ml-1 text-secondary font-normal">({indicator.unit})</span>
             </h3>
-            <span className="text-[10px] font-mono text-secondary/50">
-              {chartData[0]?.year}-{chartData[chartData.length - 1]?.year}
-            </span>
+            <div className="flex items-center gap-2">
+              <ShareButton title={indicator.label} subtitle={`${chartData[0]?.year}–${chartData[chartData.length - 1]?.year} · Singapore`} />
+              <span className="text-[10px] font-mono text-secondary/50">
+                {chartData[0]?.year}-{chartData[chartData.length - 1]?.year}
+              </span>
+            </div>
           </div>
           <ResponsiveContainer width="100%" height={isMobile ? 260 : 300}>
             {isBarChart && breakdown === 'all' ? (

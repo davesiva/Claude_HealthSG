@@ -9,6 +9,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import globalData from '../data/global-health-data.json'
 import { INDICATORS, ENTITY_STYLES } from '../data/global-comparisons-config'
 import InfoTooltip from './InfoTooltip'
+import ShareButton from './share/ShareButton'
 
 const iconMap = { Heart, Baby, TrendingUp, DollarSign, Wallet }
 const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
@@ -171,9 +172,12 @@ export default function GlobalComparisons() {
                   {activeIndicator.narrative}
                 </p>
               </div>
-              <span className="text-[10px] font-mono text-secondary/50 shrink-0 ml-2">
-                {activeIndicator.yearRange[0]}-{activeIndicator.yearRange[1]}
-              </span>
+              <div className="flex items-center gap-2 shrink-0 ml-2">
+                <ShareButton title={activeIndicator.title} subtitle={`Singapore vs. the World`} />
+                <span className="text-[10px] font-mono text-secondary/50">
+                  {activeIndicator.yearRange[0]}-{activeIndicator.yearRange[1]}
+                </span>
+              </div>
             </div>
 
             <div className="mt-3">

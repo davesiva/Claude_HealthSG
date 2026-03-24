@@ -6,6 +6,7 @@ const SECTION_LABELS = [
   'Explore the Data',
   'Insight Lab',
   'Singapore in the World',
+  'Test Yourself',
   'Your Insights',
 ]
 

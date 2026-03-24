@@ -12,6 +12,7 @@ import { askHealthSG } from '../utils/anthropic'
 import { THEMES } from '../data/insight-lab-config'
 import InfoTooltip from './InfoTooltip'
 import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
+import ShareButton from './share/ShareButton'
 import CancerButterflyChart from './insight-charts/CancerButterflyChart'
 import CancerAgeChart from './insight-charts/CancerAgeChart'
 
@@ -193,11 +194,14 @@ export default function InsightLab() {
                   </h3>
                   <p className="text-xs text-secondary mt-0.5">{activeComparison.subtitle}</p>
                 </div>
-                {activeComparison.yearRange && (
-                  <span className="text-[10px] font-mono text-secondary/50 shrink-0 ml-2">
-                    {activeComparison.yearRange[0]}-{activeComparison.yearRange[1]}
-                  </span>
-                )}
+                <div className="flex items-center gap-2 shrink-0 ml-2">
+                  <ShareButton title={activeComparison.title} subtitle={activeComparison.subtitle} />
+                  {activeComparison.yearRange && (
+                    <span className="text-[10px] font-mono text-secondary/50">
+                      {activeComparison.yearRange[0]}-{activeComparison.yearRange[1]}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {hasData ? (
