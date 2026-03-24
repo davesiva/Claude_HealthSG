@@ -391,18 +391,18 @@ export default function InsightLab() {
                   ))}
                 </div>
 
-                {/* AI sentence */}
-                {narratives[activeComparison.id] !== '__error__' && (
-                  <div className="mt-3 pt-3 border-t border-border/50">
-                    <p className="text-sm text-primary/80 leading-relaxed italic">
-                      {narratives[activeComparison.id]}
-                    </p>
-                  </div>
-                )}
+                {/* Insight sentence */}
+                <div className="mt-3 pt-3 border-t border-border/50">
+                  <p className="text-sm text-primary/80 leading-relaxed italic">
+                    {narratives[activeComparison.id] !== '__error__'
+                      ? narratives[activeComparison.id]
+                      : (activeComparison.dataBrief?.fallbackInsight || '')}
+                  </p>
+                </div>
 
                 {/* Provenance footer */}
                 <p className="mt-2 text-[9px] text-secondary/30 font-mono">
-                  Generated {new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })} · Source: SingStat, MOH · Correlation ≠ causation
+                  Generated {new Date().toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' })} · Source: SingStat, MOH · Correlation ≠ Causation
                 </p>
               </motion.div>
             ) : (

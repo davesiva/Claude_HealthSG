@@ -18,7 +18,16 @@ export const THEMES = [
         leftAxisLabel: 'Population 65+ (%)',
         rightAxisLabel: 'Total Fertility Rate',
         tooltip: 'The proportion of residents aged 65+ is rising sharply while the total fertility rate (births per woman) has fallen well below the 2.1 replacement level. These two trends are the core drivers of Singapore\'s demographic challenge.',
-        narrativePrompt: 'Analyze Singapore\'s demographic squeeze: the % aged 65+ has risen from 3.4% (1970) to nearly 20% (2024) while TFR has fallen from 3.1 to 0.87. Extrapolate what this means for Singapore in 2030 and 2050. Include the fact that by 2030, 1 in 4 residents will be 65+.'
+        narrativePrompt: 'Analyze Singapore\'s demographic squeeze: the % aged 65+ has risen from 3.4% (1970) to nearly 20% (2024) while TFR has fallen from 3.1 to 0.87. Extrapolate what this means for Singapore in 2030 and 2050. Include the fact that by 2030, 1 in 4 residents will be 65+.',
+        dataBrief: {
+          stats: [
+            { type: 'sparkline', dataPath: 'elderly_indicators.pct_65_plus', label: 'Aged 65+', format: '%' },
+            { type: 'change', dataPath: 'total_fertility_rate', label: 'Fertility Rate', format: '%' },
+            { type: 'latest', dataPath: 'total_fertility_rate', label: 'TFR (latest)', format: 'dec' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'With 1 in 4 residents projected to be 65+ by 2030, Singapore\'s healthcare system faces a funding model designed for a much younger population — the current worker-to-retiree ratio may not sustain it.'
+        }
       },
       {
         id: 'growing-old-alone',
@@ -32,7 +41,16 @@ export const THEMES = [
         leftAxisLabel: 'Living Alone (%)',
         rightAxisLabel: 'Psychiatric Admissions',
         tooltip: 'Proportion of elderly residents (65+) who live alone in their household, compared with total psychiatric hospital admissions. Social isolation is a known risk factor for mental health issues in the elderly.',
-        narrativePrompt: 'Analyze the relationship between elderly living alone (%) and psychiatric hospital admissions in Singapore. While elderly living alone has stayed relatively stable at 7-8%, psychiatric admissions have risen from ~7,000 to over 11,000. What might explain this? Consider reduced stigma, aging population size, and mental health awareness.'
+        narrativePrompt: 'Analyze the relationship between elderly living alone (%) and psychiatric hospital admissions in Singapore. While elderly living alone has stayed relatively stable at 7-8%, psychiatric admissions have risen from ~7,000 to over 11,000. What might explain this? Consider reduced stigma, aging population size, and mental health awareness.',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'elderly_indicators.elderly_living_alone_pct', label: 'Living Alone', format: '%' },
+            { type: 'change', dataPath: 'psychiatric_admissions', label: 'Psych Admissions', format: '%' },
+            { type: 'latest', dataPath: 'psychiatric_admissions', label: 'Admissions (latest)', format: 'int' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Rising psychiatric admissions despite stable elderly-living-alone rates suggest growing mental health needs across all demographics — community-based intervention may be more cost-effective than hospital beds.'
+        }
       },
       {
         id: 'support-squeeze',
@@ -46,7 +64,16 @@ export const THEMES = [
         leftAxisLabel: 'Workers per Retiree',
         rightAxisLabel: 'Health Expenditure (S$B)',
         tooltip: 'The old-age support ratio (working-age adults 20-64 per elderly 65+) has fallen from ~10 in 2000 to ~3.5 in 2024. At the same time, government health spending has surged. This is the fiscal pressure of an aging society.',
-        narrativePrompt: 'Analyze the inverse correlation between Singapore\'s old-age support ratio (declining from 9.9 to 3.5) and government health expenditure (rising from under S$5B to nearly S$17B). What does this trend mean for fiscal sustainability? How might Singapore need to adapt its healthcare funding model?'
+        narrativePrompt: 'Analyze the inverse correlation between Singapore\'s old-age support ratio (declining from 9.9 to 3.5) and government health expenditure (rising from under S$5B to nearly S$17B). What does this trend mean for fiscal sustainability? How might Singapore need to adapt its healthcare funding model?',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'old_age_support_ratio', label: 'Support Ratio', format: '%' },
+            { type: 'change', dataPath: 'govt_health_expenditure', label: 'Health Spend', format: '%' },
+            { type: 'latest', dataPath: 'govt_health_expenditure', label: 'Spend (latest)', format: '$' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Health spending nearly doubled while the support ratio halved — each working adult now bears significantly more of the fiscal burden, raising questions about CPF Medisave adequacy and long-term care insurance.'
+        }
       },
       {
         id: 'working-longer',
@@ -60,7 +87,16 @@ export const THEMES = [
         leftAxisLabel: 'In Labour Force (%)',
         rightAxisLabel: 'Death Rate (per 1,000)',
         tooltip: 'The proportion of elderly (65+) in the labour force has more than doubled since 2000. Is this because they are healthier (declining death rates), because they choose to stay active, or because they need to? The declining death rate suggests better health enables longer working lives.',
-        narrativePrompt: 'Analyze the relationship between elderly labour force participation (rising from ~13% to over 30%) and elderly death rates (declining from ~45 to ~25 per 1,000) in Singapore. Are elderly Singaporeans working longer because they are healthier, or because of financial necessity? Consider Singapore\'s retirement age changes and CPF policies.'
+        narrativePrompt: 'Analyze the relationship between elderly labour force participation (rising from ~13% to over 30%) and elderly death rates (declining from ~45 to ~25 per 1,000) in Singapore. Are elderly Singaporeans working longer because they are healthier, or because of financial necessity? Consider Singapore\'s retirement age changes and CPF policies.',
+        dataBrief: {
+          stats: [
+            { type: 'sparkline', dataPath: 'elderly_indicators.elderly_labour_force_pct', label: 'In Workforce', format: '%' },
+            { type: 'change', dataPath: 'elderly_indicators.elderly_death_rate', label: 'Death Rate', format: '%' },
+            { type: 'latest', dataPath: 'elderly_indicators.elderly_labour_force_pct', label: 'Workforce (latest)', format: '%' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Declining death rates correlate with rising workforce participation — but whether this reflects choice or financial necessity has major implications for retirement age policy and eldercare infrastructure.'
+        }
       },
       {
         id: 'longevity-at-65',
@@ -74,7 +110,16 @@ export const THEMES = [
         leftAxisLabel: 'Years at 65',
         rightAxisLabel: 'Population 65+ (%)',
         tooltip: 'Life expectancy at age 65 shows how many more years a 65-year-old can expect to live. Combined with the rising share of elderly, this shows the expanding period of old age that healthcare and social systems must support.',
-        narrativePrompt: 'Analyze trends in life expectancy at age 65 in Singapore (from ~15 years in the 1980s to ~21 years now) alongside the rising proportion of elderly. What does it mean that a 65-year-old today can expect to live to 86? Discuss implications for healthcare costs, long-term care needs, and retirement adequacy.'
+        narrativePrompt: 'Analyze trends in life expectancy at age 65 in Singapore (from ~15 years in the 1980s to ~21 years now) alongside the rising proportion of elderly. What does it mean that a 65-year-old today can expect to live to 86? Discuss implications for healthcare costs, long-term care needs, and retirement adequacy.',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'elderly_indicators.life_expectancy_at_65', label: 'LE at 65', mode: 'absolute', format: 'dec' },
+            { type: 'latest', dataPath: 'elderly_indicators.life_expectancy_at_65', label: 'LE at 65 (latest)', format: 'dec' },
+            { type: 'change', dataPath: 'elderly_indicators.pct_65_plus', label: 'Pop 65+', format: '%' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'A 65-year-old today can expect to live past 86 — that\'s 21+ years of retirement that healthcare, housing, and social systems must support, far beyond what was planned when CPF was designed.'
+        }
       },
       {
         id: 'demographic-squeeze',
@@ -88,7 +133,16 @@ export const THEMES = [
         leftAxisLabel: 'Births per Woman',
         rightAxisLabel: 'Support Ratio',
         tooltip: 'Total fertility rate (births per woman) and old-age support ratio (workers per retiree) are both declining. When both fall simultaneously, the pressure on each working adult intensifies — they must support more elderly with fewer siblings to share the burden.',
-        narrativePrompt: 'Analyze the simultaneous decline of Singapore\'s total fertility rate (from 1.82 in 1980 to 0.87 in 2025) and old-age support ratio (from ~10 to ~3.5). These two lines converging represent a demographic squeeze. What are the policy implications? Discuss immigration, pro-natalist policies, and automation as potential responses.'
+        narrativePrompt: 'Analyze the simultaneous decline of Singapore\'s total fertility rate (from 1.82 in 1980 to 0.87 in 2025) and old-age support ratio (from ~10 to ~3.5). These two lines converging represent a demographic squeeze. What are the policy implications? Discuss immigration, pro-natalist policies, and automation as potential responses.',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'total_fertility_rate', label: 'Fertility Rate', format: '%' },
+            { type: 'change', dataPath: 'old_age_support_ratio', label: 'Support Ratio', format: '%' },
+            { type: 'ratio', dataPathA: 'old_age_support_ratio', dataPathB: 'total_fertility_rate', label: 'Workers per TFR', format: 'x' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Both lines trending the same direction means the squeeze is accelerating — immigration policy and automation investment are no longer optional levers but fiscal necessities.'
+        }
       }
     ]
   },
@@ -112,7 +166,16 @@ export const THEMES = [
         leftAxisLabel: 'Gini Coefficient',
         rightAxisLabel: 'Prevalence (%)',
         tooltip: 'The Gini coefficient measures income inequality (0 = perfect equality, 1 = maximum inequality). This uses the measure after government transfers and taxes. A declining Gini means inequality is narrowing.',
-        narrativePrompt: 'Analyze the relationship between income inequality (Gini coefficient after transfers/taxes) and chronic disease prevalence (diabetes, hypertension) in Singapore from 2000-2024. The Gini has declined from ~0.43 to ~0.36 while diabetes stayed around 8-9% and hypertension methodology changed in 2020. What does this suggest about the relationship between inequality and health outcomes in Singapore?'
+        narrativePrompt: 'Analyze the relationship between income inequality (Gini coefficient after transfers/taxes) and chronic disease prevalence (diabetes, hypertension) in Singapore from 2000-2024. The Gini has declined from ~0.43 to ~0.36 while diabetes stayed around 8-9% and hypertension methodology changed in 2020. What does this suggest about the relationship between inequality and health outcomes in Singapore?',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'household_income.gini', label: 'Gini', format: '%' },
+            { type: 'latest', dataPath: 'diabetes_prevalence', label: 'Diabetes', format: '%' },
+            { type: 'latest', dataPath: 'hypertension_prevalence', label: 'Hypertension', format: '%' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Inequality has narrowed but chronic disease prevalence hasn\'t followed — suggesting lifestyle and dietary factors may matter more than income alone for Singapore\'s disease burden.'
+        }
       },
       {
         id: 'income-vs-health-spend',
@@ -127,7 +190,16 @@ export const THEMES = [
         leftAxisLabel: 'Monthly Income (S$)',
         rightAxisLabel: 'Health Expenditure (S$B)',
         tooltip: 'Compares household income (median and 20th percentile, including employer CPF) with government health expenditure. The 20th percentile represents lower-income households.',
-        narrativePrompt: 'Analyze how Singapore government health expenditure growth compares to household income growth from 2000-2024. Median income roughly doubled while health spending grew much faster. The 20th percentile income also grew. What does this suggest about the sustainability of healthcare spending and its accessibility for lower-income households?'
+        narrativePrompt: 'Analyze how Singapore government health expenditure growth compares to household income growth from 2000-2024. Median income roughly doubled while health spending grew much faster. The 20th percentile income also grew. What does this suggest about the sustainability of healthcare spending and its accessibility for lower-income households?',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'household_income.median_income', label: 'Median Income', format: '%' },
+            { type: 'change', dataPath: 'govt_health_expenditure', label: 'Health Spend', format: '%' },
+            { type: 'latest', dataPath: 'govt_health_expenditure', label: 'Spend (latest)', format: '$' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Government health spending is growing faster than household incomes — the gap is widening, which means either taxes, insurance premiums, or out-of-pocket costs will need to absorb the difference.'
+        }
       },
       {
         id: 'household-health-spend',
@@ -141,7 +213,16 @@ export const THEMES = [
         leftAxisLabel: 'Monthly Health (S$)',
         rightAxisLabel: 'Total Monthly (S$)',
         tooltip: 'Average monthly household expenditure on health vs total expenditure. Data from the Household Expenditure Survey conducted every 5 years. Health includes medical care, medicines, and health services.',
-        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from S$61 to S$225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?'
+        narrativePrompt: 'Analyze Singapore household health expenditure trends from 1993-2023 (quinquennial data). Health spending grew from S$61 to S$225/month while total spending roughly doubled. What proportion of household budgets goes to health, and what does this trend mean for families as the population ages?',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'household_expenditure.health', label: 'Health Spend', format: '%' },
+            { type: 'change', dataPath: 'household_expenditure.total', label: 'Total Spend', format: '%' },
+            { type: 'latest', dataPath: 'household_expenditure.health', label: 'Health (latest)', format: 'int' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Health spending has grown faster than total household expenditure — families are allocating a rising share of their budget to healthcare, a trend likely to accelerate as the population ages.'
+        }
       }
     ]
   },
@@ -164,7 +245,16 @@ export const THEMES = [
         leftAxisLabel: 'Incidence (per 100k)',
         rightAxisLabel: 'Mortality (per 100k)',
         tooltip: 'Age-standardised cancer incidence has risen ~27% since 1970 (more cancers being detected), while mortality has fallen ~30% (fewer deaths per case). This widening gap reflects advances in screening, early detection, and treatment.',
-        narrativePrompt: 'Analyze the divergence between cancer incidence (rising from ~190 to ~241 per 100k) and cancer mortality (falling from ~93 to ~65 per 100k) in Singapore from 1970 to 2023. What does this widening gap tell us about screening effectiveness and treatment advances? Consider the role of national screening programmes, advances in oncology, and the shift toward earlier-stage detection.'
+        narrativePrompt: 'Analyze the divergence between cancer incidence (rising from ~190 to ~241 per 100k) and cancer mortality (falling from ~93 to ~65 per 100k) in Singapore from 1970 to 2023. What does this widening gap tell us about screening effectiveness and treatment advances? Consider the role of national screening programmes, advances in oncology, and the shift toward earlier-stage detection.',
+        dataBrief: {
+          stats: [
+            { type: 'sparkline', dataPath: 'cancer_incidence', label: 'Incidence', format: '%' },
+            { type: 'change', dataPath: 'cancer_mortality', label: 'Mortality', format: '%' },
+            { type: 'latest', dataPath: 'cancer_incidence', label: 'Incidence (latest)', format: '/100k' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'The widening gap between incidence and mortality is a success story — screening catches more cancers earlier, and treatment keeps more patients alive, but the rising case load still strains oncology capacity.'
+        }
       },
       {
         id: 'cancer-gender-gap',
@@ -180,7 +270,16 @@ export const THEMES = [
         leftAxisLabel: 'Incidence (per 100k)',
         rightAxisLabel: 'Mortality (per 100k)',
         tooltip: 'Males consistently have higher cancer incidence and mortality rates than females. The gap is partly explained by cancer types (prostate, lung, liver in males vs breast in females), lifestyle factors (historically higher smoking rates in males), and screening uptake differences.',
-        narrativePrompt: 'Analyze the gender gap in cancer incidence and mortality in Singapore from 1970-2023. Male incidence (~280/100k) exceeds female (~210/100k), and male mortality is significantly higher. What factors contribute? Consider cancer types (prostate/lung/liver vs breast), historical smoking rates, occupational exposure, and screening behaviours. Has the gap narrowed or widened over time?'
+        narrativePrompt: 'Analyze the gender gap in cancer incidence and mortality in Singapore from 1970-2023. Male incidence (~280/100k) exceeds female (~210/100k), and male mortality is significantly higher. What factors contribute? Consider cancer types (prostate/lung/liver vs breast), historical smoking rates, occupational exposure, and screening behaviours. Has the gap narrowed or widened over time?',
+        dataBrief: {
+          stats: [
+            { type: 'ratio', dataPathA: 'cancer_incidence.by_gender.male', dataPathB: 'cancer_incidence.by_gender.female', label: 'M/F Incidence', format: 'x' },
+            { type: 'ratio', dataPathA: 'cancer_mortality.by_gender.male', dataPathB: 'cancer_mortality.by_gender.female', label: 'M/F Mortality', format: 'x' },
+            { type: 'change', dataPath: 'cancer_mortality.by_gender.male', label: 'Male Mortality', format: '%' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Males face both higher cancer incidence and disproportionately higher mortality — targeted screening programmes for prostate and lung cancer could significantly narrow this gap.'
+        }
       },
       {
         id: 'cancer-ethnicity',
@@ -194,7 +293,16 @@ export const THEMES = [
         ],
         leftAxisLabel: 'Incidence (per 100k)',
         tooltip: 'Cancer incidence varies across Singapore\'s three main ethnic groups. Differences may reflect genetic predisposition, dietary patterns, lifestyle factors, and screening uptake rates across communities.',
-        narrativePrompt: 'Analyze cancer incidence trends across Chinese, Malay, and Indian populations in Singapore from 1970-2023. Chinese have historically had the highest rates. Are the ethnic groups converging or diverging? What might explain the differences — genetics, diet, lifestyle, or screening access? Consider the impact of westernisation of diet across all groups.'
+        narrativePrompt: 'Analyze cancer incidence trends across Chinese, Malay, and Indian populations in Singapore from 1970-2023. Chinese have historically had the highest rates. Are the ethnic groups converging or diverging? What might explain the differences — genetics, diet, lifestyle, or screening access? Consider the impact of westernisation of diet across all groups.',
+        dataBrief: {
+          stats: [
+            { type: 'latest', dataPath: 'cancer_incidence.by_ethnicity.chinese', label: 'Chinese', format: '/100k' },
+            { type: 'latest', dataPath: 'cancer_incidence.by_ethnicity.malay', label: 'Malay', format: '/100k' },
+            { type: 'latest', dataPath: 'cancer_incidence.by_ethnicity.indian', label: 'Indian', format: '/100k' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Ethnic differences in cancer incidence point to a mix of genetic, dietary, and lifestyle factors — community-specific health education and culturally tailored screening may be more effective than one-size-fits-all campaigns.'
+        }
       },
       {
         id: 'cancer-top-sites',
@@ -203,7 +311,15 @@ export const THEMES = [
         chartType: 'butterfly',
         dataPath: 'cancer_top_incident',
         tooltip: 'The top 5 cancers by incidence are strikingly different between males and females. Breast cancer alone accounts for nearly 30% of all female cancers, while prostate, colorectal, and lung cancers dominate in males.',
-        narrativePrompt: 'Compare the top 5 cancers by incidence in Singapore males vs females (2019-2023). Prostate (18%) leads in males while breast (29.9%) dominates in females. Colorectal cancer is the only top-3 cancer common to both. What do these patterns suggest about gender-specific screening priorities and risk factors?'
+        narrativePrompt: 'Compare the top 5 cancers by incidence in Singapore males vs females (2019-2023). Prostate (18%) leads in males while breast (29.9%) dominates in females. Colorectal cancer is the only top-3 cancer common to both. What do these patterns suggest about gender-specific screening priorities and risk factors?',
+        dataBrief: {
+          stats: [
+            { type: 'custom', value: '29.9%', label: 'Breast (F)', direction: 'neutral' },
+            { type: 'custom', value: '18.0%', label: 'Prostate (M)', direction: 'neutral' },
+            { type: 'custom', value: '15.8%', label: 'Colorectal (M)', direction: 'neutral' }
+          ],
+          fallbackInsight: 'Breast cancer alone accounts for nearly a third of all female cancers — the dominance of a single site makes the case for universal mammography screening even stronger than population-wide approaches for males.'
+        }
       },
       {
         id: 'cancer-age-cliff',
@@ -212,7 +328,15 @@ export const THEMES = [
         chartType: 'age-bars',
         dataPath: 'cancer_age_distribution',
         tooltip: 'Cancer incidence rises exponentially with age. The crude rate jumps from ~160 per 100k in the 40-49 bracket to over 2,000 per 100k in the 70-79 bracket — a 13-fold increase. This age-incidence cliff underscores why screening becomes critical from age 50.',
-        narrativePrompt: 'Analyze the age distribution of cancer incidence in Singapore (2019-2023). The rate jumps dramatically after age 50 — from ~160/100k (40-49) to ~1,077/100k (60-69) to ~2,099/100k (70-79) in males. Females show a different pattern with higher rates in younger brackets (30-49) due to breast cancer. What does this mean for screening policy and age-based targeting?'
+        narrativePrompt: 'Analyze the age distribution of cancer incidence in Singapore (2019-2023). The rate jumps dramatically after age 50 — from ~160/100k (40-49) to ~1,077/100k (60-69) to ~2,099/100k (70-79) in males. Females show a different pattern with higher rates in younger brackets (30-49) due to breast cancer. What does this mean for screening policy and age-based targeting?',
+        dataBrief: {
+          stats: [
+            { type: 'custom', value: '117×', label: 'Risk increase', direction: 'up' },
+            { type: 'custom', value: '2,890', label: 'Rate 80+ (M)', direction: 'neutral' },
+            { type: 'custom', value: '50+', label: 'Screening age', direction: 'neutral' }
+          ],
+          fallbackInsight: 'A 117-fold increase in cancer risk from the youngest to oldest age group underscores why age 50 is the critical threshold for screening — early detection at this inflection point has the highest return on investment.'
+        }
       }
     ]
   },
@@ -235,7 +359,16 @@ export const THEMES = [
         leftAxisLabel: 'Obesity (%)',
         rightAxisLabel: 'Fertility Rate',
         tooltip: 'Childhood obesity among Primary 1 children (~7 years old) alongside the total fertility rate. Singapore is having fewer children — are those children healthier? The recent drop in childhood obesity to 8.9% (2024) is encouraging.',
-        narrativePrompt: 'Analyze childhood obesity trends (Primary 1) alongside fertility rate in Singapore. While TFR has fallen to 0.87, childhood obesity has also declined to 8.9% in 2024 — the lowest in over a decade. Is there a connection? Discuss the role of HPB programmes, school nutrition policies, and parental health awareness. Consider the 2021 COVID spike.'
+        narrativePrompt: 'Analyze childhood obesity trends (Primary 1) alongside fertility rate in Singapore. While TFR has fallen to 0.87, childhood obesity has also declined to 8.9% in 2024 — the lowest in over a decade. Is there a connection? Discuss the role of HPB programmes, school nutrition policies, and parental health awareness. Consider the 2021 COVID spike.',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'childhood_obesity', label: 'Obesity', format: '%' },
+            { type: 'latest', dataPath: 'childhood_obesity', label: 'Obesity (latest)', format: '%' },
+            { type: 'latest', dataPath: 'total_fertility_rate', label: 'TFR (latest)', format: 'dec' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Childhood obesity declining alongside falling birth rates is encouraging — fewer children but healthier ones, though the 2021 COVID spike shows how quickly gains can reverse without sustained policy attention.'
+        }
       },
       {
         id: 'workforce-pipeline',
@@ -249,7 +382,16 @@ export const THEMES = [
         leftAxisLabel: 'University Intake',
         rightAxisLabel: 'Doctors per 10,000',
         tooltip: 'University health sciences intake (nursing, pharmacy, allied health) compared with the doctor-to-population ratio. As the population ages, Singapore needs to rapidly expand its healthcare workforce. The question is whether training pipelines are keeping pace with demand.',
-        narrativePrompt: 'Analyze Singapore\'s healthcare workforce pipeline: university health sciences intake has tripled from ~350 (2011) to ~1,150 (2024), while doctors per 10,000 population has grown from 14 to 29. Is this pace sufficient given the aging population? By 2030, 1 in 4 residents will be 65+. Discuss the gap between supply and demand.'
+        narrativePrompt: 'Analyze Singapore\'s healthcare workforce pipeline: university health sciences intake has tripled from ~350 (2011) to ~1,150 (2024), while doctors per 10,000 population has grown from 14 to 29. Is this pace sufficient given the aging population? By 2030, 1 in 4 residents will be 65+. Discuss the gap between supply and demand.',
+        dataBrief: {
+          stats: [
+            { type: 'change', dataPath: 'university_intake.health_sciences', label: 'HS Intake', format: '%' },
+            { type: 'change', dataPath: 'health_personnel', label: 'Doctors/10k', format: '%' },
+            { type: 'latest', dataPath: 'health_personnel', label: 'Docs/10k (latest)', format: 'int' }
+          ],
+          dataPointCount: true,
+          fallbackInsight: 'Training intake has tripled but the doctor-to-population ratio still trails behind the ageing demand curve — by 2030, Singapore may need to accelerate foreign recruitment or expand telehealth to close the gap.'
+        }
       }
     ]
   }
