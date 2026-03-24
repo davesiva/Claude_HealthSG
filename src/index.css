@@ -64,6 +64,18 @@
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
   }
+
+  /* Remove Leaflet default focus outlines on map paths */
+  .leaflet-interactive:focus {
+    outline: none !important;
+  }
+  .leaflet-container {
+    outline: none !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .leaflet-container *:focus {
+    outline: none !important;
+  }
 }
 
 /* When the scroll animation is complete, override anime.js inline styles.
