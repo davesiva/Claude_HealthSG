@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, useEffect } from 'react'
+import { useState, useMemo, useCallback, useEffect, useRef } from 'react'
 import { MapContainer, TileLayer, GeoJSON, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -9,7 +9,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import InfoTooltip from './InfoTooltip'
 import { censusData, nationalTotals } from '../data/planning-area-census'
 import geoData from '../data/planning-area-boundaries.json'
-import { getAllAreaMetrics, getColorScale, METRICS } from '../utils/healthBurdenCalculations'
+import { getAllAreaMetrics, getColorScale, METRICS, SCALE_GRADIENTS } from '../utils/healthBurdenCalculations'
 import { fetchAgingTrend } from '../utils/fetchOneMapData'
 
 const isMobile = () => typeof window !== 'undefined' && window.innerWidth < 768
@@ -66,9 +66,11 @@ export default function HealthMap() {
     return () => { cancelled = true }
   }, [selectedArea])
 
-  const handleAreaClick = useCallback((name) => {
+  // Use ref so Leaflet event handlers always get the latest callback
+  const handleAreaClickRef = useRef(null)
+  handleAreaClickRef.current = (name) => {
     setSelectedArea(prev => prev === name ? null : name)
-  }, [])
+  }
 
   const formatAreaName = (name) =>
     name.split(' ').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ')
@@ -122,9 +124,9 @@ export default function HealthMap() {
       mouseout: (e) => {
         e.target.setStyle(styleFeature(feature))
       },
-      click: () => handleAreaClick(name),
+      click: () => handleAreaClickRef.current?.(name),
     })
-  }, [areaMetrics, activeMetric, currentMetricDef, styleFeature, handleAreaClick, formatAreaName])
+  }, [areaMetrics, activeMetric, currentMetricDef, styleFeature, formatAreaName])
 
   // Age distribution chart data for detail panel
   const ageDistData = useMemo(() => {
@@ -185,21 +187,23 @@ export default function HealthMap() {
           transition={{ duration: 0.5, delay: 0.15 }}
         >
           {METRICS.map(metric => (
-            <button
-              key={metric.id}
-              onClick={() => setActiveMetric(metric.id)}
-              className={`px-4 py-2 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
-                activeMetric === metric.id
-                  ? 'text-white shadow-sm'
-                  : 'bg-card text-secondary border border-border hover:border-accent'
-              }`}
-              style={{
-                backgroundColor: activeMetric === metric.id ? '#0D9488' : undefined,
-                WebkitTapHighlightColor: 'transparent',
-              }}
-            >
-              {metric.label}
-            </button>
+            <span key={metric.id} className="inline-flex items-center">
+              <button
+                onClick={() => setActiveMetric(metric.id)}
+                className={`px-4 py-2 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
+                  activeMetric === metric.id
+                    ? 'text-white shadow-sm'
+                    : 'bg-card text-secondary border border-border hover:border-accent'
+                }`}
+                style={{
+                  backgroundColor: activeMetric === metric.id ? '#0D9488' : undefined,
+                  WebkitTapHighlightColor: 'transparent',
+                }}
+              >
+                {metric.label}
+              </button>
+              <InfoTooltip content={metric.tooltip} size={12} />
+            </span>
           ))}
         </motion.div>
 
@@ -227,7 +231,7 @@ export default function HealthMap() {
                 opacity={0.3}
               />
               <GeoJSON
-                key={activeMetric + selectedArea}
+                key={activeMetric}
                 data={geoData}
                 style={styleFeature}
                 onEachFeature={onEachFeature}
@@ -243,9 +247,7 @@ export default function HealthMap() {
             <div
               className="h-2.5 rounded-full flex-1 max-w-[200px]"
               style={{
-                background: currentMetricDef.colorScale === 'warm'
-                  ? 'linear-gradient(to right, #FEF3C7, #F59E0B, #DC2626)'
-                  : 'linear-gradient(to right, #E6FFFA, #5EEAD4, #0F766E)',
+                background: SCALE_GRADIENTS[colorScale.colorScale] || SCALE_GRADIENTS.teal,
               }}
             />
             <span className="text-[10px] font-mono text-secondary/60">

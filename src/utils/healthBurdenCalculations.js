@@ -59,36 +59,50 @@ export const METRICS = [
     id: 'elderlyRatio',
     label: 'Elderly Ratio',
     unit: '% aged 65+',
+    tooltip: 'Percentage of residents aged 65 and above. Areas with higher elderly ratios face greater demand for healthcare and social services.',
     format: v => `${(v * 100).toFixed(1)}%`,
-    colorScale: 'teal', // neutral/informational
+    colorScale: 'teal',
   },
   {
     id: 'estDiabetes',
     label: 'Est. Diabetes',
     unit: 'estimated prevalence',
+    tooltip: 'Estimated diabetes prevalence based on each area\'s age distribution applied to national age-specific rates (NPHS). Not a direct measurement.',
     format: v => `${(v * 100).toFixed(1)}%`,
-    colorScale: 'warm', // concerning
+    colorScale: 'rose',
   },
   {
     id: 'estHypertension',
     label: 'Est. Hypertension',
     unit: 'estimated prevalence',
+    tooltip: 'Estimated hypertension prevalence based on each area\'s age distribution applied to national age-specific rates (NPHS). Not a direct measurement.',
     format: v => `${(v * 100).toFixed(1)}%`,
-    colorScale: 'warm',
+    colorScale: 'purple',
   },
   {
     id: 'difficultyRate',
     label: 'Functional Difficulty',
     unit: '% with difficulty',
+    tooltip: 'Percentage of residents reporting some difficulty or inability to perform at least one basic activity (seeing, hearing, mobility, cognition). From Census 2020.',
     format: v => v != null ? `${(v * 100).toFixed(1)}%` : 'N/A',
-    colorScale: 'warm',
+    colorScale: 'amber',
   },
 ]
 
-// Color scales
+// Distinct color scales per metric for visual differentiation
 const SCALES = {
-  teal: { low: '#E6FFFA', mid: '#5EEAD4', high: '#0F766E' },
-  warm: { low: '#FEF3C7', mid: '#F59E0B', high: '#DC2626' },
+  teal:   { low: '#F0FDFA', high: '#115E59' },  // elderly ratio — teal
+  rose:   { low: '#FFF1F2', high: '#9F1239' },  // diabetes — rose/red
+  purple: { low: '#F5F3FF', high: '#5B21B6' },  // hypertension — violet
+  amber:  { low: '#FFFBEB', high: '#92400E' },  // difficulty — amber/brown
+}
+
+// CSS gradient strings for the legend bar
+export const SCALE_GRADIENTS = {
+  teal:   'linear-gradient(to right, #F0FDFA, #5EEAD4, #115E59)',
+  rose:   'linear-gradient(to right, #FFF1F2, #FB7185, #9F1239)',
+  purple: 'linear-gradient(to right, #F5F3FF, #A78BFA, #5B21B6)',
+  amber:  'linear-gradient(to right, #FFFBEB, #FBBF24, #92400E)',
 }
 
 function parseHex(hex) {
@@ -115,12 +129,14 @@ export function getColorScale(metricId, allValues) {
   const scale = (value) => {
     if (value == null || isNaN(value)) return '#F3F4F6'
     const t = max > min ? (value - min) / (max - min) : 0
-    if (t < 0.5) return lerpColor(colors.low, colors.mid, t * 2)
-    return lerpColor(colors.mid, colors.high, (t - 0.5) * 2)
+    // Power curve (t^0.6) to spread out the mid-range and boost contrast
+    const curved = Math.pow(t, 0.6)
+    return lerpColor(colors.low, colors.high, curved)
   }
 
   scale.noDataColor = '#F3F4F6'
   scale.min = min
   scale.max = max
+  scale.colorScale = metric?.colorScale || 'teal'
   return scale
 }
