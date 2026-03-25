@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid,
+  LineChart, Line, BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend
 } from 'recharts'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
@@ -63,10 +63,23 @@ const EXPLORER_GROUPS = [
     label: 'Longevity',
     color: '#0D9488',
     indicators: [
+      { key: 'deaths_by_cause', label: 'Deaths by Cause' },
       { key: 'life_expectancy', label: 'Life Expectancy' },
     ],
   },
 ]
+
+const CAUSE_COLORS = {
+  cancer:        '#6366F1', // indigo
+  heart_disease: '#EF4444', // red
+  pneumonia:     '#F59E0B', // amber
+  stroke:        '#0EA5E9', // sky
+  infectious:    '#10B981', // emerald
+  other:         '#9CA3AF', // gray
+}
+
+// Stack order: bottom → top (largest causes at bottom for visual stability)
+const CAUSE_ORDER = ['other', 'infectious', 'stroke', 'pneumonia', 'heart_disease', 'cancer']
 
 const demographicColors = {
   male: '#0D9488',
@@ -171,6 +184,11 @@ const descriptions = {
     survey: 'Department of Statistics Singapore (SingStat), Table M810001.',
     note: 'The ratio has fallen sharply from nearly 10 in 2000 to around 3.5 in 2024, signalling growing fiscal pressure on healthcare funding, CPF/pension sustainability, and eldercare services.'
   },
+  deaths_by_cause: {
+    text: 'Annual deaths in Singapore broken down by major cause, showing the epidemiological transition from infectious diseases to chronic non-communicable diseases over five decades.',
+    survey: 'Registry of Births and Deaths, Department of Statistics Singapore (SingStat Table M810131).',
+    note: 'ICD classification changed 3 times (ICD-8 before 1979, ICD-9 1979-2011, ICD-10 from 2012), which may cause minor discontinuities. "Other Causes" combines: kidney disease (the largest component, ~1,350 deaths in 2024), digestive system diseases (~709), accidents and suicides (~630), diabetes and endocrine conditions (~287), nervous system diseases including dementia (~163), remaining respiratory and circulatory conditions not classified under pneumonia/heart disease/stroke, congenital anomalies, perinatal mortality, and other unclassified causes.'
+  },
   total_fertility_rate: {
     text: 'The average number of live births a woman would have over her lifetime if current age-specific fertility rates persist. A TFR of 2.1 is the "replacement level" needed to maintain population size without immigration.',
     survey: 'Department of Statistics Singapore (SingStat), Table M810091.',
@@ -192,6 +210,31 @@ function CustomTooltip({ active, payload, label, unit }) {
   )
 }
 
+function StackedTooltip({ active, payload, label, mode }) {
+  if (!active || !payload?.length) return null
+  const sorted = [...payload].reverse()
+  const total = sorted.reduce((sum, p) => sum + p.value, 0)
+  return (
+    <div className="bg-white px-3 py-2 text-xs border border-border rounded-lg shadow-md max-w-[220px]">
+      <p className="font-mono font-semibold text-primary mb-1">{label}</p>
+      {sorted.map((p, i) => (
+        <p key={i} className="font-mono flex justify-between gap-3">
+          <span style={{ color: p.color }}>{p.name}</span>
+          <span style={{ color: p.color }}>
+            {mode === 'percent' ? `${p.value}%` : p.value.toLocaleString()}
+          </span>
+        </p>
+      ))}
+      {mode === 'absolute' && (
+        <p className="font-mono font-semibold text-primary border-t border-border mt-1 pt-1 flex justify-between">
+          <span>Total</span>
+          <span>{total.toLocaleString()}</span>
+        </p>
+      )}
+    </div>
+  )
+}
+
 // Helper: find which category a key belongs to
 function findCategoryForKey(key) {
   for (const group of EXPLORER_GROUPS) {
@@ -205,6 +248,7 @@ export default function Explorer({ selectedIndicator }) {
   const [activeKey, setActiveKey] = useState(selectedIndicator || 'diabetes_prevalence')
   const [activeCategory, setActiveCategory] = useState(() => findCategoryForKey(selectedIndicator || 'diabetes_prevalence'))
   const [breakdown, setBreakdown] = useState('all')
+  const [stackMode, setStackMode] = useState('percent')
   const [ref, isVisible] = useScrollAnimation(0.1)
   const [isMobile, setIsMobile] = useState(false)
   const chartContainerRef = useRef(null)
@@ -228,6 +272,7 @@ export default function Explorer({ selectedIndicator }) {
       setActiveKey(selectedIndicator)
       setActiveCategory(findCategoryForKey(selectedIndicator))
       setBreakdown('all')
+      setStackMode('percent')
     }
   }, [selectedIndicator])
 
@@ -237,12 +282,40 @@ export default function Explorer({ selectedIndicator }) {
   const hasGender = indicator.by_gender != null
   const hasEthnicity = indicator.by_ethnicity != null
   const isBarChart = activeKey === 'govt_health_expenditure' || activeKey === 'hospital_beds' || activeKey === 'psychiatric_admissions'
+  const isStackedArea = indicator.chartType === 'stackedArea' && indicator.categories != null
   const desc = descriptions[activeKey]
 
-  let chartData = indicator.data
+  let chartData = indicator.data || []
   let lines = [{ key: 'value', name: indicator.label, color: '#0D9488' }]
 
-  if (breakdown === 'gender' && hasGender) {
+  if (isStackedArea) {
+    const cats = indicator.categories
+    const catKeys = CAUSE_ORDER.filter(k => cats[k])
+    const allYears = new Set()
+    Object.values(cats).forEach(c => c.data.forEach(d => allYears.add(d.year)))
+
+    chartData = [...allYears].sort((a, b) => a - b).map(year => {
+      const row = { year }
+      let total = 0
+      catKeys.forEach(key => {
+        const found = cats[key].data.find(d => d.year === year)
+        row[key] = found?.value || 0
+        total += row[key]
+      })
+      if (stackMode === 'percent' && total > 0) {
+        catKeys.forEach(key => {
+          row[key] = Math.round((row[key] / total) * 1000) / 10
+        })
+      }
+      return row
+    })
+
+    lines = catKeys.map(key => ({
+      key,
+      name: cats[key].label,
+      color: CAUSE_COLORS[key] || '#9CA3AF'
+    }))
+  } else if (breakdown === 'gender' && hasGender) {
     const allYears = new Set()
     Object.values(indicator.by_gender).forEach(arr => arr.forEach(d => allYears.add(d.year)))
     chartData = [...allYears].sort((a, b) => a - b).map(year => {
@@ -336,7 +409,7 @@ export default function Explorer({ selectedIndicator }) {
             {activeGroup.indicators.map(({ key, label }) => (
               <button
                 key={key}
-                onClick={() => { setActiveKey(key); setBreakdown('all') }}
+                onClick={() => { setActiveKey(key); setBreakdown('all'); setStackMode('percent') }}
                 className={`px-3 py-1.5 rounded-full text-sm font-body transition-all cursor-pointer focus:outline-none ${
                   activeKey === key
                     ? 'text-white shadow-sm'
@@ -358,7 +431,7 @@ export default function Explorer({ selectedIndicator }) {
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-sm font-body font-semibold text-primary">
               {indicator.label}
-              <span className="ml-1 text-secondary font-normal">({indicator.unit})</span>
+              <span className="ml-1 text-secondary font-normal">({isStackedArea && stackMode === 'percent' ? '% of total' : indicator.unit})</span>
             </h3>
             <div className="flex items-center gap-2">
               <ShareButton title={indicator.label} subtitle={`${chartData[0]?.year}–${chartData[chartData.length - 1]?.year} · Singapore`} chartRef={chartContainerRef} />
@@ -367,8 +440,37 @@ export default function Explorer({ selectedIndicator }) {
               </span>
             </div>
           </div>
-          <ResponsiveContainer width="100%" height={isMobile ? 260 : 300}>
-            {isBarChart && breakdown === 'all' ? (
+          <ResponsiveContainer width="100%" height={isMobile ? 280 : 320}>
+            {isStackedArea ? (
+              <AreaChart data={chartData} margin={{ top: 5, right: 5, left: isMobile ? 0 : 5, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
+                <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
+                <YAxis
+                  tick={axisTick}
+                  stroke={axisStroke}
+                  width={isMobile ? 35 : 55}
+                  tickFormatter={stackMode === 'percent' ? v => `${v}%` : v => v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v}
+                  domain={stackMode === 'percent' ? [0, 100] : [0, 'auto']}
+                  ticks={stackMode === 'percent' ? [0, 25, 50, 75, 100] : undefined}
+                />
+                <Tooltip content={<StackedTooltip mode={stackMode} />} />
+                <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} iconSize={10} />
+                {lines.map(line => (
+                  <Area
+                    key={line.key}
+                    type="monotone"
+                    dataKey={line.key}
+                    stackId="causes"
+                    fill={line.color}
+                    stroke={line.color}
+                    fillOpacity={0.85}
+                    name={line.name}
+                    isAnimationActive={true}
+                    animationDuration={1500}
+                  />
+                ))}
+              </AreaChart>
+            ) : isBarChart && breakdown === 'all' ? (
               <BarChart data={chartData} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
                 <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
@@ -403,8 +505,37 @@ export default function Explorer({ selectedIndicator }) {
           </ResponsiveContainer>
         </div>
 
+        {/* Stacked area mode toggle */}
+        {isStackedArea && (
+          <div className="mt-4 flex items-center justify-center gap-2">
+            <button
+              onClick={() => setStackMode('percent')}
+              className={`px-4 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
+                stackMode === 'percent' ? 'bg-accent text-white' : 'bg-card text-secondary border border-border'
+              }`}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
+            >
+              Percentage
+            </button>
+            <button
+              onClick={() => setStackMode('absolute')}
+              className={`px-4 py-1.5 rounded-full text-xs font-body transition-all cursor-pointer focus:outline-none ${
+                stackMode === 'absolute' ? 'bg-accent text-white' : 'bg-card text-secondary border border-border'
+              }`}
+              style={{ WebkitTapHighlightColor: 'transparent' }}
+            >
+              Absolute
+            </button>
+            <InfoTooltip content={
+              stackMode === 'percent'
+                ? 'Showing each cause as a percentage of total deaths that year. This reveals how the mortality profile shifted over time, independent of population growth.'
+                : 'Showing absolute number of deaths per cause per year. Total deaths have risen with population growth and aging.'
+            } />
+          </div>
+        )}
+
         {/* Demographic toggles */}
-        {(hasGender || hasEthnicity) && (
+        {!isStackedArea && (hasGender || hasEthnicity) && (
           <div className="mt-4 flex items-center justify-center gap-2">
             <button
               onClick={() => setBreakdown('all')}

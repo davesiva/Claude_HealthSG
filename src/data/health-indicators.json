@@ -7,48 +7,159 @@
     "tooltip": "Based on period life tables published by SingStat. Reflects the average lifespan if current-year mortality rates persist. Not a prediction for any individual. The dip in 2021–2022 reflects excess COVID-19 mortality.",
     "singstatTableId": "M810501",
     "data": [
-      {"year": 1960, "value": 64.5},
-      {"year": 1970, "value": 69.5},
-      {"year": 1980, "value": 72.1},
-      {"year": 1990, "value": 75.3},
-      {"year": 2000, "value": 78.0},
-      {"year": 2005, "value": 79.6},
-      {"year": 2010, "value": 81.7},
-      {"year": 2015, "value": 82.9},
-      {"year": 2016, "value": 83.0},
-      {"year": 2017, "value": 83.2},
-      {"year": 2018, "value": 83.4},
-      {"year": 2019, "value": 83.7},
-      {"year": 2020, "value": 83.7},
-      {"year": 2021, "value": 83.2},
-      {"year": 2022, "value": 83.0},
-      {"year": 2023, "value": 83.2},
-      {"year": 2024, "value": 83.5}
+      {
+        "year": 1960,
+        "value": 64.5
+      },
+      {
+        "year": 1970,
+        "value": 69.5
+      },
+      {
+        "year": 1980,
+        "value": 72.1
+      },
+      {
+        "year": 1990,
+        "value": 75.3
+      },
+      {
+        "year": 2000,
+        "value": 78
+      },
+      {
+        "year": 2005,
+        "value": 79.6
+      },
+      {
+        "year": 2010,
+        "value": 81.7
+      },
+      {
+        "year": 2015,
+        "value": 82.9
+      },
+      {
+        "year": 2016,
+        "value": 83
+      },
+      {
+        "year": 2017,
+        "value": 83.2
+      },
+      {
+        "year": 2018,
+        "value": 83.4
+      },
+      {
+        "year": 2019,
+        "value": 83.7
+      },
+      {
+        "year": 2020,
+        "value": 83.7
+      },
+      {
+        "year": 2021,
+        "value": 83.2
+      },
+      {
+        "year": 2022,
+        "value": 83
+      },
+      {
+        "year": 2023,
+        "value": 83.2
+      },
+      {
+        "year": 2024,
+        "value": 83.5
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2015, "value": 80.5},
-        {"year": 2016, "value": 80.7},
-        {"year": 2017, "value": 80.9},
-        {"year": 2018, "value": 81.2},
-        {"year": 2019, "value": 81.4},
-        {"year": 2020, "value": 81.3},
-        {"year": 2021, "value": 80.8},
-        {"year": 2022, "value": 80.7},
-        {"year": 2023, "value": 81.0},
-        {"year": 2024, "value": 81.2}
+        {
+          "year": 2015,
+          "value": 80.5
+        },
+        {
+          "year": 2016,
+          "value": 80.7
+        },
+        {
+          "year": 2017,
+          "value": 80.9
+        },
+        {
+          "year": 2018,
+          "value": 81.2
+        },
+        {
+          "year": 2019,
+          "value": 81.4
+        },
+        {
+          "year": 2020,
+          "value": 81.3
+        },
+        {
+          "year": 2021,
+          "value": 80.8
+        },
+        {
+          "year": 2022,
+          "value": 80.7
+        },
+        {
+          "year": 2023,
+          "value": 81
+        },
+        {
+          "year": 2024,
+          "value": 81.2
+        }
       ],
       "female": [
-        {"year": 2015, "value": 85.1},
-        {"year": 2016, "value": 85.1},
-        {"year": 2017, "value": 85.4},
-        {"year": 2018, "value": 85.5},
-        {"year": 2019, "value": 85.9},
-        {"year": 2020, "value": 85.9},
-        {"year": 2021, "value": 85.5},
-        {"year": 2022, "value": 85.2},
-        {"year": 2023, "value": 85.3},
-        {"year": 2024, "value": 85.6}
+        {
+          "year": 2015,
+          "value": 85.1
+        },
+        {
+          "year": 2016,
+          "value": 85.1
+        },
+        {
+          "year": 2017,
+          "value": 85.4
+        },
+        {
+          "year": 2018,
+          "value": 85.5
+        },
+        {
+          "year": 2019,
+          "value": 85.9
+        },
+        {
+          "year": 2020,
+          "value": 85.9
+        },
+        {
+          "year": 2021,
+          "value": 85.5
+        },
+        {
+          "year": 2022,
+          "value": 85.2
+        },
+        {
+          "year": 2023,
+          "value": 85.3
+        },
+        {
+          "year": 2024,
+          "value": 85.6
+        }
       ]
     }
   },
@@ -61,26 +172,71 @@
     "trendBaseline": "2010 NPHS baseline (8.6%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 1992, "value": 7.3},
-      {"year": 1998, "value": 9.0},
-      {"year": 2004, "value": 8.2},
-      {"year": 2010, "value": 8.6},
-      {"year": 2017, "value": 8.8},
-      {"year": 2020, "value": 9.5},
-      {"year": 2022, "value": 8.5}
+      {
+        "year": 1992,
+        "value": 7.3
+      },
+      {
+        "year": 1998,
+        "value": 9
+      },
+      {
+        "year": 2004,
+        "value": 8.2
+      },
+      {
+        "year": 2010,
+        "value": 8.6
+      },
+      {
+        "year": 2017,
+        "value": 8.8
+      },
+      {
+        "year": 2020,
+        "value": 9.5
+      },
+      {
+        "year": 2022,
+        "value": 8.5
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2010, "value": 9.2},
-        {"year": 2017, "value": 10.3},
-        {"year": 2020, "value": 10.6},
-        {"year": 2022, "value": 9.7}
+        {
+          "year": 2010,
+          "value": 9.2
+        },
+        {
+          "year": 2017,
+          "value": 10.3
+        },
+        {
+          "year": 2020,
+          "value": 10.6
+        },
+        {
+          "year": 2022,
+          "value": 9.7
+        }
       ],
       "female": [
-        {"year": 2010, "value": 8.0},
-        {"year": 2017, "value": 7.4},
-        {"year": 2020, "value": 8.4},
-        {"year": 2022, "value": 7.3}
+        {
+          "year": 2010,
+          "value": 8
+        },
+        {
+          "year": 2017,
+          "value": 7.4
+        },
+        {
+          "year": 2020,
+          "value": 8.4
+        },
+        {
+          "year": 2022,
+          "value": 7.3
+        }
       ]
     }
   },
@@ -93,26 +249,71 @@
     "trendBaseline": "2010 NPHS baseline (19.8%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 1992, "value": 22.6},
-      {"year": 1998, "value": 26.7},
-      {"year": 2004, "value": 20.1},
-      {"year": 2010, "value": 19.8},
-      {"year": 2017, "value": 24.2},
-      {"year": 2020, "value": 35.5},
-      {"year": 2022, "value": 37.0}
+      {
+        "year": 1992,
+        "value": 22.6
+      },
+      {
+        "year": 1998,
+        "value": 26.7
+      },
+      {
+        "year": 2004,
+        "value": 20.1
+      },
+      {
+        "year": 2010,
+        "value": 19.8
+      },
+      {
+        "year": 2017,
+        "value": 24.2
+      },
+      {
+        "year": 2020,
+        "value": 35.5
+      },
+      {
+        "year": 2022,
+        "value": 37
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2010, "value": 22.0},
-        {"year": 2017, "value": 27.0},
-        {"year": 2020, "value": 41.0},
-        {"year": 2022, "value": 44.0}
+        {
+          "year": 2010,
+          "value": 22
+        },
+        {
+          "year": 2017,
+          "value": 27
+        },
+        {
+          "year": 2020,
+          "value": 41
+        },
+        {
+          "year": 2022,
+          "value": 44
+        }
       ],
       "female": [
-        {"year": 2010, "value": 17.6},
-        {"year": 2017, "value": 21.7},
-        {"year": 2020, "value": 30.2},
-        {"year": 2022, "value": 30.2}
+        {
+          "year": 2010,
+          "value": 17.6
+        },
+        {
+          "year": 2017,
+          "value": 21.7
+        },
+        {
+          "year": 2020,
+          "value": 30.2
+        },
+        {
+          "year": 2022,
+          "value": 30.2
+        }
       ]
     }
   },
@@ -125,29 +326,83 @@
     "trendBaseline": "2010 NPHS baseline (10.5%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 1992, "value": 5.1},
-      {"year": 1998, "value": 6.0},
-      {"year": 2004, "value": 6.9},
-      {"year": 2010, "value": 10.5},
-      {"year": 2013, "value": 8.6},
-      {"year": 2017, "value": 8.6},
-      {"year": 2020, "value": 10.5},
-      {"year": 2022, "value": 11.6}
+      {
+        "year": 1992,
+        "value": 5.1
+      },
+      {
+        "year": 1998,
+        "value": 6
+      },
+      {
+        "year": 2004,
+        "value": 6.9
+      },
+      {
+        "year": 2010,
+        "value": 10.5
+      },
+      {
+        "year": 2013,
+        "value": 8.6
+      },
+      {
+        "year": 2017,
+        "value": 8.6
+      },
+      {
+        "year": 2020,
+        "value": 10.5
+      },
+      {
+        "year": 2022,
+        "value": 11.6
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2010, "value": 11.7},
-        {"year": 2013, "value": 9.4},
-        {"year": 2017, "value": 7.0},
-        {"year": 2020, "value": 11.9},
-        {"year": 2022, "value": 13.1}
+        {
+          "year": 2010,
+          "value": 11.7
+        },
+        {
+          "year": 2013,
+          "value": 9.4
+        },
+        {
+          "year": 2017,
+          "value": 7
+        },
+        {
+          "year": 2020,
+          "value": 11.9
+        },
+        {
+          "year": 2022,
+          "value": 13.1
+        }
       ],
       "female": [
-        {"year": 2010, "value": 9.4},
-        {"year": 2013, "value": 7.8},
-        {"year": 2017, "value": 10.0},
-        {"year": 2020, "value": 9.3},
-        {"year": 2022, "value": 10.2}
+        {
+          "year": 2010,
+          "value": 9.4
+        },
+        {
+          "year": 2013,
+          "value": 7.8
+        },
+        {
+          "year": 2017,
+          "value": 10
+        },
+        {
+          "year": 2020,
+          "value": 9.3
+        },
+        {
+          "year": 2022,
+          "value": 10.2
+        }
       ]
     }
   },
@@ -160,23 +415,59 @@
     "trendBaseline": "2010 NPHS baseline (26.2%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 2010, "value": 26.2},
-      {"year": 2017, "value": 35.5},
-      {"year": 2020, "value": 39.1},
-      {"year": 2022, "value": 31.9}
+      {
+        "year": 2010,
+        "value": 26.2
+      },
+      {
+        "year": 2017,
+        "value": 35.5
+      },
+      {
+        "year": 2020,
+        "value": 39.1
+      },
+      {
+        "year": 2022,
+        "value": 31.9
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2010, "value": 28.8},
-        {"year": 2017, "value": 42.8},
-        {"year": 2020, "value": 42.8},
-        {"year": 2022, "value": 36.2}
+        {
+          "year": 2010,
+          "value": 28.8
+        },
+        {
+          "year": 2017,
+          "value": 42.8
+        },
+        {
+          "year": 2020,
+          "value": 42.8
+        },
+        {
+          "year": 2022,
+          "value": 36.2
+        }
       ],
       "female": [
-        {"year": 2010, "value": 23.6},
-        {"year": 2017, "value": 28.5},
-        {"year": 2020, "value": 35.8},
-        {"year": 2022, "value": 27.9}
+        {
+          "year": 2010,
+          "value": 23.6
+        },
+        {
+          "year": 2017,
+          "value": 28.5
+        },
+        {
+          "year": 2020,
+          "value": 35.8
+        },
+        {
+          "year": 2022,
+          "value": 27.9
+        }
       ]
     }
   },
@@ -189,41 +480,131 @@
     "trendBaseline": "2007 NPHS baseline (13.3%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 1992, "value": 18.3},
-      {"year": 1998, "value": 15.0},
-      {"year": 2004, "value": 12.6},
-      {"year": 2007, "value": 13.3},
-      {"year": 2010, "value": 13.9},
-      {"year": 2013, "value": 13.1},
-      {"year": 2017, "value": 11.8},
-      {"year": 2019, "value": 10.6},
-      {"year": 2020, "value": 10.1},
-      {"year": 2021, "value": 10.4},
-      {"year": 2022, "value": 9.2},
-      {"year": 2023, "value": 8.8}
+      {
+        "year": 1992,
+        "value": 18.3
+      },
+      {
+        "year": 1998,
+        "value": 15
+      },
+      {
+        "year": 2004,
+        "value": 12.6
+      },
+      {
+        "year": 2007,
+        "value": 13.3
+      },
+      {
+        "year": 2010,
+        "value": 13.9
+      },
+      {
+        "year": 2013,
+        "value": 13.1
+      },
+      {
+        "year": 2017,
+        "value": 11.8
+      },
+      {
+        "year": 2019,
+        "value": 10.6
+      },
+      {
+        "year": 2020,
+        "value": 10.1
+      },
+      {
+        "year": 2021,
+        "value": 10.4
+      },
+      {
+        "year": 2022,
+        "value": 9.2
+      },
+      {
+        "year": 2023,
+        "value": 8.8
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2007, "value": 23.1},
-        {"year": 2010, "value": 24.0},
-        {"year": 2013, "value": 23.0},
-        {"year": 2017, "value": 20.6},
-        {"year": 2019, "value": 18.4},
-        {"year": 2020, "value": 17.0},
-        {"year": 2021, "value": 17.8},
-        {"year": 2022, "value": 16.0},
-        {"year": 2023, "value": 15.7}
+        {
+          "year": 2007,
+          "value": 23.1
+        },
+        {
+          "year": 2010,
+          "value": 24
+        },
+        {
+          "year": 2013,
+          "value": 23
+        },
+        {
+          "year": 2017,
+          "value": 20.6
+        },
+        {
+          "year": 2019,
+          "value": 18.4
+        },
+        {
+          "year": 2020,
+          "value": 17
+        },
+        {
+          "year": 2021,
+          "value": 17.8
+        },
+        {
+          "year": 2022,
+          "value": 16
+        },
+        {
+          "year": 2023,
+          "value": 15.7
+        }
       ],
       "female": [
-        {"year": 2007, "value": 3.8},
-        {"year": 2010, "value": 4.1},
-        {"year": 2013, "value": 3.6},
-        {"year": 2017, "value": 3.3},
-        {"year": 2019, "value": 3.2},
-        {"year": 2020, "value": 3.4},
-        {"year": 2021, "value": 3.3},
-        {"year": 2022, "value": 2.7},
-        {"year": 2023, "value": 2.3}
+        {
+          "year": 2007,
+          "value": 3.8
+        },
+        {
+          "year": 2010,
+          "value": 4.1
+        },
+        {
+          "year": 2013,
+          "value": 3.6
+        },
+        {
+          "year": 2017,
+          "value": 3.3
+        },
+        {
+          "year": 2019,
+          "value": 3.2
+        },
+        {
+          "year": 2020,
+          "value": 3.4
+        },
+        {
+          "year": 2021,
+          "value": 3.3
+        },
+        {
+          "year": 2022,
+          "value": 2.7
+        },
+        {
+          "year": 2023,
+          "value": 2.3
+        }
       ]
     }
   },
@@ -236,14 +617,38 @@
     "trendBaseline": "2015 baseline (S$8.6B)",
     "singstatTableId": "M870391",
     "data": [
-      {"year": 2015, "value": 8.6},
-      {"year": 2016, "value": 9.3},
-      {"year": 2017, "value": 9.8},
-      {"year": 2018, "value": 10.1},
-      {"year": 2019, "value": 11.1},
-      {"year": 2020, "value": 15.2},
-      {"year": 2021, "value": 16.9},
-      {"year": 2022, "value": 16.8}
+      {
+        "year": 2015,
+        "value": 8.6
+      },
+      {
+        "year": 2016,
+        "value": 9.3
+      },
+      {
+        "year": 2017,
+        "value": 9.8
+      },
+      {
+        "year": 2018,
+        "value": 10.1
+      },
+      {
+        "year": 2019,
+        "value": 11.1
+      },
+      {
+        "year": 2020,
+        "value": 15.2
+      },
+      {
+        "year": 2021,
+        "value": 16.9
+      },
+      {
+        "year": 2022,
+        "value": 16.8
+      }
     ]
   },
   "chronic_disease_screening": {
@@ -255,38 +660,119 @@
     "trendBaseline": "2007 baseline (58.1%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 2007, "value": 58.1},
-      {"year": 2010, "value": 45.2},
-      {"year": 2013, "value": 56.0},
-      {"year": 2017, "value": 66.4},
-      {"year": 2019, "value": 66.3},
-      {"year": 2020, "value": 63.0},
-      {"year": 2021, "value": 59.2},
-      {"year": 2022, "value": 60.3},
-      {"year": 2023, "value": 62.6}
+      {
+        "year": 2007,
+        "value": 58.1
+      },
+      {
+        "year": 2010,
+        "value": 45.2
+      },
+      {
+        "year": 2013,
+        "value": 56
+      },
+      {
+        "year": 2017,
+        "value": 66.4
+      },
+      {
+        "year": 2019,
+        "value": 66.3
+      },
+      {
+        "year": 2020,
+        "value": 63
+      },
+      {
+        "year": 2021,
+        "value": 59.2
+      },
+      {
+        "year": 2022,
+        "value": 60.3
+      },
+      {
+        "year": 2023,
+        "value": 62.6
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2007, "value": 59.9},
-        {"year": 2010, "value": 47.8},
-        {"year": 2013, "value": 55.0},
-        {"year": 2017, "value": 65.9},
-        {"year": 2019, "value": 67.5},
-        {"year": 2020, "value": 63.9},
-        {"year": 2021, "value": 61.3},
-        {"year": 2022, "value": 59.2},
-        {"year": 2023, "value": 61.9}
+        {
+          "year": 2007,
+          "value": 59.9
+        },
+        {
+          "year": 2010,
+          "value": 47.8
+        },
+        {
+          "year": 2013,
+          "value": 55
+        },
+        {
+          "year": 2017,
+          "value": 65.9
+        },
+        {
+          "year": 2019,
+          "value": 67.5
+        },
+        {
+          "year": 2020,
+          "value": 63.9
+        },
+        {
+          "year": 2021,
+          "value": 61.3
+        },
+        {
+          "year": 2022,
+          "value": 59.2
+        },
+        {
+          "year": 2023,
+          "value": 61.9
+        }
       ],
       "female": [
-        {"year": 2007, "value": 56.4},
-        {"year": 2010, "value": 42.8},
-        {"year": 2013, "value": 56.9},
-        {"year": 2017, "value": 66.8},
-        {"year": 2019, "value": 65.2},
-        {"year": 2020, "value": 62.2},
-        {"year": 2021, "value": 57.5},
-        {"year": 2022, "value": 61.1},
-        {"year": 2023, "value": 63.3}
+        {
+          "year": 2007,
+          "value": 56.4
+        },
+        {
+          "year": 2010,
+          "value": 42.8
+        },
+        {
+          "year": 2013,
+          "value": 56.9
+        },
+        {
+          "year": 2017,
+          "value": 66.8
+        },
+        {
+          "year": 2019,
+          "value": 65.2
+        },
+        {
+          "year": 2020,
+          "value": 62.2
+        },
+        {
+          "year": 2021,
+          "value": 57.5
+        },
+        {
+          "year": 2022,
+          "value": 61.1
+        },
+        {
+          "year": 2023,
+          "value": 63.3
+        }
       ]
     }
   },
@@ -299,35 +785,107 @@
     "trendBaseline": "2007 baseline (4.3%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 2007, "value": 4.3},
-      {"year": 2013, "value": 7.4},
-      {"year": 2017, "value": 8.8},
-      {"year": 2019, "value": 10.2},
-      {"year": 2020, "value": 10.5},
-      {"year": 2021, "value": 9.6},
-      {"year": 2022, "value": 9.4},
-      {"year": 2023, "value": 10.3}
+      {
+        "year": 2007,
+        "value": 4.3
+      },
+      {
+        "year": 2013,
+        "value": 7.4
+      },
+      {
+        "year": 2017,
+        "value": 8.8
+      },
+      {
+        "year": 2019,
+        "value": 10.2
+      },
+      {
+        "year": 2020,
+        "value": 10.5
+      },
+      {
+        "year": 2021,
+        "value": 9.6
+      },
+      {
+        "year": 2022,
+        "value": 9.4
+      },
+      {
+        "year": 2023,
+        "value": 10.3
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2007, "value": 6.4},
-        {"year": 2013, "value": 10.7},
-        {"year": 2017, "value": 13.1},
-        {"year": 2019, "value": 14.9},
-        {"year": 2020, "value": 14.6},
-        {"year": 2021, "value": 13.8},
-        {"year": 2022, "value": 13.1},
-        {"year": 2023, "value": 13.7}
+        {
+          "year": 2007,
+          "value": 6.4
+        },
+        {
+          "year": 2013,
+          "value": 10.7
+        },
+        {
+          "year": 2017,
+          "value": 13.1
+        },
+        {
+          "year": 2019,
+          "value": 14.9
+        },
+        {
+          "year": 2020,
+          "value": 14.6
+        },
+        {
+          "year": 2021,
+          "value": 13.8
+        },
+        {
+          "year": 2022,
+          "value": 13.1
+        },
+        {
+          "year": 2023,
+          "value": 13.7
+        }
       ],
       "female": [
-        {"year": 2007, "value": 2.2},
-        {"year": 2013, "value": 4.2},
-        {"year": 2017, "value": 4.7},
-        {"year": 2019, "value": 5.7},
-        {"year": 2020, "value": 6.5},
-        {"year": 2021, "value": 5.6},
-        {"year": 2022, "value": 5.7},
-        {"year": 2023, "value": 7.1}
+        {
+          "year": 2007,
+          "value": 2.2
+        },
+        {
+          "year": 2013,
+          "value": 4.2
+        },
+        {
+          "year": 2017,
+          "value": 4.7
+        },
+        {
+          "year": 2019,
+          "value": 5.7
+        },
+        {
+          "year": 2020,
+          "value": 6.5
+        },
+        {
+          "year": 2021,
+          "value": 5.6
+        },
+        {
+          "year": 2022,
+          "value": 5.7
+        },
+        {
+          "year": 2023,
+          "value": 7.1
+        }
       ]
     }
   },
@@ -340,35 +898,107 @@
     "trendBaseline": "2007 baseline (85.4%)",
     "singstatTableId": "M870401",
     "data": [
-      {"year": 2007, "value": 85.4},
-      {"year": 2013, "value": 79.5},
-      {"year": 2017, "value": 84.0},
-      {"year": 2019, "value": 84.6},
-      {"year": 2020, "value": 80.6},
-      {"year": 2021, "value": 76.0},
-      {"year": 2022, "value": 74.9},
-      {"year": 2023, "value": 78.5}
+      {
+        "year": 2007,
+        "value": 85.4
+      },
+      {
+        "year": 2013,
+        "value": 79.5
+      },
+      {
+        "year": 2017,
+        "value": 84
+      },
+      {
+        "year": 2019,
+        "value": 84.6
+      },
+      {
+        "year": 2020,
+        "value": 80.6
+      },
+      {
+        "year": 2021,
+        "value": 76
+      },
+      {
+        "year": 2022,
+        "value": 74.9
+      },
+      {
+        "year": 2023,
+        "value": 78.5
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 2007, "value": 85.2},
-        {"year": 2013, "value": 82.5},
-        {"year": 2017, "value": 84.6},
-        {"year": 2019, "value": 85.6},
-        {"year": 2020, "value": 80.4},
-        {"year": 2021, "value": 78.1},
-        {"year": 2022, "value": 76.7},
-        {"year": 2023, "value": 80.0}
+        {
+          "year": 2007,
+          "value": 85.2
+        },
+        {
+          "year": 2013,
+          "value": 82.5
+        },
+        {
+          "year": 2017,
+          "value": 84.6
+        },
+        {
+          "year": 2019,
+          "value": 85.6
+        },
+        {
+          "year": 2020,
+          "value": 80.4
+        },
+        {
+          "year": 2021,
+          "value": 78.1
+        },
+        {
+          "year": 2022,
+          "value": 76.7
+        },
+        {
+          "year": 2023,
+          "value": 80
+        }
       ],
       "female": [
-        {"year": 2007, "value": 85.7},
-        {"year": 2013, "value": 76.6},
-        {"year": 2017, "value": 83.5},
-        {"year": 2019, "value": 83.6},
-        {"year": 2020, "value": 80.7},
-        {"year": 2021, "value": 74.1},
-        {"year": 2022, "value": 73.2},
-        {"year": 2023, "value": 76.9}
+        {
+          "year": 2007,
+          "value": 85.7
+        },
+        {
+          "year": 2013,
+          "value": 76.6
+        },
+        {
+          "year": 2017,
+          "value": 83.5
+        },
+        {
+          "year": 2019,
+          "value": 83.6
+        },
+        {
+          "year": 2020,
+          "value": 80.7
+        },
+        {
+          "year": 2021,
+          "value": 74.1
+        },
+        {
+          "year": 2022,
+          "value": 73.2
+        },
+        {
+          "year": 2023,
+          "value": 76.9
+        }
       ]
     }
   },
@@ -380,18 +1010,54 @@
     "tooltip": "Measured during the annual School Health Service screening of Primary 1 students (age ~7). Combines overweight and severely overweight categories. The spike in 2021 (13.4%) likely reflects reduced physical activity during COVID-19 school closures.",
     "singstatTableId": "M870381",
     "data": [
-      {"year": 2013, "value": 12.0},
-      {"year": 2014, "value": 12.0},
-      {"year": 2015, "value": 12.0},
-      {"year": 2016, "value": 13.0},
-      {"year": 2017, "value": 13.0},
-      {"year": 2018, "value": 13.0},
-      {"year": 2019, "value": 12.0},
-      {"year": 2020, "value": 10.1},
-      {"year": 2021, "value": 13.4},
-      {"year": 2022, "value": 12.1},
-      {"year": 2023, "value": 9.5},
-      {"year": 2024, "value": 8.9}
+      {
+        "year": 2013,
+        "value": 12
+      },
+      {
+        "year": 2014,
+        "value": 12
+      },
+      {
+        "year": 2015,
+        "value": 12
+      },
+      {
+        "year": 2016,
+        "value": 13
+      },
+      {
+        "year": 2017,
+        "value": 13
+      },
+      {
+        "year": 2018,
+        "value": 13
+      },
+      {
+        "year": 2019,
+        "value": 12
+      },
+      {
+        "year": 2020,
+        "value": 10.1
+      },
+      {
+        "year": 2021,
+        "value": 13.4
+      },
+      {
+        "year": 2022,
+        "value": 12.1
+      },
+      {
+        "year": 2023,
+        "value": 9.5
+      },
+      {
+        "year": 2024,
+        "value": 8.9
+      }
     ]
   },
   "health_personnel": {
@@ -402,17 +1068,50 @@
     "tooltip": "Includes all registered medical practitioners (GPs, specialists, house officers). The gradual increase reflects Singapore's efforts to expand healthcare workforce capacity to meet growing demand from an aging population.",
     "singstatTableId": "M870001",
     "data": [
-      {"year": 2000, "value": 14},
-      {"year": 2005, "value": 16},
-      {"year": 2010, "value": 19},
-      {"year": 2015, "value": 23},
-      {"year": 2018, "value": 24},
-      {"year": 2019, "value": 25},
-      {"year": 2020, "value": 26},
-      {"year": 2021, "value": 27},
-      {"year": 2022, "value": 28},
-      {"year": 2023, "value": 28},
-      {"year": 2024, "value": 29}
+      {
+        "year": 2000,
+        "value": 14
+      },
+      {
+        "year": 2005,
+        "value": 16
+      },
+      {
+        "year": 2010,
+        "value": 19
+      },
+      {
+        "year": 2015,
+        "value": 23
+      },
+      {
+        "year": 2018,
+        "value": 24
+      },
+      {
+        "year": 2019,
+        "value": 25
+      },
+      {
+        "year": 2020,
+        "value": 26
+      },
+      {
+        "year": 2021,
+        "value": 27
+      },
+      {
+        "year": 2022,
+        "value": 28
+      },
+      {
+        "year": 2023,
+        "value": 28
+      },
+      {
+        "year": 2024,
+        "value": 29
+      }
     ]
   },
   "hospital_beds": {
@@ -423,14 +1122,38 @@
     "tooltip": "Includes public, not-for-profit, and private acute hospital beds. Does not include community hospital or psychiatric hospital beds. The gradual increase reflects infrastructure expansion to serve a growing and aging population.",
     "singstatTableId": "M870301",
     "data": [
-      {"year": 2010, "value": 9993},
-      {"year": 2015, "value": 10745},
-      {"year": 2018, "value": 11208},
-      {"year": 2019, "value": 11412},
-      {"year": 2020, "value": 11572},
-      {"year": 2021, "value": 11704},
-      {"year": 2022, "value": 11830},
-      {"year": 2023, "value": 12025}
+      {
+        "year": 2010,
+        "value": 9993
+      },
+      {
+        "year": 2015,
+        "value": 10745
+      },
+      {
+        "year": 2018,
+        "value": 11208
+      },
+      {
+        "year": 2019,
+        "value": 11412
+      },
+      {
+        "year": 2020,
+        "value": 11572
+      },
+      {
+        "year": 2021,
+        "value": 11704
+      },
+      {
+        "year": 2022,
+        "value": 11830
+      },
+      {
+        "year": 2023,
+        "value": 12025
+      }
     ]
   },
   "cancer_incidence": {
@@ -440,91 +1163,307 @@
     "source": "Singapore Cancer Registry Annual Report 2023",
     "tooltip": "Cancer incidence has risen steadily, driven partly by aging population and better detection. Despite rising diagnoses, survival rates have improved significantly. 1 in 4 Singaporeans will develop cancer in their lifetime.",
     "data": [
-      {"year": 1970, "value": 189.5},
-      {"year": 1975, "value": 201.1},
-      {"year": 1980, "value": 210.4},
-      {"year": 1985, "value": 210.7},
-      {"year": 1990, "value": 211.8},
-      {"year": 1995, "value": 213.6},
-      {"year": 2000, "value": 217.0},
-      {"year": 2005, "value": 218.0},
-      {"year": 2010, "value": 222.2},
-      {"year": 2015, "value": 233.9},
-      {"year": 2020, "value": 242.9},
-      {"year": 2023, "value": 241.2}
+      {
+        "year": 1970,
+        "value": 189.5
+      },
+      {
+        "year": 1975,
+        "value": 201.1
+      },
+      {
+        "year": 1980,
+        "value": 210.4
+      },
+      {
+        "year": 1985,
+        "value": 210.7
+      },
+      {
+        "year": 1990,
+        "value": 211.8
+      },
+      {
+        "year": 1995,
+        "value": 213.6
+      },
+      {
+        "year": 2000,
+        "value": 217
+      },
+      {
+        "year": 2005,
+        "value": 218
+      },
+      {
+        "year": 2010,
+        "value": 222.2
+      },
+      {
+        "year": 2015,
+        "value": 233.9
+      },
+      {
+        "year": 2020,
+        "value": 242.9
+      },
+      {
+        "year": 2023,
+        "value": 241.2
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 1970, "value": 229.0},
-        {"year": 1975, "value": 247.0},
-        {"year": 1980, "value": 251.0},
-        {"year": 1985, "value": 244.2},
-        {"year": 1990, "value": 237.6},
-        {"year": 1995, "value": 236.7},
-        {"year": 2000, "value": 235.3},
-        {"year": 2005, "value": 235.6},
-        {"year": 2010, "value": 235.7},
-        {"year": 2015, "value": 238.6},
-        {"year": 2020, "value": 243.7},
-        {"year": 2023, "value": 233.7}
+        {
+          "year": 1970,
+          "value": 229
+        },
+        {
+          "year": 1975,
+          "value": 247
+        },
+        {
+          "year": 1980,
+          "value": 251
+        },
+        {
+          "year": 1985,
+          "value": 244.2
+        },
+        {
+          "year": 1990,
+          "value": 237.6
+        },
+        {
+          "year": 1995,
+          "value": 236.7
+        },
+        {
+          "year": 2000,
+          "value": 235.3
+        },
+        {
+          "year": 2005,
+          "value": 235.6
+        },
+        {
+          "year": 2010,
+          "value": 235.7
+        },
+        {
+          "year": 2015,
+          "value": 238.6
+        },
+        {
+          "year": 2020,
+          "value": 243.7
+        },
+        {
+          "year": 2023,
+          "value": 233.7
+        }
       ],
       "female": [
-        {"year": 1970, "value": 155.6},
-        {"year": 1975, "value": 161.5},
-        {"year": 1980, "value": 176.0},
-        {"year": 1985, "value": 184.0},
-        {"year": 1990, "value": 191.9},
-        {"year": 1995, "value": 196.5},
-        {"year": 2000, "value": 204.7},
-        {"year": 2005, "value": 207.6},
-        {"year": 2010, "value": 214.8},
-        {"year": 2015, "value": 233.8},
-        {"year": 2020, "value": 245.3},
-        {"year": 2023, "value": 250.0}
+        {
+          "year": 1970,
+          "value": 155.6
+        },
+        {
+          "year": 1975,
+          "value": 161.5
+        },
+        {
+          "year": 1980,
+          "value": 176
+        },
+        {
+          "year": 1985,
+          "value": 184
+        },
+        {
+          "year": 1990,
+          "value": 191.9
+        },
+        {
+          "year": 1995,
+          "value": 196.5
+        },
+        {
+          "year": 2000,
+          "value": 204.7
+        },
+        {
+          "year": 2005,
+          "value": 207.6
+        },
+        {
+          "year": 2010,
+          "value": 214.8
+        },
+        {
+          "year": 2015,
+          "value": 233.8
+        },
+        {
+          "year": 2020,
+          "value": 245.3
+        },
+        {
+          "year": 2023,
+          "value": 250
+        }
       ]
     },
     "by_ethnicity": {
       "chinese": [
-        {"year": 1970, "value": 203.5},
-        {"year": 1975, "value": 216.0},
-        {"year": 1980, "value": 227.1},
-        {"year": 1985, "value": 228.3},
-        {"year": 1990, "value": 229.6},
-        {"year": 1995, "value": 230.5},
-        {"year": 2000, "value": 231.7},
-        {"year": 2005, "value": 229.6},
-        {"year": 2010, "value": 230.1},
-        {"year": 2015, "value": 238.9},
-        {"year": 2020, "value": 246.2},
-        {"year": 2023, "value": 246.6}
+        {
+          "year": 1970,
+          "value": 203.5
+        },
+        {
+          "year": 1975,
+          "value": 216
+        },
+        {
+          "year": 1980,
+          "value": 227.1
+        },
+        {
+          "year": 1985,
+          "value": 228.3
+        },
+        {
+          "year": 1990,
+          "value": 229.6
+        },
+        {
+          "year": 1995,
+          "value": 230.5
+        },
+        {
+          "year": 2000,
+          "value": 231.7
+        },
+        {
+          "year": 2005,
+          "value": 229.6
+        },
+        {
+          "year": 2010,
+          "value": 230.1
+        },
+        {
+          "year": 2015,
+          "value": 238.9
+        },
+        {
+          "year": 2020,
+          "value": 246.2
+        },
+        {
+          "year": 2023,
+          "value": 246.6
+        }
       ],
       "malay": [
-        {"year": 1970, "value": 96.4},
-        {"year": 1975, "value": 108.2},
-        {"year": 1980, "value": 118.1},
-        {"year": 1985, "value": 125.6},
-        {"year": 1990, "value": 141.6},
-        {"year": 1995, "value": 153.0},
-        {"year": 2000, "value": 169.1},
-        {"year": 2005, "value": 174.2},
-        {"year": 2010, "value": 192.9},
-        {"year": 2015, "value": 224.1},
-        {"year": 2020, "value": 237.5},
-        {"year": 2023, "value": 241.7}
+        {
+          "year": 1970,
+          "value": 96.4
+        },
+        {
+          "year": 1975,
+          "value": 108.2
+        },
+        {
+          "year": 1980,
+          "value": 118.1
+        },
+        {
+          "year": 1985,
+          "value": 125.6
+        },
+        {
+          "year": 1990,
+          "value": 141.6
+        },
+        {
+          "year": 1995,
+          "value": 153
+        },
+        {
+          "year": 2000,
+          "value": 169.1
+        },
+        {
+          "year": 2005,
+          "value": 174.2
+        },
+        {
+          "year": 2010,
+          "value": 192.9
+        },
+        {
+          "year": 2015,
+          "value": 224.1
+        },
+        {
+          "year": 2020,
+          "value": 237.5
+        },
+        {
+          "year": 2023,
+          "value": 241.7
+        }
       ],
       "indian": [
-        {"year": 1970, "value": 140.6},
-        {"year": 1975, "value": 158.8},
-        {"year": 1980, "value": 163.1},
-        {"year": 1985, "value": 145.1},
-        {"year": 1990, "value": 121.3},
-        {"year": 1995, "value": 130.6},
-        {"year": 2000, "value": 121.6},
-        {"year": 2005, "value": 140.8},
-        {"year": 2010, "value": 156.7},
-        {"year": 2015, "value": 171.0},
-        {"year": 2020, "value": 168.8},
-        {"year": 2023, "value": 181.8}
+        {
+          "year": 1970,
+          "value": 140.6
+        },
+        {
+          "year": 1975,
+          "value": 158.8
+        },
+        {
+          "year": 1980,
+          "value": 163.1
+        },
+        {
+          "year": 1985,
+          "value": 145.1
+        },
+        {
+          "year": 1990,
+          "value": 121.3
+        },
+        {
+          "year": 1995,
+          "value": 130.6
+        },
+        {
+          "year": 2000,
+          "value": 121.6
+        },
+        {
+          "year": 2005,
+          "value": 140.8
+        },
+        {
+          "year": 2010,
+          "value": 156.7
+        },
+        {
+          "year": 2015,
+          "value": 171
+        },
+        {
+          "year": 2020,
+          "value": 168.8
+        },
+        {
+          "year": 2023,
+          "value": 181.8
+        }
       ]
     }
   },
@@ -535,159 +1474,1920 @@
     "source": "Singapore Cancer Registry Annual Report 2023",
     "tooltip": "Despite rising cancer incidence, mortality rates have declined steadily since the 1980s — reflecting advances in early detection, treatment, and screening programmes like Screen for Life.",
     "data": [
-      {"year": 1970, "value": 93.2},
-      {"year": 1975, "value": 118.9},
-      {"year": 1980, "value": 128.5},
-      {"year": 1985, "value": 124.3},
-      {"year": 1990, "value": 125.7},
-      {"year": 1995, "value": 113.1},
-      {"year": 2000, "value": 114.4},
-      {"year": 2005, "value": 98.4},
-      {"year": 2010, "value": 90.8},
-      {"year": 2015, "value": 86.9},
-      {"year": 2020, "value": 75.0},
-      {"year": 2023, "value": 65.1}
+      {
+        "year": 1970,
+        "value": 93.2
+      },
+      {
+        "year": 1975,
+        "value": 118.9
+      },
+      {
+        "year": 1980,
+        "value": 128.5
+      },
+      {
+        "year": 1985,
+        "value": 124.3
+      },
+      {
+        "year": 1990,
+        "value": 125.7
+      },
+      {
+        "year": 1995,
+        "value": 113.1
+      },
+      {
+        "year": 2000,
+        "value": 114.4
+      },
+      {
+        "year": 2005,
+        "value": 98.4
+      },
+      {
+        "year": 2010,
+        "value": 90.8
+      },
+      {
+        "year": 2015,
+        "value": 86.9
+      },
+      {
+        "year": 2020,
+        "value": 75
+      },
+      {
+        "year": 2023,
+        "value": 65.1
+      }
     ],
     "by_gender": {
       "male": [
-        {"year": 1970, "value": 121.8},
-        {"year": 1975, "value": 155.0},
-        {"year": 1980, "value": 165.1},
-        {"year": 1985, "value": 157.9},
-        {"year": 1990, "value": 159.6},
-        {"year": 1995, "value": 142.3},
-        {"year": 2000, "value": 145.0},
-        {"year": 2005, "value": 123.9},
-        {"year": 2010, "value": 111.4},
-        {"year": 2015, "value": 104.4},
-        {"year": 2020, "value": 88.4},
-        {"year": 2023, "value": 76.8}
+        {
+          "year": 1970,
+          "value": 121.8
+        },
+        {
+          "year": 1975,
+          "value": 155
+        },
+        {
+          "year": 1980,
+          "value": 165.1
+        },
+        {
+          "year": 1985,
+          "value": 157.9
+        },
+        {
+          "year": 1990,
+          "value": 159.6
+        },
+        {
+          "year": 1995,
+          "value": 142.3
+        },
+        {
+          "year": 2000,
+          "value": 145
+        },
+        {
+          "year": 2005,
+          "value": 123.9
+        },
+        {
+          "year": 2010,
+          "value": 111.4
+        },
+        {
+          "year": 2015,
+          "value": 104.4
+        },
+        {
+          "year": 2020,
+          "value": 88.4
+        },
+        {
+          "year": 2023,
+          "value": 76.8
+        }
       ],
       "female": [
-        {"year": 1970, "value": 67.5},
-        {"year": 1975, "value": 86.4},
-        {"year": 1980, "value": 96.3},
-        {"year": 1985, "value": 95.1},
-        {"year": 1990, "value": 96.5},
-        {"year": 1995, "value": 88.7},
-        {"year": 2000, "value": 89.1},
-        {"year": 2005, "value": 78.1},
-        {"year": 2010, "value": 74.7},
-        {"year": 2015, "value": 73.0},
-        {"year": 2020, "value": 64.4},
-        {"year": 2023, "value": 55.1}
+        {
+          "year": 1970,
+          "value": 67.5
+        },
+        {
+          "year": 1975,
+          "value": 86.4
+        },
+        {
+          "year": 1980,
+          "value": 96.3
+        },
+        {
+          "year": 1985,
+          "value": 95.1
+        },
+        {
+          "year": 1990,
+          "value": 96.5
+        },
+        {
+          "year": 1995,
+          "value": 88.7
+        },
+        {
+          "year": 2000,
+          "value": 89.1
+        },
+        {
+          "year": 2005,
+          "value": 78.1
+        },
+        {
+          "year": 2010,
+          "value": 74.7
+        },
+        {
+          "year": 2015,
+          "value": 73
+        },
+        {
+          "year": 2020,
+          "value": 64.4
+        },
+        {
+          "year": 2023,
+          "value": 55.1
+        }
       ]
     },
     "by_ethnicity": {
       "chinese": [
-        {"year": 1970, "value": 100.9},
-        {"year": 1975, "value": 129.0},
-        {"year": 1980, "value": 140.2},
-        {"year": 1985, "value": 136.1},
-        {"year": 1990, "value": 136.6},
-        {"year": 1995, "value": 122.3},
-        {"year": 2000, "value": 122.7},
-        {"year": 2005, "value": 103.3},
-        {"year": 2010, "value": 93.6},
-        {"year": 2015, "value": 87.7},
-        {"year": 2020, "value": 74.0},
-        {"year": 2023, "value": 64.0}
+        {
+          "year": 1970,
+          "value": 100.9
+        },
+        {
+          "year": 1975,
+          "value": 129
+        },
+        {
+          "year": 1980,
+          "value": 140.2
+        },
+        {
+          "year": 1985,
+          "value": 136.1
+        },
+        {
+          "year": 1990,
+          "value": 136.6
+        },
+        {
+          "year": 1995,
+          "value": 122.3
+        },
+        {
+          "year": 2000,
+          "value": 122.7
+        },
+        {
+          "year": 2005,
+          "value": 103.3
+        },
+        {
+          "year": 2010,
+          "value": 93.6
+        },
+        {
+          "year": 2015,
+          "value": 87.7
+        },
+        {
+          "year": 2020,
+          "value": 74
+        },
+        {
+          "year": 2023,
+          "value": 64
+        }
       ],
       "malay": [
-        {"year": 1970, "value": 45.4},
-        {"year": 1975, "value": 61.4},
-        {"year": 1980, "value": 65.5},
-        {"year": 1985, "value": 73.5},
-        {"year": 1990, "value": 86.3},
-        {"year": 1995, "value": 85.0},
-        {"year": 2000, "value": 87.0},
-        {"year": 2005, "value": 85.9},
-        {"year": 2010, "value": 88.0},
-        {"year": 2015, "value": 94.4},
-        {"year": 2020, "value": 92.6},
-        {"year": 2023, "value": 84.2}
+        {
+          "year": 1970,
+          "value": 45.4
+        },
+        {
+          "year": 1975,
+          "value": 61.4
+        },
+        {
+          "year": 1980,
+          "value": 65.5
+        },
+        {
+          "year": 1985,
+          "value": 73.5
+        },
+        {
+          "year": 1990,
+          "value": 86.3
+        },
+        {
+          "year": 1995,
+          "value": 85
+        },
+        {
+          "year": 2000,
+          "value": 87
+        },
+        {
+          "year": 2005,
+          "value": 85.9
+        },
+        {
+          "year": 2010,
+          "value": 88
+        },
+        {
+          "year": 2015,
+          "value": 94.4
+        },
+        {
+          "year": 2020,
+          "value": 92.6
+        },
+        {
+          "year": 2023,
+          "value": 84.2
+        }
       ],
       "indian": [
-        {"year": 1970, "value": 63.2},
-        {"year": 1975, "value": 78.6},
-        {"year": 1980, "value": 90.7},
-        {"year": 1985, "value": 73.8},
-        {"year": 1990, "value": 67.6},
-        {"year": 1995, "value": 55.7},
-        {"year": 2000, "value": 58.4},
-        {"year": 2005, "value": 61.3},
-        {"year": 2010, "value": 64.0},
-        {"year": 2015, "value": 63.3},
-        {"year": 2020, "value": 58.3},
-        {"year": 2023, "value": 48.1}
+        {
+          "year": 1970,
+          "value": 63.2
+        },
+        {
+          "year": 1975,
+          "value": 78.6
+        },
+        {
+          "year": 1980,
+          "value": 90.7
+        },
+        {
+          "year": 1985,
+          "value": 73.8
+        },
+        {
+          "year": 1990,
+          "value": 67.6
+        },
+        {
+          "year": 1995,
+          "value": 55.7
+        },
+        {
+          "year": 2000,
+          "value": 58.4
+        },
+        {
+          "year": 2005,
+          "value": 61.3
+        },
+        {
+          "year": 2010,
+          "value": 64
+        },
+        {
+          "year": 2015,
+          "value": 63.3
+        },
+        {
+          "year": 2020,
+          "value": 58.3
+        },
+        {
+          "year": 2023,
+          "value": 48.1
+        }
       ]
     }
   },
   "deaths_by_cause": {
     "label": "Deaths by Cause",
     "unit": "deaths",
-    "description": "Annual deaths in Singapore broken down by broad cause categories.",
-    "source": "SingStat Table M810131",
-    "tooltip": "Based on certified cause of death. Cancer (neoplasms), heart disease, and pneumonia are consistently the top causes. Pneumonia deaths surged during COVID-19. These are absolute numbers — rates per 100,000 would differ due to population growth.",
+    "chartType": "stackedArea",
+    "description": "Annual deaths in Singapore broken down by major cause, showing the epidemiological transition from infectious diseases to chronic non-communicable diseases over five decades.",
+    "source": "Registry of Births and Deaths, SingStat Table M810131",
+    "tooltip": "Shows how Singapore's mortality profile shifted dramatically since 1969. Cancer, heart disease, and pneumonia now dominate, while infectious diseases have been nearly eliminated. \"Other Causes\" combines kidney disease, digestive system diseases, accidents and suicides, diabetes, nervous system diseases (including dementia), and remaining conditions.",
     "singstatTableId": "M810131",
     "categories": {
       "cancer": {
         "label": "Cancer",
         "data": [
-          {"year": 2015, "value": 6262},
-          {"year": 2018, "value": 6397},
-          {"year": 2019, "value": 6436},
-          {"year": 2020, "value": 6415},
-          {"year": 2021, "value": 6605},
-          {"year": 2022, "value": 6702},
-          {"year": 2023, "value": 6781},
-          {"year": 2024, "value": 7173},
-          {"year": 2025, "value": 7189}
+          {
+            "year": 1969,
+            "value": 1577
+          },
+          {
+            "year": 1970,
+            "value": 1633
+          },
+          {
+            "year": 1971,
+            "value": 1728
+          },
+          {
+            "year": 1972,
+            "value": 1821
+          },
+          {
+            "year": 1973,
+            "value": 1912
+          },
+          {
+            "year": 1974,
+            "value": 2002
+          },
+          {
+            "year": 1975,
+            "value": 2123
+          },
+          {
+            "year": 1976,
+            "value": 2278
+          },
+          {
+            "year": 1977,
+            "value": 2326
+          },
+          {
+            "year": 1978,
+            "value": 2415
+          },
+          {
+            "year": 1979,
+            "value": 2542
+          },
+          {
+            "year": 1980,
+            "value": 2623
+          },
+          {
+            "year": 1981,
+            "value": 2672
+          },
+          {
+            "year": 1982,
+            "value": 2729
+          },
+          {
+            "year": 1983,
+            "value": 2903
+          },
+          {
+            "year": 1984,
+            "value": 2817
+          },
+          {
+            "year": 1985,
+            "value": 2939
+          },
+          {
+            "year": 1986,
+            "value": 2921
+          },
+          {
+            "year": 1987,
+            "value": 3169
+          },
+          {
+            "year": 1988,
+            "value": 3233
+          },
+          {
+            "year": 1989,
+            "value": 3321
+          },
+          {
+            "year": 1990,
+            "value": 3314
+          },
+          {
+            "year": 1991,
+            "value": 3405
+          },
+          {
+            "year": 1992,
+            "value": 3497
+          },
+          {
+            "year": 1993,
+            "value": 3560
+          },
+          {
+            "year": 1994,
+            "value": 3785
+          },
+          {
+            "year": 1995,
+            "value": 3921
+          },
+          {
+            "year": 1996,
+            "value": 4034
+          },
+          {
+            "year": 1997,
+            "value": 4178
+          },
+          {
+            "year": 1998,
+            "value": 4091
+          },
+          {
+            "year": 1999,
+            "value": 4168
+          },
+          {
+            "year": 2000,
+            "value": 4278
+          },
+          {
+            "year": 2001,
+            "value": 4384
+          },
+          {
+            "year": 2002,
+            "value": 4465
+          },
+          {
+            "year": 2003,
+            "value": 4187
+          },
+          {
+            "year": 2004,
+            "value": 4353
+          },
+          {
+            "year": 2005,
+            "value": 4331
+          },
+          {
+            "year": 2006,
+            "value": 4722
+          },
+          {
+            "year": 2007,
+            "value": 4803
+          },
+          {
+            "year": 2008,
+            "value": 5081
+          },
+          {
+            "year": 2009,
+            "value": 5063
+          },
+          {
+            "year": 2010,
+            "value": 5078
+          },
+          {
+            "year": 2011,
+            "value": 5461
+          },
+          {
+            "year": 2012,
+            "value": 5651
+          },
+          {
+            "year": 2013,
+            "value": 5849
+          },
+          {
+            "year": 2014,
+            "value": 5790
+          },
+          {
+            "year": 2015,
+            "value": 5986
+          },
+          {
+            "year": 2016,
+            "value": 5993
+          },
+          {
+            "year": 2017,
+            "value": 6237
+          },
+          {
+            "year": 2018,
+            "value": 6243
+          },
+          {
+            "year": 2019,
+            "value": 6253
+          },
+          {
+            "year": 2020,
+            "value": 6480
+          },
+          {
+            "year": 2021,
+            "value": 6605
+          },
+          {
+            "year": 2022,
+            "value": 6702
+          },
+          {
+            "year": 2023,
+            "value": 6781
+          },
+          {
+            "year": 2024,
+            "value": 7173
+          }
         ]
       },
       "heart_disease": {
         "label": "Heart Disease",
         "data": [
-          {"year": 2015, "value": 5826},
-          {"year": 2018, "value": 5925},
-          {"year": 2019, "value": 5975},
-          {"year": 2020, "value": 6210},
-          {"year": 2021, "value": 6238},
-          {"year": 2022, "value": 6884},
-          {"year": 2023, "value": 6798},
-          {"year": 2024, "value": 6587},
-          {"year": 2025, "value": 6721}
+          {
+            "year": 1969,
+            "value": 1761
+          },
+          {
+            "year": 1970,
+            "value": 1780
+          },
+          {
+            "year": 1971,
+            "value": 1925
+          },
+          {
+            "year": 1972,
+            "value": 1819
+          },
+          {
+            "year": 1973,
+            "value": 1967
+          },
+          {
+            "year": 1974,
+            "value": 2014
+          },
+          {
+            "year": 1975,
+            "value": 2000
+          },
+          {
+            "year": 1976,
+            "value": 2283
+          },
+          {
+            "year": 1977,
+            "value": 2426
+          },
+          {
+            "year": 1978,
+            "value": 2518
+          },
+          {
+            "year": 1979,
+            "value": 2752
+          },
+          {
+            "year": 1980,
+            "value": 2777
+          },
+          {
+            "year": 1981,
+            "value": 2892
+          },
+          {
+            "year": 1982,
+            "value": 2866
+          },
+          {
+            "year": 1983,
+            "value": 2911
+          },
+          {
+            "year": 1984,
+            "value": 3156
+          },
+          {
+            "year": 1985,
+            "value": 3129
+          },
+          {
+            "year": 1986,
+            "value": 3028
+          },
+          {
+            "year": 1987,
+            "value": 3251
+          },
+          {
+            "year": 1988,
+            "value": 3318
+          },
+          {
+            "year": 1989,
+            "value": 3416
+          },
+          {
+            "year": 1990,
+            "value": 3385
+          },
+          {
+            "year": 1991,
+            "value": 3234
+          },
+          {
+            "year": 1992,
+            "value": 3457
+          },
+          {
+            "year": 1993,
+            "value": 3552
+          },
+          {
+            "year": 1994,
+            "value": 3653
+          },
+          {
+            "year": 1995,
+            "value": 3742
+          },
+          {
+            "year": 1996,
+            "value": 3984
+          },
+          {
+            "year": 1997,
+            "value": 3943
+          },
+          {
+            "year": 1998,
+            "value": 3950
+          },
+          {
+            "year": 1999,
+            "value": 4061
+          },
+          {
+            "year": 2000,
+            "value": 3976
+          },
+          {
+            "year": 2001,
+            "value": 4075
+          },
+          {
+            "year": 2002,
+            "value": 3856
+          },
+          {
+            "year": 2003,
+            "value": 4067
+          },
+          {
+            "year": 2004,
+            "value": 3714
+          },
+          {
+            "year": 2005,
+            "value": 3656
+          },
+          {
+            "year": 2006,
+            "value": 3833
+          },
+          {
+            "year": 2007,
+            "value": 4197
+          },
+          {
+            "year": 2008,
+            "value": 4201
+          },
+          {
+            "year": 2009,
+            "value": 4081
+          },
+          {
+            "year": 2010,
+            "value": 4161
+          },
+          {
+            "year": 2011,
+            "value": 3920
+          },
+          {
+            "year": 2012,
+            "value": 3848
+          },
+          {
+            "year": 2013,
+            "value": 3914
+          },
+          {
+            "year": 2014,
+            "value": 4165
+          },
+          {
+            "year": 2015,
+            "value": 4534
+          },
+          {
+            "year": 2016,
+            "value": 4576
+          },
+          {
+            "year": 2017,
+            "value": 4970
+          },
+          {
+            "year": 2018,
+            "value": 4939
+          },
+          {
+            "year": 2019,
+            "value": 5023
+          },
+          {
+            "year": 2020,
+            "value": 5633
+          },
+          {
+            "year": 2021,
+            "value": 6238
+          },
+          {
+            "year": 2022,
+            "value": 6884
+          },
+          {
+            "year": 2023,
+            "value": 6798
+          },
+          {
+            "year": 2024,
+            "value": 6587
+          }
         ]
       },
       "pneumonia": {
         "label": "Pneumonia",
         "data": [
-          {"year": 2015, "value": 3533},
-          {"year": 2018, "value": 4048},
-          {"year": 2019, "value": 4243},
-          {"year": 2020, "value": 2970},
-          {"year": 2021, "value": 4460},
-          {"year": 2022, "value": 5391},
-          {"year": 2023, "value": 6320},
-          {"year": 2024, "value": 6077},
-          {"year": 2025, "value": 6057}
+          {
+            "year": 1969,
+            "value": 655
+          },
+          {
+            "year": 1970,
+            "value": 843
+          },
+          {
+            "year": 1971,
+            "value": 875
+          },
+          {
+            "year": 1972,
+            "value": 951
+          },
+          {
+            "year": 1973,
+            "value": 950
+          },
+          {
+            "year": 1974,
+            "value": 969
+          },
+          {
+            "year": 1975,
+            "value": 948
+          },
+          {
+            "year": 1976,
+            "value": 1010
+          },
+          {
+            "year": 1977,
+            "value": 1215
+          },
+          {
+            "year": 1978,
+            "value": 942
+          },
+          {
+            "year": 1979,
+            "value": 1124
+          },
+          {
+            "year": 1980,
+            "value": 1129
+          },
+          {
+            "year": 1981,
+            "value": 1284
+          },
+          {
+            "year": 1982,
+            "value": 1375
+          },
+          {
+            "year": 1983,
+            "value": 1513
+          },
+          {
+            "year": 1984,
+            "value": 1204
+          },
+          {
+            "year": 1985,
+            "value": 1287
+          },
+          {
+            "year": 1986,
+            "value": 1082
+          },
+          {
+            "year": 1987,
+            "value": 998
+          },
+          {
+            "year": 1988,
+            "value": 1039
+          },
+          {
+            "year": 1989,
+            "value": 1130
+          },
+          {
+            "year": 1990,
+            "value": 1191
+          },
+          {
+            "year": 1991,
+            "value": 1285
+          },
+          {
+            "year": 1992,
+            "value": 1420
+          },
+          {
+            "year": 1993,
+            "value": 1596
+          },
+          {
+            "year": 1994,
+            "value": 1670
+          },
+          {
+            "year": 1995,
+            "value": 2028
+          },
+          {
+            "year": 1996,
+            "value": 1693
+          },
+          {
+            "year": 1997,
+            "value": 1553
+          },
+          {
+            "year": 1998,
+            "value": 1780
+          },
+          {
+            "year": 1999,
+            "value": 1641
+          },
+          {
+            "year": 2000,
+            "value": 1794
+          },
+          {
+            "year": 2001,
+            "value": 1540
+          },
+          {
+            "year": 2002,
+            "value": 2079
+          },
+          {
+            "year": 2003,
+            "value": 2340
+          },
+          {
+            "year": 2004,
+            "value": 2232
+          },
+          {
+            "year": 2005,
+            "value": 2437
+          },
+          {
+            "year": 2006,
+            "value": 2244
+          },
+          {
+            "year": 2007,
+            "value": 2375
+          },
+          {
+            "year": 2008,
+            "value": 2387
+          },
+          {
+            "year": 2009,
+            "value": 2614
+          },
+          {
+            "year": 2010,
+            "value": 2766
+          },
+          {
+            "year": 2011,
+            "value": 2879
+          },
+          {
+            "year": 2012,
+            "value": 3096
+          },
+          {
+            "year": 2013,
+            "value": 3512
+          },
+          {
+            "year": 2014,
+            "value": 3680
+          },
+          {
+            "year": 2015,
+            "value": 3859
+          },
+          {
+            "year": 2016,
+            "value": 3855
+          },
+          {
+            "year": 2017,
+            "value": 4212
+          },
+          {
+            "year": 2018,
+            "value": 4380
+          },
+          {
+            "year": 2019,
+            "value": 4435
+          },
+          {
+            "year": 2020,
+            "value": 4153
+          },
+          {
+            "year": 2021,
+            "value": 4460
+          },
+          {
+            "year": 2022,
+            "value": 5391
+          },
+          {
+            "year": 2023,
+            "value": 6320
+          },
+          {
+            "year": 2024,
+            "value": 6077
+          }
         ]
       },
       "stroke": {
         "label": "Stroke",
         "data": [
-          {"year": 2015, "value": 1682},
-          {"year": 2018, "value": 1595},
-          {"year": 2019, "value": 1566},
-          {"year": 2020, "value": 1530},
-          {"year": 2021, "value": 1492},
-          {"year": 2022, "value": 1554},
-          {"year": 2023, "value": 1496},
-          {"year": 2024, "value": 1473},
-          {"year": 2025, "value": 1478}
+          {
+            "year": 1969,
+            "value": 863
+          },
+          {
+            "year": 1970,
+            "value": 1038
+          },
+          {
+            "year": 1971,
+            "value": 1103
+          },
+          {
+            "year": 1972,
+            "value": 1080
+          },
+          {
+            "year": 1973,
+            "value": 1131
+          },
+          {
+            "year": 1974,
+            "value": 1213
+          },
+          {
+            "year": 1975,
+            "value": 1244
+          },
+          {
+            "year": 1976,
+            "value": 1427
+          },
+          {
+            "year": 1977,
+            "value": 1360
+          },
+          {
+            "year": 1978,
+            "value": 1382
+          },
+          {
+            "year": 1979,
+            "value": 1409
+          },
+          {
+            "year": 1980,
+            "value": 1447
+          },
+          {
+            "year": 1981,
+            "value": 1438
+          },
+          {
+            "year": 1982,
+            "value": 1469
+          },
+          {
+            "year": 1983,
+            "value": 1454
+          },
+          {
+            "year": 1984,
+            "value": 1413
+          },
+          {
+            "year": 1985,
+            "value": 1418
+          },
+          {
+            "year": 1986,
+            "value": 1355
+          },
+          {
+            "year": 1987,
+            "value": 1343
+          },
+          {
+            "year": 1988,
+            "value": 1414
+          },
+          {
+            "year": 1989,
+            "value": 1551
+          },
+          {
+            "year": 1990,
+            "value": 1666
+          },
+          {
+            "year": 1991,
+            "value": 1700
+          },
+          {
+            "year": 1992,
+            "value": 1697
+          },
+          {
+            "year": 1993,
+            "value": 1652
+          },
+          {
+            "year": 1994,
+            "value": 1692
+          },
+          {
+            "year": 1995,
+            "value": 1701
+          },
+          {
+            "year": 1996,
+            "value": 1805
+          },
+          {
+            "year": 1997,
+            "value": 1645
+          },
+          {
+            "year": 1998,
+            "value": 1633
+          },
+          {
+            "year": 1999,
+            "value": 1633
+          },
+          {
+            "year": 2000,
+            "value": 1625
+          },
+          {
+            "year": 2001,
+            "value": 1409
+          },
+          {
+            "year": 2002,
+            "value": 1393
+          },
+          {
+            "year": 2003,
+            "value": 1556
+          },
+          {
+            "year": 2004,
+            "value": 1562
+          },
+          {
+            "year": 2005,
+            "value": 1616
+          },
+          {
+            "year": 2006,
+            "value": 1462
+          },
+          {
+            "year": 2007,
+            "value": 1490
+          },
+          {
+            "year": 2008,
+            "value": 1435
+          },
+          {
+            "year": 2009,
+            "value": 1375
+          },
+          {
+            "year": 2010,
+            "value": 1472
+          },
+          {
+            "year": 2011,
+            "value": 1628
+          },
+          {
+            "year": 2012,
+            "value": 1714
+          },
+          {
+            "year": 2013,
+            "value": 1680
+          },
+          {
+            "year": 2014,
+            "value": 1620
+          },
+          {
+            "year": 2015,
+            "value": 1357
+          },
+          {
+            "year": 2016,
+            "value": 1317
+          },
+          {
+            "year": 2017,
+            "value": 1310
+          },
+          {
+            "year": 2018,
+            "value": 1277
+          },
+          {
+            "year": 2019,
+            "value": 1253
+          },
+          {
+            "year": 2020,
+            "value": 1328
+          },
+          {
+            "year": 2021,
+            "value": 1492
+          },
+          {
+            "year": 2022,
+            "value": 1554
+          },
+          {
+            "year": 2023,
+            "value": 1496
+          },
+          {
+            "year": 2024,
+            "value": 1473
+          }
+        ]
+      },
+      "infectious": {
+        "label": "Infectious Diseases",
+        "data": [
+          {
+            "year": 1969,
+            "value": 708
+          },
+          {
+            "year": 1970,
+            "value": 727
+          },
+          {
+            "year": 1971,
+            "value": 702
+          },
+          {
+            "year": 1972,
+            "value": 752
+          },
+          {
+            "year": 1973,
+            "value": 775
+          },
+          {
+            "year": 1974,
+            "value": 714
+          },
+          {
+            "year": 1975,
+            "value": 630
+          },
+          {
+            "year": 1976,
+            "value": 554
+          },
+          {
+            "year": 1977,
+            "value": 523
+          },
+          {
+            "year": 1978,
+            "value": 502
+          },
+          {
+            "year": 1979,
+            "value": 503
+          },
+          {
+            "year": 1980,
+            "value": 425
+          },
+          {
+            "year": 1981,
+            "value": 432
+          },
+          {
+            "year": 1982,
+            "value": 393
+          },
+          {
+            "year": 1983,
+            "value": 432
+          },
+          {
+            "year": 1984,
+            "value": 390
+          },
+          {
+            "year": 1985,
+            "value": 375
+          },
+          {
+            "year": 1986,
+            "value": 402
+          },
+          {
+            "year": 1987,
+            "value": 432
+          },
+          {
+            "year": 1988,
+            "value": 430
+          },
+          {
+            "year": 1989,
+            "value": 439
+          },
+          {
+            "year": 1990,
+            "value": 347
+          },
+          {
+            "year": 1991,
+            "value": 321
+          },
+          {
+            "year": 1992,
+            "value": 342
+          },
+          {
+            "year": 1993,
+            "value": 398
+          },
+          {
+            "year": 1994,
+            "value": 366
+          },
+          {
+            "year": 1995,
+            "value": 369
+          },
+          {
+            "year": 1996,
+            "value": 358
+          },
+          {
+            "year": 1997,
+            "value": 318
+          },
+          {
+            "year": 1998,
+            "value": 361
+          },
+          {
+            "year": 1999,
+            "value": 311
+          },
+          {
+            "year": 2000,
+            "value": 276
+          },
+          {
+            "year": 2001,
+            "value": 296
+          },
+          {
+            "year": 2002,
+            "value": 289
+          },
+          {
+            "year": 2003,
+            "value": 250
+          },
+          {
+            "year": 2004,
+            "value": 296
+          },
+          {
+            "year": 2005,
+            "value": 373
+          },
+          {
+            "year": 2006,
+            "value": 257
+          },
+          {
+            "year": 2007,
+            "value": 307
+          },
+          {
+            "year": 2008,
+            "value": 285
+          },
+          {
+            "year": 2009,
+            "value": 279
+          },
+          {
+            "year": 2010,
+            "value": 269
+          },
+          {
+            "year": 2011,
+            "value": 244
+          },
+          {
+            "year": 2012,
+            "value": 233
+          },
+          {
+            "year": 2013,
+            "value": 211
+          },
+          {
+            "year": 2014,
+            "value": 217
+          },
+          {
+            "year": 2015,
+            "value": 194
+          },
+          {
+            "year": 2016,
+            "value": 174
+          },
+          {
+            "year": 2017,
+            "value": 189
+          },
+          {
+            "year": 2018,
+            "value": 199
+          },
+          {
+            "year": 2019,
+            "value": 239
+          },
+          {
+            "year": 2020,
+            "value": 216
+          },
+          {
+            "year": 2021,
+            "value": 982
+          },
+          {
+            "year": 2022,
+            "value": 1402
+          },
+          {
+            "year": 2023,
+            "value": 519
+          },
+          {
+            "year": 2024,
+            "value": 310
+          }
+        ]
+      },
+      "other": {
+        "label": "Other Causes",
+        "data": [
+          {
+            "year": 1969,
+            "value": 4660
+          },
+          {
+            "year": 1970,
+            "value": 4696
+          },
+          {
+            "year": 1971,
+            "value": 4996
+          },
+          {
+            "year": 1972,
+            "value": 5099
+          },
+          {
+            "year": 1973,
+            "value": 5185
+          },
+          {
+            "year": 1974,
+            "value": 4762
+          },
+          {
+            "year": 1975,
+            "value": 4502
+          },
+          {
+            "year": 1976,
+            "value": 4096
+          },
+          {
+            "year": 1977,
+            "value": 4105
+          },
+          {
+            "year": 1978,
+            "value": 4306
+          },
+          {
+            "year": 1979,
+            "value": 4138
+          },
+          {
+            "year": 1980,
+            "value": 4104
+          },
+          {
+            "year": 1981,
+            "value": 4145
+          },
+          {
+            "year": 1982,
+            "value": 4064
+          },
+          {
+            "year": 1983,
+            "value": 4108
+          },
+          {
+            "year": 1984,
+            "value": 4182
+          },
+          {
+            "year": 1985,
+            "value": 4200
+          },
+          {
+            "year": 1986,
+            "value": 4033
+          },
+          {
+            "year": 1987,
+            "value": 3980
+          },
+          {
+            "year": 1988,
+            "value": 4256
+          },
+          {
+            "year": 1989,
+            "value": 4212
+          },
+          {
+            "year": 1990,
+            "value": 3988
+          },
+          {
+            "year": 1991,
+            "value": 3931
+          },
+          {
+            "year": 1992,
+            "value": 3924
+          },
+          {
+            "year": 1993,
+            "value": 3703
+          },
+          {
+            "year": 1994,
+            "value": 3780
+          },
+          {
+            "year": 1995,
+            "value": 3808
+          },
+          {
+            "year": 1996,
+            "value": 3716
+          },
+          {
+            "year": 1997,
+            "value": 3668
+          },
+          {
+            "year": 1998,
+            "value": 3842
+          },
+          {
+            "year": 1999,
+            "value": 3702
+          },
+          {
+            "year": 2000,
+            "value": 3744
+          },
+          {
+            "year": 2001,
+            "value": 3663
+          },
+          {
+            "year": 2002,
+            "value": 3738
+          },
+          {
+            "year": 2003,
+            "value": 3636
+          },
+          {
+            "year": 2004,
+            "value": 3703
+          },
+          {
+            "year": 2005,
+            "value": 3802
+          },
+          {
+            "year": 2006,
+            "value": 3875
+          },
+          {
+            "year": 2007,
+            "value": 3968
+          },
+          {
+            "year": 2008,
+            "value": 3833
+          },
+          {
+            "year": 2009,
+            "value": 3689
+          },
+          {
+            "year": 2010,
+            "value": 3864
+          },
+          {
+            "year": 2011,
+            "value": 3895
+          },
+          {
+            "year": 2012,
+            "value": 3939
+          },
+          {
+            "year": 2013,
+            "value": 3772
+          },
+          {
+            "year": 2014,
+            "value": 3921
+          },
+          {
+            "year": 2015,
+            "value": 3932
+          },
+          {
+            "year": 2016,
+            "value": 4102
+          },
+          {
+            "year": 2017,
+            "value": 3987
+          },
+          {
+            "year": 2018,
+            "value": 4244
+          },
+          {
+            "year": 2019,
+            "value": 4243
+          },
+          {
+            "year": 2020,
+            "value": 4244
+          },
+          {
+            "year": 2021,
+            "value": 4515
+          },
+          {
+            "year": 2022,
+            "value": 4958
+          },
+          {
+            "year": 2023,
+            "value": 4974
+          },
+          {
+            "year": 2024,
+            "value": 4822
+          }
         ]
       }
-    }
+    },
+    "total": [
+      {
+        "year": 1969,
+        "value": 10224
+      },
+      {
+        "year": 1970,
+        "value": 10717
+      },
+      {
+        "year": 1971,
+        "value": 11329
+      },
+      {
+        "year": 1972,
+        "value": 11522
+      },
+      {
+        "year": 1973,
+        "value": 11920
+      },
+      {
+        "year": 1974,
+        "value": 11674
+      },
+      {
+        "year": 1975,
+        "value": 11447
+      },
+      {
+        "year": 1976,
+        "value": 11648
+      },
+      {
+        "year": 1977,
+        "value": 11955
+      },
+      {
+        "year": 1978,
+        "value": 12065
+      },
+      {
+        "year": 1979,
+        "value": 12468
+      },
+      {
+        "year": 1980,
+        "value": 12505
+      },
+      {
+        "year": 1981,
+        "value": 12863
+      },
+      {
+        "year": 1982,
+        "value": 12896
+      },
+      {
+        "year": 1983,
+        "value": 13321
+      },
+      {
+        "year": 1984,
+        "value": 13162
+      },
+      {
+        "year": 1985,
+        "value": 13348
+      },
+      {
+        "year": 1986,
+        "value": 12821
+      },
+      {
+        "year": 1987,
+        "value": 13173
+      },
+      {
+        "year": 1988,
+        "value": 13690
+      },
+      {
+        "year": 1989,
+        "value": 14069
+      },
+      {
+        "year": 1990,
+        "value": 13891
+      },
+      {
+        "year": 1991,
+        "value": 13876
+      },
+      {
+        "year": 1992,
+        "value": 14337
+      },
+      {
+        "year": 1993,
+        "value": 14461
+      },
+      {
+        "year": 1994,
+        "value": 14946
+      },
+      {
+        "year": 1995,
+        "value": 15569
+      },
+      {
+        "year": 1996,
+        "value": 15590
+      },
+      {
+        "year": 1997,
+        "value": 15305
+      },
+      {
+        "year": 1998,
+        "value": 15657
+      },
+      {
+        "year": 1999,
+        "value": 15516
+      },
+      {
+        "year": 2000,
+        "value": 15693
+      },
+      {
+        "year": 2001,
+        "value": 15367
+      },
+      {
+        "year": 2002,
+        "value": 15820
+      },
+      {
+        "year": 2003,
+        "value": 16036
+      },
+      {
+        "year": 2004,
+        "value": 15860
+      },
+      {
+        "year": 2005,
+        "value": 16215
+      },
+      {
+        "year": 2006,
+        "value": 16393
+      },
+      {
+        "year": 2007,
+        "value": 17140
+      },
+      {
+        "year": 2008,
+        "value": 17222
+      },
+      {
+        "year": 2009,
+        "value": 17101
+      },
+      {
+        "year": 2010,
+        "value": 17610
+      },
+      {
+        "year": 2011,
+        "value": 18027
+      },
+      {
+        "year": 2012,
+        "value": 18481
+      },
+      {
+        "year": 2013,
+        "value": 18938
+      },
+      {
+        "year": 2014,
+        "value": 19393
+      },
+      {
+        "year": 2015,
+        "value": 19862
+      },
+      {
+        "year": 2016,
+        "value": 20017
+      },
+      {
+        "year": 2017,
+        "value": 20905
+      },
+      {
+        "year": 2018,
+        "value": 21282
+      },
+      {
+        "year": 2019,
+        "value": 21446
+      },
+      {
+        "year": 2020,
+        "value": 22054
+      },
+      {
+        "year": 2021,
+        "value": 24292
+      },
+      {
+        "year": 2022,
+        "value": 26891
+      },
+      {
+        "year": 2023,
+        "value": 26888
+      },
+      {
+        "year": 2024,
+        "value": 26442
+      }
+    ]
   },
   "psychiatric_admissions": {
     "label": "Psychiatric Admissions",
@@ -697,15 +3397,42 @@
     "tooltip": "Tracks public psychiatric hospital admissions (primarily Institute of Mental Health). The steady increase from 2021 onward may reflect growing mental health needs and reduced stigma around seeking help. Does not capture outpatient psychiatric visits.",
     "singstatTableId": "M870311",
     "data": [
-      {"year": 2015, "value": 6842},
-      {"year": 2018, "value": 7576},
-      {"year": 2019, "value": 7709},
-      {"year": 2020, "value": 6781},
-      {"year": 2021, "value": 8226},
-      {"year": 2022, "value": 9340},
-      {"year": 2023, "value": 9693},
-      {"year": 2024, "value": 9846},
-      {"year": 2025, "value": 11154}
+      {
+        "year": 2015,
+        "value": 6842
+      },
+      {
+        "year": 2018,
+        "value": 7576
+      },
+      {
+        "year": 2019,
+        "value": 7709
+      },
+      {
+        "year": 2020,
+        "value": 6781
+      },
+      {
+        "year": 2021,
+        "value": 8226
+      },
+      {
+        "year": 2022,
+        "value": 9340
+      },
+      {
+        "year": 2023,
+        "value": 9693
+      },
+      {
+        "year": 2024,
+        "value": 9846
+      },
+      {
+        "year": 2025,
+        "value": 11154
+      }
     ]
   },
   "tb_incidence": {
@@ -716,17 +3443,50 @@
     "tooltip": "Singapore still has an intermediate TB burden compared to other developed countries. The decline from 2022 onward may reflect improved screening and treatment. TB remains a notifiable disease in Singapore.",
     "singstatTableId": "M870361",
     "data": [
-      {"year": 2000, "value": 48.0},
-      {"year": 2005, "value": 35.6},
-      {"year": 2010, "value": 39.2},
-      {"year": 2015, "value": 47.7},
-      {"year": 2018, "value": 42.0},
-      {"year": 2019, "value": 40.7},
-      {"year": 2020, "value": 39.1},
-      {"year": 2021, "value": 42.4},
-      {"year": 2022, "value": 44.5},
-      {"year": 2023, "value": 34.1},
-      {"year": 2024, "value": 35.1}
+      {
+        "year": 2000,
+        "value": 48
+      },
+      {
+        "year": 2005,
+        "value": 35.6
+      },
+      {
+        "year": 2010,
+        "value": 39.2
+      },
+      {
+        "year": 2015,
+        "value": 47.7
+      },
+      {
+        "year": 2018,
+        "value": 42
+      },
+      {
+        "year": 2019,
+        "value": 40.7
+      },
+      {
+        "year": 2020,
+        "value": 39.1
+      },
+      {
+        "year": 2021,
+        "value": 42.4
+      },
+      {
+        "year": 2022,
+        "value": 44.5
+      },
+      {
+        "year": 2023,
+        "value": 34.1
+      },
+      {
+        "year": 2024,
+        "value": 35.1
+      }
     ]
   },
   "aged_65_plus": {
@@ -738,17 +3498,50 @@
     "trendBaseline": "2000 baseline (7.2%)",
     "singstatTableId": "M810011",
     "data": [
-      {"year": 2000, "value": 7.2},
-      {"year": 2005, "value": 8.4},
-      {"year": 2010, "value": 9.0},
-      {"year": 2015, "value": 12.0},
-      {"year": 2018, "value": 13.7},
-      {"year": 2019, "value": 14.4},
-      {"year": 2020, "value": 15.2},
-      {"year": 2021, "value": 16.0},
-      {"year": 2022, "value": 17.6},
-      {"year": 2023, "value": 18.4},
-      {"year": 2024, "value": 19.1}
+      {
+        "year": 2000,
+        "value": 7.2
+      },
+      {
+        "year": 2005,
+        "value": 8.4
+      },
+      {
+        "year": 2010,
+        "value": 9
+      },
+      {
+        "year": 2015,
+        "value": 12
+      },
+      {
+        "year": 2018,
+        "value": 13.7
+      },
+      {
+        "year": 2019,
+        "value": 14.4
+      },
+      {
+        "year": 2020,
+        "value": 15.2
+      },
+      {
+        "year": 2021,
+        "value": 16
+      },
+      {
+        "year": 2022,
+        "value": 17.6
+      },
+      {
+        "year": 2023,
+        "value": 18.4
+      },
+      {
+        "year": 2024,
+        "value": 19.1
+      }
     ]
   },
   "old_age_support_ratio": {
@@ -760,17 +3553,50 @@
     "trendBaseline": "2005 baseline (8.4)",
     "singstatTableId": "M810001",
     "data": [
-      {"year": 2000, "value": 9.9},
-      {"year": 2005, "value": 8.4},
-      {"year": 2010, "value": 7.6},
-      {"year": 2015, "value": 5.6},
-      {"year": 2018, "value": 4.7},
-      {"year": 2019, "value": 4.5},
-      {"year": 2020, "value": 4.2},
-      {"year": 2021, "value": 4.0},
-      {"year": 2022, "value": 3.7},
-      {"year": 2023, "value": 3.6},
-      {"year": 2024, "value": 3.5}
+      {
+        "year": 2000,
+        "value": 9.9
+      },
+      {
+        "year": 2005,
+        "value": 8.4
+      },
+      {
+        "year": 2010,
+        "value": 7.6
+      },
+      {
+        "year": 2015,
+        "value": 5.6
+      },
+      {
+        "year": 2018,
+        "value": 4.7
+      },
+      {
+        "year": 2019,
+        "value": 4.5
+      },
+      {
+        "year": 2020,
+        "value": 4.2
+      },
+      {
+        "year": 2021,
+        "value": 4
+      },
+      {
+        "year": 2022,
+        "value": 3.7
+      },
+      {
+        "year": 2023,
+        "value": 3.6
+      },
+      {
+        "year": 2024,
+        "value": 3.5
+      }
     ]
   },
   "total_fertility_rate": {
@@ -782,20 +3608,62 @@
     "trendBaseline": "Replacement level: 2.1",
     "singstatTableId": "M810091",
     "data": [
-      {"year": 1980, "value": 1.82},
-      {"year": 1990, "value": 1.83},
-      {"year": 2000, "value": 1.60},
-      {"year": 2005, "value": 1.26},
-      {"year": 2010, "value": 1.15},
-      {"year": 2015, "value": 1.24},
-      {"year": 2018, "value": 1.14},
-      {"year": 2019, "value": 1.14},
-      {"year": 2020, "value": 1.10},
-      {"year": 2021, "value": 1.12},
-      {"year": 2022, "value": 1.04},
-      {"year": 2023, "value": 0.97},
-      {"year": 2024, "value": 0.97},
-      {"year": 2025, "value": 0.87}
+      {
+        "year": 1980,
+        "value": 1.82
+      },
+      {
+        "year": 1990,
+        "value": 1.83
+      },
+      {
+        "year": 2000,
+        "value": 1.6
+      },
+      {
+        "year": 2005,
+        "value": 1.26
+      },
+      {
+        "year": 2010,
+        "value": 1.15
+      },
+      {
+        "year": 2015,
+        "value": 1.24
+      },
+      {
+        "year": 2018,
+        "value": 1.14
+      },
+      {
+        "year": 2019,
+        "value": 1.14
+      },
+      {
+        "year": 2020,
+        "value": 1.1
+      },
+      {
+        "year": 2021,
+        "value": 1.12
+      },
+      {
+        "year": 2022,
+        "value": 1.04
+      },
+      {
+        "year": 2023,
+        "value": 0.97
+      },
+      {
+        "year": 2024,
+        "value": 0.97
+      },
+      {
+        "year": 2025,
+        "value": 0.87
+      }
     ]
   },
   "household_income": {
@@ -804,18 +3672,54 @@
       "unit": "index",
       "source": "SingStat Table M810361",
       "data": [
-        {"year": 2000, "value": 0.430},
-        {"year": 2005, "value": 0.430},
-        {"year": 2010, "value": 0.418},
-        {"year": 2015, "value": 0.402},
-        {"year": 2018, "value": 0.400},
-        {"year": 2019, "value": 0.398},
-        {"year": 2020, "value": 0.375},
-        {"year": 2021, "value": 0.385},
-        {"year": 2022, "value": 0.378},
-        {"year": 2023, "value": 0.371},
-        {"year": 2024, "value": 0.364},
-        {"year": 2025, "value": 0.359}
+        {
+          "year": 2000,
+          "value": 0.43
+        },
+        {
+          "year": 2005,
+          "value": 0.43
+        },
+        {
+          "year": 2010,
+          "value": 0.418
+        },
+        {
+          "year": 2015,
+          "value": 0.402
+        },
+        {
+          "year": 2018,
+          "value": 0.4
+        },
+        {
+          "year": 2019,
+          "value": 0.398
+        },
+        {
+          "year": 2020,
+          "value": 0.375
+        },
+        {
+          "year": 2021,
+          "value": 0.385
+        },
+        {
+          "year": 2022,
+          "value": 0.378
+        },
+        {
+          "year": 2023,
+          "value": 0.371
+        },
+        {
+          "year": 2024,
+          "value": 0.364
+        },
+        {
+          "year": 2025,
+          "value": 0.359
+        }
       ]
     },
     "median_income": {
@@ -823,17 +3727,50 @@
       "unit": "S$",
       "source": "SingStat Table M810361",
       "data": [
-        {"year": 2000, "value": 4398},
-        {"year": 2005, "value": 4522},
-        {"year": 2010, "value": 5600},
-        {"year": 2015, "value": 8292},
-        {"year": 2018, "value": 9293},
-        {"year": 2019, "value": 9425},
-        {"year": 2020, "value": 9189},
-        {"year": 2021, "value": 9520},
-        {"year": 2022, "value": 10099},
-        {"year": 2023, "value": 10439},
-        {"year": 2024, "value": 10960}
+        {
+          "year": 2000,
+          "value": 4398
+        },
+        {
+          "year": 2005,
+          "value": 4522
+        },
+        {
+          "year": 2010,
+          "value": 5600
+        },
+        {
+          "year": 2015,
+          "value": 8292
+        },
+        {
+          "year": 2018,
+          "value": 9293
+        },
+        {
+          "year": 2019,
+          "value": 9425
+        },
+        {
+          "year": 2020,
+          "value": 9189
+        },
+        {
+          "year": 2021,
+          "value": 9520
+        },
+        {
+          "year": 2022,
+          "value": 10099
+        },
+        {
+          "year": 2023,
+          "value": 10439
+        },
+        {
+          "year": 2024,
+          "value": 10960
+        }
       ]
     },
     "income_20th_pct": {
@@ -841,17 +3778,50 @@
       "unit": "S$",
       "source": "SingStat Table M810361",
       "data": [
-        {"year": 2000, "value": 868},
-        {"year": 2005, "value": 830},
-        {"year": 2010, "value": 1029},
-        {"year": 2015, "value": 1592},
-        {"year": 2018, "value": 1780},
-        {"year": 2019, "value": 1850},
-        {"year": 2020, "value": 1740},
-        {"year": 2021, "value": 1843},
-        {"year": 2022, "value": 1990},
-        {"year": 2023, "value": 2100},
-        {"year": 2024, "value": 2267}
+        {
+          "year": 2000,
+          "value": 868
+        },
+        {
+          "year": 2005,
+          "value": 830
+        },
+        {
+          "year": 2010,
+          "value": 1029
+        },
+        {
+          "year": 2015,
+          "value": 1592
+        },
+        {
+          "year": 2018,
+          "value": 1780
+        },
+        {
+          "year": 2019,
+          "value": 1850
+        },
+        {
+          "year": 2020,
+          "value": 1740
+        },
+        {
+          "year": 2021,
+          "value": 1843
+        },
+        {
+          "year": 2022,
+          "value": 1990
+        },
+        {
+          "year": 2023,
+          "value": 2100
+        },
+        {
+          "year": 2024,
+          "value": 2267
+        }
       ]
     }
   },
@@ -861,15 +3831,42 @@
       "unit": "%",
       "source": "SingStat Table M810611",
       "data": [
-        {"year": 1970, "value": 3.4},
-        {"year": 1980, "value": 5.0},
-        {"year": 1990, "value": 5.7},
-        {"year": 2000, "value": 7.3},
-        {"year": 2010, "value": 9.0},
-        {"year": 2015, "value": 11.8},
-        {"year": 2020, "value": 15.2},
-        {"year": 2023, "value": 18.4},
-        {"year": 2024, "value": 19.9}
+        {
+          "year": 1970,
+          "value": 3.4
+        },
+        {
+          "year": 1980,
+          "value": 5
+        },
+        {
+          "year": 1990,
+          "value": 5.7
+        },
+        {
+          "year": 2000,
+          "value": 7.3
+        },
+        {
+          "year": 2010,
+          "value": 9
+        },
+        {
+          "year": 2015,
+          "value": 11.8
+        },
+        {
+          "year": 2020,
+          "value": 15.2
+        },
+        {
+          "year": 2023,
+          "value": 18.4
+        },
+        {
+          "year": 2024,
+          "value": 19.9
+        }
       ]
     },
     "life_expectancy_at_65": {
@@ -877,12 +3874,30 @@
       "unit": "years",
       "source": "SingStat Table M810611",
       "data": [
-        {"year": 1990, "value": 15.5},
-        {"year": 2000, "value": 17.5},
-        {"year": 2010, "value": 19.6},
-        {"year": 2015, "value": 20.3},
-        {"year": 2020, "value": 21.1},
-        {"year": 2023, "value": 20.9}
+        {
+          "year": 1990,
+          "value": 15.5
+        },
+        {
+          "year": 2000,
+          "value": 17.5
+        },
+        {
+          "year": 2010,
+          "value": 19.6
+        },
+        {
+          "year": 2015,
+          "value": 20.3
+        },
+        {
+          "year": 2020,
+          "value": 21.1
+        },
+        {
+          "year": 2023,
+          "value": 20.9
+        }
       ]
     },
     "elderly_living_alone_pct": {
@@ -890,10 +3905,22 @@
       "unit": "%",
       "source": "SingStat Table M810611",
       "data": [
-        {"year": 2000, "value": 6.6},
-        {"year": 2010, "value": 7.5},
-        {"year": 2015, "value": 7.3},
-        {"year": 2020, "value": 7.6}
+        {
+          "year": 2000,
+          "value": 6.6
+        },
+        {
+          "year": 2010,
+          "value": 7.5
+        },
+        {
+          "year": 2015,
+          "value": 7.3
+        },
+        {
+          "year": 2020,
+          "value": 7.6
+        }
       ]
     },
     "elderly_labour_force_pct": {
@@ -901,12 +3928,30 @@
       "unit": "%",
       "source": "SingStat Table M810611",
       "data": [
-        {"year": 2000, "value": 13.3},
-        {"year": 2005, "value": 15.2},
-        {"year": 2010, "value": 18.6},
-        {"year": 2015, "value": 25.8},
-        {"year": 2020, "value": 30.3},
-        {"year": 2023, "value": 32.6}
+        {
+          "year": 2000,
+          "value": 13.3
+        },
+        {
+          "year": 2005,
+          "value": 15.2
+        },
+        {
+          "year": 2010,
+          "value": 18.6
+        },
+        {
+          "year": 2015,
+          "value": 25.8
+        },
+        {
+          "year": 2020,
+          "value": 30.3
+        },
+        {
+          "year": 2023,
+          "value": 32.6
+        }
       ]
     },
     "elderly_death_rate": {
@@ -914,12 +3959,30 @@
       "unit": "per 1,000",
       "source": "SingStat Table M810611",
       "data": [
-        {"year": 1990, "value": 44.8},
-        {"year": 2000, "value": 38.5},
-        {"year": 2010, "value": 28.3},
-        {"year": 2015, "value": 27.0},
-        {"year": 2020, "value": 24.3},
-        {"year": 2023, "value": 25.1}
+        {
+          "year": 1990,
+          "value": 44.8
+        },
+        {
+          "year": 2000,
+          "value": 38.5
+        },
+        {
+          "year": 2010,
+          "value": 28.3
+        },
+        {
+          "year": 2015,
+          "value": 27
+        },
+        {
+          "year": 2020,
+          "value": 24.3
+        },
+        {
+          "year": 2023,
+          "value": 25.1
+        }
       ]
     },
     "elderly_death_heart": {
@@ -941,13 +4004,34 @@
       "unit": "S$",
       "source": "SingStat Table M212981",
       "data": [
-        {"year": 1993, "value": 61},
-        {"year": 1998, "value": 94},
-        {"year": 2003, "value": 106},
-        {"year": 2008, "value": 131},
-        {"year": 2013, "value": 156},
-        {"year": 2018, "value": 179},
-        {"year": 2023, "value": 225}
+        {
+          "year": 1993,
+          "value": 61
+        },
+        {
+          "year": 1998,
+          "value": 94
+        },
+        {
+          "year": 2003,
+          "value": 106
+        },
+        {
+          "year": 2008,
+          "value": 131
+        },
+        {
+          "year": 2013,
+          "value": 156
+        },
+        {
+          "year": 2018,
+          "value": 179
+        },
+        {
+          "year": 2023,
+          "value": 225
+        }
       ]
     },
     "total": {
@@ -955,13 +4039,34 @@
       "unit": "S$",
       "source": "SingStat Table M212981",
       "data": [
-        {"year": 1993, "value": 2692},
-        {"year": 1998, "value": 3380},
-        {"year": 2003, "value": 3537},
-        {"year": 2008, "value": 4118},
-        {"year": 2013, "value": 4724},
-        {"year": 2018, "value": 4906},
-        {"year": 2023, "value": 5932}
+        {
+          "year": 1993,
+          "value": 2692
+        },
+        {
+          "year": 1998,
+          "value": 3380
+        },
+        {
+          "year": 2003,
+          "value": 3537
+        },
+        {
+          "year": 2008,
+          "value": 4118
+        },
+        {
+          "year": 2013,
+          "value": 4724
+        },
+        {
+          "year": 2018,
+          "value": 4906
+        },
+        {
+          "year": 2023,
+          "value": 5932
+        }
       ]
     }
   },
@@ -979,12 +4084,30 @@
       "unit": "students",
       "source": "SingStat Table M850761",
       "data": [
-        {"year": 2011, "value": 347},
-        {"year": 2015, "value": 694},
-        {"year": 2018, "value": 1059},
-        {"year": 2020, "value": 1102},
-        {"year": 2022, "value": 1114},
-        {"year": 2024, "value": 1148}
+        {
+          "year": 2011,
+          "value": 347
+        },
+        {
+          "year": 2015,
+          "value": 694
+        },
+        {
+          "year": 2018,
+          "value": 1059
+        },
+        {
+          "year": 2020,
+          "value": 1102
+        },
+        {
+          "year": 2022,
+          "value": 1114
+        },
+        {
+          "year": 2024,
+          "value": 1148
+        }
       ]
     },
     "total": {
@@ -992,12 +4115,30 @@
       "unit": "students",
       "source": "SingStat Table M850761",
       "data": [
-        {"year": 2011, "value": 14252},
-        {"year": 2015, "value": 15588},
-        {"year": 2018, "value": 16363},
-        {"year": 2020, "value": 16866},
-        {"year": 2022, "value": 17780},
-        {"year": 2024, "value": 18180}
+        {
+          "year": 2011,
+          "value": 14252
+        },
+        {
+          "year": 2015,
+          "value": 15588
+        },
+        {
+          "year": 2018,
+          "value": 16363
+        },
+        {
+          "year": 2020,
+          "value": 16866
+        },
+        {
+          "year": 2022,
+          "value": 17780
+        },
+        {
+          "year": 2024,
+          "value": 18180
+        }
       ]
     }
   },
@@ -1006,18 +4147,58 @@
     "period": "2019-2023",
     "source": "Singapore Cancer Registry Annual Report 2023",
     "male": [
-      { "site": "Prostate", "pct": 18.0, "cases": 8114 },
-      { "site": "Colorectal", "pct": 15.8, "cases": 7101 },
-      { "site": "Lung", "pct": 13.2, "cases": 5938 },
-      { "site": "Lymphoid neoplasms", "pct": 7.4, "cases": 3336 },
-      { "site": "Liver", "pct": 7.0, "cases": 3148 }
+      {
+        "site": "Prostate",
+        "pct": 18,
+        "cases": 8114
+      },
+      {
+        "site": "Colorectal",
+        "pct": 15.8,
+        "cases": 7101
+      },
+      {
+        "site": "Lung",
+        "pct": 13.2,
+        "cases": 5938
+      },
+      {
+        "site": "Lymphoid neoplasms",
+        "pct": 7.4,
+        "cases": 3336
+      },
+      {
+        "site": "Liver",
+        "pct": 7,
+        "cases": 3148
+      }
     ],
     "female": [
-      { "site": "Breast", "pct": 29.9, "cases": 13935 },
-      { "site": "Colorectal", "pct": 12.6, "cases": 5849 },
-      { "site": "Lung", "pct": 8.1, "cases": 3794 },
-      { "site": "Uterus", "pct": 7.3, "cases": 3424 },
-      { "site": "Lymphoid neoplasms", "pct": 5.3, "cases": 2463 }
+      {
+        "site": "Breast",
+        "pct": 29.9,
+        "cases": 13935
+      },
+      {
+        "site": "Colorectal",
+        "pct": 12.6,
+        "cases": 5849
+      },
+      {
+        "site": "Lung",
+        "pct": 8.1,
+        "cases": 3794
+      },
+      {
+        "site": "Uterus",
+        "pct": 7.3,
+        "cases": 3424
+      },
+      {
+        "site": "Lymphoid neoplasms",
+        "pct": 5.3,
+        "cases": 2463
+      }
     ]
   },
   "cancer_top_mortality": {
@@ -1025,18 +4206,58 @@
     "period": "2019-2023",
     "source": "Singapore Cancer Registry Annual Report 2023",
     "male": [
-      { "site": "Lung", "pct": 24.6, "cases": 4033 },
-      { "site": "Colorectal", "pct": 14.8, "cases": 2429 },
-      { "site": "Liver", "pct": 12.4, "cases": 2039 },
-      { "site": "Pancreas", "pct": 7.7, "cases": 1264 },
-      { "site": "Prostate", "pct": 7.0, "cases": 1157 }
+      {
+        "site": "Lung",
+        "pct": 24.6,
+        "cases": 4033
+      },
+      {
+        "site": "Colorectal",
+        "pct": 14.8,
+        "cases": 2429
+      },
+      {
+        "site": "Liver",
+        "pct": 12.4,
+        "cases": 2039
+      },
+      {
+        "site": "Pancreas",
+        "pct": 7.7,
+        "cases": 1264
+      },
+      {
+        "site": "Prostate",
+        "pct": 7,
+        "cases": 1157
+      }
     ],
     "female": [
-      { "site": "Breast", "pct": 17.9, "cases": 2426 },
-      { "site": "Colorectal", "pct": 15.9, "cases": 2162 },
-      { "site": "Lung", "pct": 15.9, "cases": 2157 },
-      { "site": "Pancreas", "pct": 8.1, "cases": 1096 },
-      { "site": "Liver", "pct": 6.0, "cases": 815 }
+      {
+        "site": "Breast",
+        "pct": 17.9,
+        "cases": 2426
+      },
+      {
+        "site": "Colorectal",
+        "pct": 15.9,
+        "cases": 2162
+      },
+      {
+        "site": "Lung",
+        "pct": 15.9,
+        "cases": 2157
+      },
+      {
+        "site": "Pancreas",
+        "pct": 8.1,
+        "cases": 1096
+      },
+      {
+        "site": "Liver",
+        "pct": 6,
+        "cases": 815
+      }
     ]
   },
   "cancer_age_distribution": {
@@ -1045,22 +4266,78 @@
     "unit": "per 100k",
     "source": "Singapore Cancer Registry Annual Report 2023",
     "male": [
-      { "ageGroup": "0-29", "rate": 24.7, "cases": 825 },
-      { "ageGroup": "30-39", "rate": 65.7, "cases": 945 },
-      { "ageGroup": "40-49", "rate": 158.4, "cases": 2309 },
-      { "ageGroup": "50-59", "rate": 412.9, "cases": 6099 },
-      { "ageGroup": "60-69", "rate": 1076.8, "cases": 13953 },
-      { "ageGroup": "70-79", "rate": 2098.6, "cases": 13654 },
-      { "ageGroup": "80+", "rate": 2889.7, "cases": 7196 }
+      {
+        "ageGroup": "0-29",
+        "rate": 24.7,
+        "cases": 825
+      },
+      {
+        "ageGroup": "30-39",
+        "rate": 65.7,
+        "cases": 945
+      },
+      {
+        "ageGroup": "40-49",
+        "rate": 158.4,
+        "cases": 2309
+      },
+      {
+        "ageGroup": "50-59",
+        "rate": 412.9,
+        "cases": 6099
+      },
+      {
+        "ageGroup": "60-69",
+        "rate": 1076.8,
+        "cases": 13953
+      },
+      {
+        "ageGroup": "70-79",
+        "rate": 2098.6,
+        "cases": 13654
+      },
+      {
+        "ageGroup": "80+",
+        "rate": 2889.7,
+        "cases": 7196
+      }
     ],
     "female": [
-      { "ageGroup": "0-29", "rate": 30.6, "cases": 990 },
-      { "ageGroup": "30-39", "rate": 141.9, "cases": 2235 },
-      { "ageGroup": "40-49", "rate": 379.8, "cases": 5983 },
-      { "ageGroup": "50-59", "rate": 590.3, "cases": 8932 },
-      { "ageGroup": "60-69", "rate": 880.4, "cases": 11666 },
-      { "ageGroup": "70-79", "rate": 1288.7, "cases": 9545 },
-      { "ageGroup": "80+", "rate": 1821.1, "cases": 7242 }
+      {
+        "ageGroup": "0-29",
+        "rate": 30.6,
+        "cases": 990
+      },
+      {
+        "ageGroup": "30-39",
+        "rate": 141.9,
+        "cases": 2235
+      },
+      {
+        "ageGroup": "40-49",
+        "rate": 379.8,
+        "cases": 5983
+      },
+      {
+        "ageGroup": "50-59",
+        "rate": 590.3,
+        "cases": 8932
+      },
+      {
+        "ageGroup": "60-69",
+        "rate": 880.4,
+        "cases": 11666
+      },
+      {
+        "ageGroup": "70-79",
+        "rate": 1288.7,
+        "cases": 9545
+      },
+      {
+        "ageGroup": "80+",
+        "rate": 1821.1,
+        "cases": 7242
+      }
     ]
   }
 }

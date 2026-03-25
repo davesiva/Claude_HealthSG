@@ -185,14 +185,37 @@ function updateDeathsByCause(merged, parsed) {
     'Malignant Neoplasms': 'cancer',
     'Heart And Hypertensive Diseases': 'heart_disease',
     'Pneumonia': 'pneumonia',
-    'Cerebrovascular Disease': 'stroke'
+    'Cerebrovascular Disease': 'stroke',
+    'Infective And Parasitic Diseases': 'infectious'
   }
+
+  // Filter to <= 2024 (2025 data has incomplete cause classification)
+  const filterYears = (data) => data.filter(d => d.year <= 2024)
 
   for (const [seriesName, catKey] of Object.entries(causeMapping)) {
     const data = parsed[seriesName]
     if (data?.length && merged.deaths_by_cause?.categories?.[catKey]) {
-      merged.deaths_by_cause.categories[catKey].data = data
+      merged.deaths_by_cause.categories[catKey].data = filterYears(data)
       merged.deaths_by_cause._live = true
+    }
+  }
+
+  // Update total and recompute "other" category
+  const totalData = parsed['Total Deaths By Causes']
+  if (totalData?.length) {
+    merged.deaths_by_cause.total = filterYears(totalData)
+
+    // Recompute other = total - 5 named causes
+    const namedKeys = ['cancer', 'heart_disease', 'pneumonia', 'stroke', 'infectious']
+    merged.deaths_by_cause.categories.other = {
+      label: 'Other Causes',
+      data: merged.deaths_by_cause.total.map(({ year, value: total }) => {
+        const namedSum = namedKeys.reduce((sum, key) => {
+          const found = merged.deaths_by_cause.categories[key]?.data?.find(d => d.year === year)
+          return sum + (found?.value || 0)
+        }, 0)
+        return { year, value: total - namedSum }
+      })
     }
   }
 }
