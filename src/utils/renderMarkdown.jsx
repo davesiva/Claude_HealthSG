@@ -1,6 +1,7 @@
 /**
  * Renders basic markdown (bold, italic) in AI-generated text.
  * Splits text into paragraphs and applies inline formatting.
+ * Supports severity tags [GREEN], [AMBER], [RED] for color-coded insight blocks.
  */
 function renderInline(text) {
   // Split on **bold** and *italic* patterns
@@ -30,11 +31,33 @@ function renderInline(text) {
   return parts.length ? parts : text
 }
 
+const SEVERITY_STYLES = {
+  GREEN: 'border-l-4 border-green-500 bg-green-50/50 pl-4 py-2 rounded-r-lg',
+  AMBER: 'border-l-4 border-amber-500 bg-amber-50/50 pl-4 py-2 rounded-r-lg',
+  RED:   'border-l-4 border-red-500 bg-red-50/50 pl-4 py-2 rounded-r-lg',
+}
+
+const SEVERITY_TAG_RE = /^\[(GREEN|AMBER|RED)\]\s*/
+
+function parseSeverity(para) {
+  const match = para.match(SEVERITY_TAG_RE)
+  if (match) {
+    return { severity: match[1], text: para.slice(match[0].length) }
+  }
+  return { severity: null, text: para }
+}
+
 export function renderMarkdownParagraphs(text) {
   if (!text) return null
-  return text.split('\n\n').map((para, i) => (
-    <p key={i} className={i > 0 ? 'mt-2' : ''}>
-      {renderInline(para)}
-    </p>
-  ))
+  return text.split('\n\n').map((para, i) => {
+    const { severity, text: cleanText } = parseSeverity(para.trim())
+    const className = severity
+      ? SEVERITY_STYLES[severity]
+      : (i > 0 ? 'mt-2' : '')
+    return (
+      <p key={i} className={className}>
+        {renderInline(cleanText)}
+      </p>
+    )
+  })
 }

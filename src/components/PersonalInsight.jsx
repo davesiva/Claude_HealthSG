@@ -123,9 +123,15 @@ ${paragraphInstructions}
 
 Rules:
 - Do NOT use markdown headers (#), bullet points, or emojis
-- Start each paragraph with a short bold label like **Where you stand:** or **What you can do:** using markdown bold
+- Start each paragraph with a severity tag and then a short bold label. The severity tag must be one of [GREEN], [AMBER], or [RED] placed before the bold label:
+  - [GREEN] for positive findings, healthy metrics, or reassuring information
+  - [AMBER] for areas to monitor, borderline values, or things to be aware of
+  - [RED] for concerning findings that need attention or discussion with a doctor
+  Example: [GREEN] **Where you stand:** Your demographic has seen...
+  Example: [AMBER] **What to watch for:** Your LDL is slightly above...
 - Write in flowing paragraphs after the bold label
 - Tone: warm, conversational, empowering — not clinical or alarming
+- Choose the severity based on the actual content of each paragraph, not a fixed pattern. A paragraph about lifestyle could be GREEN if the user is active, or AMBER if sedentary
 - Always end by recommending they consult their doctor for personal medical advice
 ${personalDataSection}
 

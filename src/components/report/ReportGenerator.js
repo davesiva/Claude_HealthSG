@@ -339,6 +339,7 @@ export async function generateReport({ healthData, profile, insight, selectedInd
     // Strip markdown formatting and sanitize for PDF
     const cleanText = sanitize(
       insight
+        .replace(/\[(GREEN|AMBER|RED)\]\s*/g, '')
         .replace(/\*\*(.*?)\*\*/g, '$1')
         .replace(/\*(.*?)\*/g, '$1')
         .replace(/#{1,3}\s/g, '')
