@@ -289,16 +289,15 @@ export default function HealthMap() {
                   highlight={areaMetrics[selectedArea].elderlyRatio > nationalMetrics.elderlyRatio}
                 />
                 <StatCard
-                  label="Est. Diabetes"
-                  value={`${(areaMetrics[selectedArea].estDiabetes * 100).toFixed(1)}%`}
-                  national={`${(nationalMetrics.estDiabetes * 100).toFixed(1)}%`}
-                  highlight={areaMetrics[selectedArea].estDiabetes > nationalMetrics.estDiabetes}
+                  label="Under 15"
+                  value={`${(areaMetrics[selectedArea].youthRatio * 100).toFixed(1)}%`}
+                  national={`${(nationalMetrics.youthRatio * 100).toFixed(1)}%`}
                 />
                 <StatCard
-                  label="Est. Hypertension"
-                  value={`${(areaMetrics[selectedArea].estHypertension * 100).toFixed(1)}%`}
-                  national={`${(nationalMetrics.estHypertension * 100).toFixed(1)}%`}
-                  highlight={areaMetrics[selectedArea].estHypertension > nationalMetrics.estHypertension}
+                  label="Dependency Ratio"
+                  value={areaMetrics[selectedArea].dependencyRatio.toFixed(2)}
+                  national={nationalMetrics.dependencyRatio.toFixed(2)}
+                  highlight={areaMetrics[selectedArea].dependencyRatio > nationalMetrics.dependencyRatio}
                 />
                 <StatCard
                   label="Functional Diff."
@@ -421,8 +420,7 @@ export default function HealthMap() {
           animate={isVisible ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          Estimates are modeled from Census 2020 age distributions and national prevalence rates (NPHS).
-          They reflect demographic composition, not direct health measurements.
+          All data from the Census of Population 2020, Department of Statistics Singapore.
         </motion.p>
       </div>
     </section>

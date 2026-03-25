@@ -1,5 +1,3 @@
-import { diabetesRates, hypertensionRates, ageBandMapping } from '../data/disease-prevalence-rates'
-
 // Compute % aged 65+
 export function computeElderlyRatio(areaData) {
   const { ageGroups, population } = areaData
@@ -10,22 +8,24 @@ export function computeElderlyRatio(areaData) {
   return elderly / population.total
 }
 
-// Compute estimated disease prevalence weighted by age distribution
-export function computeEstimatedPrevalence(areaData, rates) {
+// Compute % aged 0-14
+export function computeYouthRatio(areaData) {
   const { ageGroups, population } = areaData
   if (!population.total) return 0
+  const youth = (ageGroups['0_4'] || 0) + (ageGroups['5_9'] || 0) + (ageGroups['10_14'] || 0)
+  return youth / population.total
+}
 
-  let weightedCases = 0
-  let eligiblePop = 0
-
-  for (const [band, count] of Object.entries(ageGroups)) {
-    const rateKey = ageBandMapping[band]
-    if (!rateKey || !rates[rateKey]) continue
-    weightedCases += count * rates[rateKey]
-    eligiblePop += count
-  }
-
-  return eligiblePop > 0 ? weightedCases / eligiblePop : 0
+// Compute dependency ratio: (aged 0-14 + aged 65+) / (aged 15-64)
+export function computeDependencyRatio(areaData) {
+  const { ageGroups, population } = areaData
+  if (!population.total) return 0
+  const young = (ageGroups['0_4'] || 0) + (ageGroups['5_9'] || 0) + (ageGroups['10_14'] || 0)
+  const elderly = (ageGroups['65_69'] || 0) + (ageGroups['70_74'] || 0) +
+    (ageGroups['75_79'] || 0) + (ageGroups['80_84'] || 0) +
+    (ageGroups['85_89'] || 0) + (ageGroups['90andOver'] || 0)
+  const workingAge = population.total - young - elderly
+  return workingAge > 0 ? (young + elderly) / workingAge : 0
 }
 
 // Compute % with any functional difficulty (some + severe)
@@ -43,8 +43,8 @@ export function getAllAreaMetrics(censusData) {
     results[name] = {
       population: data.population.total,
       elderlyRatio: computeElderlyRatio(data),
-      estDiabetes: computeEstimatedPrevalence(data, diabetesRates),
-      estHypertension: computeEstimatedPrevalence(data, hypertensionRates),
+      youthRatio: computeYouthRatio(data),
+      dependencyRatio: computeDependencyRatio(data),
       difficultyRate: computeDifficultyRate(data),
       ageGroups: data.ageGroups,
     }
@@ -53,30 +53,30 @@ export function getAllAreaMetrics(censusData) {
   return results
 }
 
-// Metric definitions
+// Metric definitions — only factually verifiable data from Census 2020
 export const METRICS = [
   {
     id: 'elderlyRatio',
-    label: 'Elderly Ratio',
+    label: 'Aged 65+',
     unit: '% aged 65+',
-    tooltip: 'Percentage of residents aged 65 and above. Areas with higher elderly ratios face greater demand for healthcare and social services.',
+    tooltip: 'Percentage of residents aged 65 and above. Towns built in the 1970s–80s have aged in place, creating concentrated elderly populations.',
     format: v => `${(v * 100).toFixed(1)}%`,
     colorScale: 'teal',
   },
   {
-    id: 'estDiabetes',
-    label: 'Est. Diabetes',
-    unit: 'estimated prevalence',
-    tooltip: 'Estimated diabetes prevalence based on each area\'s age distribution applied to national age-specific rates (NPHS). Not a direct measurement.',
+    id: 'youthRatio',
+    label: 'Under 15',
+    unit: '% aged 0-14',
+    tooltip: 'Percentage of residents aged 0–14. Newer towns like Punggol and Sengkang have the highest youth ratios, reflecting young families.',
     format: v => `${(v * 100).toFixed(1)}%`,
-    colorScale: 'rose',
+    colorScale: 'blue',
   },
   {
-    id: 'estHypertension',
-    label: 'Est. Hypertension',
-    unit: 'estimated prevalence',
-    tooltip: 'Estimated hypertension prevalence based on each area\'s age distribution applied to national age-specific rates (NPHS). Not a direct measurement.',
-    format: v => `${(v * 100).toFixed(1)}%`,
+    id: 'dependencyRatio',
+    label: 'Dependency Ratio',
+    unit: 'dependents per worker',
+    tooltip: 'Number of dependents (aged 0–14 and 65+) per working-age resident (15–64). Higher ratios mean more pressure on each working adult to support the young and old.',
+    format: v => v.toFixed(2),
     colorScale: 'purple',
   },
   {
@@ -89,18 +89,18 @@ export const METRICS = [
   },
 ]
 
-// Distinct color scales per metric for visual differentiation
+// Distinct color scales per metric
 const SCALES = {
-  teal:   { low: '#F0FDFA', high: '#115E59' },  // elderly ratio — teal
-  rose:   { low: '#FFF1F2', high: '#9F1239' },  // diabetes — rose/red
-  purple: { low: '#F5F3FF', high: '#5B21B6' },  // hypertension — violet
-  amber:  { low: '#FFFBEB', high: '#92400E' },  // difficulty — amber/brown
+  teal:   { low: '#F0FDFA', high: '#115E59' },
+  blue:   { low: '#EFF6FF', high: '#1E3A8A' },
+  purple: { low: '#F5F3FF', high: '#5B21B6' },
+  amber:  { low: '#FFFBEB', high: '#92400E' },
 }
 
 // CSS gradient strings for the legend bar
 export const SCALE_GRADIENTS = {
   teal:   'linear-gradient(to right, #F0FDFA, #5EEAD4, #115E59)',
-  rose:   'linear-gradient(to right, #FFF1F2, #FB7185, #9F1239)',
+  blue:   'linear-gradient(to right, #EFF6FF, #60A5FA, #1E3A8A)',
   purple: 'linear-gradient(to right, #F5F3FF, #A78BFA, #5B21B6)',
   amber:  'linear-gradient(to right, #FFFBEB, #FBBF24, #92400E)',
 }
@@ -122,14 +122,12 @@ function lerpColor(a, b, t) {
 export function getColorScale(metricId, allValues) {
   const metric = METRICS.find(m => m.id === metricId)
   const colors = SCALES[metric?.colorScale || 'teal']
-  // Filter out nulls, NaNs, and zeros (unpopulated areas)
   const valid = allValues.filter(v => v != null && !isNaN(v) && v > 0)
   const min = Math.min(...valid)
   const max = Math.max(...valid)
 
   const scale = (value) => {
     if (value == null || isNaN(value) || value === 0) return '#F3F4F6'
-    // Map the actual data range [min, max] to [0, 1]
     const t = max > min ? (value - min) / (max - min) : 0
     return lerpColor(colors.low, colors.high, t)
   }
