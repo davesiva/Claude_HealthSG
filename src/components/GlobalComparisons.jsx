@@ -10,6 +10,7 @@ import { streamHealthSG } from '../utils/anthropic'
 import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
 import globalData from '../data/global-health-data.json'
 import { INDICATORS, ENTITY_STYLES } from '../data/global-comparisons-config'
+import { POLICY_FACTS, POLICY_LAST_REVIEWED } from '../data/insurance-policy-facts'
 import InfoTooltip from './InfoTooltip'
 import ShareButton from './share/ShareButton'
 
@@ -41,7 +42,16 @@ const OOP_TERMS = [
   },
 ]
 
+// Build grounding context from verified policy facts
+function buildPolicyContext() {
+  return POLICY_FACTS.map(p =>
+    `[${p.topic}] (updated ${p.updated}, source: ${p.source})\n${p.facts.map(f => `• ${f}`).join('\n')}`
+  ).join('\n\n')
+}
+
 const OOP_UPDATE_PROMPT = `You are a health policy analyst providing a concise update on Singapore's healthcare insurance landscape as it relates to out-of-pocket spending.
+
+IMPORTANT: You MUST base your response on the verified policy facts provided below. Do NOT rely on your training data for specific dates, dollar amounts, or policy details — use ONLY the facts given. If the facts below do not cover a topic, omit it rather than guessing.
 
 Cover the following in 2–3 short paragraphs (no headings, no bullet points):
 1. The latest changes to MediShield Life (premium adjustments, claim limit changes, government support measures)
@@ -49,8 +59,7 @@ Cover the following in 2–3 short paragraphs (no headings, no bullet points):
 3. Any recent or upcoming MediSave changes (withdrawal limits, Flexi-MediSave, etc.)
 
 Rules:
-- Be factual and cite specific policy details (dates, dollar amounts, percentages) where possible
-- If you are not confident about a specific figure or date, say "as of the latest available information" rather than guessing
+- Use ONLY the verified facts provided — do not add figures or dates from your training data
 - Use plain language a general audience can understand
 - Do NOT include disclaimers like "consult a financial advisor" — this is an informational summary
 - Do NOT use headings, bullet points, or numbered lists — write in flowing paragraphs
@@ -72,8 +81,9 @@ function OOPContextPanel() {
     setAiStatus('loading')
     setAiUpdate('')
     try {
+      const factsContext = buildPolicyContext()
       const result = await streamHealthSG(
-        [{ role: 'user', content: 'Provide a brief update on the current state of Singapore\'s health insurance landscape — MediShield Life, Integrated Shield Plans, IP riders, and MediSave. Focus on recent policy changes and what they mean for out-of-pocket costs.' }],
+        [{ role: 'user', content: `Here are the latest verified policy facts (last reviewed ${POLICY_LAST_REVIEWED}):\n\n${factsContext}\n\nBased on these facts, provide a brief update on the current state of Singapore's health insurance landscape — MediShield Life, Integrated Shield Plans, IP riders, and MediSave. Focus on recent policy changes and what they mean for out-of-pocket costs.` }],
         OOP_UPDATE_PROMPT,
         512,
         (text) => setAiUpdate(text)
@@ -164,7 +174,7 @@ function OOPContextPanel() {
               </div>
 
               <p className="text-[10px] font-mono text-secondary/40">
-                Sources: MOH Singapore, CPF Board, WHO Global Health Expenditure Database (SHA 2011 framework)
+                Sources: MOH Singapore, CPF Board, WHO Global Health Expenditure Database (SHA 2011 framework) · Last reviewed {POLICY_LAST_REVIEWED}
               </p>
 
               {/* AI-generated recent developments */}
