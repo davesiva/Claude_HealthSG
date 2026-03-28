@@ -48,16 +48,33 @@ const CHOL_FACTOR = 38.67
 function mgToMmol(mg) { return mg ? (parseFloat(mg) / CHOL_FACTOR).toFixed(2) : '' }
 function mmolToMg(mmol) { return mmol ? (parseFloat(mmol) * CHOL_FACTOR).toFixed(0) : '' }
 
+// ── Glucose unit conversion (1 mmol/L = 18.02 mg/dL) ──
+const GLUC_FACTOR = 18.02
+function glucMgToMmol(mg) { return mg ? (parseFloat(mg) / GLUC_FACTOR).toFixed(1) : '' }
+function glucMmolToMg(mmol) { return mmol ? (parseFloat(mmol) * GLUC_FACTOR).toFixed(0) : '' }
+
 // Detect likely unit mismatch: value looks like it's in the wrong unit
 function cholUnitMismatch(value, unit) {
   const v = parseFloat(value)
   if (!v || !isFinite(v)) return null
   if (unit === 'mmol/L' && v > 30) {
-    // Values above 30 in mmol/L are physiologically impossible — likely mg/dL
     return 'This looks like a mg/dL value. Check your unit selection.'
   }
   if (unit === 'mg/dL' && v < 15) {
-    // Values below 15 in mg/dL are extremely unlikely — likely mmol/L
+    return 'This looks like a mmol/L value. Check your unit selection.'
+  }
+  return null
+}
+
+function glucUnitMismatch(value, unit) {
+  const v = parseFloat(value)
+  if (!v || !isFinite(v)) return null
+  if (unit === 'mmol/L' && v > 20) {
+    // Fasting glucose above 20 mmol/L is extremely rare — likely mg/dL
+    return 'This looks like a mg/dL value. Check your unit selection.'
+  }
+  if (unit === 'mg/dL' && v < 20) {
+    // Fasting glucose below 20 mg/dL is dangerously low — likely mmol/L
     return 'This looks like a mmol/L value. Check your unit selection.'
   }
   return null
@@ -118,6 +135,7 @@ function getSystemPrompt(healthData, profile) {
     if (hasLabs) {
       const labParts = []
       if (labs.hba1c) labParts.push(`HbA1c: ${labs.hba1c}%`)
+      if (labs.fastingGlucose) labParts.push(`Fasting glucose: ${labs.fastingGlucose} mmol/L`)
       if (labs.sysBP || labs.diaBP) labParts.push(`BP: ${labs.sysBP || '?'}/${labs.diaBP || '?'} mmHg`)
       if (labs.totalChol) labParts.push(`Total cholesterol: ${labs.totalChol} mmol/L`)
       if (labs.ldl) labParts.push(`LDL: ${labs.ldl} mmol/L`)
@@ -320,7 +338,7 @@ export default function PersonalInsight() {
   // Tier 3 — Clinical
   const [tier3Open, setTier3Open] = useState(false)
   const [conditions, setConditions] = useState({})
-  const [labs, setLabs] = useState({ hba1c: '', sysBP: '', diaBP: '', totalChol: '', ldl: '' })
+  const [labs, setLabs] = useState({ hba1c: '', fastingGlucose: '', sysBP: '', diaBP: '', totalChol: '', ldl: '' })
   const [cholUnit, setCholUnit] = useState('mmol/L') // 'mmol/L' or 'mg/dL'
   const [familyHistory, setFamilyHistory] = useState(new Set())
 
@@ -395,6 +413,7 @@ export default function PersonalInsight() {
 
     const labParts = []
     if (labs.hba1c) labParts.push(`HbA1c ${labs.hba1c}%`)
+    if (labs.fastingGlucose) labParts.push(`Fasting glucose ${labs.fastingGlucose} mmol/L`)
     if (labs.sysBP || labs.diaBP) labParts.push(`BP ${labs.sysBP || '?'}/${labs.diaBP || '?'}`)
     if (labs.totalChol) labParts.push(`Total cholesterol ${labs.totalChol}`)
     if (labs.ldl) labParts.push(`LDL ${labs.ldl}`)
@@ -570,7 +589,7 @@ export default function PersonalInsight() {
                 <InfoTooltip content="If you know your latest numbers, enter them here. Lab values help the AI give more specific guidance. Skip any you don't know." size={13} />
               </div>
               <div className="space-y-4">
-                {/* Row 1: HbA1c */}
+                {/* Row 1: HbA1c + Fasting Glucose */}
                 <div className="grid grid-cols-2 gap-4">
                   <NumericInput
                     label="HbA1c"
@@ -578,6 +597,17 @@ export default function PersonalInsight() {
                     onChange={v => updateLab('hba1c', v)}
                     unit="%"
                     hint="Normal: < 6.0%"
+                  />
+                  <NumericInput
+                    label="Fasting glucose"
+                    value={cholUnit === 'mg/dL' ? (labs.fastingGlucose ? glucMmolToMg(labs.fastingGlucose) : '') : labs.fastingGlucose}
+                    onChange={v => updateLab('fastingGlucose', cholUnit === 'mg/dL' ? glucMgToMmol(v) : v)}
+                    unit={cholUnit}
+                    hint={cholUnit === 'mg/dL' ? 'Normal: < 100 mg/dL' : 'Normal: < 6.0 mmol/L'}
+                    warning={glucUnitMismatch(
+                      cholUnit === 'mg/dL' ? (labs.fastingGlucose ? glucMmolToMg(labs.fastingGlucose) : '') : labs.fastingGlucose,
+                      cholUnit
+                    )}
                   />
                 </div>
                 {/* Row 2: Blood pressure */}
@@ -599,7 +629,7 @@ export default function PersonalInsight() {
                 </div>
                 {/* Row 3: Cholesterol with unit toggle */}
                 <div className="flex items-center gap-1.5 mt-1">
-                  <span className="text-xs text-secondary font-body">Cholesterol unit:</span>
+                  <span className="text-xs text-secondary font-body">Blood test unit:</span>
                   <button
                     onClick={() => setCholUnit(u => u === 'mmol/L' ? 'mg/dL' : 'mmol/L')}
                     className="text-xs font-body font-semibold px-2.5 py-1 rounded-full border border-accent text-accent hover:bg-accent/10 transition-colors cursor-pointer"
