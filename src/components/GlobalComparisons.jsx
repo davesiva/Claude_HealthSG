@@ -1,11 +1,13 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from 'recharts'
-import { Heart, Baby, TrendingUp, DollarSign, Wallet } from 'lucide-react'
+import { Heart, Baby, TrendingUp, DollarSign, Wallet, ChevronDown, AlertTriangle, Shield, PiggyBank, Building2, Sparkles, RefreshCw } from 'lucide-react'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
+import { streamHealthSG } from '../utils/anthropic'
+import { renderMarkdownParagraphs } from '../utils/renderMarkdown'
 import globalData from '../data/global-health-data.json'
 import { INDICATORS, ENTITY_STYLES } from '../data/global-comparisons-config'
 import InfoTooltip from './InfoTooltip'
@@ -14,6 +16,204 @@ import ShareButton from './share/ShareButton'
 const iconMap = { Heart, Baby, TrendingUp, DollarSign, Wallet }
 const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
+
+const OOP_TERMS = [
+  {
+    icon: Shield,
+    term: 'MediShield Life',
+    color: '#0D9488',
+    what: 'Compulsory basic health insurance for all citizens and PRs. Covers subsidised treatment in public hospital B2/C wards, day surgery, and selected outpatient treatments.',
+    cost: 'Premiums are age-banded and payable from MediSave (no cash outlay for most). Deductible of $2,000/year, plus 10% co-insurance above that.',
+  },
+  {
+    icon: Building2,
+    term: 'Integrated Shield Plans (IPs)',
+    color: '#6366F1',
+    what: 'Optional private insurance that sits on top of MediShield Life. Provides coverage for higher ward classes (B1, A) or private hospitals.',
+    cost: 'Premiums vary widely by age and insurer. Riders that previously covered deductibles and co-pay now require a minimum 5% co-payment (capped at $3,000/year, rising to $6,000 from April 2026).',
+  },
+  {
+    icon: PiggyBank,
+    term: 'MediSave',
+    color: '#F59E0B',
+    what: 'Compulsory individual medical savings account (part of CPF). Can be used for hospitalisation, insurance premiums, chronic disease management, and vaccinations.',
+    cost: '8\u201310.5% of salary contributed automatically. Withdrawal limits apply \u2014 e.g. $800/year for IP premiums, $400/year for outpatient (from Oct 2025).',
+  },
+]
+
+const OOP_UPDATE_PROMPT = `You are a health policy analyst providing a concise update on Singapore's healthcare insurance landscape as it relates to out-of-pocket spending.
+
+Cover the following in 2–3 short paragraphs (no headings, no bullet points):
+1. The latest changes to MediShield Life (premium adjustments, claim limit changes, government support measures)
+2. Integrated Shield Plan (IP) rider policy changes — especially co-payment requirements, deductible coverage rules, and any recent MOH announcements
+3. Any recent or upcoming MediSave changes (withdrawal limits, Flexi-MediSave, etc.)
+
+Rules:
+- Be factual and cite specific policy details (dates, dollar amounts, percentages) where possible
+- If you are not confident about a specific figure or date, say "as of the latest available information" rather than guessing
+- Use plain language a general audience can understand
+- Do NOT include disclaimers like "consult a financial advisor" — this is an informational summary
+- Do NOT use headings, bullet points, or numbered lists — write in flowing paragraphs
+- Keep the total response under 200 words
+- Bold key terms using **markdown** for emphasis`
+
+function OOPContextPanel() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [aiUpdate, setAiUpdate] = useState('')
+  const [aiStatus, setAiStatus] = useState('idle') // idle | loading | done | error
+  const aiCacheRef = useRef(null)
+
+  const generateUpdate = useCallback(async () => {
+    if (aiCacheRef.current) {
+      setAiUpdate(aiCacheRef.current)
+      setAiStatus('done')
+      return
+    }
+    setAiStatus('loading')
+    setAiUpdate('')
+    try {
+      const result = await streamHealthSG(
+        [{ role: 'user', content: 'Provide a brief update on the current state of Singapore\'s health insurance landscape — MediShield Life, Integrated Shield Plans, IP riders, and MediSave. Focus on recent policy changes and what they mean for out-of-pocket costs.' }],
+        OOP_UPDATE_PROMPT,
+        512,
+        (text) => setAiUpdate(text)
+      )
+      aiCacheRef.current = result
+      setAiStatus('done')
+    } catch {
+      setAiStatus('error')
+    }
+  }, [])
+
+  const handleToggle = () => {
+    const opening = !isOpen
+    setIsOpen(opening)
+    if (opening && aiStatus === 'idle') {
+      generateUpdate()
+    }
+  }
+
+  const handleRefresh = (e) => {
+    e.stopPropagation()
+    aiCacheRef.current = null
+    generateUpdate()
+  }
+
+  return (
+    <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/50 overflow-hidden">
+      <button
+        onClick={handleToggle}
+        className="w-full flex items-center gap-2 px-4 py-3 text-left cursor-pointer focus:outline-none"
+        style={{ WebkitTapHighlightColor: 'transparent' }}
+      >
+        <AlertTriangle size={14} className="text-amber-600 shrink-0" />
+        <span className="text-xs font-body font-semibold text-amber-800 flex-1">
+          Important context: what this metric does and doesn't capture
+        </span>
+        <ChevronDown
+          size={14}
+          className={`text-amber-600 transition-transform ${isOpen ? 'rotate-180' : ''}`}
+        />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <div className="px-4 pb-4 space-y-4">
+              {/* What OOP measures */}
+              <div>
+                <p className="text-xs font-body font-semibold text-primary mb-1">What "out-of-pocket" measures</p>
+                <p className="text-xs font-body text-secondary leading-relaxed">
+                  The WHO defines out-of-pocket (OOP) spending as <strong>direct payments at the point of care</strong> — co-payments, deductibles, and fees for uncovered services. It <strong>excludes</strong> insurance premiums, MediSave contributions, and taxes. Singapore's drop from ~49% to ~25% partly reflects the expansion of MediShield Life and government subsidies, but also accounting choices about how MediSave is classified internationally.
+                </p>
+              </div>
+
+              {/* What people actually pay */}
+              <div>
+                <p className="text-xs font-body font-semibold text-primary mb-1">What Singaporeans actually pay</p>
+                <p className="text-xs font-body text-secondary leading-relaxed">
+                  The true household healthcare burden is higher than this metric suggests. Mandatory MediSave contributions (8–10.5% of salary), MediShield Life premiums, and optional IP/rider premiums are all excluded from the OOP figure — yet they represent real costs. The IP rider controversy, where "as-charged" riders led to over-consumption and spiralling premiums, highlights how insurance design directly affects what people pay.
+                </p>
+              </div>
+
+              {/* Key terms */}
+              <div>
+                <p className="text-xs font-body font-semibold text-primary mb-2">Singapore's healthcare financing: key terms</p>
+                <div className="space-y-3">
+                  {OOP_TERMS.map(t => (
+                    <div key={t.term} className="flex gap-2.5">
+                      <div className="shrink-0 mt-0.5">
+                        <div className="w-6 h-6 rounded-lg flex items-center justify-center" style={{ backgroundColor: t.color + '18' }}>
+                          <t.icon size={13} style={{ color: t.color }} />
+                        </div>
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-body font-semibold text-primary">{t.term}</p>
+                        <p className="text-[11px] font-body text-secondary leading-relaxed mt-0.5">{t.what}</p>
+                        <p className="text-[11px] font-body text-secondary/70 leading-relaxed mt-0.5"><strong className="text-secondary">Cost:</strong> {t.cost}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[10px] font-mono text-secondary/40">
+                Sources: MOH Singapore, CPF Board, WHO Global Health Expenditure Database (SHA 2011 framework)
+              </p>
+
+              {/* AI-generated recent developments */}
+              <div className="rounded-lg border border-indigo-200 bg-indigo-50/40 p-3">
+                <div className="flex items-center gap-1.5 mb-2">
+                  <Sparkles size={12} className="text-indigo-500" />
+                  <p className="text-xs font-body font-semibold text-primary flex-1">Recent developments</p>
+                  {aiStatus === 'done' && (
+                    <button
+                      onClick={handleRefresh}
+                      className="p-1 rounded-full hover:bg-indigo-100 transition-colors cursor-pointer"
+                      title="Refresh update"
+                    >
+                      <RefreshCw size={11} className="text-indigo-400" />
+                    </button>
+                  )}
+                </div>
+
+                {aiStatus === 'loading' && !aiUpdate && (
+                  <div className="flex items-center gap-2 py-2">
+                    <div className="w-3 h-3 rounded-full border-2 border-indigo-300 border-t-indigo-600 animate-spin" />
+                    <p className="text-[11px] font-body text-secondary">Fetching latest policy updates...</p>
+                  </div>
+                )}
+
+                {aiUpdate && (
+                  <div className="text-[11px] font-body text-secondary leading-relaxed space-y-1.5">
+                    {renderMarkdownParagraphs(aiUpdate)}
+                  </div>
+                )}
+
+                {aiStatus === 'error' && (
+                  <p className="text-[11px] font-body text-red-500">
+                    Unable to fetch updates. <button onClick={handleRefresh} className="underline cursor-pointer">Try again</button>
+                  </p>
+                )}
+
+                <p className="text-[10px] font-mono text-indigo-300 mt-2 flex items-center gap-1">
+                  <Sparkles size={9} />
+                  AI-generated summary — verify important details with official sources (MOH, CPF Board)
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 function ComparisonTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null
@@ -227,6 +427,8 @@ export default function GlobalComparisons() {
             <p className="mt-3 text-[10px] text-secondary/40 font-mono">
               Source: Our World in Data — {activeIndicator.source}
             </p>
+
+            {activeId === 'out_of_pocket' && <OOPContextPanel />}
           </motion.div>
         </AnimatePresence>
       </div>

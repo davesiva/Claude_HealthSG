@@ -48,6 +48,21 @@ const CHOL_FACTOR = 38.67
 function mgToMmol(mg) { return mg ? (parseFloat(mg) / CHOL_FACTOR).toFixed(2) : '' }
 function mmolToMg(mmol) { return mmol ? (parseFloat(mmol) * CHOL_FACTOR).toFixed(0) : '' }
 
+// Detect likely unit mismatch: value looks like it's in the wrong unit
+function cholUnitMismatch(value, unit) {
+  const v = parseFloat(value)
+  if (!v || !isFinite(v)) return null
+  if (unit === 'mmol/L' && v > 30) {
+    // Values above 30 in mmol/L are physiologically impossible — likely mg/dL
+    return 'This looks like a mg/dL value. Check your unit selection.'
+  }
+  if (unit === 'mg/dL' && v < 15) {
+    // Values below 15 in mg/dL are extremely unlikely — likely mmol/L
+    return 'This looks like a mmol/L value. Check your unit selection.'
+  }
+  return null
+}
+
 // ── System prompt builder ──
 function getSystemPrompt(healthData, profile) {
   const { bmi, smoking, activity, alcohol, conditions, labs, familyHistory } = profile
@@ -204,7 +219,7 @@ function CollapsibleSection({ title, subtitle, isOpen, onToggle, children }) {
   )
 }
 
-function NumericInput({ label, value, onChange, unit, hint, tooltip, placeholder }) {
+function NumericInput({ label, value, onChange, unit, hint, tooltip, placeholder, warning }) {
   return (
     <div>
       <div className="flex items-center mb-1.5">
@@ -217,7 +232,9 @@ function NumericInput({ label, value, onChange, unit, hint, tooltip, placeholder
           inputMode="decimal"
           value={value}
           onChange={e => onChange(e.target.value)}
-          className="bg-grid rounded-xl px-4 py-2.5 text-sm text-primary w-full focus:ring-2 focus:ring-accent/30 focus:outline-none font-body"
+          className={`bg-grid rounded-xl px-4 py-2.5 text-sm text-primary w-full focus:outline-none font-body ${
+            warning ? 'ring-2 ring-amber-400/60 focus:ring-amber-400/60' : 'focus:ring-2 focus:ring-accent/30'
+          }`}
           placeholder={placeholder || '—'}
         />
         {unit && (
@@ -226,7 +243,8 @@ function NumericInput({ label, value, onChange, unit, hint, tooltip, placeholder
           </span>
         )}
       </div>
-      {hint && <p className="text-xs text-secondary/70 mt-1">{hint}</p>}
+      {warning && <p className="text-xs text-amber-600 mt-1 font-body">{warning}</p>}
+      {!warning && hint && <p className="text-xs text-secondary/70 mt-1">{hint}</p>}
     </div>
   )
 }
@@ -596,6 +614,10 @@ export default function PersonalInsight() {
                     onChange={v => updateLab('totalChol', cholUnit === 'mg/dL' ? mgToMmol(v) : v)}
                     unit={cholUnit}
                     hint={cholUnit === 'mg/dL' ? 'Optimal: < 200 mg/dL' : 'Optimal: < 5.2 mmol/L'}
+                    warning={cholUnitMismatch(
+                      cholUnit === 'mg/dL' ? (labs.totalChol ? mmolToMg(labs.totalChol) : '') : labs.totalChol,
+                      cholUnit
+                    )}
                   />
                   <NumericInput
                     label="LDL cholesterol"
@@ -603,6 +625,10 @@ export default function PersonalInsight() {
                     onChange={v => updateLab('ldl', cholUnit === 'mg/dL' ? mgToMmol(v) : v)}
                     unit={cholUnit}
                     hint={cholUnit === 'mg/dL' ? 'Optimal: < 100 mg/dL' : 'Optimal: < 2.6 mmol/L'}
+                    warning={cholUnitMismatch(
+                      cholUnit === 'mg/dL' ? (labs.ldl ? mmolToMg(labs.ldl) : '') : labs.ldl,
+                      cholUnit
+                    )}
                   />
                 </div>
               </div>
