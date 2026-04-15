@@ -1,20 +1,143 @@
 @import "tailwindcss";
+@import "./styles/material.css";
+
+/* ═══════════════════════════════════════════════════════════════════
+   MATERIAL YOU (M3) DESIGN TOKENS
+   Seeds: Primary #475D92 (deep indigo) · Secondary #755A2F (warm).
+   Neutral surface tones tinted slightly toward primary hue.
+   Legacy --color-* tokens alias MD3 slots so existing components
+   inherit the new look without edits.
+   ═══════════════════════════════════════════════════════════════════ */
 
 @theme {
-  --color-bg: #FAFAF8;
-  --color-card: #FFFFFF;
-  --color-primary: #1A1A1A;
-  --color-secondary: #6B7280;
-  --color-accent: #0D9488;
-  --color-accent-secondary: #F59E0B;
-  --color-danger: #EF4444;
-  --color-border: #E5E7EB;
-  --color-grid: #F3F4F6;
+  /* ── Primary — bright cornflower indigo tonal palette ───────────── */
+  --md-sys-color-primary: #5370E0;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #DEE3FF;
+  --md-sys-color-on-primary-container: #0B1559;
 
-  --font-heading: 'Instrument Serif', serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  /* ── Secondary — warm tonal palette ─────────────────────────────── */
+  --md-sys-color-secondary: #755A2F;
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #FFDEA6;
+  --md-sys-color-on-secondary-container: #281900;
+
+  /* ── Tertiary — complementary muted plum ────────────────────────── */
+  --md-sys-color-tertiary: #7D5260;
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #FFD8E4;
+  --md-sys-color-on-tertiary-container: #31111D;
+
+  /* ── Error ──────────────────────────────────────────────────────── */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* ── Neutral surface tiers (tinted toward primary) ──────────────── */
+  --md-sys-color-background: #FDFBFF;
+  --md-sys-color-on-background: #1B1B1F;
+  --md-sys-color-surface: #FDFBFF;
+  --md-sys-color-on-surface: #1B1B1F;
+  --md-sys-color-surface-variant: #E1E2EC;
+  --md-sys-color-on-surface-variant: #45464F;
+
+  --md-sys-color-surface-dim: #DDDAE0;
+  --md-sys-color-surface-bright: #FDFBFF;
+  --md-sys-color-surface-container-lowest: #FFFFFF;
+  --md-sys-color-surface-container-low: #F7F3F9;
+  --md-sys-color-surface-container:     #F1EDF4;
+  --md-sys-color-surface-container-high: #EBE8EC;
+  --md-sys-color-surface-container-highest: #E5E2E7;
+
+  --md-sys-color-outline: #757680;
+  --md-sys-color-outline-variant: #C5C6D0;
+  --md-sys-color-scrim: #000000;
+  --md-sys-color-shadow: #000000;
+
+  /* Inverse (tooltips / snackbars) */
+  --md-sys-color-inverse-surface: #303034;
+  --md-sys-color-inverse-on-surface: #F2F0F4;
+  --md-sys-color-inverse-primary: #B8C5FF;
+
+  /* ── Category palette (Material You harmonised hues) ────────────── */
+  --md-sys-color-demographics: #5370E0;   /* primary indigo */
+  --md-sys-color-chronic:      #8E4A5E;   /* warm rose */
+  --md-sys-color-lifestyle:    #755A2F;   /* secondary warm */
+  --md-sys-color-healthcare:   #6750A4;   /* Material purple */
+  --md-sys-color-longevity:    #3D6A5E;   /* teal harmonised */
+  --md-sys-color-stroke-cat:   #00629D;   /* cool sky */
+
+  /* ═════════════════════════════════════════════════════════════════
+     SHAPE SCALE — softer, rounder
+     ═════════════════════════════════════════════════════════════════ */
+  --md-sys-shape-corner-none: 0;
+  --md-sys-shape-corner-xs: 4px;
+  --md-sys-shape-corner-sm: 8px;
+  --md-sys-shape-corner-md: 12px;
+  --md-sys-shape-corner-lg: 16px;
+  --md-sys-shape-corner-xl: 20px;       /* buttons */
+  --md-sys-shape-corner-xxl: 28px;      /* cards */
+  --md-sys-shape-corner-full: 9999px;   /* pills */
+
+  /* ═════════════════════════════════════════════════════════════════
+     ELEVATION — Material 3, soft and wide
+     ═════════════════════════════════════════════════════════════════ */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1:
+      0 1px 2px rgba(83, 112, 224, 0.08),
+      0 2px 6px 1px rgba(83, 112, 224, 0.06);
+  --md-sys-elevation-2:
+      0 1px 2px rgba(83, 112, 224, 0.10),
+      0 3px 10px 2px rgba(83, 112, 224, 0.08);
+  --md-sys-elevation-3:
+      0 2px 4px rgba(83, 112, 224, 0.10),
+      0 6px 16px 3px rgba(83, 112, 224, 0.09);
+  --md-sys-elevation-4:
+      0 3px 6px rgba(83, 112, 224, 0.11),
+      0 10px 24px 5px rgba(83, 112, 224, 0.10);
+  --md-sys-elevation-5:
+      0 4px 8px rgba(83, 112, 224, 0.12),
+      0 16px 32px 8px rgba(83, 112, 224, 0.11);
+
+  /* ═════════════════════════════════════════════════════════════════
+     MOTION (M3 easing + duration)
+     ═════════════════════════════════════════════════════════════════ */
+  --md-sys-motion-easing-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-sys-motion-easing-emphasized-decel: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --md-sys-motion-easing-emphasized-accel: cubic-bezier(0.3, 0, 0.8, 0.15);
+  --md-sys-motion-duration-short2: 100ms;
+  --md-sys-motion-duration-short4: 200ms;
+  --md-sys-motion-duration-medium2: 300ms;
+  --md-sys-motion-duration-long2: 500ms;
+
+  /* ═════════════════════════════════════════════════════════════════
+     TYPOGRAPHY — Inter everywhere, no serif
+     ═════════════════════════════════════════════════════════════════ */
+  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'Roboto Mono', 'SF Mono', 'Menlo', monospace;
+
+  /* ═════════════════════════════════════════════════════════════════
+     LEGACY TOKEN ALIASES
+     Keep existing --color-* names working. Cards now default to
+     surface-container-low for tonal differentiation (no borders).
+     ═════════════════════════════════════════════════════════════════ */
+  --color-bg: var(--md-sys-color-background);
+  --color-card: var(--md-sys-color-surface-container-low);
+  --color-primary: var(--md-sys-color-on-background);
+  --color-secondary: var(--md-sys-color-on-surface-variant);
+  --color-accent: var(--md-sys-color-primary);
+  --color-accent-secondary: var(--md-sys-color-secondary);
+  --color-danger: var(--md-sys-color-error);
+  --color-border: var(--md-sys-color-outline-variant);
+  --color-grid: var(--md-sys-color-surface-container);
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   BASE LAYER
+   ═══════════════════════════════════════════════════════════════════ */
 
 @layer base {
   /* Hide number input spinners */
@@ -31,38 +154,52 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
     font-family: var(--font-body);
-    background-color: var(--color-bg);
-    color: var(--color-primary);
+    font-optical-sizing: auto;
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
     position: relative;
     min-height: 100vh;
     margin: 0;
+    letter-spacing: -0.006em;
   }
 
+  /* Ambient Material You surface tint — indigo + warm glows */
   body::before {
     content: '';
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.03;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 256px 256px;
+    background:
+      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(83, 112, 224, 0.06), transparent 65%),
+      radial-gradient(ellipse 60% 40% at 100% 100%, rgba(117, 90, 47, 0.04), transparent 60%);
   }
 
-  h1, h2, h3 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
+    font-optical-sizing: auto;
+    font-weight: 500;
+    letter-spacing: -0.022em;
+    color: var(--md-sys-color-on-background);
   }
+
+  h1 { font-weight: 600; }
+  h2 { font-weight: 600; }
 
   * {
     box-sizing: border-box;
+  }
+
+  /* Focus ring — M3 style */
+  :focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+    border-radius: var(--md-sys-shape-corner-xs);
   }
 
   /* Remove focus outline on chart SVG elements */
@@ -76,20 +213,23 @@
   }
 
   /* Remove Leaflet default focus outlines on map paths */
-  .leaflet-interactive:focus {
-    outline: none !important;
-  }
+  .leaflet-interactive:focus { outline: none !important; }
   .leaflet-container {
     outline: none !important;
     -webkit-tap-highlight-color: transparent;
   }
-  .leaflet-container *:focus {
-    outline: none !important;
+  .leaflet-container *:focus { outline: none !important; }
+
+  /* Selection color — Material tonal */
+  ::selection {
+    background: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
   }
 }
 
-/* When the scroll animation is complete, override anime.js inline styles.
-   Stylesheet !important beats anime.js non-!important inline style writes. */
+/* ═══════════════════════════════════════════════════════════════════
+   ANIMATION SETTLED STATE (preserved from original)
+   ═══════════════════════════════════════════════════════════════════ */
 .settled .snapshot-heading,
 .settled .pill-bar,
 .settled .pill-btn,

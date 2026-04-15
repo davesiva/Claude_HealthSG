@@ -1,0 +1,254 @@
+/* ═══════════════════════════════════════════════════════════════════
+   MATERIAL 3 UTILITY CLASSES
+   Borderless surfaces + softer shapes per design spec.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Card surfaces (M3 — borderless, tonal differentiation) ──────── */
+
+.md-card {
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-xxl);         /* 28px */
+  border: none;
+  transition:
+    box-shadow var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    transform  var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+
+.md-card-elevated {
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: var(--md-sys-shape-corner-xxl);
+  box-shadow: var(--md-sys-elevation-1);
+  border: none;
+  transition: box-shadow var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+.md-card-elevated:hover { box-shadow: var(--md-sys-elevation-2); }
+
+.md-card-filled {
+  background: var(--md-sys-color-surface-container-high);
+  border-radius: var(--md-sys-shape-corner-xxl);
+  border: none;
+}
+
+/* Override legacy `.card` helper — borderless, rounder, softer shadow */
+.card {
+  background: var(--md-sys-color-surface-container-low);
+  border-radius: 24px;
+  border: none;
+  box-shadow: var(--md-sys-elevation-1);
+  transition:
+    box-shadow var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    transform  var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+}
+
+.card.hover\:card-hover:hover,
+.card-hover {
+  box-shadow: var(--md-sys-elevation-2);
+  background: var(--md-sys-color-surface-container);
+  transform: translateY(-1px);
+}
+
+/* ── Buttons (M3 — 20px rounded, pills where explicitly requested) ─ */
+
+.md-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 24px;
+  border: none;
+  border-radius: var(--md-sys-shape-corner-xl);          /* 20px */
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    box-shadow       var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.md-button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  pointer-events: none;
+}
+
+.md-button:hover::before          { opacity: 0.08; }
+.md-button:focus-visible::before  { opacity: 0.10; }
+.md-button:active::before         { opacity: 0.12; }
+
+.md-button-filled {
+  background: var(--md-sys-color-primary);
+  color: var(--md-sys-color-on-primary);
+}
+.md-button-filled:hover { box-shadow: var(--md-sys-elevation-1); }
+
+.md-button-tonal {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+}
+
+.md-button-outlined {
+  background: transparent;
+  color: var(--md-sys-color-primary);
+  border: 1px solid var(--md-sys-color-outline);
+}
+
+.md-button-text {
+  background: transparent;
+  color: var(--md-sys-color-primary);
+  padding: 0 12px;
+}
+
+.md-button-elevated {
+  background: var(--md-sys-color-surface-container-low);
+  color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-1);
+}
+.md-button-elevated:hover { box-shadow: var(--md-sys-elevation-2); }
+
+/* ── Pills (explicitly fully-rounded) ────────────────────────────── */
+
+.md-pill {
+  border-radius: var(--md-sys-shape-corner-full);
+}
+
+/* ── Chips (M3) ──────────────────────────────────────────────────── */
+
+.md-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  padding: 0 16px;
+  border-radius: var(--md-sys-shape-corner-sm);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid var(--md-sys-color-outline-variant);
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant);
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    border-color     var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard),
+    color            var(--md-sys-motion-duration-short4) var(--md-sys-motion-easing-standard);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.md-chip:hover {
+  background: color-mix(in srgb, var(--md-sys-color-on-surface) 8%, transparent);
+}
+
+.md-chip-selected {
+  background: var(--md-sys-color-secondary-container);
+  color: var(--md-sys-color-on-secondary-container);
+  border-color: transparent;
+}
+
+/* ── State layer helper ──────────────────────────────────────────── */
+
+.md-state-layer {
+  position: relative;
+}
+
+.md-state-layer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--md-sys-motion-duration-short2) var(--md-sys-motion-easing-standard);
+  border-radius: inherit;
+}
+
+.md-state-layer:hover::after        { opacity: 0.08; }
+.md-state-layer:focus-visible::after { opacity: 0.10; }
+.md-state-layer:active::after       { opacity: 0.12; }
+
+/* ── Typography scale (M3) ───────────────────────────────────────── */
+
+.md-display-large {
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+}
+
+.md-display-medium {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 4vw, 2.875rem);
+  font-weight: 600;
+  line-height: 1.14;
+  letter-spacing: -0.022em;
+}
+
+.md-headline {
+  font-family: var(--font-body);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: -0.01em;
+}
+
+.md-title {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.005em;
+}
+
+.md-body-large {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+.md-body {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.43;
+  letter-spacing: 0;
+}
+
+.md-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.33;
+  letter-spacing: 0.02em;
+}
+
+/* ── Elevation + shape utility classes ───────────────────────────── */
+.md-elevation-0 { box-shadow: var(--md-sys-elevation-0); }
+.md-elevation-1 { box-shadow: var(--md-sys-elevation-1); }
+.md-elevation-2 { box-shadow: var(--md-sys-elevation-2); }
+.md-elevation-3 { box-shadow: var(--md-sys-elevation-3); }
+.md-elevation-4 { box-shadow: var(--md-sys-elevation-4); }
+.md-elevation-5 { box-shadow: var(--md-sys-elevation-5); }
+
+.md-shape-xs   { border-radius: var(--md-sys-shape-corner-xs); }
+.md-shape-sm   { border-radius: var(--md-sys-shape-corner-sm); }
+.md-shape-md   { border-radius: var(--md-sys-shape-corner-md); }
+.md-shape-lg   { border-radius: var(--md-sys-shape-corner-lg); }
+.md-shape-xl   { border-radius: var(--md-sys-shape-corner-xl); }
+.md-shape-xxl  { border-radius: var(--md-sys-shape-corner-xxl); }
+.md-shape-full { border-radius: var(--md-sys-shape-corner-full); }
