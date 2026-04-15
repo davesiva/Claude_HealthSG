@@ -85,7 +85,7 @@ function DesktopNavBar({ sections, activeIndex }) {
                 fontFamily: 'var(--font-body)',
                 fontSize: 13,
                 fontWeight: 500,
-                color: isActive ? '#0D9488' : '#6B7280',
+                color: isActive ? '#5370E0' : '#6B7280',
                 transition: 'color 0.2s',
                 whiteSpace: 'nowrap',
               }}
@@ -108,7 +108,7 @@ function DesktopNavBar({ sections, activeIndex }) {
                     right: 8,
                     height: 2,
                     borderRadius: 1,
-                    background: '#0D9488',
+                    background: '#5370E0',
                   }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                 />
@@ -197,7 +197,7 @@ function MobileTabBar({ sections, activeIndex }) {
                 cursor: 'pointer',
                 padding: '6px 12px',
                 minWidth: 56,
-                color: isActive ? '#0D9488' : '#9CA3AF',
+                color: isActive ? '#5370E0' : '#9CA3AF',
                 transition: 'color 0.2s',
               }}
             >
@@ -222,7 +222,7 @@ function MobileTabBar({ sections, activeIndex }) {
                         width: 4,
                         height: 4,
                         borderRadius: '50%',
-                        background: di === subIndex ? '#0D9488' : '#D1D5DB',
+                        background: di === subIndex ? '#5370E0' : '#D1D5DB',
                         transition: 'background 0.2s',
                       }}
                     />

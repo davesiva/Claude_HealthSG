@@ -125,7 +125,7 @@ export default function CancerButterflyChart({ data, isMobile }) {
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" horizontal={false} />
           <XAxis
             type="number"
-            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'DM Sans', fill: '#9CA3AF' }}
+            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'Lato', fill: '#9CA3AF' }}
             stroke="#E5E7EB"
             tickFormatter={v => `${Math.abs(v)}%`}
             domain={[-35, 35]}
@@ -133,7 +133,7 @@ export default function CancerButterflyChart({ data, isMobile }) {
           <YAxis
             type="category"
             dataKey="site"
-            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'DM Sans', fill: '#6B7280', fontWeight: 500 }}
+            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'Lato', fill: '#6B7280', fontWeight: 500 }}
             stroke="none"
             width={isMobile ? 75 : 110}
           />

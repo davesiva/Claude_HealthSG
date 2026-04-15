@@ -8,14 +8,14 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import healthData from '../data/health-indicators.json'
 
 const chartColors = {
-  diabetes: '#0D9488',
+  diabetes: '#5370E0',
   hypertension: '#F59E0B',
   obesity: '#EF4444',
   smoking: '#6B7280'
 }
 
 // Axis tick style — darker for better contrast
-const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
+const axisTick = { fontSize: 11, fontFamily: 'Roboto Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
 
 function SimpleTooltip({ active, payload, label }) {
@@ -70,17 +70,17 @@ function Chapter1({ isMobile }) {
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis domain={[60, 85]} tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<LifeExpTooltip />} />
-          <ReferenceArea x1={1960} x2={1990} fill="#0D9488" fillOpacity={0.05} />
-          <ReferenceLine x={1984} stroke="#0D9488" strokeDasharray="3 3">
-            <Label value="Medisave" position="top" fill="#0D9488" fontSize={10} />
+          <ReferenceArea x1={1960} x2={1990} fill="#5370E0" fillOpacity={0.05} />
+          <ReferenceLine x={1984} stroke="#5370E0" strokeDasharray="3 3">
+            <Label value="Medisave" position="top" fill="#5370E0" fontSize={10} />
           </ReferenceLine>
           <Line
             type="monotone"
             dataKey="value"
-            stroke="#0D9488"
+            stroke="#5370E0"
             strokeWidth={2}
-            dot={isMobile ? false : { r: 3, fill: '#0D9488' }}
-            activeDot={{ r: 5, fill: '#0D9488', stroke: '#fff', strokeWidth: 2 }}
+            dot={isMobile ? false : { r: 3, fill: '#5370E0' }}
+            activeDot={{ r: 5, fill: '#5370E0', stroke: '#fff', strokeWidth: 2 }}
             name="Life Expectancy"
             isAnimationActive={true}
             animationDuration={1500}
@@ -116,7 +116,7 @@ function Chapter2({ isMobile }) {
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
-          <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
+          <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'Lato' }} />
           <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Diabetes" />
           <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Hypertension" />
           <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Obesity" />
@@ -154,7 +154,7 @@ function Chapter3({ isMobile }) {
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleTooltip />} />
-          <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />
+          <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'Lato' }} />
           <Line type="monotone" dataKey="diabetes" stroke={chartColors.diabetes} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Diabetes" />
           <Line type="monotone" dataKey="hypertension" stroke={chartColors.hypertension} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Hypertension" />
           <Line type="monotone" dataKey="obesity" stroke={chartColors.obesity} strokeWidth={2} dot={isMobile ? false : { r: 3 }} connectNulls name="Obesity" />
@@ -168,7 +168,7 @@ function Chapter3({ isMobile }) {
           <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
           <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
           <Tooltip content={<SimpleBarTooltip />} />
-          <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name="Health Spend" />
+          <Bar dataKey="value" fill="#5370E0" radius={[4, 4, 0, 0]} name="Health Spend" />
         </BarChart>
       </ResponsiveContainer>
     </div>

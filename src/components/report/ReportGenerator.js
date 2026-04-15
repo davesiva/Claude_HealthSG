@@ -1,6 +1,6 @@
 import { jsPDF } from 'jspdf'
 
-const TEAL = [13, 148, 136]   // #0D9488
+const TEAL = [13, 148, 136]   // #5370E0
 const DARK = [26, 26, 26]     // #1A1A1A
 const GRAY = [107, 114, 128]  // #6B7280
 const PAGE_W = 210 // A4 mm
@@ -123,14 +123,14 @@ async function renderChartImage(data, chartType = 'line', label = '', unit = '')
       const x = toX(i) - barW / 2
       const y = toY(data[i].value)
       const h = padding.top + chartH - y
-      ctx.fillStyle = '#0D9488'
+      ctx.fillStyle = '#5370E0'
       ctx.beginPath()
       ctx.roundRect(x, y, barW, h, 4)
       ctx.fill()
     }
   } else {
     // Line chart
-    ctx.strokeStyle = '#0D9488'
+    ctx.strokeStyle = '#5370E0'
     ctx.lineWidth = 4
     ctx.lineJoin = 'round'
     ctx.lineCap = 'round'
@@ -151,7 +151,7 @@ async function renderChartImage(data, chartType = 'line', label = '', unit = '')
       ctx.beginPath()
       ctx.arc(x, y, 6, 0, Math.PI * 2)
       ctx.fill()
-      ctx.fillStyle = '#0D9488'
+      ctx.fillStyle = '#5370E0'
       ctx.beginPath()
       ctx.arc(x, y, 4, 0, Math.PI * 2)
       ctx.fill()

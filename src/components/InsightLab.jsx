@@ -19,7 +19,7 @@ import CancerAgeChart from './insight-charts/CancerAgeChart'
 
 const iconMap = { DollarSign, Users, GraduationCap, Ribbon }
 
-const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
+const axisTick = { fontSize: 11, fontFamily: 'Roboto Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
 
 function DualAxisTooltip({ active, payload, label }) {
@@ -253,7 +253,7 @@ export default function InsightLab() {
                         angle: -90,
                         position: 'insideLeft',
                         offset: 5,
-                        style: { fontSize: 10, fontFamily: 'DM Sans', fill: '#9CA3AF' }
+                        style: { fontSize: 10, fontFamily: 'Lato', fill: '#9CA3AF' }
                       }}
                     />
                     <YAxis
@@ -267,11 +267,11 @@ export default function InsightLab() {
                         angle: 90,
                         position: 'insideRight',
                         offset: 5,
-                        style: { fontSize: 10, fontFamily: 'DM Sans', fill: '#9CA3AF' }
+                        style: { fontSize: 10, fontFamily: 'Lato', fill: '#9CA3AF' }
                       }}
                     />
                     <Tooltip content={<DualAxisTooltip />} />
-                    <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'DM Sans' }} />
+                    <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'Lato' }} />
                     {activeComparison.series.map((s, i) => {
                       const dataKey = `s${i}`
 
@@ -379,7 +379,7 @@ export default function InsightLab() {
                         {stat.sparkData && (
                           <Sparkline
                             data={stat.sparkData}
-                            color={stat.direction === 'down' ? '#059669' : stat.direction === 'up' ? '#F43F5E' : '#6366F1'}
+                            color={stat.direction === 'down' ? '#1E8E3E' : stat.direction === 'up' ? '#DC2626' : '#5370E0'}
                           />
                         )}
                       </p>

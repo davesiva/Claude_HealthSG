@@ -89,7 +89,7 @@ export default function HealthMap() {
     return {
       fillColor: fill,
       fillOpacity: 0.85,
-      color: isSelected ? '#0D9488' : '#FFFFFF',
+      color: isSelected ? '#5370E0' : '#FFFFFF',
       weight: isSelected ? 3 : 1,
       opacity: 1,
     }
@@ -102,9 +102,9 @@ export default function HealthMap() {
     if (!metrics) return
 
     // Tooltip on hover
-    const tooltipContent = `<div style="font-family: 'DM Sans', sans-serif; font-size: 12px;">
+    const tooltipContent = `<div style="font-family: 'Lato', sans-serif; font-size: 12px;">
       <strong>${formatAreaName(name)}</strong><br/>
-      <span style="font-family: 'JetBrains Mono', monospace; color: #6B7280;">
+      <span style="font-family: 'Roboto Mono', monospace; color: #6B7280;">
         ${currentMetricDef.label}: ${currentMetricDef.format(metrics[activeMetric])}
       </span>
     </div>`
@@ -118,7 +118,7 @@ export default function HealthMap() {
 
     layer.on({
       mouseover: (e) => {
-        e.target.setStyle({ weight: 2, color: '#0D9488', fillOpacity: 0.95 })
+        e.target.setStyle({ weight: 2, color: '#5370E0', fillOpacity: 0.95 })
         e.target.bringToFront()
       },
       mouseout: (e) => {
@@ -196,7 +196,7 @@ export default function HealthMap() {
                     : 'bg-card text-secondary border border-border hover:border-accent'
                 }`}
                 style={{
-                  backgroundColor: activeMetric === metric.id ? '#0D9488' : undefined,
+                  backgroundColor: activeMetric === metric.id ? '#5370E0' : undefined,
                   WebkitTapHighlightColor: 'transparent',
                 }}
               >
@@ -324,8 +324,8 @@ export default function HealthMap() {
                     <ResponsiveContainer width="100%" height={180}>
                       <BarChart data={ageDistData} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-                        <XAxis dataKey="label" tick={{ fontSize: 10, fontFamily: 'JetBrains Mono', fill: '#6B7280' }} stroke="#D1D5DB" />
-                        <YAxis tick={{ fontSize: 10, fontFamily: 'JetBrains Mono', fill: '#6B7280' }} stroke="#D1D5DB" width={35} />
+                        <XAxis dataKey="label" tick={{ fontSize: 10, fontFamily: 'Roboto Mono', fill: '#6B7280' }} stroke="#D1D5DB" />
+                        <YAxis tick={{ fontSize: 10, fontFamily: 'Roboto Mono', fill: '#6B7280' }} stroke="#D1D5DB" width={35} />
                         <RechartsTooltip
                           content={({ active, payload, label }) => {
                             if (!active || !payload?.length) return null
@@ -341,7 +341,7 @@ export default function HealthMap() {
                             )
                           }}
                         />
-                        <Bar dataKey="area" name={formatAreaName(selectedArea)} fill="#0D9488" radius={[3, 3, 0, 0]} />
+                        <Bar dataKey="area" name={formatAreaName(selectedArea)} fill="#5370E0" radius={[3, 3, 0, 0]} />
                         <Bar dataKey="national" name="National" fill="#D1D5DB" radius={[3, 3, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
@@ -362,9 +362,9 @@ export default function HealthMap() {
                     <ResponsiveContainer width="100%" height={180}>
                       <LineChart data={agingTrend} margin={{ top: 5, right: 5, left: -15, bottom: 5 }}>
                         <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" />
-                        <XAxis dataKey="year" tick={{ fontSize: 10, fontFamily: 'JetBrains Mono', fill: '#6B7280' }} stroke="#D1D5DB" />
+                        <XAxis dataKey="year" tick={{ fontSize: 10, fontFamily: 'Roboto Mono', fill: '#6B7280' }} stroke="#D1D5DB" />
                         <YAxis
-                          tick={{ fontSize: 10, fontFamily: 'JetBrains Mono', fill: '#6B7280' }}
+                          tick={{ fontSize: 10, fontFamily: 'Roboto Mono', fill: '#6B7280' }}
                           stroke="#D1D5DB"
                           width={35}
                           tickFormatter={v => `${(v * 100).toFixed(0)}%`}
@@ -385,10 +385,10 @@ export default function HealthMap() {
                         <Line
                           type="monotone"
                           dataKey="elderlyRatio"
-                          stroke="#0D9488"
+                          stroke="#5370E0"
                           strokeWidth={2}
-                          dot={{ r: 4, fill: '#0D9488', stroke: '#fff', strokeWidth: 2 }}
-                          activeDot={{ r: 6, fill: '#0D9488', stroke: '#fff', strokeWidth: 2 }}
+                          dot={{ r: 4, fill: '#5370E0', stroke: '#fff', strokeWidth: 2 }}
+                          activeDot={{ r: 6, fill: '#5370E0', stroke: '#fff', strokeWidth: 2 }}
                         />
                       </LineChart>
                     </ResponsiveContainer>

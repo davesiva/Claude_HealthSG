@@ -53,8 +53,10 @@ function SnapshotCard({ indicatorKey, onSelect, healthData, forceVisible }) {
   const displayValue = countValue.toFixed(1)
   const isPositiveUp = positiveUpKeys.has(indicatorKey)
   const trendColor = isPositiveUp
-    ? (isUp ? '#0D9488' : '#EF4444')
-    : (isUp ? '#EF4444' : '#0D9488')
+    ? (isUp ? '#1E8E3E' : '#DC2626')
+    : (isUp ? '#DC2626' : '#1E8E3E')
+  const indicatorMeta = indicators.find(i => i.key === indicatorKey)
+  const categoryColor = CATEGORIES.find(c => c.id === indicatorMeta?.category)?.color || '#5370E0'
   const tooltipContent = indicator.tooltip || indicator.description || ''
 
   return (
@@ -90,7 +92,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData, forceVisible }) {
       <div className="mt-3 h-8">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
-            <Line type="monotone" dataKey="value" stroke="#0D9488" strokeWidth={1.5} dot={false} isAnimationActive={visible} animationDuration={1500} />
+            <Line type="monotone" dataKey="value" stroke={categoryColor} strokeWidth={1.5} dot={false} isAnimationActive={visible} animationDuration={1500} />
           </LineChart>
         </ResponsiveContainer>
       </div>

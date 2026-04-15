@@ -3,7 +3,7 @@ export const INDICATORS = [
     id: 'life_expectancy',
     title: 'Life Expectancy',
     icon: 'Heart',
-    color: '#0D9488',
+    color: '#1E8E3E',
     dataKey: 'life_expectancy',
     unit: 'years',
     narrative: 'Singapore consistently ranks among the top 3 globally for life expectancy \u2014 a testament to its healthcare system, public hygiene, and preventive care.',
@@ -38,7 +38,7 @@ export const INDICATORS = [
     id: 'health_spend_gdp',
     title: 'Health Spend (% GDP)',
     icon: 'DollarSign',
-    color: '#6366F1',
+    color: '#5370E0',
     dataKey: 'health_spend_gdp',
     unit: '% GDP',
     narrative: 'Singapore spends just ~5% of GDP on healthcare yet achieves world-leading outcomes \u2014 one of the most efficient health systems globally.',
@@ -59,8 +59,8 @@ export const INDICATORS = [
 ]
 
 export const ENTITY_STYLES = {
-  singapore: { label: 'Singapore', color: '#0D9488', strokeWidth: 2.5, strokeDasharray: undefined },
+  singapore: { label: 'Singapore', color: '#5370E0', strokeWidth: 2.5, strokeDasharray: undefined },
   world: { label: 'World', color: '#9CA3AF', strokeWidth: 1.5, strokeDasharray: '6 3' },
-  regional: { label: 'SE Asia / East Asia & Pacific', color: '#6366F1', strokeWidth: 1.5, strokeDasharray: '4 2' },
+  regional: { label: 'SE Asia / East Asia & Pacific', color: '#5370E0', strokeWidth: 1.5, strokeDasharray: '4 2' },
   malaysia: { label: 'Malaysia', color: '#F59E0B', strokeWidth: 1.5, strokeDasharray: '2 2' }
 }

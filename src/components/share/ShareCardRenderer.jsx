@@ -12,18 +12,18 @@ const ShareCardRenderer = forwardRef(function ShareCardRenderer({ title, subtitl
         width: 1200,
         height: 630,
         backgroundColor: '#FAFAF8',
-        fontFamily: '"DM Sans", sans-serif',
+        fontFamily: '"Lato", sans-serif',
         overflow: 'hidden',
       }}
     >
       {/* Top accent bar */}
-      <div style={{ height: 5, background: 'linear-gradient(90deg, #0D9488, #14B8A6)' }} />
+      <div style={{ height: 5, background: 'linear-gradient(90deg, #5370E0, #14B8A6)' }} />
 
       {/* Header */}
       <div style={{ padding: '28px 48px 0' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 8 }}>
           <span style={{
-            fontFamily: '"Instrument Serif", serif',
+            fontFamily: '"Montserrat", serif',
             fontSize: 22,
             color: '#1A1A1A',
             letterSpacing: '-0.02em',
@@ -33,13 +33,13 @@ const ShareCardRenderer = forwardRef(function ShareCardRenderer({ title, subtitl
           <span style={{
             fontSize: 13,
             color: '#9CA3AF',
-            fontFamily: '"JetBrains Mono", monospace',
+            fontFamily: '"Roboto Mono", monospace',
           }}>
             Singapore Health Data
           </span>
         </div>
         <h2 style={{
-          fontFamily: '"Instrument Serif", serif',
+          fontFamily: '"Montserrat", serif',
           fontSize: 32,
           color: '#1A1A1A',
           margin: 0,
@@ -80,14 +80,14 @@ const ShareCardRenderer = forwardRef(function ShareCardRenderer({ title, subtitl
         <span style={{
           fontSize: 12,
           color: '#9CA3AF',
-          fontFamily: '"JetBrains Mono", monospace',
+          fontFamily: '"Roboto Mono", monospace',
         }}>
           middleout.sg
         </span>
         <span style={{
           fontSize: 11,
           color: '#D1D5DB',
-          fontFamily: '"JetBrains Mono", monospace',
+          fontFamily: '"Roboto Mono", monospace',
         }}>
           Data: SingStat, MOH, OWID
         </span>

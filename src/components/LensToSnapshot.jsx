@@ -50,8 +50,8 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
   const displayValue = countValue.toFixed(1)
   const isPositiveUp = positiveUpKeys.has(indicatorKey)
   const trendColor = isPositiveUp
-    ? (isUp ? '#0D9488' : '#EF4444')
-    : (isUp ? '#EF4444' : '#0D9488')
+    ? (isUp ? '#5370E0' : '#EF4444')
+    : (isUp ? '#EF4444' : '#5370E0')
   const tooltipContent = indicator.tooltip || indicator.description || ''
 
   return (
@@ -84,7 +84,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
       <div className="mt-3 h-8">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={data}>
-            <Line type="monotone" dataKey="value" stroke="#0D9488" strokeWidth={1.5} dot={false} isAnimationActive={isVisible} animationDuration={1500} />
+            <Line type="monotone" dataKey="value" stroke="#5370E0" strokeWidth={1.5} dot={false} isAnimationActive={isVisible} animationDuration={1500} />
           </LineChart>
         </ResponsiveContainer>
       </div>
@@ -458,14 +458,14 @@ export default function LensToSnapshot({ onSelectIndicator }) {
             style={{ maxHeight: '60vh' }}
           >
             {/* Crosshair lines */}
-            <line x1={300} y1={40} x2={300} y2={140} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.2} />
-            <line x1={300} y1={460} x2={300} y2={560} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.2} />
-            <line x1={40} y1={300} x2={140} y2={300} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.2} />
-            <line x1={460} y1={300} x2={560} y2={300} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.2} />
+            <line x1={300} y1={40} x2={300} y2={140} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.2} />
+            <line x1={300} y1={460} x2={300} y2={560} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.2} />
+            <line x1={40} y1={300} x2={140} y2={300} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.2} />
+            <line x1={460} y1={300} x2={560} y2={300} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.2} />
 
             {/* Center focal point */}
-            <circle cx={300} cy={300} r={6} fill="#0D9488" fillOpacity={0.3} />
-            <circle cx={300} cy={300} r={2} fill="#0D9488" fillOpacity={0.6} />
+            <circle cx={300} cy={300} r={6} fill="#5370E0" fillOpacity={0.3} />
+            <circle cx={300} cy={300} r={2} fill="#5370E0" fillOpacity={0.6} />
 
             {/* Tick marks */}
             {TICK_ANGLES.map(angle => {
@@ -515,7 +515,7 @@ export default function LensToSnapshot({ onSelectIndicator }) {
                         x={annot.lx + 8} y={annot.ly + 4}
                         fill={ring.color}
                         fontSize={12}
-                        fontFamily="JetBrains Mono, monospace"
+                        fontFamily="Roboto Mono, monospace"
                         opacity={0}
                       >
                         {ring.label}

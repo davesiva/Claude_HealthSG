@@ -3,19 +3,19 @@
 
 export const CATEGORIES = [
   { id: 'all', label: 'All', color: '#6B7280' },
-  { id: 'demographics', label: 'Demographics', color: '#6366F1' },
-  { id: 'chronic', label: 'Chronic Disease', color: '#EF4444' },
+  { id: 'demographics', label: 'Demographics', color: '#5370E0' },
+  { id: 'chronic', label: 'Chronic Disease', color: '#EC4899' },
   { id: 'lifestyle', label: 'Lifestyle', color: '#F59E0B' },
   { id: 'healthcare', label: 'Public Health', color: '#8B5CF6' },
-  { id: 'longevity', label: 'Longevity', color: '#0D9488' },
+  { id: 'longevity', label: 'Longevity', color: '#1E8E3E' },
 ]
 
 // Ring definitions for the lens SVG (inner → outer)
 export const RINGS = [
-  { id: 'longevity', label: 'Longevity', r: 50, strokeWidth: 4, color: '#0D9488' },
-  { id: 'chronic', label: 'Chronic Disease', r: 105, strokeWidth: 3.5, color: '#EF4444' },
+  { id: 'longevity', label: 'Longevity', r: 50, strokeWidth: 4, color: '#1E8E3E' },
+  { id: 'chronic', label: 'Chronic Disease', r: 105, strokeWidth: 3.5, color: '#EC4899' },
   { id: 'lifestyle', label: 'Lifestyle', r: 155, strokeWidth: 3, color: '#F59E0B' },
-  { id: 'demographics', label: 'Demographics', r: 200, strokeWidth: 2.5, color: '#6366F1' },
+  { id: 'demographics', label: 'Demographics', r: 200, strokeWidth: 2.5, color: '#5370E0' },
   { id: 'healthcare', label: 'Healthcare', r: 245, strokeWidth: 2, color: '#8B5CF6' },
 ]
 
@@ -52,11 +52,11 @@ export const positiveUpKeys = new Set([
 // 5 arcs spanning 70° each with 2° gaps = 360°
 // Order matches CATEGORIES (excluding 'all') for pill position mapping
 export const ARCS = [
-  { id: 'demographics', label: 'Demographics', startAngle: 216, endAngle: 286, color: '#6366F1' },
-  { id: 'chronic', label: 'Chronic Disease', startAngle: 72, endAngle: 142, color: '#EF4444' },
+  { id: 'demographics', label: 'Demographics', startAngle: 216, endAngle: 286, color: '#5370E0' },
+  { id: 'chronic', label: 'Chronic Disease', startAngle: 72, endAngle: 142, color: '#EC4899' },
   { id: 'lifestyle', label: 'Lifestyle', startAngle: 144, endAngle: 214, color: '#F59E0B' },
   { id: 'healthcare', label: 'Public Health', startAngle: 288, endAngle: 358, color: '#8B5CF6' },
-  { id: 'longevity', label: 'Longevity', startAngle: 0, endAngle: 70, color: '#0D9488' },
+  { id: 'longevity', label: 'Longevity', startAngle: 0, endAngle: 70, color: '#1E8E3E' },
 ]
 
 /** Convert polar coords to cartesian */

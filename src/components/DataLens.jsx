@@ -2,10 +2,10 @@ import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 
 const RINGS = [
-  { id: 'longevity', label: 'Longevity', r: 50, strokeWidth: 4, color: '#0D9488' },
-  { id: 'chronic', label: 'Chronic Disease', r: 105, strokeWidth: 3.5, color: '#EF4444' },
+  { id: 'longevity', label: 'Longevity', r: 50, strokeWidth: 4, color: '#1E8E3E' },
+  { id: 'chronic', label: 'Chronic Disease', r: 105, strokeWidth: 3.5, color: '#EC4899' },
   { id: 'lifestyle', label: 'Lifestyle', r: 155, strokeWidth: 3, color: '#F59E0B' },
-  { id: 'demographics', label: 'Demographics', r: 200, strokeWidth: 2.5, color: '#6366F1' },
+  { id: 'demographics', label: 'Demographics', r: 200, strokeWidth: 2.5, color: '#5370E0' },
   { id: 'healthcare', label: 'Healthcare', r: 245, strokeWidth: 2, color: '#8B5CF6' },
 ]
 
@@ -92,7 +92,7 @@ export default function DataLens() {
                 strokeOpacity={0.7}
               />
             ))}
-            <circle cx={300} cy={300} r={6} fill="#0D9488" fillOpacity={0.4} />
+            <circle cx={300} cy={300} r={6} fill="#5370E0" fillOpacity={0.4} />
             {ANNOTATIONS_DESKTOP.map(({ ringIdx, lx, ly }) => {
               const ring = RINGS[ringIdx]
               return (
@@ -103,7 +103,7 @@ export default function DataLens() {
                     stroke={ring.color} strokeWidth={1} strokeOpacity={0.4}
                     strokeDasharray="4 3"
                   />
-                  <text x={lx + 8} y={ly + 4} fill={ring.color} fontSize={12} fontFamily="JetBrains Mono, monospace">
+                  <text x={lx + 8} y={ly + 4} fill={ring.color} fontSize={12} fontFamily="Roboto Mono, monospace">
                     {ring.label}
                   </text>
                 </g>
@@ -156,14 +156,14 @@ export default function DataLens() {
             style={{ maxHeight: '80vh' }}
           >
             {/* Crosshair lines */}
-            <line x1={300} y1={40} x2={300} y2={140} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.25} />
-            <line x1={300} y1={460} x2={300} y2={560} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.25} />
-            <line x1={40} y1={300} x2={140} y2={300} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.25} />
-            <line x1={460} y1={300} x2={560} y2={300} stroke="#0D9488" strokeWidth={1} strokeOpacity={0.25} />
+            <line x1={300} y1={40} x2={300} y2={140} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.25} />
+            <line x1={300} y1={460} x2={300} y2={560} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.25} />
+            <line x1={40} y1={300} x2={140} y2={300} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.25} />
+            <line x1={460} y1={300} x2={560} y2={300} stroke="#5370E0" strokeWidth={1} strokeOpacity={0.25} />
 
             {/* Center focal point */}
-            <circle cx={300} cy={300} r={6} fill="#0D9488" fillOpacity={0.3} />
-            <circle cx={300} cy={300} r={2} fill="#0D9488" fillOpacity={0.6} />
+            <circle cx={300} cy={300} r={6} fill="#5370E0" fillOpacity={0.3} />
+            <circle cx={300} cy={300} r={2} fill="#5370E0" fillOpacity={0.6} />
 
             {/* Tick marks on outer ring */}
             {TICK_ANGLES.map(angle => {
@@ -209,7 +209,7 @@ export default function DataLens() {
                         y={annot.ly + 4}
                         fill={ring.color}
                         fontSize={isMobile ? 10 : 12}
-                        fontFamily="JetBrains Mono, monospace"
+                        fontFamily="Roboto Mono, monospace"
                         style={{ opacity: annotationOpacities[annotIdx] }}
                       >
                         {ring.label}

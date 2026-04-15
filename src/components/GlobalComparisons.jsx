@@ -15,21 +15,21 @@ import InfoTooltip from './InfoTooltip'
 import ShareButton from './share/ShareButton'
 
 const iconMap = { Heart, Baby, TrendingUp, DollarSign, Wallet }
-const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
+const axisTick = { fontSize: 11, fontFamily: 'Roboto Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
 
 const OOP_TERMS = [
   {
     icon: Shield,
     term: 'MediShield Life',
-    color: '#0D9488',
+    color: '#5370E0',
     what: 'Compulsory basic health insurance for all citizens and PRs. Covers subsidised treatment in public hospital B2/C wards, day surgery, and selected outpatient treatments.',
     cost: 'Premiums are age-banded and payable from MediSave (no cash outlay for most). Deductible of $2,000/year, plus 10% co-insurance above that.',
   },
   {
     icon: Building2,
     term: 'Integrated Shield Plans (IPs)',
-    color: '#6366F1',
+    color: '#5370E0',
     what: 'Optional private insurance that sits on top of MediShield Life. Provides coverage for higher ward classes (B1, A) or private hospitals.',
     cost: 'Premiums vary widely by age and insurer. Riders that previously covered deductibles and co-pay now require a minimum 5% co-payment (capped at $3,000/year, rising to $6,000 from April 2026).',
   },
@@ -408,7 +408,7 @@ export default function GlobalComparisons() {
                     domain={activeIndicator.domain || ['auto', 'auto']}
                   />
                   <Tooltip content={<ComparisonTooltip />} />
-                  <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'DM Sans' }} />
+                  <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'Lato' }} />
                   {availableEntities.filter(k => visibleEntities.includes(k)).map(key => {
                     const style = ENTITY_STYLES[key]
                     return (

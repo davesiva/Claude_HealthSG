@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import InfoTooltip from './InfoTooltip'
 
 function getPM25Level(value) {
-  if (value <= 55) return { label: 'Good', color: '#0D9488' }
+  if (value <= 55) return { label: 'Good', color: '#5370E0' }
   if (value <= 150) return { label: 'Moderate', color: '#F59E0B' }
   return { label: 'Unhealthy', color: '#EF4444' }
 }
 
 function getUVLevel(value) {
-  if (value <= 2) return { label: 'Low', color: '#0D9488' }
+  if (value <= 2) return { label: 'Low', color: '#5370E0' }
   if (value <= 5) return { label: 'Moderate', color: '#F59E0B' }
   if (value <= 7) return { label: 'High', color: '#F59E0B' }
   if (value <= 10) return { label: 'Very High', color: '#EF4444' }

@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, Tooltip
 } from 'recharts'
 
-const axisTick = { fontSize: 11, fill: '#6B7280', fontFamily: 'JetBrains Mono, monospace' }
+const axisTick = { fontSize: 11, fill: '#6B7280', fontFamily: 'Roboto Mono, monospace' }
 const axisStroke = '#D1D5DB'
 
 function CustomTooltip({ active, payload, label }) {
@@ -30,7 +30,7 @@ export default function QuizMiniChart({ data, chartType = 'line', unit = '' }) {
             <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
             <YAxis tick={axisTick} stroke={axisStroke} />
             <Tooltip content={<CustomTooltip />} />
-            <Bar dataKey="value" fill="#0D9488" radius={[3, 3, 0, 0]} />
+            <Bar dataKey="value" fill="#5370E0" radius={[3, 3, 0, 0]} />
           </BarChart>
         ) : (
           <LineChart data={chartData} margin={{ top: 5, right: 5, left: -10, bottom: 5 }}>
@@ -41,10 +41,10 @@ export default function QuizMiniChart({ data, chartType = 'line', unit = '' }) {
             <Line
               type="monotone"
               dataKey="value"
-              stroke="#0D9488"
+              stroke="#5370E0"
               strokeWidth={2}
               dot={false}
-              activeDot={{ r: 4, fill: '#0D9488' }}
+              activeDot={{ r: 4, fill: '#5370E0' }}
             />
           </LineChart>
         )}

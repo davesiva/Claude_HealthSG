@@ -15,7 +15,7 @@ const EXPLORER_GROUPS = [
   {
     id: 'demographics',
     label: 'Demographics',
-    color: '#6366F1',
+    color: '#5370E0',
     indicators: [
       { key: 'aged_65_plus', label: 'Aged 65+' },
       { key: 'old_age_support_ratio', label: 'Support Ratio' },
@@ -25,7 +25,7 @@ const EXPLORER_GROUPS = [
   {
     id: 'chronic',
     label: 'Chronic Disease',
-    color: '#E8829B',
+    color: '#EC4899',
     indicators: [
       { key: 'diabetes_prevalence', label: 'Diabetes' },
       { key: 'hypertension_prevalence', label: 'Hypertension' },
@@ -61,7 +61,7 @@ const EXPLORER_GROUPS = [
   {
     id: 'longevity',
     label: 'Longevity',
-    color: '#0D9488',
+    color: '#1E8E3E',
     indicators: [
       { key: 'deaths_by_cause', label: 'Deaths by Cause' },
       { key: 'life_expectancy', label: 'Life Expectancy' },
@@ -70,7 +70,7 @@ const EXPLORER_GROUPS = [
 ]
 
 const CAUSE_COLORS = {
-  cancer:        '#6366F1', // indigo
+  cancer:        '#5370E0', // indigo
   heart_disease: '#EF4444', // red
   pneumonia:     '#F59E0B', // amber
   stroke:        '#0EA5E9', // sky
@@ -82,15 +82,15 @@ const CAUSE_COLORS = {
 const CAUSE_ORDER = ['other', 'infectious', 'stroke', 'pneumonia', 'heart_disease', 'cancer']
 
 const demographicColors = {
-  male: '#0D9488',
+  male: '#5370E0',
   female: '#F59E0B',
-  chinese: '#0D9488',
+  chinese: '#5370E0',
   malay: '#F59E0B',
   indian: '#EF4444'
 }
 
 // Better contrast axis styles
-const axisTick = { fontSize: 11, fontFamily: 'JetBrains Mono', fill: '#6B7280' }
+const axisTick = { fontSize: 11, fontFamily: 'Roboto Mono', fill: '#6B7280' }
 const axisStroke = '#D1D5DB'
 
 const descriptions = {
@@ -285,8 +285,10 @@ export default function Explorer({ selectedIndicator }) {
   const isStackedArea = indicator.chartType === 'stackedArea' && indicator.categories != null
   const desc = descriptions[activeKey]
 
+  const activeColor = activeGroup?.color || '#5370E0'
+
   let chartData = indicator.data || []
-  let lines = [{ key: 'value', name: indicator.label, color: '#0D9488' }]
+  let lines = [{ key: 'value', name: indicator.label, color: activeColor }]
 
   if (isStackedArea) {
     const cats = indicator.categories
@@ -454,7 +456,7 @@ export default function Explorer({ selectedIndicator }) {
                   ticks={stackMode === 'percent' ? [0, 25, 50, 75, 100] : undefined}
                 />
                 <Tooltip content={<StackedTooltip mode={stackMode} />} />
-                <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} iconSize={10} />
+                <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'Lato' }} iconSize={10} />
                 {lines.map(line => (
                   <Area
                     key={line.key}
@@ -476,7 +478,7 @@ export default function Explorer({ selectedIndicator }) {
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
                 <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
                 <Tooltip content={<CustomTooltip unit={indicator.unit === 'S$B' ? 'B' : indicator.unit} />} />
-                <Bar dataKey="value" fill="#0D9488" radius={[4, 4, 0, 0]} name={indicator.label} />
+                <Bar dataKey="value" fill={activeColor} radius={[4, 4, 0, 0]} name={indicator.label} />
               </BarChart>
             ) : (
               <LineChart data={chartData} margin={{ top: 5, right: 5, left: isMobile ? -15 : 5, bottom: 5 }}>
@@ -484,7 +486,7 @@ export default function Explorer({ selectedIndicator }) {
                 <XAxis dataKey="year" tick={axisTick} stroke={axisStroke} />
                 <YAxis tick={axisTick} stroke={axisStroke} width={isMobile ? 35 : 55} />
                 <Tooltip content={<CustomTooltip unit={indicator.unit === '%' ? '%' : ''} />} />
-                {lines.length > 1 && <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'DM Sans' }} />}
+                {lines.length > 1 && <Legend wrapperStyle={{ fontSize: 11, fontFamily: 'Lato' }} />}
                 {lines.map(line => (
                   <Line
                     key={line.key}

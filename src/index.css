@@ -16,23 +16,29 @@
   --md-sys-color-primary-container: #DEE3FF;
   --md-sys-color-on-primary-container: #0B1559;
 
-  /* ── Secondary — warm tonal palette ─────────────────────────────── */
-  --md-sys-color-secondary: #755A2F;
+  /* ── Secondary — vibrant amber (warm accents, lifestyle) ────────── */
+  --md-sys-color-secondary: #D97706;
   --md-sys-color-on-secondary: #FFFFFF;
-  --md-sys-color-secondary-container: #FFDEA6;
-  --md-sys-color-on-secondary-container: #281900;
+  --md-sys-color-secondary-container: #FFECC2;
+  --md-sys-color-on-secondary-container: #3A2A00;
 
-  /* ── Tertiary — complementary muted plum ────────────────────────── */
-  --md-sys-color-tertiary: #7D5260;
+  /* ── Tertiary — Material green (success, longevity, positive) ───── */
+  --md-sys-color-tertiary: #1E8E3E;
   --md-sys-color-on-tertiary: #FFFFFF;
-  --md-sys-color-tertiary-container: #FFD8E4;
-  --md-sys-color-on-tertiary-container: #31111D;
+  --md-sys-color-tertiary-container: #B8F2BB;
+  --md-sys-color-on-tertiary-container: #002106;
 
   /* ── Error ──────────────────────────────────────────────────────── */
   --md-sys-color-error: #BA1A1A;
   --md-sys-color-on-error: #FFFFFF;
   --md-sys-color-error-container: #FFDAD6;
   --md-sys-color-on-error-container: #410002;
+
+  /* ── Success (green — positive trends, longevity, healthy states) ─ */
+  --md-sys-color-success: #2E7D32;
+  --md-sys-color-on-success: #FFFFFF;
+  --md-sys-color-success-container: #B8F2BB;
+  --md-sys-color-on-success-container: #002106;
 
   /* ── Neutral surface tiers (tinted toward primary) ──────────────── */
   --md-sys-color-background: #FDFBFF;
@@ -60,13 +66,13 @@
   --md-sys-color-inverse-on-surface: #F2F0F4;
   --md-sys-color-inverse-primary: #B8C5FF;
 
-  /* ── Category palette (Material You harmonised hues) ────────────── */
-  --md-sys-color-demographics: #5370E0;   /* primary indigo */
-  --md-sys-color-chronic:      #8E4A5E;   /* warm rose */
-  --md-sys-color-lifestyle:    #755A2F;   /* secondary warm */
-  --md-sys-color-healthcare:   #6750A4;   /* Material purple */
-  --md-sys-color-longevity:    #3D6A5E;   /* teal harmonised */
-  --md-sys-color-stroke-cat:   #00629D;   /* cool sky */
+  /* ── Category palette — fun, distinct hues per section ──────────── */
+  --md-sys-color-demographics: #5370E0;   /* indigo  — people */
+  --md-sys-color-chronic:      #EC4899;   /* pink    — disease */
+  --md-sys-color-lifestyle:    #F59E0B;   /* amber   — habits */
+  --md-sys-color-healthcare:   #8B5CF6;   /* violet  — public systems */
+  --md-sys-color-longevity:    #1E8E3E;   /* green   — life */
+  --md-sys-color-stroke-cat:   #0EA5E9;   /* sky     — stroke/cerebro */
 
   /* ═════════════════════════════════════════════════════════════════
      SHAPE SCALE — softer, rounder
@@ -113,10 +119,10 @@
   --md-sys-motion-duration-long2: 500ms;
 
   /* ═════════════════════════════════════════════════════════════════
-     TYPOGRAPHY — Inter everywhere, no serif
+     TYPOGRAPHY — Montserrat (display) + Lato (body) + Roboto Mono
      ═════════════════════════════════════════════════════════════════ */
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body:    'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --font-mono:    'Roboto Mono', 'SF Mono', 'Menlo', monospace;
 
   /* ═════════════════════════════════════════════════════════════════
@@ -159,13 +165,13 @@
 
   body {
     font-family: var(--font-body);
-    font-optical-sizing: auto;
+    font-weight: 400;
     background-color: var(--md-sys-color-background);
     color: var(--md-sys-color-on-background);
     position: relative;
     min-height: 100vh;
     margin: 0;
-    letter-spacing: -0.006em;
+    letter-spacing: 0;
   }
 
   /* Ambient Material You surface tint — indigo + warm glows */
@@ -174,7 +180,7 @@
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: -1;
     background:
       radial-gradient(ellipse 70% 50% at 50% -10%, rgba(83, 112, 224, 0.06), transparent 65%),
       radial-gradient(ellipse 60% 40% at 100% 100%, rgba(117, 90, 47, 0.04), transparent 60%);
@@ -182,14 +188,13 @@
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
-    font-optical-sizing: auto;
-    font-weight: 500;
-    letter-spacing: -0.022em;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--md-sys-color-on-background);
   }
 
-  h1 { font-weight: 600; }
-  h2 { font-weight: 600; }
+  h1 { font-weight: 700; letter-spacing: -0.015em; }
+  h2 { font-weight: 700; letter-spacing: -0.012em; }
 
   * {
     box-sizing: border-box;

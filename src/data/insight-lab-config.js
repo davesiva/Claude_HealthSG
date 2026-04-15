@@ -4,7 +4,7 @@ export const THEMES = [
     title: 'Silver Tsunami',
     subtitle: 'Aging, loneliness & the demographic squeeze',
     icon: 'Users',
-    color: '#6366F1',
+    color: '#5370E0',
     comparisons: [
       {
         id: 'aging-curve',
@@ -12,7 +12,7 @@ export const THEMES = [
         subtitle: 'TFR hit a historic low of 0.87 in 2025 — how fast is the population aging?',
         yearRange: [1970, 2025],
         series: [
-          { dataPath: 'elderly_indicators.pct_65_plus', label: 'Aged 65+ (%)', axis: 'left', type: 'area', color: '#6366F1', unit: '%' },
+          { dataPath: 'elderly_indicators.pct_65_plus', label: 'Aged 65+ (%)', axis: 'left', type: 'area', color: '#5370E0', unit: '%' },
           { dataPath: 'total_fertility_rate', label: 'Fertility Rate', axis: 'right', type: 'line', color: '#EF4444', unit: '' }
         ],
         leftAxisLabel: 'Population 65+ (%)',
@@ -35,7 +35,7 @@ export const THEMES = [
         subtitle: 'Elderly living alone vs mental health admissions',
         yearRange: [2000, 2025],
         series: [
-          { dataPath: 'elderly_indicators.elderly_living_alone_pct', label: 'Elderly Living Alone (%)', axis: 'left', type: 'line', color: '#6366F1', unit: '%' },
+          { dataPath: 'elderly_indicators.elderly_living_alone_pct', label: 'Elderly Living Alone (%)', axis: 'left', type: 'line', color: '#5370E0', unit: '%' },
           { dataPath: 'psychiatric_admissions', label: 'Psych Admissions', axis: 'right', type: 'bar', color: '#F59E0B', unit: '' }
         ],
         leftAxisLabel: 'Living Alone (%)',
@@ -58,7 +58,7 @@ export const THEMES = [
         subtitle: 'Fewer workers per retiree, more health spending',
         yearRange: [2000, 2025],
         series: [
-          { dataPath: 'old_age_support_ratio', label: 'Support Ratio', axis: 'left', type: 'line', color: '#0D9488', unit: '' },
+          { dataPath: 'old_age_support_ratio', label: 'Support Ratio', axis: 'left', type: 'line', color: '#5370E0', unit: '' },
           { dataPath: 'govt_health_expenditure', label: 'Health Spend (S$B)', axis: 'right', type: 'bar', color: '#EF4444', unit: 'S$B' }
         ],
         leftAxisLabel: 'Workers per Retiree',
@@ -81,7 +81,7 @@ export const THEMES = [
         subtitle: 'More elderly in the workforce — by choice or necessity?',
         yearRange: [1990, 2025],
         series: [
-          { dataPath: 'elderly_indicators.elderly_labour_force_pct', label: 'Elderly in Labour Force (%)', axis: 'left', type: 'line', color: '#0D9488', unit: '%' },
+          { dataPath: 'elderly_indicators.elderly_labour_force_pct', label: 'Elderly in Labour Force (%)', axis: 'left', type: 'line', color: '#5370E0', unit: '%' },
           { dataPath: 'elderly_indicators.elderly_death_rate', label: 'Elderly Death Rate (per 1,000)', axis: 'right', type: 'line', color: '#9CA3AF', unit: '‰' }
         ],
         leftAxisLabel: 'In Labour Force (%)',
@@ -104,7 +104,7 @@ export const THEMES = [
         subtitle: '50 years of gains in elderly life expectancy',
         yearRange: [1970, 2025],
         series: [
-          { dataPath: 'elderly_indicators.life_expectancy_at_65', label: 'Life Expectancy at 65 (years)', axis: 'left', type: 'area', color: '#6366F1', unit: ' yrs' },
+          { dataPath: 'elderly_indicators.life_expectancy_at_65', label: 'Life Expectancy at 65 (years)', axis: 'left', type: 'area', color: '#5370E0', unit: ' yrs' },
           { dataPath: 'elderly_indicators.pct_65_plus', label: 'Population 65+ (%)', axis: 'right', type: 'line', color: '#F59E0B', unit: '%' }
         ],
         leftAxisLabel: 'Years at 65',
@@ -128,7 +128,7 @@ export const THEMES = [
         yearRange: [1980, 2025],
         series: [
           { dataPath: 'total_fertility_rate', label: 'Fertility Rate', axis: 'left', type: 'line', color: '#EF4444', unit: '' },
-          { dataPath: 'old_age_support_ratio', label: 'Support Ratio', axis: 'right', type: 'line', color: '#0D9488', unit: '' }
+          { dataPath: 'old_age_support_ratio', label: 'Support Ratio', axis: 'right', type: 'line', color: '#5370E0', unit: '' }
         ],
         leftAxisLabel: 'Births per Woman',
         rightAxisLabel: 'Support Ratio',
@@ -151,7 +151,7 @@ export const THEMES = [
     title: 'The Cost of Care',
     subtitle: 'Income inequality, spending & chronic disease',
     icon: 'DollarSign',
-    color: '#0D9488',
+    color: '#D97706',
     comparisons: [
       {
         id: 'gini-vs-chronic',
@@ -159,7 +159,7 @@ export const THEMES = [
         subtitle: 'As income inequality narrows, do chronic diseases decline?',
         yearRange: [2000, 2025],
         series: [
-          { dataPath: 'household_income.gini', label: 'Gini Coefficient', axis: 'left', type: 'line', color: '#0D9488', unit: '' },
+          { dataPath: 'household_income.gini', label: 'Gini Coefficient', axis: 'left', type: 'line', color: '#5370E0', unit: '' },
           { dataPath: 'diabetes_prevalence', label: 'Diabetes (%)', axis: 'right', type: 'line', color: '#F59E0B', unit: '%' },
           { dataPath: 'hypertension_prevalence', label: 'Hypertension (%)', axis: 'right', type: 'line', color: '#EF4444', unit: '%' }
         ],
@@ -183,8 +183,8 @@ export const THEMES = [
         subtitle: 'Government spending vs household income trends',
         yearRange: [2000, 2025],
         series: [
-          { dataPath: 'household_income.median_income', label: 'Median Income (S$)', axis: 'left', type: 'line', color: '#0D9488', unit: 'S$' },
-          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile (S$)', axis: 'left', type: 'line', color: '#6366F1', unit: 'S$' },
+          { dataPath: 'household_income.median_income', label: 'Median Income (S$)', axis: 'left', type: 'line', color: '#5370E0', unit: 'S$' },
+          { dataPath: 'household_income.income_20th_pct', label: '20th Percentile (S$)', axis: 'left', type: 'line', color: '#5370E0', unit: 'S$' },
           { dataPath: 'govt_health_expenditure', label: 'Govt Health Spend (S$B)', axis: 'right', type: 'bar', color: '#F59E0B', unit: 'S$B' }
         ],
         leftAxisLabel: 'Monthly Income (S$)',
@@ -207,7 +207,7 @@ export const THEMES = [
         subtitle: 'Household health expenditure every 5 years',
         yearRange: [1993, 2023],
         series: [
-          { dataPath: 'household_expenditure.health', label: 'Health Spend (S$)', axis: 'left', type: 'bar', color: '#0D9488', unit: 'S$' },
+          { dataPath: 'household_expenditure.health', label: 'Health Spend (S$)', axis: 'left', type: 'bar', color: '#5370E0', unit: 'S$' },
           { dataPath: 'household_expenditure.total', label: 'Total Spend (S$)', axis: 'right', type: 'line', color: '#9CA3AF', unit: 'S$' }
         ],
         leftAxisLabel: 'Monthly Health (S$)',
@@ -231,7 +231,7 @@ export const THEMES = [
     title: 'Cancer in Focus',
     subtitle: 'Incidence, mortality & the demographic divide',
     icon: 'Ribbon',
-    color: '#B388FF',
+    color: '#EC4899',
     comparisons: [
       {
         id: 'incidence-vs-mortality',
@@ -289,7 +289,7 @@ export const THEMES = [
         series: [
           { dataPath: 'cancer_incidence.by_ethnicity.chinese', label: 'Chinese Incidence', axis: 'left', type: 'line', color: '#EF4444', unit: '/100k' },
           { dataPath: 'cancer_incidence.by_ethnicity.malay', label: 'Malay Incidence', axis: 'left', type: 'line', color: '#F59E0B', unit: '/100k' },
-          { dataPath: 'cancer_incidence.by_ethnicity.indian', label: 'Indian Incidence', axis: 'left', type: 'line', color: '#6366F1', unit: '/100k' }
+          { dataPath: 'cancer_incidence.by_ethnicity.indian', label: 'Indian Incidence', axis: 'left', type: 'line', color: '#5370E0', unit: '/100k' }
         ],
         leftAxisLabel: 'Incidence (per 100k)',
         tooltip: 'Cancer incidence varies across Singapore\'s three main ethnic groups. Differences may reflect genetic predisposition, dietary patterns, lifestyle factors, and screening uptake rates across communities.',
@@ -345,7 +345,7 @@ export const THEMES = [
     title: 'The Next Generation',
     subtitle: 'Children\'s health & healthcare workforce pipeline',
     icon: 'GraduationCap',
-    color: '#F59E0B',
+    color: '#1E8E3E',
     comparisons: [
       {
         id: 'kids-health',
@@ -354,7 +354,7 @@ export const THEMES = [
         yearRange: [2010, 2025],
         series: [
           { dataPath: 'childhood_obesity', label: 'Childhood Obesity (%)', axis: 'left', type: 'line', color: '#EF4444', unit: '%' },
-          { dataPath: 'total_fertility_rate', label: 'Fertility Rate', axis: 'right', type: 'line', color: '#6366F1', unit: '' }
+          { dataPath: 'total_fertility_rate', label: 'Fertility Rate', axis: 'right', type: 'line', color: '#5370E0', unit: '' }
         ],
         leftAxisLabel: 'Obesity (%)',
         rightAxisLabel: 'Fertility Rate',
@@ -376,7 +376,7 @@ export const THEMES = [
         subtitle: 'Are we training enough healthcare workers?',
         yearRange: [2005, 2025],
         series: [
-          { dataPath: 'university_intake.health_sciences', label: 'Health Sciences Intake', axis: 'left', type: 'bar', color: '#0D9488', unit: '' },
+          { dataPath: 'university_intake.health_sciences', label: 'Health Sciences Intake', axis: 'left', type: 'bar', color: '#5370E0', unit: '' },
           { dataPath: 'health_personnel', label: 'Doctors per 10,000', axis: 'right', type: 'line', color: '#F59E0B', unit: '' }
         ],
         leftAxisLabel: 'University Intake',

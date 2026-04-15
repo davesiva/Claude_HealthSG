@@ -9,10 +9,10 @@ import InfoTooltip from './InfoTooltip'
 
 const CATEGORIES = [
   { id: 'all', label: 'All', color: '#6B7280' },
-  { id: 'longevity', label: 'Longevity', color: '#0D9488' },
-  { id: 'chronic', label: 'Chronic Disease', color: '#EF4444' },
+  { id: 'longevity', label: 'Longevity', color: '#1E8E3E' },
+  { id: 'chronic', label: 'Chronic Disease', color: '#EC4899' },
   { id: 'lifestyle', label: 'Lifestyle', color: '#F59E0B' },
-  { id: 'demographics', label: 'Demographics', color: '#6366F1' },
+  { id: 'demographics', label: 'Demographics', color: '#5370E0' },
   { id: 'healthcare', label: 'Healthcare', color: '#8B5CF6' },
 ]
 
@@ -70,8 +70,8 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
 
   const isPositiveUp = positiveUpKeys.has(indicatorKey)
   const trendColor = isPositiveUp
-    ? (isUp ? '#0D9488' : '#EF4444')
-    : (isUp ? '#EF4444' : '#0D9488')
+    ? (isUp ? '#5370E0' : '#EF4444')
+    : (isUp ? '#EF4444' : '#5370E0')
 
   const tooltipContent = indicator.tooltip || indicator.description || ''
 
@@ -114,7 +114,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData }) {
             <Line
               type="monotone"
               dataKey="value"
-              stroke="#0D9488"
+              stroke="#5370E0"
               strokeWidth={1.5}
               dot={false}
               isAnimationActive={isVisible}

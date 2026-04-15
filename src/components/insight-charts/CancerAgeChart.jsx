@@ -104,11 +104,11 @@ export default function CancerAgeChart({ data, isMobile }) {
           <CartesianGrid strokeDasharray="3 3" stroke="#F3F4F6" vertical={false} />
           <XAxis
             dataKey="ageGroup"
-            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'DM Sans', fill: '#9CA3AF' }}
+            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'Lato', fill: '#9CA3AF' }}
             stroke="#E5E7EB"
           />
           <YAxis
-            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'DM Sans', fill: '#9CA3AF' }}
+            tick={{ fontSize: isMobile ? 9 : 11, fontFamily: 'Lato', fill: '#9CA3AF' }}
             stroke="#E5E7EB"
             width={isMobile ? 40 : 55}
             tickFormatter={v => v >= 1000 ? `${(v / 1000).toFixed(1)}k` : v}
@@ -117,11 +117,11 @@ export default function CancerAgeChart({ data, isMobile }) {
               angle: -90,
               position: 'insideLeft',
               offset: 10,
-              style: { fontSize: 10, fontFamily: 'DM Sans', fill: '#9CA3AF' }
+              style: { fontSize: 10, fontFamily: 'Lato', fill: '#9CA3AF' }
             }}
           />
           <Tooltip content={<AgeTooltip />} />
-          <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'DM Sans' }} />
+          <Legend wrapperStyle={{ fontSize: isMobile ? 10 : 11, fontFamily: 'Lato' }} />
           <Bar
             dataKey="male"
             name="Male"

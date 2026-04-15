@@ -131,7 +131,7 @@ export function computeDataBriefStats(healthData, comparison) {
  * Tiny SVG sparkline for inline use in stat pills.
  * Takes an array of numbers, renders a 60×20 path.
  */
-export function Sparkline({ data, color = '#6366F1', width = 60, height = 20 }) {
+export function Sparkline({ data, color = '#5370E0', width = 60, height = 20 }) {
   if (!data || data.length < 2) return null
   const min = Math.min(...data)
   const max = Math.max(...data)

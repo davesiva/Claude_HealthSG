@@ -41,30 +41,30 @@ export default function ShareButton({ title, subtitle, chartRef, className = '' 
 
       // Top accent bar
       const grad = ctx.createLinearGradient(0, 0, 2400, 0)
-      grad.addColorStop(0, '#0D9488')
+      grad.addColorStop(0, '#5370E0')
       grad.addColorStop(1, '#14B8A6')
       ctx.fillStyle = grad
       ctx.fillRect(0, 0, 2400, 10)
 
       // Header: "Middle Out"
       ctx.fillStyle = '#1A1A1A'
-      ctx.font = '44px "DM Sans", sans-serif'
+      ctx.font = '44px "Lato", sans-serif'
       ctx.fillText('Middle Out', 96, 80)
 
       // Subheader
       ctx.fillStyle = '#9CA3AF'
-      ctx.font = '26px "JetBrains Mono", monospace'
+      ctx.font = '26px "Roboto Mono", monospace'
       ctx.fillText('Singapore Health Data', 350, 80)
 
       // Title
       ctx.fillStyle = '#1A1A1A'
-      ctx.font = '600 52px "DM Sans", sans-serif'
+      ctx.font = '600 52px "Lato", sans-serif'
       ctx.fillText(title || '', 96, 140)
 
       // Subtitle
       if (subtitle) {
         ctx.fillStyle = '#6B7280'
-        ctx.font = '28px "DM Sans", sans-serif'
+        ctx.font = '28px "Lato", sans-serif'
         ctx.fillText(subtitle, 96, 178)
       }
 
@@ -95,11 +95,11 @@ export default function ShareButton({ title, subtitle, chartRef, className = '' 
 
       // Footer text
       ctx.fillStyle = '#9CA3AF'
-      ctx.font = '24px "JetBrains Mono", monospace'
+      ctx.font = '24px "Roboto Mono", monospace'
       ctx.fillText('Middle Out', 96, 1220)
 
       ctx.fillStyle = '#D1D5DB'
-      ctx.font = '22px "JetBrains Mono", monospace'
+      ctx.font = '22px "Roboto Mono", monospace'
       ctx.textAlign = 'right'
       ctx.fillText('Data: SingStat, MOH, OWID', 2304, 1220)
       ctx.textAlign = 'left'
