@@ -41,26 +41,27 @@
   --md-sys-color-on-success-container: #002106;
 
   /* ── Neutral surface tiers ──────────────────────────────────────────
-     Warm paper background + deeper editorial ink text for publication
-     feel. Surface tiers kept subtly cool to pair with indigo primary.
+     Apple-leaning palette: very soft warm white background with pure
+     white cards for clean contrast. Matches sister project (Invest).
+     Text is Apple's near-black + graphite grey for an editorial feel.
      ──────────────────────────────────────────────────────────────── */
-  --md-sys-color-background: #FAF7F2;
-  --md-sys-color-on-background: #0F1524;
-  --md-sys-color-surface: #FAF7F2;
-  --md-sys-color-on-surface: #0F1524;
-  --md-sys-color-surface-variant: #E3E5EF;
-  --md-sys-color-on-surface-variant: #3A3F4D;
+  --md-sys-color-background: #FAFAF7;
+  --md-sys-color-on-background: #1D1D1F;
+  --md-sys-color-surface: #FAFAF7;
+  --md-sys-color-on-surface: #1D1D1F;
+  --md-sys-color-surface-variant: #F3F4F6;
+  --md-sys-color-on-surface-variant: #6E6E73;
 
-  --md-sys-color-surface-dim: #D9D6D1;
+  --md-sys-color-surface-dim: #EAEAE7;
   --md-sys-color-surface-bright: #FFFFFF;
   --md-sys-color-surface-container-lowest: #FFFFFF;
-  --md-sys-color-surface-container-low: #F5F1EA;
-  --md-sys-color-surface-container:     #EFEBE3;
-  --md-sys-color-surface-container-high: #E8E4DB;
-  --md-sys-color-surface-container-highest: #E1DDD4;
+  --md-sys-color-surface-container-low: #FFFFFF;
+  --md-sys-color-surface-container:     #F5F5F3;
+  --md-sys-color-surface-container-high: #EFEFED;
+  --md-sys-color-surface-container-highest: #E8E8E6;
 
-  --md-sys-color-outline: #6B6E78;
-  --md-sys-color-outline-variant: #C8CAD2;
+  --md-sys-color-outline: #8E8E93;
+  --md-sys-color-outline-variant: #E5E7EB;
   --md-sys-color-scrim: #000000;
   --md-sys-color-shadow: #000000;
 

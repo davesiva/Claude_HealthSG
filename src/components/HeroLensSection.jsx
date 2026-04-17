@@ -7,15 +7,10 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import { useCountUp } from '../hooks/useCountUp'
 import { useHealthData } from '../context/HealthDataContext'
 import {
-  CATEGORIES, ARCS, indicators, positiveUpKeys,
-  describeArc,
+  CATEGORIES, indicators, positiveUpKeys,
 } from './snapshotData'
 import InfoTooltip from './InfoTooltip'
-
-// ── SVG constants ──
-const CX = 300
-const CY = 300
-const MUTED_COLOR = '#a1a1aa' // zinc-400
+import { HERO } from '../assets/images'
 
 // ── Helper: get latest data point ──
 function getLatest(indicator) {
@@ -110,9 +105,9 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
   // ── Refs ──
   const containerRef = useRef(null)
   const stickyRef = useRef(null)
-  const arcRefs = useRef([])
   const pillRefs = useRef([])
   const heroTextRef = useRef(null)
+  const heroImageRef = useRef(null)
   const scopeRef = useRef(null)
   const transitionCompleteRef = useRef(false)
 
@@ -168,11 +163,8 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
     return () => clearInterval(interval)
   }, [prefersReduced, stats.length])
 
-  // ── Derived dimensions (desktop only) ──
-  const R = 200
-  const strokeW = 3
-  const scrollHeight = '280vh'
-  const separateDistance = 25
+  // ── Desktop scroll height for sticky hero → snapshot transition ──
+  const scrollHeight = '220vh'
 
   // ── anime.js scroll timeline (desktop only) ──
   useEffect(() => {
@@ -191,34 +183,13 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
         const pillBar = sticky.querySelector('.pill-bar')
         const cardGrid = sticky.querySelector('.card-grid')
 
-        // ── Measure pill offsets from center ──
-        const stickyRect = sticky.getBoundingClientRect()
-        const centerX = stickyRect.width / 2
-        const centerY = stickyRect.height * 0.38
-
-        const pillOffsets = []
-        CATEGORIES.forEach((cat, i) => {
-          const pill = pillRefs.current[i]
-          if (!pill) return
-          const pr = pill.getBoundingClientRect()
-          const pillCX = pr.left + pr.width / 2 - stickyRect.left
-          const pillCY = pr.top + pr.height / 2 - stickyRect.top
-          pillOffsets.push({
-            x: centerX - pillCX,
-            y: centerY - pillCY,
-          })
-          utils.set(pill, {
-            translateX: centerX - pillCX,
-            translateY: centerY - pillCY,
-            opacity: 0,
-            scale: 0.4,
-          })
+        // Set initial state for snapshot elements (pills stay in grid position)
+        pillRefs.current.forEach(pill => {
+          if (pill) utils.set(pill, { opacity: 0, translateY: 16, scale: 0.94 })
         })
-
-        // Set initial state for snapshot elements
         utils.set(pillBar, { opacity: 0 })
         utils.set(snapshotHeading, { opacity: 0, translateY: 20 })
-        utils.set(cardGrid, { opacity: 0 })
+        utils.set(cardGrid, { opacity: 0, translateY: 16 })
 
         // ── Create scroll-linked timeline ──
         const tl = createTimeline({
@@ -238,9 +209,9 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
           }),
         })
 
-        // ═══ DESKTOP: Full arc animation ═══
+        // ═══ DESKTOP: Hero fade → snapshot reveal ═══
 
-        // Phase 1: Colorize (0–500ms) + immediate hero text response
+        // Phase 1: Hero text gentle scale + chevron out (0–600ms)
         if (heroText) {
           tl.add(heroText, {
             scale: [1, 0.97],
@@ -248,17 +219,6 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
             ease: 'inOutQuad',
           }, 0)
         }
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          tl.add(arcEl, {
-            stroke: [MUTED_COLOR, arc.color],
-            strokeWidth: [strokeW, strokeW + 1],
-            duration: 500,
-            delay: i * 60,
-            ease: 'inOutQuad',
-          }, 0)
-        })
         if (chevron) {
           tl.add(chevron, {
             opacity: [1, 0],
@@ -267,79 +227,57 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
           }, 0)
         }
 
-        // Phase 2: Separate (400–1000ms)
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-          tl.add(arcEl, {
-            translateX: Math.cos(midAngle) * separateDistance,
-            translateY: Math.sin(midAngle) * separateDistance,
-            duration: 500,
-            ease: 'outQuart',
-          }, 400 + i * 30)
-        })
-
-        // Phase 3: Transform (800–1600ms)
+        // Phase 2: Hero text + image fade out together (600–1200ms)
         if (heroText) {
           tl.add(heroText, {
             opacity: [1, 0],
-            scale: [0.97, 0.90],
-            duration: 350,
+            scale: [0.97, 0.92],
+            duration: 450,
             ease: 'inQuart',
-          }, 800)
+          }, 600)
+        }
+        if (heroImageRef.current) {
+          tl.add(heroImageRef.current, {
+            opacity: [1, 0],
+            duration: 600,
+            ease: 'inOutQuad',
+          }, 650)
         }
 
-        const flyDistance = 160
-        ARCS.forEach((arc, i) => {
-          const arcEl = arcRefs.current[i]
-          if (!arcEl) return
-          const midAngle = ((arc.startAngle + arc.endAngle) / 2 - 90) * Math.PI / 180
-          tl.add(arcEl, {
-            translateX: Math.cos(midAngle) * flyDistance,
-            translateY: Math.sin(midAngle) * flyDistance,
-            opacity: [1, 0],
-            duration: 450,
-            delay: i * 25,
-            ease: 'inQuart',
-          }, 900)
-        })
-
-        // Pill bar fades in
-        tl.add(pillBar, {
-          opacity: [0, 1],
-          duration: 250,
-          ease: 'outQuad',
-        }, 950)
-
-        // Pills fly in
-        CATEGORIES.forEach((cat, i) => {
-          const pill = pillRefs.current[i]
-          if (!pill) return
-          tl.add(pill, {
-            translateX: [pillOffsets[i]?.x ?? 0, 0],
-            translateY: [pillOffsets[i]?.y ?? 0, 0],
-            opacity: [0, 1],
-            scale: [0.4, 1],
-            duration: 450,
-            ease: 'outQuart',
-          }, 1000 + i * 70)
-        })
-
-        // Phase 4: Settle (1500–2000ms)
+        // Phase 3: Snapshot reveal (1100–1700ms)
         if (snapshotHeading) {
           tl.add(snapshotHeading, {
             opacity: [0, 1],
             translateY: [20, 0],
-            duration: 350,
+            duration: 400,
             ease: 'outQuart',
-          }, 1500)
+          }, 1100)
         }
+        tl.add(pillBar, {
+          opacity: [0, 1],
+          duration: 300,
+          ease: 'outQuad',
+        }, 1250)
+
+        // Pills simply fade up (no arc-origin flight)
+        CATEGORIES.forEach((cat, i) => {
+          const pill = pillRefs.current[i]
+          if (!pill) return
+          tl.add(pill, {
+            translateY: [16, 0],
+            opacity: [0, 1],
+            scale: [0.94, 1],
+            duration: 380,
+            ease: 'outQuart',
+          }, 1300 + i * 55)
+        })
+
         if (cardGrid) {
           tl.add(cardGrid, {
             opacity: [0, 1],
-            duration: 350,
-          }, 1700)
+            translateY: [16, 0],
+            duration: 420,
+          }, 1500)
         }
       })
     }, 300)
@@ -386,10 +324,29 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
   if (prefersReduced) {
     return (
       <>
-        <section className="min-h-screen flex flex-col items-center justify-center px-6 relative">
-          <div className="text-center max-w-2xl mx-auto">
-            <h1 className="font-heading text-5xl md:text-7xl text-primary tracking-tight">Middle-Out</h1>
-            <p className="mt-4 text-lg md:text-xl text-secondary font-body">
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+          <div className="absolute inset-0" aria-hidden="true">
+            <img
+              src={HERO.singapore_skyline.src}
+              alt=""
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 85% 65% at 50% 50%, rgba(10,15,30,0.80) 0%, rgba(10,15,30,0.55) 55%, rgba(10,15,30,0.30) 100%), linear-gradient(135deg, rgba(10,15,30,0.50) 0%, rgba(10,15,30,0.30) 50%, rgba(83,112,224,0.45) 100%)',
+              }}
+            />
+          </div>
+          <div className="text-center max-w-2xl mx-auto relative z-10">
+            <p className="editorial-eyebrow text-white/80 mb-4">Singapore · 1960 – Today</p>
+            <h1 className="font-heading text-5xl md:text-7xl tracking-tight" style={{ color: '#FFFFFF' }}>
+              Middle-Out
+            </h1>
+            <p className="mt-4 text-lg md:text-xl font-body" style={{ color: 'rgba(255,255,255,0.92)' }}>
               Singapore's health story, told through data.
             </p>
           </div>
@@ -434,28 +391,57 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
     return (
       <>
         {/* ── Full-screen Hero Landing ── */}
-        <section className="min-h-screen flex flex-col items-center justify-center px-6 relative">
-          <div className="text-center max-w-2xl mx-auto">
+        <section className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
+          <div className="absolute inset-0" aria-hidden="true">
+            <img
+              src={HERO.singapore_skyline.srcSmall || HERO.singapore_skyline.src}
+              alt=""
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'radial-gradient(ellipse 95% 65% at 50% 50%, rgba(10,15,30,0.82) 0%, rgba(10,15,30,0.58) 55%, rgba(10,15,30,0.35) 100%), linear-gradient(160deg, rgba(10,15,30,0.55) 0%, rgba(10,15,30,0.32) 50%, rgba(83,112,224,0.48) 100%)',
+              }}
+            />
+          </div>
+
+          <div className="text-center max-w-2xl mx-auto relative z-10">
+            <motion.p
+              className="editorial-eyebrow mb-3"
+              style={{ color: 'rgba(255,255,255,0.80)' }}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              Singapore · 1960 – Today
+            </motion.p>
+
             <motion.h1
-              className="font-heading text-5xl text-primary tracking-tight"
+              className="font-heading text-5xl tracking-tight"
+              style={{ color: '#FFFFFF' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
             >
               Middle-Out
             </motion.h1>
 
             <motion.p
-              className="mt-4 text-lg text-secondary font-body"
+              className="mt-4 text-lg font-body"
+              style={{ color: 'rgba(255,255,255,0.92)' }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
             >
               Singapore's health story, told through data.
             </motion.p>
 
             <motion.div
-              className="mt-10 h-16 flex items-center justify-center"
+              className="mt-8 h-16 flex items-center justify-center"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -469,10 +455,13 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
                   transition={{ duration: 0.4 }}
                   className="text-center"
                 >
-                  <span className="text-secondary text-sm font-body">
+                  <span className="text-sm font-body" style={{ color: 'rgba(255,255,255,0.75)' }}>
                     {stats[currentStat].label}:
                   </span>
-                  <span className="ml-2 text-2xl font-mono font-semibold text-accent">
+                  <span
+                    className="ml-2 text-2xl font-mono font-semibold"
+                    style={{ color: '#FFFFFF' }}
+                  >
                     {stats[currentStat].value}
                   </span>
                 </motion.div>
@@ -485,9 +474,9 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
             className="absolute bottom-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: [0, 8, 0] }}
-            transition={{ opacity: { duration: 0.6, delay: 0.6 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 } }}
+            transition={{ opacity: { duration: 0.6, delay: 0.7 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.7 } }}
           >
-            <ChevronDown className="w-6 h-6 text-secondary/40" />
+            <ChevronDown className="w-6 h-6" style={{ color: 'rgba(255,255,255,0.6)' }} />
           </motion.div>
         </section>
 
@@ -552,20 +541,54 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
         className="sticky top-0 h-screen flex flex-col items-center justify-center"
         style={{ overflowX: 'clip' }}
       >
+        {/* ── Full-bleed editorial hero image (fades out during transition) ── */}
+        <div
+          ref={heroImageRef}
+          className="absolute inset-0"
+          style={{ zIndex: 0, willChange: 'opacity' }}
+          aria-hidden="true"
+        >
+          <img
+            src={HERO.singapore_skyline.src}
+            alt=""
+            className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'radial-gradient(ellipse 85% 65% at 50% 50%, rgba(10,15,30,0.78) 0%, rgba(10,15,30,0.52) 55%, rgba(10,15,30,0.28) 100%), linear-gradient(135deg, rgba(10,15,30,0.48) 0%, rgba(10,15,30,0.28) 50%, rgba(83,112,224,0.45) 100%)',
+            }}
+          />
+        </div>
+
         {/* ── Hero Text Content ── */}
         <div ref={heroTextRef} className="hero-text text-center max-w-2xl mx-auto relative z-10 px-6">
-          <motion.h1
-            className="font-heading text-5xl md:text-7xl text-primary tracking-tight"
+          <motion.p
+            className="editorial-eyebrow mb-4"
+            style={{ color: 'rgba(255,255,255,0.80)' }}
             {...fadeIn}
             transition={{ duration: 0.6, delay: 0 }}
+          >
+            Singapore · 1960 – Today
+          </motion.p>
+
+          <motion.h1
+            className="font-heading text-5xl md:text-7xl tracking-tight"
+            style={{ color: '#FFFFFF' }}
+            {...fadeIn}
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
             Middle-Out
           </motion.h1>
 
           <motion.p
-            className="mt-4 text-lg md:text-xl text-secondary font-body"
+            className="mt-4 text-lg md:text-xl font-body"
+            style={{ color: 'rgba(255,255,255,0.92)' }}
             {...fadeIn}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
           >
             Singapore's health story, told through data.
           </motion.p>
@@ -584,37 +607,19 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
                 transition={{ duration: 0.4 }}
                 className="text-center"
               >
-                <span className="text-secondary text-sm font-body">
+                <span className="text-sm font-body" style={{ color: 'rgba(255,255,255,0.78)' }}>
                   {stats[currentStat].label}:
                 </span>
-                <span className="ml-2 text-2xl md:text-3xl font-mono font-semibold text-accent">
+                <span
+                  className="ml-2 text-2xl md:text-3xl font-mono font-semibold"
+                  style={{ color: '#FFFFFF' }}
+                >
                   {stats[currentStat].value}
                 </span>
               </motion.div>
             </AnimatePresence>
           </motion.div>
         </div>
-
-        {/* ── SVG Circle made of 5 arc paths (desktop only) ── */}
-        <svg
-          className="absolute inset-0 w-full h-full pointer-events-none"
-          style={{ zIndex: 5 }}
-          viewBox={`0 0 ${CX * 2} ${CY * 2}`}
-          preserveAspectRatio="xMidYMid meet"
-        >
-          {ARCS.map((arc, i) => (
-            <path
-              key={arc.id}
-              ref={el => arcRefs.current[i] = el}
-              d={describeArc(CX, CY, R, arc.startAngle, arc.endAngle)}
-              stroke={MUTED_COLOR}
-              strokeWidth={strokeW}
-              fill="none"
-              strokeLinecap="round"
-              style={{ transformOrigin: `${CX}px ${CY}px` }}
-            />
-          ))}
-        </svg>
 
         {/* ── Bouncing chevron ── */}
         <div className="chevron-hint absolute bottom-8 z-10">
@@ -623,7 +628,7 @@ export default function HeroLensSection({ onSelectIndicator, onSettled }) {
             animate={{ opacity: 1, y: [0, 8, 0] }}
             transition={{ opacity: { duration: 0.6, delay: 0.6 }, y: { duration: 2, repeat: Infinity, ease: 'easeInOut', delay: 0.6 } }}
           >
-            <ChevronDown className="w-6 h-6 text-secondary" />
+            <ChevronDown className="w-6 h-6" style={{ color: 'rgba(255,255,255,0.7)' }} />
           </motion.div>
         </div>
 

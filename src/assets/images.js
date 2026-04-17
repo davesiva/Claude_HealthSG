@@ -16,12 +16,12 @@ const U = (id, w = 1600, q = 80) =>
 // ── Hero / top-of-page imagery ────────────────────────────────────
 export const HERO = {
   singapore_skyline: {
-    src: U('1567360425618-1594206637d2', 2200, 82),
-    srcSmall: U('1567360425618-1594206637d2', 1000, 75),
-    alt: 'Singapore Marina Bay skyline at dusk with the Merlion statue and modern skyscrapers',
+    src: U('1508964942454-1a56651d54ac', 2200, 82),
+    srcSmall: U('1508964942454-1a56651d54ac', 1000, 75),
+    alt: 'Singapore Marina Bay Sands and city skyline at blue hour',
     credit: {
-      photographer: 'Meriç Dağlı',
-      url: 'https://unsplash.com/photos/dFFzlQ5YUKo',
+      photographer: 'Timo Volz',
+      url: 'https://unsplash.com/photos/rjZ-ds139hQ',
     },
   },
   people_active: {
