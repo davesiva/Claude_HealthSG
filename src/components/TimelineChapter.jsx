@@ -251,6 +251,7 @@ export default function TimelineChapter({ chapter, index }) {
               src={ch.image.src}
               alt={ch.image.alt}
               className="w-full h-full object-cover"
+              style={{ objectPosition: ch.image.objectPosition || '50% 50%' }}
               loading="lazy"
               decoding="async"
             />

@@ -118,6 +118,9 @@ export const TIMELINE_ERAS = {
       photographer: 'Max H. Hilckes / KITLV (via Wikimedia Commons, CC BY 4.0)',
       url: 'https://commons.wikimedia.org/wiki/File:Singapore._General_Hospital.,_KITLV_1404902.tiff',
     },
+    // Building sits in upper-middle of source; pull the crop up so the
+    // arched facade stays in frame instead of being cropped to grass+fence.
+    objectPosition: '50% 30%',
     tone: '#5370E0',
   },
   // 1990–2010 — modern SGH facade. As NCDs rose, specialist medicine and
@@ -129,6 +132,9 @@ export const TIMELINE_ERAS = {
       photographer: 'Jaytothez (via Wikimedia Commons, CC BY-SA 3.0)',
       url: 'https://commons.wikimedia.org/wiki/File:Singapore_General_Hospital_Facade.JPG',
     },
+    // "SINGAPORE GENERAL HOSPITAL" signage is near the very top of the
+    // source (~5% mark). Anchor crop high so the signage is the hero.
+    objectPosition: '50% 3%',
     tone: '#EC4899',
   },
   // 2010–Present — War on Diabetes. People moving outdoors captures the
