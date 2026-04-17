@@ -40,24 +40,27 @@
   --md-sys-color-success-container: #B8F2BB;
   --md-sys-color-on-success-container: #002106;
 
-  /* ── Neutral surface tiers (tinted toward primary) ──────────────── */
-  --md-sys-color-background: #FDFBFF;
-  --md-sys-color-on-background: #1B1B1F;
-  --md-sys-color-surface: #FDFBFF;
-  --md-sys-color-on-surface: #1B1B1F;
-  --md-sys-color-surface-variant: #E1E2EC;
-  --md-sys-color-on-surface-variant: #45464F;
+  /* ── Neutral surface tiers ──────────────────────────────────────────
+     Warm paper background + deeper editorial ink text for publication
+     feel. Surface tiers kept subtly cool to pair with indigo primary.
+     ──────────────────────────────────────────────────────────────── */
+  --md-sys-color-background: #FAF7F2;
+  --md-sys-color-on-background: #0F1524;
+  --md-sys-color-surface: #FAF7F2;
+  --md-sys-color-on-surface: #0F1524;
+  --md-sys-color-surface-variant: #E3E5EF;
+  --md-sys-color-on-surface-variant: #3A3F4D;
 
-  --md-sys-color-surface-dim: #DDDAE0;
-  --md-sys-color-surface-bright: #FDFBFF;
+  --md-sys-color-surface-dim: #D9D6D1;
+  --md-sys-color-surface-bright: #FFFFFF;
   --md-sys-color-surface-container-lowest: #FFFFFF;
-  --md-sys-color-surface-container-low: #F7F3F9;
-  --md-sys-color-surface-container:     #F1EDF4;
-  --md-sys-color-surface-container-high: #EBE8EC;
-  --md-sys-color-surface-container-highest: #E5E2E7;
+  --md-sys-color-surface-container-low: #F5F1EA;
+  --md-sys-color-surface-container:     #EFEBE3;
+  --md-sys-color-surface-container-high: #E8E4DB;
+  --md-sys-color-surface-container-highest: #E1DDD4;
 
-  --md-sys-color-outline: #757680;
-  --md-sys-color-outline-variant: #C5C6D0;
+  --md-sys-color-outline: #6B6E78;
+  --md-sys-color-outline-variant: #C8CAD2;
   --md-sys-color-scrim: #000000;
   --md-sys-color-shadow: #000000;
 
