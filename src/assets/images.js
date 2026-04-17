@@ -100,6 +100,51 @@ export const DIVIDER_IMAGES = {
   },
 }
 
+// ── Timeline era banners (thin header strip above each chapter card) ─
+// All three are authentic Singapore imagery, sourced from Wikimedia Commons
+// under CC licences, downloaded into /public/images/timeline/ so they stay
+// stable even if Wikimedia thumbnail paths change.
+//   foundation    — historic Singapore General Hospital (c.1906–1935)
+//   chronic_shift — SGH facade (2008) — modern SG medical institution
+//   prevention    — East Coast Park (2023) — the "City in a Garden" era
+//   road_ahead    — deliberately imageless; the future is unwritten
+export const TIMELINE_ERAS = {
+  // 1965–1990 — heritage of SG's oldest hospital; the medical institution
+  // Singapore was built upon as it launched Medisave and conquered TB.
+  foundation: {
+    src: '/images/timeline/foundation-sgh-historic.jpg',
+    alt: 'Historic photograph of Singapore General Hospital (c.1906\u20131935) \u2014 the heritage Singapore\u2019s modern public health was built upon',
+    credit: {
+      photographer: 'Max H. Hilckes / KITLV (via Wikimedia Commons, CC BY 4.0)',
+      url: 'https://commons.wikimedia.org/wiki/File:Singapore._General_Hospital.,_KITLV_1404902.tiff',
+    },
+    tone: '#5370E0',
+  },
+  // 1990–2010 — modern SGH facade. As NCDs rose, specialist medicine and
+  // teaching hospitals defined the era. SGH is SG's oldest and largest.
+  chronic_shift: {
+    src: '/images/timeline/chronic-sgh-facade.jpg',
+    alt: 'The facade of Singapore General Hospital \u2014 the modern medical institution that anchored SG\u2019s shift to chronic disease management',
+    credit: {
+      photographer: 'Jaytothez (via Wikimedia Commons, CC BY-SA 3.0)',
+      url: 'https://commons.wikimedia.org/wiki/File:Singapore_General_Hospital_Facade.JPG',
+    },
+    tone: '#EC4899',
+  },
+  // 2010–Present — War on Diabetes. People moving outdoors captures the
+  // pivot from clinical treatment to population-level prevention.
+  prevention: {
+    src: U('1571019613454-1cb2f99b2d8b', 1400, 78),
+    alt: 'People exercising outdoors at sunrise \u2014 Singapore\u2019s pivot from treatment to everyday prevention',
+    credit: {
+      photographer: 'Danielle Cerullo',
+      url: 'https://unsplash.com/photos/CQfNt66ttZM',
+    },
+    tone: '#F59E0B',
+  },
+  // 2030 — no photo. Treat as a forward-looking gradient card.
+}
+
 // ── Global comparisons — world / cross-country imagery ────────────
 export const GLOBAL_IMAGES = {
   world_context: {
@@ -118,6 +163,7 @@ export function collectCredits() {
     ...Object.values(HERO),
     ...Object.values(CATEGORY_IMAGES),
     ...Object.values(DIVIDER_IMAGES),
+    ...Object.values(TIMELINE_ERAS),
     ...Object.values(GLOBAL_IMAGES),
   ]
   const seen = new Set()

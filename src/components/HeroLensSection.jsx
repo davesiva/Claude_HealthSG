@@ -57,7 +57,7 @@ function SnapshotCard({ indicatorKey, onSelect, healthData, forceVisible }) {
   return (
     <motion.div
       ref={ref}
-      className="snapshot-card card p-3 md:p-5 cursor-pointer hover:card-hover focus:outline-none"
+      className="snapshot-card card relative overflow-hidden p-3 md:p-5 cursor-pointer hover:card-hover focus:outline-none"
       style={{
         WebkitTapHighlightColor: 'transparent',
         ...(forceVisible ? { opacity: 1 } : { opacity: 0, transform: 'translateY(24px)' }),
@@ -67,6 +67,11 @@ function SnapshotCard({ indicatorKey, onSelect, healthData, forceVisible }) {
       transition={{ duration: 0.5 }}
       onClick={() => onSelect(indicatorKey)}
     >
+      <span
+        aria-hidden="true"
+        className="absolute top-0 left-0 right-0 h-[3px]"
+        style={{ background: categoryColor }}
+      />
       <div className="flex items-start gap-1">
         <p className="text-sm text-secondary font-body truncate flex-1">{indicator.label}</p>
         {tooltipContent && <InfoTooltip content={tooltipContent} size={13} />}

@@ -6,6 +6,7 @@ import {
 } from 'recharts'
 import { useScrollAnimation } from '../hooks/useScrollAnimation'
 import healthData from '../data/health-indicators.json'
+import { TIMELINE_ERAS } from '../assets/images'
 
 const chartColors = {
   diabetes: '#5370E0',
@@ -180,25 +181,30 @@ const chapters = [
     era: '1965-1990',
     title: 'Building the Foundation',
     narrative: "Singapore's early public health story was one of conquering infectious diseases, building hospital infrastructure, and establishing Medisave \u2014 the world's first compulsory medical savings scheme. Life expectancy leapt from 65 to 75 years in just 25 years, a transformation that rivalled any nation on Earth.",
-    chart: Chapter1
+    chart: Chapter1,
+    image: TIMELINE_ERAS.foundation,
   },
   {
     era: '1990-2010',
     title: 'The Chronic Disease Shift',
     narrative: "As infectious diseases retreated, chronic conditions took centre stage. The first National Health Survey in 1992 established baseline numbers. By 2010, diabetes had risen to 8.6% and obesity had doubled \u2014 a wake-up call that the nation's health challenges had fundamentally changed.",
-    chart: Chapter2
+    chart: Chapter2,
+    image: TIMELINE_ERAS.chronic_shift,
   },
   {
     era: '2010-Present',
     title: 'War on Diabetes & Beyond',
     narrative: "The government declared a War on Diabetes in 2016. Health expenditure surged past $15B. But smoking hit historic lows and Healthier SG signalled a fundamental shift to prevention.",
-    chart: Chapter3
+    chart: Chapter3,
+    image: TIMELINE_ERAS.prevention,
   },
   {
     era: '2030',
     title: 'The Road Ahead',
     narrative: "By 2030, 1 in 4 Singaporeans will be 65 or older. Multimorbidity is rising. Mental health is emerging as a priority. The question isn't whether the system will be tested \u2014 it's whether the shift to prevention came soon enough.",
-    chart: null
+    chart: null,
+    image: null,
+    futureTone: '#8B5CF6',
   }
 ]
 
@@ -218,6 +224,7 @@ export default function TimelineChapter({ chapter, index }) {
   if (!ch) return null
 
   const ChartComponent = ch.chart
+  const eraTone = ch.image?.tone || ch.futureTone || '#5370E0'
 
   return (
     <motion.div
@@ -227,30 +234,77 @@ export default function TimelineChapter({ chapter, index }) {
       animate={isVisible ? { opacity: 1, x: 0 } : {}}
       transition={{ duration: 0.6 }}
     >
-      {/* Timeline dot */}
-      <div className="absolute left-0 top-1 w-3 h-3 rounded-full bg-accent border-2 border-card" />
+      {/* Timeline dot — era-tinted */}
+      <div
+        className="absolute left-0 top-1 w-3 h-3 rounded-full border-2 border-card"
+        style={{ background: eraTone }}
+      />
 
-      <div className="card p-3 md:p-8">
-        <span className="inline-block px-3 py-1 rounded-full bg-grid text-xs font-mono text-secondary">
-          {ch.era}
-        </span>
-        <h3 className="mt-3 text-xl md:text-2xl font-heading text-primary">{ch.title}</h3>
-        <p className="mt-3 text-secondary text-base leading-relaxed">{ch.narrative}</p>
-
-        {ChartComponent && (
-          <div className="mt-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
-            <ChartComponent isMobile={isMobile} />
+      <div className="card overflow-hidden">
+        {/* Era image banner (chapters 1-3) */}
+        {ch.image && (
+          <div
+            className="relative h-28 md:h-36 w-full"
+            style={{ background: `linear-gradient(135deg, ${eraTone}18, ${eraTone}08)` }}
+          >
+            <img
+              src={ch.image.src}
+              alt={ch.image.alt}
+              className="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: `linear-gradient(180deg, rgba(10,15,30,0) 40%, rgba(10,15,30,0.55) 100%), linear-gradient(90deg, ${eraTone}55 0%, rgba(0,0,0,0) 45%)`,
+              }}
+            />
+            <span
+              className="absolute bottom-3 left-4 inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider text-white"
+              style={{ background: 'rgba(10,15,30,0.55)', backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)' }}
+            >
+              {ch.era}
+            </span>
           </div>
         )}
 
-        {!ChartComponent && index === 3 && (
-          <div className="mt-8 py-8 text-center">
-            <p className="text-4xl md:text-5xl font-heading text-accent">1 in 4</p>
-            <p className="mt-2 text-secondary text-sm">
-              Singaporeans will be aged 65+ by 2030
-            </p>
-          </div>
-        )}
+        <div className="p-3 md:p-8">
+          {!ch.image && (
+            <span
+              className="inline-block px-3 py-1 rounded-full text-xs font-mono font-semibold tracking-wider"
+              style={{ background: `${eraTone}18`, color: eraTone }}
+            >
+              {ch.era}
+            </span>
+          )}
+          <h3 className={`${ch.image ? '' : 'mt-3'} text-xl md:text-2xl font-heading text-primary`}>
+            {ch.title}
+          </h3>
+          <p className="mt-3 text-secondary text-base leading-relaxed">{ch.narrative}</p>
+
+          {ChartComponent && (
+            <div className="mt-6 focus:outline-none" tabIndex={-1} style={{ WebkitTapHighlightColor: 'transparent' }}>
+              <ChartComponent isMobile={isMobile} />
+            </div>
+          )}
+
+          {!ChartComponent && index === 3 && (
+            <div
+              className="mt-8 py-8 text-center rounded-2xl"
+              style={{
+                background: `linear-gradient(135deg, ${eraTone}12 0%, ${eraTone}04 100%)`,
+              }}
+            >
+              <p className="text-4xl md:text-5xl font-heading" style={{ color: eraTone }}>
+                1 in 4
+              </p>
+              <p className="mt-2 text-secondary text-sm">
+                Singaporeans will be aged 65+ by 2030
+              </p>
+            </div>
+          )}
+        </div>
       </div>
     </motion.div>
   )
